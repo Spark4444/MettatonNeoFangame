@@ -65,7 +65,7 @@ start_button.addEventListener('click', () =>{
     },4400);
     }
     }
-    // start_animation();
+    start_animation();
 
     //No start animation
 function no_start_animation(){
@@ -82,7 +82,7 @@ function no_start_animation(){
   },10);
   }
   }
-  no_start_animation();
+  // no_start_animation();
 });
 
 //img_h initialization
