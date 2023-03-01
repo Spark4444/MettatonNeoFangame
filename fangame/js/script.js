@@ -12,6 +12,11 @@ let img_h = document.querySelectorAll(".heart_img");
 let start_button = document.querySelector(".start_button");
 let html = document.querySelector("html");
 let hp = document.querySelector(".txt");
+let hp_mettaton_attacked = document.querySelector(".hp-");
+let elem_mettaton = document.querySelector(".mettaton_hp");
+let hp_left = document.querySelector(".hp_shower");
+let attack_gif = document.querySelector(".attack_png");
+let attack_line = document.querySelector(".line_attack");
 let hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
 let hp_width = document.querySelector(".hpVis");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
@@ -19,16 +24,23 @@ let health = ["72","72","60","40","40","40","40","40"];
 let text = "* Mettaton NEO blocks the way!";
 let text1;
 let text2;
+let width_pr;
 let food = "";
 let stage = false;
-let hp_recover = 0;
-let num_second = 0;
+let attack = false;
+let hp_mettaton = 1000;
+let attack2 = 0;
 let num = false;
 let x_disable = false;
 let invent = false;
 let position = false;
-let position2 = 0;
 let started = false;
+let position2 = 0;
+let hp_recover = 0;
+let num_second = 0;
+let time = -200;
+let time2 = 0;
+let mettaton_hp = 1000;
 //console.log(alert("Click this so the game starts"));
 
 //Width for hp bar
@@ -53,7 +65,7 @@ start_button.addEventListener('click', () =>{
         start.classList.add("hidden");
         heart.classList.add("move");
       }, 200);
-    }, 4000); 
+    }, 2000); 
     setTimeout(function(){
       typeWriter();
       buttons[0].classList.add('yellow');
@@ -62,7 +74,7 @@ start_button.addEventListener('click', () =>{
         audio.play();
       num = 0;
       stage = 0;
-    },4400);
+    },2400);
     }
     }
     start_animation();
@@ -91,6 +103,39 @@ function imgH(){
   return;
 }
 
+//Attack
+function attack_function(){
+  let timer;
+    setTimeout(function(){
+    clearTimeout(timeoutID);
+    attack_line.classList.remove("hidden");
+    attack = 0;
+    time = -50;
+    timer = setInterval(function() {
+    time += 10;
+    }, 10);
+  },100);
+  setTimeout(function(){
+    attack_line.classList.add("move_attack");
+  },200);
+  setTimeout(function(){
+    clearInterval(timer);
+    if(attack !== false){
+      attack = "MISS";
+      attack_line.classList.add("appear_hide");
+      attack_line.classList.remove("move_attack");
+      attack_line.classList.add("hidden");
+      elem_mettaton.classList.remove("hidden");
+      hp_mettaton_attacked.innerHTML = attack;
+      setTimeout(function() {
+        attack_line.classList.add("hidden");
+        elem_mettaton.classList.add("hidden");
+      }, 900);
+    }
+    time = -50;
+  },1600+200);
+}
+
 //HP recovering
 function HP_recover(health,HP,HP_text,HP_width){
   HP = parseInt(HP) + parseInt(health);
@@ -105,6 +150,7 @@ function HP_recover(health,HP,HP_text,HP_width){
 }
 
 img_h[0].remove();
+
 //Movement between buttons function
 function classA(){
   num_second = num;
@@ -199,6 +245,34 @@ document.addEventListener('keyup', e => {
     case 'Enter':
     case 'z':
     case 'Z':
+      if(attack === 0 && stage == false && attack !== false){
+        attack = false;
+        time2 = time/1000;
+        if(time2 > 1.11){
+          time2 = time2 - 1.11;
+          time2 = 1.11 - time2;
+        }
+        attack2 = (time2/(0.8/100)/2 * (36/100)).toFixed(0);
+        attack_gif.src = "img/attack.gif";
+        attack_gif.classList.remove("hidden");
+        elem_mettaton.classList.remove("hidden");
+        hp_mettaton = hp_mettaton - attack2;
+        hp_left.style.width = `${hp_mettaton/(1000/100)}%`;
+        hp_mettaton_attacked.innerHTML = `${attack2}`;
+        setTimeout(function(){
+          elem_mettaton.classList.add("hidden");
+          attack_gif.classList.add("hidden");
+        },900);
+        width_pr = attack_line.getBoundingClientRect().left / window.innerWidth;
+        attack_line.style.left = `${width_pr*100}%`;
+        attack_line.classList.add("appear_hide");
+        attack_line.classList.remove("move_attack");
+        setTimeout(function(){
+          attack_line.style.left = '';
+          attack_line.classList.add("hidden");
+          attack_line.classList.remove("appear_hide");
+        },400);
+      }
       if(num_second > 3){
         num_second = 0;
       }
@@ -239,6 +313,7 @@ document.addEventListener('keyup', e => {
       if(x_disable == true){
       position = false;
       stage = 0;
+      attack = false
       img[num_second].src = "img/heart.png";
       text = "* Stage lights are blaring";
       typeWriter();
@@ -418,7 +493,7 @@ function typeWriter2() {
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
-    text = "<img class= 'heart_img' src='img/heart.png'> * Mettaton NEO";
+    text = "<div class='attack_text'><img class= 'heart_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp'></div></div></div>";
     typeWriter2();
   }
   if(num_second == 1){
@@ -450,7 +525,9 @@ function check2(num){
     x_disable = false;
     stage = false;
     num = false;
-    //attack
+    text = `<div class="attack_wrap"><img src="img/attack.png" class="attack"></div>`
+    typeWriter2();
+    attack_function()
   }
   if(num_second == 1){
     text = `<img class= 'heart_img' src='img/heart.png'> * Check`;
