@@ -1,0 +1,373 @@
+@font-face {
+    font-family: "BUTTONS";
+    src: url('fonts/ATTACK_BUTTONS.otf');
+    font-weight: normal;
+}
+@font-face {
+    font-family: "attack";
+    src: url('fonts/attack.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "8bit";
+    src: url('fonts/8bit.ttf');
+}
+
+@font-face {
+    font-family: "8bit_small";
+    src: url('fonts/small_8bit.ttf');
+}
+
+@font-face {
+    font-family: "HP";
+    src: url('fonts/HP.ttf');
+}
+html {
+    width: 100%;
+    height: 100%;
+}
+.cursor_none{
+    cursor: none;
+}
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+audio{
+    pointer-events: none;
+}
+.mettaton_hp {
+    position: absolute;
+    top: 11%;
+    top: 44%;
+    width: 14%;
+    height: 10%;
+    left: 42.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.hp- {
+    color: red;
+    font-size: 220%;
+    font-family: 'attack';
+    animation: bounce 0.5s;
+}
+.hp_show_wrap2 {
+    width: 100%;
+    height: 100%;
+    margin: 3% 0 0 0;
+    background: red;
+}
+.hp_show_wrap {
+    width: 13%;
+    height: 100%;
+    background: red;
+}
+.hp_shower {
+    width: 100%;
+    height: 100% !important;
+    height: 28%;
+    background: yellow;
+}
+.hp_shower.fisrt_hp {
+    background: yellow;
+    height: 100%;
+}
+img.line_attack {
+    position: absolute;
+    left: 23.5%;
+    top: 59%;
+    width: 1.14%;
+}
+img.attack_png {
+    position: absolute;
+    top: 2%;
+    left: 34%;
+    width: 31%;
+}
+img.heart_img {
+    width: 3%;
+}
+.start_button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 10%;
+    height: 9%;
+    font-family: "BUTTONS";
+    color: #fe8507;
+    background-image: linear-gradient(#aa5904, #fe8507);
+    border: 8px groove #fe8507;
+    font-size: 230%;
+    border-radius: 12px;
+    top: 44%;
+    left: 44%;
+    align-items: center;
+    cursor:pointer;
+}
+img#heart {
+    width: 2%;
+    padding: 0 0 10% 0;
+    position: absolute;
+    left: 49%;
+    top: 73%;
+    transform: translate(-50%, -50%);
+    background-image: url("img/heart.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: beam 0.5s infinite;
+    opacity: 1;
+    -webkit-animation: beam 0.5s infinite;
+}
+.start {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#frisk {
+    width: 4%;
+    padding: 0 0 10% 0;
+}
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: black;
+    color: white;
+    z-index: 1;
+}
+.mettaton {
+    width: 100%;
+    height: 51.5%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 0.5% 0;
+}
+.area {
+    width: 82.5%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.mettaton img {
+    width: 59%;
+}
+.text-menu {
+    font-family: "8bit";
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.text {
+    width: 51.5%;
+    height: 73%;
+    border: 10px solid white;
+    font-size: 230%;
+    color: white;
+    padding: 1%;
+    white-space: pre;
+    transition: 1s;
+}
+canvas#canvas {
+    width: 51%;
+    height: 93%;
+    border: 10px solid white;
+}
+.stats-menu {
+    font-family: "8bit_small";
+    display: flex;
+    height: 7%;
+    justify-content: center;
+    align-items: center;
+    font-size: 246%;
+    width: 100%;
+}
+.stats-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 54.5%;
+    height: 100%;
+}
+.name {
+    padding-right: 5%;
+    font-size: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.lv {
+    padding-right: 5%;
+    font-size: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.hp2 {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: flex-start;
+    font-size: 100%;
+    height: 100%;
+    align-items: center;
+}
+.small_hp {
+    font-family: "HP";
+    font-size: 50%;
+    padding: 0 4% 0 0;
+    display: flex;
+    align-items: center;
+}
+.hp {
+    width: 50%;
+    padding: 0 4% 0 0;
+    height: 43%;
+}
+.hpVis {
+    background: #ffff00;
+    height: 100%;
+}
+/*
+.txt {
+Nothing yet
+}
+*/
+.battle-menu {
+    width: 100%;
+    height: 9.5%;
+    background-color: black;
+    display: flex;
+    align-items: flex-end;
+    font-family: "BUTTONS";
+    padding: 0 0 0.5% 0;
+    justify-content: space-evenly;
+}
+.inner_part {
+    display: flex;
+    justify-content: space-between;
+    width: 54.5%;
+    height: 100%;
+}
+.button {
+    height: 96%;
+    width: 19%;
+    color: #fe8507;
+    border: 2px solid #fe8507;
+    background: 0;
+    font-size: 230%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.button:focus {
+    outline:none;
+}
+.button.yellow {
+    color: #d4d415;
+    border: 2px solid #d4d415;
+}
+img.heart {
+    height: 40%;
+    vertical-align: middle;
+    padding: 0 4% 0 0;
+    position: relative;
+    top: 3%;
+}
+img.heart_img.i2 {
+    padding: 0 0 0 33%;
+}
+img.heart_img.i1 {
+    padding: 0 0 0 39%;
+}
+img.heart_img.i3,img.heart_img.i4 {
+    padding: 0 0 0 29%;
+}
+.p1 {
+    padding: 0 0 0 75%;
+}
+.p2 {
+    padding: 0 0 0 75%;
+}
+img.attack {
+    width: 107%;
+    height: 137%;
+}
+.attack_wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.attack_text {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 18%;
+    padding: 2% 0 0 0;
+}
+.hidden{
+    display:none !important;
+}
+.black{
+    background-color: black;
+}
+.none{
+    position:absolute;
+    display: none;
+}
+.appear_hide{
+    animation: beam 0.2s infinite;
+}
+.move_attack{
+    left: 75.5% !important;
+    transition: 1.6s cubic-bezier(0.4, 0, 1, 1);
+} 
+.cube {
+    width: 49% !important;
+    height: 77% !important;
+}
+.move {
+    transition: all 0.2s ease-in-out !important;
+    top: 104.5% !important;
+    left: 24.09% !important;
+}
+@keyframes beam {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+}
+@keyframes bounce {
+    0% {
+        position: relative;
+        bottom: 30%;
+    }
+    100% {
+        position: relative;
+        bottom: 0%;
+    }
+}  
