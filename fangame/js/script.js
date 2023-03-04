@@ -42,6 +42,30 @@ let num_second = 0;
 let time = -200;
 let time2 = 0;
 let mettaton_hp = 1000;
+let html2 = html.innerHTML;
+
+//CHecks the size of the screen
+function Check_screen(){
+if(window.innerWidth < 982){
+  html.innerHTML = `
+  <!DOCTYPE html>
+  <html class="" lang="en-US">
+  <head>
+    <title>Mettaton NEO Battle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fonts/ATTACK_BUTTONS.otf">
+    <link rel="icon" href="img/icon.png">
+  </head>
+  <body> 
+  <div class='too_small'>YOUR SCREEN IS TOO SMALL</div>
+  </body>
+  </html>
+  `
+}
+}
+
+//Checks screen for first time
+Check_screen();
 
 //Width for hp bar
 hp_width.style.width = "100%"
@@ -91,7 +115,7 @@ function no_start_animation(){
   stage = 0;
   setTimeout(function(){
     typeWriter();
-    audio.play();
+    //audio.play();
   },10);
   }
   }
