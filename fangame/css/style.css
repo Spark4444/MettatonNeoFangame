@@ -50,6 +50,11 @@ body {
 audio{
     pointer-events: none;
 }
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 .mettaton_hp {
     position: absolute;
     top: 11%;
@@ -103,6 +108,19 @@ img.attack_png {
 }
 img.heart_img {
     width: 3%;
+}
+.start_menu {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, black, white);
+    position: absolute;
+    transition: 1s;
+}
+img.sound {
+    width: 5%;
+    height: 7%;
+    cursor: pointer; 
+    position: absolute;
 }
 .start_button {
     position: absolute;
@@ -169,7 +187,7 @@ img#heart {
     align-items: flex-end;
     justify-content: center;
 }
-.mettaton img {
+.mettaton_gif {
     width: 59%;
 }
 .text-menu {
@@ -191,16 +209,9 @@ img#heart {
     white-space: pre;
     transition: 1s;
 }
-canvas#canvas {
-    width: 51%;
-    height: 92%;
-    border: 10px solid white;
-}
-canvas#canvas2 {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
+img.img_M {
+    width: 4%;
+    position: relative;
 }
 .stats-menu {
     font-family: "8bit_small";
@@ -341,7 +352,10 @@ img.attack {
     padding: 2% 0 0 0;
 }
 .hidden{
-    display:none !important;
+    display: none;
+}
+.hidden_anim{
+    animation: disepear 1s;
 }
 .black{
     background-color: black;
@@ -385,5 +399,15 @@ img.attack {
     100% {
         position: relative;
         bottom: 0%;
+    }
+}  
+@keyframes disepear {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    100% {
+        display: block;
+        opacity: 0;
     }
 }  

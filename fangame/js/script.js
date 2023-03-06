@@ -10,6 +10,8 @@ let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
 let img_h = document.querySelectorAll(".heart_img");  
 let start_button = document.querySelector(".start_button");
+let start_menu = document.querySelector(".start_menu");
+let sound = document.querySelector(".sound");
 let html = document.querySelector("html");
 let hp = document.querySelector(".txt");
 let hp_mettaton_attacked = document.querySelector(".hp-");
@@ -17,66 +19,59 @@ let elem_mettaton = document.querySelector(".mettaton_hp");
 let hp_left = document.querySelector(".hp_shower");
 let attack_gif = document.querySelector(".attack_png");
 let attack_line = document.querySelector(".line_attack");
+let mettaton_gif = document.querySelector(".mettaton_gif");
 let hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
 let hp_width = document.querySelector(".hpVis");
 let canvas = document.querySelector("#canvas");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
-let text = "* Mettaton NEO blocks the way!";
+let text = "";
 let text1;
 let text2;
 let width_pr;
 let food = "";
 let stage = false;
 let attack = false;
-let hp_mettaton = 1000;
-let attack2 = 0;
 let num = false;
 let x_disable = false;
 let invent = false;
 let position = false;
 let started = false;
+let canvas_t = false;
+let sound_boolean = true;
+let hp_mettaton = 1000;
+let attack2 = 0;
 let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
 let time = -200;
 let time2 = 0;
 let mettaton_hp = 1000;
-let html2 = html.innerHTML;
-
-//CHecks the size of the screen
-function Check_screen(){
-if(window.innerWidth < 982){
-  html.innerHTML = `
-  <!DOCTYPE html>
-  <html class="" lang="en-US">
-  <head>
-    <title>Mettaton NEO Battle</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fonts/ATTACK_BUTTONS.otf">
-    <link rel="icon" href="img/icon.png">
-  </head>
-  <body> 
-  <div class='too_small'>YOUR SCREEN IS TOO SMALL</div>
-  </body>
-  </html>
-  `
-}
-}
-
-//Checks screen for first time
-Check_screen();
 
 //Width for hp bar
 hp_width.style.width = "100%"
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
+sound.addEventListener('click', () =>{
+  if(sound.src.includes("sound.png")){
+  sound.src = "img/sound_canceled.png";
+  sound_boolean = false;
+  }
+  else if(sound.src.includes("sound_canceled.png")){
+  sound.src = "img/sound.png";
+  sound_boolean = true
+  }
+});
+
 start_button.addEventListener('click', () =>{
+  text = "* Mettaton NEO blocks the way!";
   html.classList.add("cursor_none");
   frisk.classList.remove("hidden");
-  start_button.classList.add("hidden");
+  start_menu.classList.add("hidden_anim");
+  setTimeout(function() {
+  start_menu.classList.add("hidden");
+  },1000);
   started = true;
-
   //Starting animation
   function start_animation(){
     if(started == true){
@@ -96,7 +91,9 @@ start_button.addEventListener('click', () =>{
       buttons[0].classList.add('yellow');
       heart.classList.add("hidden");
       img[0].src = "img/heart.png";
-        audio.play();
+      if(sound_boolean === true){
+      audio.play();
+      }
       num = 0;
       stage = 0;
     },2400);
@@ -115,7 +112,9 @@ function no_start_animation(){
   stage = 0;
   setTimeout(function(){
     typeWriter();
-    //audio.play();
+    if(sound_boolean === true){
+      audio.play();
+    }
   },10);
   }
   }
@@ -245,10 +244,10 @@ function disappear(){
   typeWriter2();
   text_placeholder.classList.add("cube")
   setTimeout(function(){
-    text_placeholder.classList.add("hidden");
     buttons[num_second].classList.remove('yellow');
     img[num_second].src = "";
     canvas.style.display = "";
+    canvas_t = true;
   },1000);
 }
 
