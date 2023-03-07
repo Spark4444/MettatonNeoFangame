@@ -136,3 +136,10 @@ document.addEventListener('keyup', e => {
 });
 
 setInterval(moveHeart, 10);
+
+//attack 1
+function attack1(){
+  setTimeout(function() {
+    appear();
+  },10000);
+}

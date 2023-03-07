@@ -26,10 +26,11 @@ let canvas = document.querySelector("#canvas");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
 let text = "";
+let food = "";
+let HP_width_small = "100%";
 let text1;
 let text2;
 let width_pr;
-let food = "";
 let stage = false;
 let attack = false;
 let num = false;
@@ -40,6 +41,7 @@ let started = false;
 let canvas_t = false;
 let sound_boolean = true;
 let hp_mettaton = 1000;
+let attack_num = false;
 let attack2 = 0;
 let position2 = 0;
 let hp_recover = 0;
@@ -47,6 +49,7 @@ let num_second = 0;
 let time = -200;
 let time2 = 0;
 let mettaton_hp = 1000;
+// alert(window.innerHeight + " " + window.innerWidth);
 
 //Width for hp bar
 hp_width.style.width = "100%"
@@ -55,15 +58,18 @@ hp_width.style.width = "100%"
 sound.addEventListener('click', () =>{
   if(sound.src.includes("sound.png")){
   sound.src = "img/sound_canceled.png";
+  audio1.play();
   sound_boolean = false;
   }
   else if(sound.src.includes("sound_canceled.png")){
   sound.src = "img/sound.png";
+  audio1.play();
   sound_boolean = true
   }
 });
 
 start_button.addEventListener('click', () =>{
+  audio1.play();
   text = "* Mettaton NEO blocks the way!";
   html.classList.add("cursor_none");
   frisk.classList.remove("hidden");
@@ -126,7 +132,7 @@ function no_start_animation(){
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
-    text = "<div class='attack_text'><img class= 'heart_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp'></div></div></div>";
+    text = `<div class='attack_text'><img class= 'heart_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
     typeWriter2();
   }
   if(num_second == 1){
@@ -240,23 +246,41 @@ function check4(num){
 
 //text_menu disappear
 function disappear(){
+  stage = false;
+  num = false;
   text = "";
   typeWriter2();
   text_placeholder.classList.add("cube")
   setTimeout(function(){
     buttons[num_second].classList.remove('yellow');
     img[num_second].src = "";
+    if(num_second == 0){
+      img[0].src = "img/fight.png";
+    }
+    if(num_second == 1){
+      img[1].src = "img/act.png";
+    }
+    if(num_second == 2){
+      img[2].src = "img/item.png";
+    }
+    if(num_second == 3){
+      img[3].src = "img/mercy.png";
+    } 
     canvas.style.display = "";
     canvas_t = true;
+    attack_num = 0;
+    attack1();
   },1000);
 }
 
 //text_menu appear
 function appear(){
+  canvas_t = false;
   num = 0;
+  text = "";
+  typeWriter2();
   classA();
   stage = 0;
-  canvas.style.display = "none";
   text_placeholder.classList.remove("hidden");
   setTimeout(function(){
     text_placeholder.classList.remove("cube");
@@ -462,6 +486,7 @@ document.addEventListener('keyup', e => {
         elem_mettaton.classList.remove("hidden");
         hp_mettaton = hp_mettaton - attack2;
         hp_left.style.width = `${hp_mettaton/(1000/100)}%`;
+        HP_width_small = `${hp_mettaton/(1000/100)}%`;
         hp_mettaton_attacked.innerHTML = `${attack2}`;
         setTimeout(function(){
           elem_mettaton.classList.add("hidden");

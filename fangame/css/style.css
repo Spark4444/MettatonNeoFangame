@@ -36,6 +36,10 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+img{
+    user-select: none;
+    -webkit-user-drag: none;
 }   
 .too_small {
     display: flex;
@@ -112,32 +116,34 @@ img.heart_img {
 .start_menu {
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, black, white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     position: absolute;
-    transition: 1s;
+    background-image: url(../img/background.png);
+    animation: moveBackground 2s linear infinite;
+    background-size: 2000px;
+    background-repeat: repeat;
 }
 img.sound {
-    width: 5%;
-    height: 7%;
+    width: 9%;
+    margin: 3% 0 9% 0;
     cursor: pointer; 
-    position: absolute;
 }
 .start_button {
-    position: absolute;
     display: flex;
     justify-content: center;
-    width: 10%;
-    height: 9%;
+    width: 25%;
+    height: 21%;
     font-family: "BUTTONS";
-    color: #fe8507;
-    background-image: linear-gradient(#aa5904, #fe8507);
-    border: 8px groove #fe8507;
-    font-size: 230%;
-    border-radius: 12px;
-    top: 44%;
-    left: 44%;
+    color: #f9812b;
+    background: black;
+    border: 8px solid #f9812b;
+    font-size: 706%;
+    padding: 0 0 1% 1%;
     align-items: center;
-    cursor:pointer;
+    cursor: pointer;
 }
 img#heart {
     width: 2%;
@@ -411,3 +417,11 @@ img.attack {
         opacity: 0;
     }
 }  
+@keyframes moveBackground {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+        background-position: -98% 215%;
+    }
+  }
