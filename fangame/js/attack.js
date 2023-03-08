@@ -2,6 +2,13 @@
 // Set initial position
 let img_M = document.querySelector(".img_M");
 let projectile = document.querySelector(".particles");
+let leg1 = document.querySelector(".leg1");
+let leg2 = document.querySelector(".leg2");
+let top1 = 19.3;
+let left1 = 24;
+let top2= 19.3;
+let left2 = 68;
+let number = 0;
 img_M.remove();
 let x = 35;
 let y = 47;
@@ -136,10 +143,3 @@ document.addEventListener('keyup', e => {
 });
 
 setInterval(moveHeart, 10);
-
-//attack 1
-function attack1(){
-  setTimeout(function() {
-    appear();
-  },10000);
-}

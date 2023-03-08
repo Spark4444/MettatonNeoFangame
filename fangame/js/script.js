@@ -5,6 +5,7 @@ let wrapper = document.querySelector(".wrapper");
 let heart = document.querySelector("#heart");
 let audio = document.querySelector("#audio");
 let audio1 = document.querySelector("#audio1");
+let audio2 = document.querySelector("#audio2");
 let buttons = document.querySelectorAll('.button');
 let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
@@ -54,8 +55,16 @@ let mettaton_hp = 1000;
 //Width for hp bar
 hp_width.style.width = "100%"
 
+//Plays starting music
+document.addEventListener('click', () =>{
+  if(started !== true){
+  audio2.play();
+  }
+});
+
 //Waits for the button to be clicked and here you can change the animation in the start parameter
 sound.addEventListener('click', () =>{
+  if(started !== true){
   if(sound.src.includes("sound.png")){
   sound.src = "img/sound_canceled.png";
   audio1.play();
@@ -66,9 +75,12 @@ sound.addEventListener('click', () =>{
   audio1.play();
   sound_boolean = true
   }
+  }
 });
 
 start_button.addEventListener('click', () =>{
+  if(started !== true){
+  audio2.muted = true;
   audio1.play();
   text = "* Mettaton NEO blocks the way!";
   html.classList.add("cursor_none");
@@ -125,6 +137,7 @@ function no_start_animation(){
   }
   }
   // no_start_animation();
+}
 });
 
 //All functions initialization
@@ -268,13 +281,52 @@ function disappear(){
     } 
     canvas.style.display = "";
     canvas_t = true;
+    if(attack_num === false){
     attack_num = 0;
-    attack1();
+    }
+    if(attack_num == 8){
+    // attack9();
+    attack_num = 9;
+    }
+    if(attack_num == 7){
+      // attack8();
+      attack_num = 8;
+    }
+    if(attack_num == 6){
+      // attack7();
+      attack_num = 7;
+    }
+    if(attack_num == 5){
+      // attack6();
+      attack_num = 6;
+    }
+    if(attack_num == 4){
+      // attack5();
+      attack_num = 5;
+    }
+    if(attack_num == 3){
+      // attack4();
+      attack_num = 4;
+    }
+    if(attack_num == 2){
+      // attack3();
+      attack_num = 3;
+    }
+    if(attack_num == 1){
+      // attack2();
+      attack_num = 2;
+    }
+    if(attack_num == 0){
+      attack1();
+      attack_num = 1;
+    }
   },1000);
 }
 
 //text_menu appear
 function appear(){
+  projectile.innerHTML = ``;
+  mettaton_gif.style.opacity = "1";
   canvas_t = false;
   num = 0;
   text = "";
@@ -477,7 +529,7 @@ document.addEventListener('keyup', e => {
           time2 = time2 - 1.11;
           time2 = 1.11 - time2;
         }
-        attack2 = (time2/(0.8/100)/2 * (36/100)).toFixed(0);
+        attack2 = (time2/(0.8/100)/2 * (48/100)).toFixed(0);
         if(attack2 <= 0 ){
           attack2 = 0;
         }
