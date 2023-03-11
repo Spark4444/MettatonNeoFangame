@@ -41,15 +41,15 @@ let position = false;
 let started = false;
 let canvas_t = false;
 let sound_boolean = true;
-let hp_mettaton = 1000;
 let attack_num = false;
+let anim = true;
+let hp_mettaton = 360;
 let attack2 = 0;
 let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
 let time = -200;
 let time2 = 0;
-let mettaton_hp = 1000;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Width for hp bar
@@ -62,7 +62,7 @@ document.addEventListener('click', () =>{
   }
 });
 
-//Waits for the button to be clicked and here you can change the animation in the start parameter
+//Waits for the button to be clicked to turn sound off and on
 sound.addEventListener('click', () =>{
   if(started !== true){
   if(sound.src.includes("sound.png")){
@@ -78,11 +78,11 @@ sound.addEventListener('click', () =>{
   }
 });
 
+//Waits for the button to be clicked and here you can change the animation in the start parameter
 start_button.addEventListener('click', () =>{
   if(started !== true){
   audio2.muted = true;
   audio1.play();
-  text = "* Mettaton NEO blocks the way!";
   html.classList.add("cursor_none");
   frisk.classList.remove("hidden");
   start_menu.classList.add("hidden_anim");
@@ -90,53 +90,63 @@ start_button.addEventListener('click', () =>{
   start_menu.classList.add("hidden");
   },1000);
   started = true;
-  //Starting animation
-  function start_animation(){
-    if(started == true){
+    //Starting animation
+    function start_animation(){
+    if(started === true){
     setTimeout(function() {
-      heart.classList.remove("hidden");
-      frisk.classList.add("hidden");
-      start.classList.add("black");
-      setTimeout(function() {
-        wrapper.classList.remove("hidden");
-        wrapper.classList.remove("hidden");
-        start.classList.add("hidden");
-        heart.classList.add("move");
-      }, 200);
+    appear("* Mettaton NEO blocks the way!");
+    stage = false
+    },1500);
+    setTimeout(function() {
+    heart.classList.remove("hidden");
+    frisk.classList.add("hidden");
+    start.classList.add("black");
+    setTimeout(function() {
+      wrapper.classList.remove("hidden");
+      start.classList.add("hidden");
+      heart.classList.add("move");
+    }, 200);
     }, 2000); 
     setTimeout(function(){
-      typeWriter();
-      buttons[0].classList.add('yellow');
-      heart.classList.add("hidden");
-      img[0].src = "img/heart.png";
-      if(sound_boolean === true){
-      audio.play();
-      }
-      num = 0;
-      stage = 0;
+    start_button.innerHTML = "RESTART";
+    start_button.style.width = "38%";
+    buttons[0].classList.add('yellow');
+    heart.classList.add("hidden");
+    img[0].src = "img/heart.png";
+    if(sound_boolean === true){
+    audio.play();
+    }
+    num = 0;
     },2400);
     }
     }
-    start_animation();
 
     //No start animation
-function no_start_animation(){
-  if(started == true){
-  start.classList.add("hidden");
-  wrapper.classList.remove("hidden");
-  img[0].src = "img/heart.png";
-  buttons[0].classList.add('yellow');
-  num = 0;
-  stage = 0;
-  setTimeout(function(){
-    typeWriter();
-    if(sound_boolean === true){
-      audio.play();
+    function no_start_animation(){
+    if(started === true){
+    setTimeout(function() {
+      appear("* Mettaton NEO blocks the way!");
+    },10);
+    start.classList.add("hidden");
+    wrapper.classList.remove("hidden");
+    img[0].src = "img/heart.png";
+    buttons[0].classList.add('yellow');
+    num = 0;
+    stage = false;
+    setTimeout(function(){
+      if(sound_boolean === true){
+        audio.play();
+      }
+    },10);
     }
-  },10);
+    }
+
+  if(anim === true){
+    start_animation();
   }
+  else if(anim === false){
+    no_start_animation();
   }
-  // no_start_animation();
 }
 });
 
@@ -211,7 +221,7 @@ function check2(num){
 * You recovered ${hp_recover} HP!`;
     }
     hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
-    HP_recover(hp_recover,hp_string,hp,hp_width);
+    HP_recover();
     typeWriter();
     position = false;
   }
@@ -268,7 +278,7 @@ function disappear(){
     buttons[num_second].classList.remove('yellow');
     img[num_second].src = "";
     if(num_second == 0){
-      img[0].src = "img/fight.png";
+      img[0].src = "img/fight.png";img
     }
     if(num_second == 1){
       img[1].src = "img/act.png";
@@ -324,7 +334,7 @@ function disappear(){
 }
 
 //text_menu appear
-function appear(){
+function appear(text1){
   projectile.innerHTML = ``;
   mettaton_gif.style.opacity = "1";
   canvas_t = false;
@@ -332,15 +342,15 @@ function appear(){
   text = "";
   typeWriter2();
   classA();
-  stage = 0;
   text_placeholder.classList.remove("hidden");
   setTimeout(function(){
     text_placeholder.classList.remove("cube");
   },100);
   
   setTimeout(function(){
-    text = "* Stage lights are blaring";
+    text = text1;
     typeWriter();
+    stage = 0;
   },1000 + 100);
 }
 
@@ -385,15 +395,56 @@ function attack_function(){
 }
 
 //HP recovering
-function HP_recover(health,HP,HP_text,HP_width){
-  HP = parseInt(HP) + parseInt(health);
-  if(HP < 72){
-    HP_text.innerHTML = `${HP}/72`;
-    HP_width.style.width = `${HP/(72/100)}%`
+function HP_recover(){
+  if(parseInt(hp_string) + parseInt(hp_recover) < 71 && parseInt(hp_string) + parseInt(hp_recover) > 0){
+  hp_string = parseInt(hp_string) + parseInt(hp_recover);
   }
-  if(HP >= 72){
-    HP_text.innerHTML = `72/72`;
-    HP_width.style.width = `100%`
+  else if(parseInt(hp_string) + parseInt(hp_recover) > 72){
+  hp_string = 72;
+  }
+  if(hp_string < 72){
+    hp.innerHTML = `${hp_string}/72`;
+    hp_width.style.width = `${hp_string/(72/100)}%`;
+  }
+  if(hp_string >= 72){
+    hp.innerHTML = `72/72`;
+    hp_width.style.width = `100%`;
+  }
+}
+
+//Shows hp and checks if game is over
+function showHP(){
+  hp.innerHTML = `${hp_string}/72`;
+  hp_width.style.width = `${hp_string/(72/100)}%`;
+  if(hp_string < 0){
+    projectile.innerHTML == "";
+    clearInterval(intervalId);
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show);
+    clearInterval(ten_secs);
+    food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
+    health = ["72","72","60","40","40","40","40","40"];
+    hp_mettaton = 360;
+    one = 0;
+    hp_string = "72";
+    hp.innerHTML = `72/72`;
+    hp_width.style.width = `100%`;
+    hp_left.style.width = `${hp_mettaton/(360/100)}%`;
+    HP_width_small = `${hp_mettaton/(360/100)}%`;
+    anim = false;
+    attack_num = false;
+    stage = false;
+    num = false;
+    html.classList.remove("cursor_none");
+    wrapper.classList.add("hidden");
+    start_menu.classList.remove("hidden");
+    start_menu.classList.remove("hidden_anim");
+    start_menu.style.opacity = "0";
+    setTimeout(function(){
+      start_menu.style.opacity = "";
+    },10)
+    started = false;
   }
 }
 
@@ -521,6 +572,7 @@ document.addEventListener('keyup', e => {
     case 'Enter':
     case 'z':
     case 'Z':
+
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
         attack = false;
@@ -537,8 +589,8 @@ document.addEventListener('keyup', e => {
         attack_gif.classList.remove("hidden");
         elem_mettaton.classList.remove("hidden");
         hp_mettaton = hp_mettaton - attack2;
-        hp_left.style.width = `${hp_mettaton/(1000/100)}%`;
-        HP_width_small = `${hp_mettaton/(1000/100)}%`;
+        hp_left.style.width = `${hp_mettaton/(360/100)}%`;
+        HP_width_small = `${hp_mettaton/(360/100)}%`;
         hp_mettaton_attacked.innerHTML = `${attack2}`;
         setTimeout(function(){
           elem_mettaton.classList.add("hidden");
@@ -570,6 +622,8 @@ document.addEventListener('keyup', e => {
       if(num < 0){
         num = 3;
       }
+
+      //Movement between text 
       if(stage == 3 && stage !== false && num_second == 1){
         stage = 4;
         check4(num_second);
@@ -586,6 +640,7 @@ document.addEventListener('keyup', e => {
         audio1.play();
         }
       if(stage == 0 && stage !== false){
+        clearTimeout(timeoutID);
         stage = 1;
         check(num_second);
         audio1.play();
@@ -596,7 +651,8 @@ document.addEventListener('keyup', e => {
       break;
     case 'x':
     case 'X':
-      //Go outn of the text menu
+
+      //Go out of the text menu
       if(x_disable == true){
       position = false;
       stage = 0;

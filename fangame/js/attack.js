@@ -9,6 +9,7 @@ let left1 = 24;
 let top2= 19.3;
 let left2 = 68;
 let number = 0;
+let t_f_wait = false;
 img_M.remove();
 let x = 35;
 let y = 47;
@@ -17,31 +18,50 @@ let damage = 0;
 let damage_t = 0;
 let objectX = 500;
 let objectY = 100;
+let speedX = 0.25;
+let speedY = 1;
 const objectWidth = 50;
 const objectHeight = 50;
-// Move heart with keyboard
+//Move heart with keyboard
 let moveX = 0;
 let moveY = 0;
 
-// Draw heart
+//Draw heart
 function drawHeart(x, y) {
   if(canvas_t === true){
-    if(text_placeholder.innerHTML != `<img class="img_M" src="img/heart.png">`){
-      text_placeholder.innerHTML = `<img class="img_M" src="img/heart.png" alt="">`
-    }
+  text_placeholder.innerHTML = `<img class="img_M" src="img/heart.png" alt="">`
   img_M = document.querySelector(".img_M");
   img_M.style.top = `${y}%`;
   img_M.style.left = `${x}%`;
   }
 }
 
-function checkCollision() {
-  if (x > objectX && x < objectX + objectWidth && y > objectY && y < objectY + objectHeight) {
-    damage += damage_t;
+//Checks for collision
+function checkCollision(element1, element2, damage) {
+  if(canvas_t === true){
+  const elem2Rect = element2.getBoundingClientRect();
+  let count = 0;
+  for(let i = 0;element1.length > i;i++){
+  const elem1Rect = element1[i].getBoundingClientRect();
+  if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
+  if(count == 0){
+  count++;
+  t_f_wait = true;
+  let hp_hold = parseInt(parseInt(hp_string) - damage);
+  hp_string = hp_hold.toString();
+  img_M.classList.add("flash");
+  setTimeout(function(){
+    img_M.classList.remove("flash");
+    t_f_wait = false;
+  }, 500);
+  }
+  }
+  }
   }
 }
 
 function check_out_of_bounds() {
+  if(canvas_t === true){
   if((moveX == 0.25 || moveX == -0.25) &&(moveY == 1 || moveY == -1)){
     if(98 < x && 82 < y){
       x = 98;
@@ -73,52 +93,50 @@ function check_out_of_bounds() {
     y = -17;
   }
 }
+}
 // Move heart and check collision
 function moveHeart() {
   // Check if heart is out of bounds
   if(canvas_t === true){
   check_out_of_bounds();
-  //Add the %
   x += moveX;
   y += moveY;
-
-  checkCollision();
   drawHeart(x, y);
   }
 }
 
 //AWSD keys listeners
 document.addEventListener('keydown', e => {
-  check_out_of_bounds()
+  if(canvas_t === true){
   switch (e.code) {
     case 'KeyA':
     case 'ArrowLeft':
-      moveX = -+0.25;
+      moveX = -speedX;
       moveHeart();
       break;
     case 'KeyD':
     case 'ArrowRight':
-      moveX = 0.25;
+      moveX = speedX;
       moveHeart();
       break;
     case 'KeyW':
     case 'ArrowUp':
-      moveY = -1;
+      moveY = -speedY;
       moveHeart();
       break;
     case 'KeyS':
     case 'ArrowDown':
-      moveY = 1;
+      moveY = speedY;
       moveHeart();
       break;
     default:
       break;
   }
-  check_out_of_bounds()
+}
 });
 
 document.addEventListener('keyup', e => {
-  check_out_of_bounds()
+  if(canvas_t === true){
   switch (e.code) {
     case 'KeyA':
     case 'ArrowLeft':
@@ -139,7 +157,5 @@ document.addEventListener('keyup', e => {
     default:
       break;
   }
-  check_out_of_bounds()
+}
 });
-
-setInterval(moveHeart, 10);

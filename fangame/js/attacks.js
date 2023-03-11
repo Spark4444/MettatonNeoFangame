@@ -2,13 +2,26 @@
 
 
 //attack 1(legs)
+let HP_show;
+let intervalId2;
+let intervalId;
+let ten_secs;
+let moveHeartI;
 function attack1(){ 
-    projectile.innerHTML = `<img src="img/leg1.png" class="leg1" alt=""><img src="img/leg2.png" class="leg2" alt="">`
+    moveHeartI = setInterval(moveHeart, 10);
+    x = 35;
+    y = 47;
+    drawHeart(x, y)
+    projectile.innerHTML = `<img src="img/leg1.png" class="leg1 legs" alt=""><img src="img/leg2.png" class="leg2 legs" alt="">`
     mettaton_gif.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
     leg2 = document.querySelector(".leg2");
+    legs = document.querySelectorAll(".legs");
   
-    function doSomething() {
+    function legs_move() {
+      if(num > 30){
+        number = 0;
+      }
       number++;
       if(number%3 === 1){
         left1 = randomRange(23,71);
@@ -28,10 +41,23 @@ function attack1(){
       leg2.style.left = `${left2}%`;
     }
   
-    const intervalId = setInterval(doSomething, 200);
+    intervalId = setInterval(legs_move, 333);
+    intervalId2 = setInterval(() => {
+      if(t_f_wait === false){
+      checkCollision(legs, img_M, 20);
+      }
+      }, 10);
+      
   
-    setTimeout(() => {
+    HP_show = setInterval(() => {
+      showHP();
+    }, 10);
+  
+    ten_secs = setTimeout(() => {
       clearInterval(intervalId);
-      appear();
-    }, 10000);
+      clearInterval(intervalId2);
+      clearInterval(moveHeartI);
+      clearInterval(HP_show);
+      appear("* Stage lights are blaring");
+    }, 9999);
   }
