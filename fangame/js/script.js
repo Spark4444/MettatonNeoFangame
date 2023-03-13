@@ -29,6 +29,7 @@ let health = ["72","72","60","40","40","40","40","40"];
 let text = "";
 let food = "";
 let HP_width_small = "100%";
+let audio_src = audio.src;
 let text1;
 let text2;
 let width_pr;
@@ -40,7 +41,6 @@ let invent = false;
 let position = false;
 let started = false;
 let canvas_t = false;
-let sound_boolean = true;
 let attack_num = false;
 let anim = true;
 let hp_mettaton = 360;
@@ -56,7 +56,7 @@ let time2 = 0;
 hp_width.style.width = "100%"
 
 //Plays starting music
-document.addEventListener('click', () =>{
+start_menu.addEventListener('click', () =>{
   if(started !== true){
   audio2.play();
   }
@@ -68,12 +68,14 @@ sound.addEventListener('click', () =>{
   if(sound.src.includes("sound.png")){
   sound.src = "img/sound_canceled.png";
   audio1.play();
-  sound_boolean = false;
+  audio.src = "";
+  audio.muted = true;
   }
   else if(sound.src.includes("sound_canceled.png")){
   sound.src = "img/sound.png";
   audio1.play();
-  sound_boolean = true
+  audio.src = "";
+  audio.muted = false;
   }
   }
 });
@@ -108,14 +110,15 @@ start_button.addEventListener('click', () =>{
     }, 200);
     }, 2000); 
     setTimeout(function(){
+    if(audio.muted === false){
+        audio.src = audio_src;
+        audio.play();
+    }
     start_button.innerHTML = "RESTART";
     start_button.style.width = "38%";
     buttons[0].classList.add('yellow');
     heart.classList.add("hidden");
     img[0].src = "img/heart.png";
-    if(sound_boolean === true){
-    audio.play();
-    }
     num = 0;
     },2400);
     }
@@ -134,9 +137,10 @@ start_button.addEventListener('click', () =>{
     num = 0;
     stage = false;
     setTimeout(function(){
-      if(sound_boolean === true){
+      if(audio.muted === false){
+        audio.src = audio_src;
         audio.play();
-      }
+    }
     },10);
     }
     }
@@ -372,6 +376,8 @@ function attack_function(){
     time += 10;
     }, 10);
   },100);
+  attack_line.classList.remove("move_attack");
+  attack_line.style.left =  "23.5%";
   setTimeout(function(){
     attack_line.classList.add("move_attack");
   },200);
@@ -417,7 +423,18 @@ function showHP(){
   hp.innerHTML = `${hp_string}/72`;
   hp_width.style.width = `${hp_string/(72/100)}%`;
   if(hp_string < 0){
+    top1 = 19.3;
+    top2 = 19.3;
+    left1 = 50;
+    left2 = 50;
     projectile.innerHTML == "";
+    audio2.muted = false;
+    number = 1;
+    restarts++;
+    audio.muted = true;
+    audio2.currentTime = 0;
+    audio.currentTime = 0;
+    audio.stop
     clearInterval(intervalId);
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
@@ -531,11 +548,11 @@ function typeWriter2() {
 
 //A,a and left arrow keys listeners, movement to the right of the buttons
 document.addEventListener('keyup', e => {
-  const key = e.key;
+  const key = e.keyCode || e.which;
   switch (key) {
-    case 'ArrowLeft':
-    case 'a': 
-    case 'A':
+    case 37: // Left arrow key
+    case 65: // A key
+    case 97: // a key
       if(num !== false){
         num--;
         audio1.play();
@@ -549,11 +566,11 @@ document.addEventListener('keyup', e => {
 
 //D,d and right arrow keys listener, movement to the left of the buttons
 document.addEventListener('keyup', e => {
-  const key = e.key;
+  const key = e.keyCode || e.which;
   switch (key) {
-    case 'ArrowRight':
-    case 'd':
-    case 'D':
+    case 39: // Right arrow key
+    case 68: // D key
+    case 100: // d key
       if(num !== false){
         num++;
         audio1.play();
@@ -567,11 +584,11 @@ document.addEventListener('keyup', e => {
 
 //Z and enter, x key listeners
 document.addEventListener('keyup', e => {
-  const key = e.key;
+  const key = e.keyCode || e.which;
   switch (key) {
-    case 'Enter':
-    case 'z':
-    case 'Z':
+    case 13: // Enter key
+    case 90: // Z key
+    case 122: // z key
 
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
@@ -649,8 +666,8 @@ document.addEventListener('keyup', e => {
         }
 
       break;
-    case 'x':
-    case 'X':
+      case 88: // X key
+      case 120: // x key
 
       //Go out of the text menu
       if(x_disable == true){
@@ -682,12 +699,12 @@ document.addEventListener('keyup', e => {
  <img class="heart_img" src="img/nothing.png"> * ${food_list[6]}<img class="heart_img i4" src="img/nothing.png"> * ${food_list[7]} 
 <div class="p2">PAGE 2</div>`; 
 
-  const key = e.key;
+const key = e.keyCode || e.which;
   //Movement in  the inventory
   switch (key) {
-      case 'ArrowUp':
-      case "W":
-      case "w":
+      case 38: // ArrowUp
+      case 87: // W
+      case 119: // w
         img_h[position2].src = "img/nothing.png";
         if(position == 2 || position == 3){
           position -= 2;
@@ -702,12 +719,11 @@ document.addEventListener('keyup', e => {
           position -= 2;
         }
         audio1.play();
-        console.log(position);
 
       break;
-      case 'ArrowDown':
-      case "S":
-      case "s":
+      case 40: // ArrowDown
+      case 83: // S
+      case 115: // s
         img_h[position2].src = "img/nothing.png";
         if(position == 2 || position == 3){
           position -= 2;
@@ -722,12 +738,11 @@ document.addEventListener('keyup', e => {
           position -= 2;
         }
         audio1.play();
-        console.log(position);
 
       break;
-      case 'ArrowLeft':
-      case "A":
-      case "a":
+      case 37: // ArrowLeft
+      case 65: // A
+      case 97: // a
         img_h[position2].src = "img/nothing.png";
         if(position == 2){
           position = 7;
@@ -748,12 +763,11 @@ document.addEventListener('keyup', e => {
           position -= 1;
         }
         audio1.play();
-        console.log(position);
 
       break;
-      case 'ArrowRight':
-      case "D":
-      case "d":
+      case 39: // ArrowRight
+      case 68: // D
+      case 100: // d        
         img_h[position2].src = "img/nothing.png";
         if(position == 3){
           position = 6;
@@ -780,7 +794,6 @@ document.addEventListener('keyup', e => {
         imgH();
         img_h[position2].src = "img/heart.png";
         audio1.play();
-        console.log(position);
 
       break;
     default:

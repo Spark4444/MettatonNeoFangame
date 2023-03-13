@@ -4,11 +4,13 @@ let img_M = document.querySelector(".img_M");
 let projectile = document.querySelector(".particles");
 let leg1 = document.querySelector(".leg1");
 let leg2 = document.querySelector(".leg2");
+let flash = false;
 let top1 = 19.3;
-let left1 = 24;
+let left1 = 50;
 let top2= 19.3;
-let left2 = 68;
-let number = 0;
+let left2 = 50;
+let number = 1;
+let restarts = 0;
 let t_f_wait = false;
 img_M.remove();
 let x = 35;
@@ -29,7 +31,9 @@ let moveY = 0;
 //Draw heart
 function drawHeart(x, y) {
   if(canvas_t === true){
-  text_placeholder.innerHTML = `<img class="img_M" src="img/heart.png" alt="">`
+  if(flash === false){
+  text_placeholder.innerHTML = `<img class="img_M" src="img/heart.png" alt="">`;
+  }
   img_M = document.querySelector(".img_M");
   img_M.style.top = `${y}%`;
   img_M.style.left = `${x}%`;
@@ -50,7 +54,9 @@ function checkCollision(element1, element2, damage) {
   let hp_hold = parseInt(parseInt(hp_string) - damage);
   hp_string = hp_hold.toString();
   img_M.classList.add("flash");
+  flash = true;
   setTimeout(function(){
+    flash = false;
     img_M.classList.remove("flash");
     t_f_wait = false;
   }, 500);
@@ -60,6 +66,7 @@ function checkCollision(element1, element2, damage) {
   }
 }
 
+//Checks if the heart is out of bounds
 function check_out_of_bounds() {
   if(canvas_t === true){
   if((moveX == 0.25 || moveX == -0.25) &&(moveY == 1 || moveY == -1)){
@@ -94,6 +101,7 @@ function check_out_of_bounds() {
   }
 }
 }
+
 // Move heart and check collision
 function moveHeart() {
   // Check if heart is out of bounds
@@ -107,55 +115,56 @@ function moveHeart() {
 
 //AWSD keys listeners
 document.addEventListener('keydown', e => {
-  if(canvas_t === true){
-  switch (e.code) {
-    case 'KeyA':
-    case 'ArrowLeft':
-      moveX = -speedX;
-      moveHeart();
-      break;
-    case 'KeyD':
-    case 'ArrowRight':
-      moveX = speedX;
-      moveHeart();
-      break;
-    case 'KeyW':
-    case 'ArrowUp':
-      moveY = -speedY;
-      moveHeart();
-      break;
-    case 'KeyS':
-    case 'ArrowDown':
-      moveY = speedY;
-      moveHeart();
-      break;
-    default:
-      break;
+  if (canvas_t === true){
+    switch (e.keyCode) {
+      case 65: // A
+      case 37: // ArrowLeft
+        moveX = -speedX;
+        moveHeart();
+        break;
+      case 68: // D
+      case 39: // ArrowRight
+        moveX = speedX;
+        moveHeart();
+        break;
+      case 87: // W
+      case 38: // ArrowUp
+        moveY = -speedY;
+        moveHeart();
+        break;
+      case 83: // S
+      case 40: // ArrowDown
+        moveY = speedY;
+        moveHeart();
+        break;
+      default:
+        break;
+    }
   }
-}
 });
 
+//AWSD keys listeners
 document.addEventListener('keyup', e => {
-  if(canvas_t === true){
-  switch (e.code) {
-    case 'KeyA':
-    case 'ArrowLeft':
-      if (moveX < 0) moveX = 0;
-      break;
-    case 'KeyD':
-    case 'ArrowRight':
-      if (moveX > 0) moveX = 0;
-      break;
-    case 'KeyW':
-    case 'ArrowUp':
-      if (moveY < 0) moveY = 0;
-      break;
-    case 'KeyS':
-    case 'ArrowDown':
-      if (moveY > 0) moveY = 0;
-      break;
-    default:
-      break;
+  if (canvas_t === true){
+    switch (e.keyCode) {
+      case 65: // A
+      case 37: // ArrowLeft
+        if (moveX < 0) moveX = 0;
+        break;
+      case 68: // D
+      case 39: // ArrowRight
+        if (moveX > 0) moveX = 0;
+        break;
+      case 87: // W
+      case 38: // ArrowUp
+        if (moveY < 0) moveY = 0;
+        break;
+      case 83: // S
+      case 40: // ArrowDown
+        if (moveY > 0) moveY = 0;
+        break;
+      default:
+        break;
+    }
   }
-}
 });

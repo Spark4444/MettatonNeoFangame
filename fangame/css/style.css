@@ -63,13 +63,13 @@ img.leg1 {
     width: 8%;
     position: absolute;
     top: 19.3%;
-    left: 24%;
+    left: 50%;
 }
 img.leg2 {
     width: 8%;
     position: absolute;
     top: 19.3%;
-    left: 68%;
+    left: 50%;
 }
 img.legs{
     transition: 0.200s;
