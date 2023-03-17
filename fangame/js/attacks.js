@@ -1,19 +1,18 @@
-
-
-
-//attack 1(legs)
 let HP_show;
 let intervalId2;
 let intervalId;
 let ten_secs;
 let moveHeartI;
+let number_lightning;
+let lightningElem;
+let lightning;
 
-//Attack 1
-function attack1(){ 
+//Attack 1(legs)
+function attack1_legs(){ 
     moveHeartI = setInterval(moveHeart, 10);
-    x = 35;
-    y = 47;
-    drawHeart(x, y)
+    x = 47;
+    y = 31;
+    drawHeart(x, y);
     projectile.innerHTML = `<img src="img/leg1.png" style="left:${left1}% top:${top1}%" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${left2}% top:${top2}%" class="leg2 legs" alt="">`
     mettaton_gif.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
@@ -65,4 +64,51 @@ function attack1(){
       clearInterval(HP_show);
       appear("* Stage lights are blaring");
     }, 9999);
+  }
+
+//Attack 2(smoke and lighting)
+function attack2_smoke(){
+  projectile.innerHTML = `<img src="img/smoke.png" class="smoke" style="opacity:0" alt="">`;
+  x = 47;
+  y = 31;
+  drawHeart(x, y);
+  setTimeout(() => {
+    document.querySelector(".smoke").style.opacity = "1";
+  },10);
+  number_lightning = 0;
+      lightning = setInterval(function(){
+      number_lightning++;
+      if(number_lightning == 10){
+        number_lightning = 1;
+      }
+      projectile.innerHTML += `<img src="img/lightning.png" id="${number_lightning}" class="lightning" alt="" style="left:${randomRange(0,97)}%; top:${randomRange(0,48)}%;">`;
+      img_M.style.animation = "beam 0.5s infinite";
+      setTimeout(() => {
+      if(number_lightning < 11){
+      lightningElem = document.querySelector(`#\\3${number_lightning}`);
+      }
+      lightningElem.style.left = `${randomRange(24,73)}%`;
+      lightningElem.style.top = `${randomRange(57,74)}%`;
+      }, 10);
+      setTimeout(() => {
+        lightningElem.remove();
+        }, 500);
+    },600);
+    HP_show = setInterval(() => {
+      showHP();
+    }, 10);
+    moveHeartI = setInterval(moveHeart, 10);
+    intervalId2 = setInterval(() => {
+      if(t_f_wait === false){
+        checkCollisionOne(lightningElem, img_M, 15);
+    }
+    }, 10);
+    ten_secs = setTimeout(() => {
+      clearInterval(lightning);
+      clearInterval(intervalId2);
+      clearInterval(moveHeartI);
+      clearInterval(HP_show);
+      img_M.style.animation = "";
+      appear("* Stage lights are blaring");
+    }, 11900);
   }

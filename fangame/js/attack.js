@@ -66,6 +66,28 @@ function checkCollision(element1, element2, damage) {
   }
 }
 
+//Cheks for one element
+function checkCollisionOne(element, target, damage) {
+  if (canvas_t === true) {
+    const elemRect = element.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
+      if (!t_f_wait) {
+        t_f_wait = true;
+        let hp_hold = parseInt(parseInt(hp_string) - damage);
+        hp_string = hp_hold.toString();
+        img_M.classList.add("flash");
+        flash = true;
+        setTimeout(function() {
+          flash = false;
+          img_M.classList.remove("flash");
+          t_f_wait = false;
+        }, 500);
+      }
+    }
+  }
+}
+
 //Checks if the heart is out of bounds
 function check_out_of_bounds() {
   if(canvas_t === true){

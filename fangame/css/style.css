@@ -73,7 +73,22 @@ img.leg2 {
 }
 img.legs{
     transition: 0.200s;
+    z-index: 3;
 }
+img.smoke {
+    width: 50%;
+    position: absolute;
+    top: 58%;
+    left: 25%;
+    z-index: 1;
+    transition: 1s;
+}
+img.lightning {
+    width: 3%;
+    position: absolute;
+    transition: 499ms;
+    z-index: 0;
+}   
 .mettaton_hp {
     position: absolute;
     top: 11%;
@@ -141,6 +156,7 @@ img.heart_img {
     background-size: 2000px;
     background-repeat: repeat;
     transition: 1s;
+    z-index: 3;
 }
 img.sound {
     width: 9%;
@@ -234,6 +250,7 @@ img#heart {
 img.img_M {
     width: 4%;
     position: relative;
+    z-index: 2;
 }
 .stats-menu {
     font-family: "8bit_small";

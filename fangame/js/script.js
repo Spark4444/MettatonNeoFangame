@@ -34,6 +34,7 @@ let text1;
 let text2;
 let width_pr;
 let stage = false;
+let audio_work = true;
 let attack = false;
 let num = false;
 let x_disable = false;
@@ -70,12 +71,14 @@ sound.addEventListener('click', () =>{
   audio1.play();
   audio.src = "";
   audio.muted = true;
+  audio_work = false;
   }
   else if(sound.src.includes("sound_canceled.png")){
   sound.src = "img/sound.png";
   audio1.play();
   audio.src = "";
   audio.muted = false;
+  audio_work = true;
   }
   }
 });
@@ -92,6 +95,9 @@ start_button.addEventListener('click', () =>{
   start_menu.classList.add("hidden");
   },1000);
   started = true;
+  if(audio_work === true){
+    audio.muted = false;
+  }
     //Starting animation
     function start_animation(){
     if(started === true){
@@ -327,11 +333,11 @@ function disappear(){
       attack_num = 3;
     }
     if(attack_num == 1){
-      // attack2();
+      attack2_smoke();
       attack_num = 2;
     }
     if(attack_num == 0){
-      attack1();
+      attack1_legs();
       attack_num = 1;
     }
   },1000);
@@ -431,7 +437,9 @@ function showHP(){
     audio2.muted = false;
     number = 1;
     restarts++;
+    if(audio.muted === false){
     audio.muted = true;
+    }
     audio2.currentTime = 0;
     audio.currentTime = 0;
     audio.stop
@@ -440,6 +448,7 @@ function showHP(){
     clearInterval(moveHeartI);
     clearInterval(HP_show);
     clearInterval(ten_secs);
+    clearInterval(lightning);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
     hp_mettaton = 360;
