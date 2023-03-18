@@ -18,7 +18,10 @@
     <img src="" class="heart_img none" alt="">
     <div class="start_menu">
     <div class="start_button">PLAY</div>
-    <img class="sound" src="img/sound.png" alt="">
+    <div class="slider">
+    <input type="range" id="volume" min="0" max="100" value="100" oninput="rangeValue.innerText =`${this.value}%`">
+    <p id="rangeValue">100%</p>
+    </div>
     </div>
     <img class="hidden" id="heart" src="img/heart.png" alt="">
     <div class="start">

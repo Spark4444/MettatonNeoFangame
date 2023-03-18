@@ -21,6 +21,7 @@ let hp_left = document.querySelector(".hp_shower");
 let attack_gif = document.querySelector(".attack_png");
 let attack_line = document.querySelector(".line_attack");
 let mettaton_gif = document.querySelector(".mettaton_gif");
+let volume = document.querySelector("#volume");
 let hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
 let hp_width = document.querySelector(".hpVis");
 let canvas = document.querySelector("#canvas");
@@ -29,7 +30,6 @@ let health = ["72","72","60","40","40","40","40","40"];
 let text = "";
 let food = "";
 let HP_width_small = "100%";
-let audio_src = audio.src;
 let text1;
 let text2;
 let width_pr;
@@ -57,30 +57,20 @@ let time2 = 0;
 hp_width.style.width = "100%"
 
 //Plays starting music
-start_menu.addEventListener('click', () =>{
+start_menu.addEventListener('mousedown', () =>{
   if(started !== true){
   audio2.play();
   }
 });
 
-//Waits for the button to be clicked to turn sound off and on
-sound.addEventListener('click', () =>{
-  if(started !== true){
-  if(sound.src.includes("sound.png")){
-  sound.src = "img/sound_canceled.png";
+//The bar will play a sound when you click on it
+volume.addEventListener("mousedown", () => {
   audio1.play();
-  audio.src = "";
-  audio.muted = true;
-  audio_work = false;
-  }
-  else if(sound.src.includes("sound_canceled.png")){
-  sound.src = "img/sound.png";
-  audio1.play();
-  audio.src = "";
-  audio.muted = false;
-  audio_work = true;
-  }
-  }
+});
+
+// Update the volume when the mouse is released from the slider
+volume.addEventListener("mouseup", () => {
+  audio.volume = parseInt(volume.value) / 100;
 });
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
@@ -95,9 +85,6 @@ start_button.addEventListener('click', () =>{
   start_menu.classList.add("hidden");
   },1000);
   started = true;
-  if(audio_work === true){
-    audio.muted = false;
-  }
     //Starting animation
     function start_animation(){
     if(started === true){
@@ -113,13 +100,12 @@ start_button.addEventListener('click', () =>{
       wrapper.classList.remove("hidden");
       start.classList.add("hidden");
       heart.classList.add("move");
+      audio.muted = false;
+      audio.currentTime = 0;
+      audio.play();
     }, 200);
     }, 2000); 
     setTimeout(function(){
-    if(audio.muted === false){
-        audio.src = audio_src;
-        audio.play();
-    }
     start_button.innerHTML = "RESTART";
     start_button.style.width = "38%";
     buttons[0].classList.add('yellow');
@@ -143,10 +129,9 @@ start_button.addEventListener('click', () =>{
     num = 0;
     stage = false;
     setTimeout(function(){
-      if(audio.muted === false){
-        audio.src = audio_src;
-        audio.play();
-    }
+      audio.muted = false;
+      audio.currentTime = 0;
+      audio.play();
     },10);
     }
     }
@@ -437,12 +422,8 @@ function showHP(){
     audio2.muted = false;
     number = 1;
     restarts++;
-    if(audio.muted === false){
-    audio.muted = true;
-    }
     audio2.currentTime = 0;
-    audio.currentTime = 0;
-    audio.stop
+    audio.muted = true;
     clearInterval(intervalId);
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
