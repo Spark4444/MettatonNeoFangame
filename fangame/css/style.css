@@ -76,10 +76,10 @@ img.legs{
     z-index: 3;
 }
 img.smoke {
-    width: 50%;
+    width: 53%;
     position: absolute;
-    top: 58%;
-    left: 25%;
+    top: 57%;
+    left: 24%;
     z-index: 1;
     transition: 1s;
 }
@@ -141,7 +141,7 @@ img.attack_png {
     width: 31%;
 }
 img.heart_img {
-    width: 3%;
+    width: 13%;
 }
 .start_menu {
     width: 100%;
@@ -396,20 +396,53 @@ img.heart {
     position: relative;
     top: 3%;
 }
-img.heart_img.i2 {
-    padding: 0 0 0 33%;
+.i1 {
+    position: relative;
+    bottom: 37%;
+    right: -1%;
+    width: 25%;
+    margin: 0;
+    height: 1%;
 }
-img.heart_img.i1 {
-    padding: 0 0 0 39%;
+.i2 {
+    position: relative;
+    bottom: 36%;
+    width: 25%;
+    left: 60%;
+    height: 1%;
 }
-img.heart_img.i3,img.heart_img.i4 {
-    padding: 0 0 0 29%;
+.i3 {
+    position: relative;
+    bottom: 68%;
+    left: 1%;
+    width: 25%;
+    margin: 0;
+    height: 1%;
+}
+.i4 {
+    position: relative;
+    bottom: 69%;
+    left: 60%;
+    width: 25%;
+    margin: 0;
+    height: 1%;
 }
 .p1 {
-    padding: 0 0 0 75%;
+    position: relative;
+    bottom: 108%;
+    left: 82%;
+    width: 25%;
+    margin: 0;
+    height: 1%;
 }
 .p2 {
-    padding: 0 0 0 75%;
+    position: relative;
+    bottom: 70%;
+    left: 82%;
+    width: 25%;
+    margin: 0;
+    height: 1%;
+
 }
 img.attack {
     width: 107%;

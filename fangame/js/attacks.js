@@ -71,6 +71,8 @@ function attack2_smoke(){
   projectile.innerHTML = `<img src="img/smoke.png" class="smoke" style="opacity:0" alt="">`;
   x = 47;
   y = 31;
+  moveX = 0;
+  moveY = 0;
   drawHeart(x, y);
   setTimeout(() => {
     document.querySelector(".smoke").style.opacity = "1";
@@ -112,3 +114,6 @@ function attack2_smoke(){
       appear("* Stage lights are blaring");
     }, 11900);
   }
+  //attack 3 left hand lasers shows them(theyre long whole map) random
+  //attack 4 heart on the chest gets up and follows the heart there mid-fast
+  //attack 5 the wings one blocks one attacks reverse and then they attack together

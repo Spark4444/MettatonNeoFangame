@@ -6,6 +6,13 @@ let heart = document.querySelector("#heart");
 let audio = document.querySelector("#audio");
 let audio1 = document.querySelector("#audio1");
 let audio2 = document.querySelector("#audio2");
+let audio3 = document.querySelector("#audio3");
+let audio4 = document.querySelector("#audio4");
+let audio5 = document.querySelector("#audio5");
+let audio6 = document.querySelector("#audio6");
+let audio7 = document.querySelector("#audio7");
+let audio8 = document.querySelector("#audio8");
+//.puase()
 let buttons = document.querySelectorAll('.button');
 let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
@@ -40,6 +47,7 @@ let num = false;
 let x_disable = false;
 let invent = false;
 let position = false;
+let position_bf = false;
 let started = false;
 let canvas_t = false;
 let attack_num = false;
@@ -52,6 +60,20 @@ let num_second = 0;
 let time = -200;
 let time2 = 0;
 // alert(window.innerHeight + " " + window.innerWidth);
+
+//Sets volume of the music to 75%
+audio.volume = 0.50;
+
+// Pause audio when user leaves the tab
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    audio.pause();
+    audio2.pause();
+  } else {
+    audio.play();
+    audio2.play();
+  }
+});
 
 //Width for hp bar
 hp_width.style.width = "100%"
@@ -94,22 +116,26 @@ start_button.addEventListener('click', () =>{
     },1500);
     setTimeout(function() {
     heart.classList.remove("hidden");
+    audio4.play();
     frisk.classList.add("hidden");
     start.classList.add("black");
     setTimeout(function() {
       wrapper.classList.remove("hidden");
       start.classList.add("hidden");
       heart.classList.add("move");
-      audio.muted = false;
-      audio.currentTime = 0;
-      audio.play();
     }, 200);
+    setTimeout(function() {
+    audio.muted = false;
+    audio.currentTime = 0;
+    audio.play();
+    }, 1000);
     }, 2000); 
     setTimeout(function(){
     start_button.innerHTML = "RESTART";
     start_button.style.width = "38%";
     buttons[0].classList.add('yellow');
     heart.classList.add("hidden");
+    audio7.play();
     img[0].src = "img/heart.png";
     num = 0;
     },2400);
@@ -162,9 +188,10 @@ function check(num){
   if(num_second == 2){
     img[num_second].src = "img/nothing.png"
     position = 0;
-    text =  ` <img class="heart_img" src="img/nothing.png"> * ${food_list[0]}<img class="heart_img i1" src="img/nothing.png"> * ${food_list[1]}
- <img class="heart_img" src="img/nothing.png"> * ${food_list[2]}<img class="heart_img i2" src="img/nothing.png"> * ${food_list[3]}
-<div class="p1">PAGE 1</div>`;
+    position_bf = 0;
+    text = ` ${food_list[0] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[0] + "</div>" : ""}${food_list[1] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[1] + "</div>" : ""}
+    ${food_list[2] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[2] + "</div>" : ""}${food_list[3] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[3] + "</div>" : ""}
+   <div class="p1">PAGE 1</div>`;
     typeWriter2();
     imgH();
     img_h[0].src = "img/heart.png"
@@ -195,9 +222,7 @@ function check2(num){
     food = food_list[position];
     hp_recover = health[position];
     food_list.splice(position, 1);
-    food_list[8-position] = " ";
     health.splice(position, 1);
-    health[8-position] = "0";
 
     if(food == "Pie"){
       text = `* You ate the ${food}.
@@ -359,6 +384,7 @@ function imgH(){
 function attack_function(){
   let timer;
     setTimeout(function(){
+    audio7.pause();
     clearTimeout(timeoutID);
     attack_line.classList.remove("hidden");
     attack = 0;
@@ -396,17 +422,18 @@ function HP_recover(){
   if(parseInt(hp_string) + parseInt(hp_recover) < 71 && parseInt(hp_string) + parseInt(hp_recover) > 0){
   hp_string = parseInt(hp_string) + parseInt(hp_recover);
   }
-  else if(parseInt(hp_string) + parseInt(hp_recover) > 72){
+  else if(parseInt(hp_string) + parseInt(hp_recover) >= 72){
   hp_string = 72;
   }
   if(hp_string < 72){
     hp.innerHTML = `${hp_string}/72`;
     hp_width.style.width = `${hp_string/(72/100)}%`;
   }
-  if(hp_string >= 72){
+  if(hp_string > 72 && hp_string == 72){
     hp.innerHTML = `72/72`;
     hp_width.style.width = `100%`;
   }
+  showHP();
 }
 
 //Shows hp and checks if game is over
@@ -414,6 +441,7 @@ function showHP(){
   hp.innerHTML = `${hp_string}/72`;
   hp_width.style.width = `${hp_string/(72/100)}%`;
   if(hp_string < 0){
+    audio3.play();
     top1 = 19.3;
     top2 = 19.3;
     left1 = 50;
@@ -514,11 +542,13 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
+  audio7.play();
   text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   let i = 0;
   timeoutID = setInterval(() => {
     if (i >= text.length) {
+      audio7.pause();
       clearInterval(timeoutID);
       return;
     }
@@ -529,6 +559,7 @@ function typeWriter() {
 
 //Function that writes the text in the text box instantly
 function typeWriter2() {
+  audio7.pause();
   clearTimeout(timeoutID);
   text_placeholder.innerHTML = "";
   text_placeholder.innerHTML = text;
@@ -588,7 +619,7 @@ document.addEventListener('keyup', e => {
           time2 = time2 - 1.11;
           time2 = 1.11 - time2;
         }
-        attack2 = (time2/(0.8/100)/2 * (48/100)).toFixed(0);
+        attack2 = ((time2/(0.8/100)/2 * (48/100)) + 2).toFixed(0);
         if(attack2 <= 0 ){
           attack2 = 0;
         }
@@ -606,6 +637,7 @@ document.addEventListener('keyup', e => {
         },900);
         width_pr = attack_line.getBoundingClientRect().left / window.innerWidth;
         attack_line.style.left = `${width_pr*100}%`;
+        audio5.play();
         attack_line.classList.add("appear_hide");
         attack_line.classList.remove("move_attack");
         setTimeout(function(){
@@ -647,6 +679,7 @@ document.addEventListener('keyup', e => {
         audio1.play();
         }
       if(stage == 0 && stage !== false){
+        audio7.pause();
         clearTimeout(timeoutID);
         stage = 1;
         check(num_second);
@@ -681,14 +714,14 @@ document.addEventListener('keyup', e => {
 //Movement in the inventory
 document.addEventListener('keyup', e => {
   if(position !== false){
-    //Sets the text1 to this every time
-  text1 = ` <img class="heart_img" src="img/nothing.png"> * ${food_list[0]}<img class="heart_img i1" src="img/nothing.png"> * ${food_list[1]}
- <img class="heart_img" src="img/nothing.png"> * ${food_list[2]}<img class="heart_img i2" src="img/nothing.png"> * ${food_list[3]}
-<div class="p1">PAGE 1</div>`;
-  text2 = ` <img class="heart_img" src="img/nothing.png"> * ${food_list[4]}<img class="heart_img i3" src="img/nothing.png"> * ${food_list[5]}
- <img class="heart_img" src="img/nothing.png"> * ${food_list[6]}<img class="heart_img i4" src="img/nothing.png"> * ${food_list[7]} 
+    position_bf = position;
+    //Sets the text1 and text2 to this every time
+    text1 = ` ${food_list[0] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[0] + "</div>" : ""}${food_list[1] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[1] + "</div>" : ""}
+    ${food_list[2] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[2] + "</div>" : ""}${food_list[3] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[3] + "</div>" : ""}
+   <div class="p1">PAGE 1</div>`;
+  text2 = ` ${food_list[4] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[4] + "</div>" : ""}${food_list[5] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[5] + "</div>" : ""}
+ ${food_list[6] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[6] + "</div>" : ""}${food_list[7] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[7] + "</div>" : ""}
 <div class="p2">PAGE 2</div>`; 
-
 const key = e.keyCode || e.which;
   //Movement in  the inventory
   switch (key) {
@@ -697,18 +730,28 @@ const key = e.keyCode || e.which;
       case 119: // w
         img_h[position2].src = "img/nothing.png";
         if(position == 2 || position == 3){
+          if(food_list[position - 2] !== undefined){
           position -= 2;
+          }
         }
         else if(position == 0 || position == 1){
+          if(food_list[position + 2] !== undefined){
           position += 2;
+          }
         }
         else if(position == 4 || position == 5){
+          if(food_list[position + 2] !== undefined){
           position += 2;
+          }
         }
         else if(position == 6 || position == 7){
+          if(food_list[position - 2] !== undefined){
           position -= 2;
+          }
         }
-        audio1.play();
+        if(position_bf != position){
+          audio1.play();
+        }
 
       break;
       case 40: // ArrowDown
@@ -716,18 +759,28 @@ const key = e.keyCode || e.which;
       case 115: // s
         img_h[position2].src = "img/nothing.png";
         if(position == 2 || position == 3){
+          if(food_list[position - 2] !== undefined){
           position -= 2;
+          }
         }
         else if(position == 0 || position == 1){
+          if(food_list[position + 2] !== undefined){
           position += 2;
+          }
         }
         else if(position == 4 || position == 5){
+          if(food_list[position + 2] !== undefined){
           position += 2;
+          }
         }
         else if(position == 6 || position == 7){
+          if(food_list[position - 2] !== undefined){
           position -= 2;
+          }
         }
-        audio1.play();
+        if(position_bf != position){
+          audio1.play();
+        }
 
       break;
       case 37: // ArrowLeft
@@ -735,55 +788,83 @@ const key = e.keyCode || e.which;
       case 97: // a
         img_h[position2].src = "img/nothing.png";
         if(position == 2){
-          position = 7;
+          if(food_list.length > 6){
+          position = food_list.length - 1;
+          }
+          else if(food_list.length < 7 && food_list.length > 3){
+            position = 3;
+          }
         }
         else if(position == 0){
-          position = 5;
+            if(food_list.length == 8 || food_list.length == 7){
+            position = 5;
+            }
+            else if(food_list.length == 6 || food_list.length == 5){
+            position = food_list.length - 1;
+            }
+            else if(food_list.length < 5 && food_list.length != 1){
+            position = 1;
+            }
+            else if(food_list.length == 1){
+            position = 0;
+            }
         }
         else if(position == 4){
+          if(food_list[1] !== undefined){
           position = 1;
+          }
         }
         else if(position == 6){
+          if(food_list[3] !== undefined){
           position = 3;
+          }
         }
         else if(1 == position || 3 == position){
+          if(food_list[position - 1] !== undefined){
           position -= 1;
+          }
         }
         else if(7 == position || 5 == position){
+          if(food_list[position - 1] !== undefined){
           position -= 1;
+          }
         }
-        audio1.play();
+        if(position_bf != position){
+          audio1.play();
+        }
 
       break;
       case 39: // ArrowRight
       case 68: // D
       case 100: // d        
         img_h[position2].src = "img/nothing.png";
-        if(position == 3){
-          position = 6;
+        if(position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7 ){
+          position += 1;
         }
-        else if(position == 0){
-          position = 1;
+        else if(position == 7 && food_list.length > 7 || position == 5 && food_list.length > 5){
+          position -= 5;
         }
-        else if(position == 1){
-          position = 4;
+        else if(position == 1 && food_list.length > 4 || position == 3 && food_list.length > 6){
+          position += 3;
         }
-        else if(position == 5){
+        else if(food_list.length == 5 && position == 3 || food_list.length == 6 && position == 3){
+          position -= 1;
+        }
+        else if(position == 4 && food_list.length == 5){
           position = 0;
         }
-        else if(position == 7){
+        else if(position == 6 && food_list.length == 7){
           position = 2;
         }
-        else if(2 == position || 4 == position){
-          position += 1;
-        }
-        else if(6 == position || 4 == position){
-          position += 1;
+        else if(position == 3 && food_list.length == 4 || position == 1  && food_list.length < 5 && food_list.length > 1){
+          position -= 1;
         }
         typeWriter2();
         imgH();
         img_h[position2].src = "img/heart.png";
+        if(position_bf != position){
         audio1.play();
+        }
 
       break;
     default:

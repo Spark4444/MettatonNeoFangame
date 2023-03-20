@@ -12,10 +12,8 @@ let left2 = 50;
 let number = 1;
 let restarts = 0;
 let t_f_wait = false;
-img_M.remove();
 let x = 35;
 let y = 47;
-// Check collision with object
 let damage = 0;
 let damage_t = 0;
 let objectX = 500;
@@ -24,9 +22,11 @@ let speedX = 0.25;
 let speedY = 1;
 const objectWidth = 50;
 const objectHeight = 50;
-//Move heart with keyboard
 let moveX = 0;
 let moveY = 0;
+
+//Removes the img_M
+img_M.remove();
 
 //Draw heart
 function drawHeart(x, y) {
@@ -49,6 +49,7 @@ function checkCollision(element1, element2, damage) {
   const elem1Rect = element1[i].getBoundingClientRect();
   if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
   if(count == 0){
+  audio8.play();
   count++;
   t_f_wait = true;
   let hp_hold = parseInt(parseInt(hp_string) - damage);
@@ -73,6 +74,7 @@ function checkCollisionOne(element, target, damage) {
     const targetRect = target.getBoundingClientRect();
     if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
       if (!t_f_wait) {
+        audio8.play();
         t_f_wait = true;
         let hp_hold = parseInt(parseInt(hp_string) - damage);
         hp_string = hp_hold.toString();

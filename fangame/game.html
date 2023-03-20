@@ -7,9 +7,15 @@
     <link rel="icon" href="img/icon.png">
   </head>
   <body> 
-    <audio id="audio" src="audio/NEO.ogg" autoplay loop></audio>
-    <audio id="audio1" src="audio/snd_select.wav" autoplay></audio>
+    <audio id="audio" src="audio/NEO.ogg" autoplay loop muted></audio>
+    <audio id="audio1" src="audio/snd_select.mp3" autoplay></audio>
     <audio id="audio2" src="audio/a cyber's world.mp3" autoplay loop></audio>
+    <audio id="audio3" src="audio/death.mp3" autoplay></audio>
+    <audio id="audio4" src="audio/start.mp3" autoplay></audio>
+    <audio id="audio5" src="audio/attack.mp3" autoplay></audio>
+    <audio id="audio6" src="audio/mtt_speak.mp3" autoplay></audio>
+    <audio id="audio7" src="audio/mtt_speak_battle.mp3" autoplay></audio>
+    <audio id="audio8" src="audio/damage.mp3" autoplay></audio>
     <div class="particles"></div>
     <div class="mettaton_hp hidden"><div class="hp-">72</div> <div class='hp_show_wrap2'><div class="hp_shower"></div></div></div>
     <img class="line_attack hidden" src="img/attack_icon.png" alt="">
@@ -19,8 +25,8 @@
     <div class="start_menu">
     <div class="start_button">PLAY</div>
     <div class="slider">
-    <input type="range" id="volume" min="0" max="100" value="100" oninput="rangeValue.innerText =`${this.value}%`">
-    <p id="rangeValue">100%</p>
+    <input type="range" id="volume" min="0" max="100" value="50" oninput="rangeValue.innerText =`${this.value}%`">
+    <p id="rangeValue">50%</p>
     </div>
     </div>
     <img class="hidden" id="heart" src="img/heart.png" alt="">
