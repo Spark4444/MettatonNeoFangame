@@ -25,8 +25,8 @@
     <div class="start_menu">
     <div class="start_button">PLAY</div>
     <div class="slider">
-    <input type="range" id="volume" min="0" max="100" value="50" oninput="rangeValue.innerText =`${this.value}%`">
-    <p id="rangeValue">50%</p>
+    <input type="range" id="volume" min="0" max="100" value="20" oninput="rangeValue.innerText =`${this.value}%`">
+    <p id="rangeValue">20%</p>
     </div>
     </div>
     <img class="hidden" id="heart" src="img/heart.png" alt="">
@@ -38,6 +38,10 @@
     <div class="mettaton">
       <div class="area">
       <img class="mettaton_gif" src="img/mettaton.gif" alt="">
+      <div class="wrap_box_text" style="opacity: 0;">
+      <div class="triangle"></div>
+      <div class="chat_box"></div>  
+      </div>
       </div>
     </div>
     <div class="text-menu">
@@ -66,6 +70,7 @@
     <script src="js/attack.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/attacks.js"></script>
+    <script src="js/chatbox.js"></script>
     <script></script>
   </body>
 </html>

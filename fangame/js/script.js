@@ -12,10 +12,12 @@ let audio5 = document.querySelector("#audio5");
 let audio6 = document.querySelector("#audio6");
 let audio7 = document.querySelector("#audio7");
 let audio8 = document.querySelector("#audio8");
-//.puase()
 let buttons = document.querySelectorAll('.button');
 let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
+let text_chatbox_main = document.querySelector(".wrap_box_text");
+let text_chatbox = document.querySelector(".chat_box");
+let triangle = document.querySelector(".triangle");
 let img_h = document.querySelectorAll(".heart_img");  
 let start_button = document.querySelector(".start_button");
 let start_menu = document.querySelector(".start_menu");
@@ -61,8 +63,8 @@ let time = -200;
 let time2 = 0;
 // alert(window.innerHeight + " " + window.innerWidth);
 
-//Sets volume of the music to 75%
-audio.volume = 0.50;
+//Sets volume of the music to 20%
+audio.volume = 0.20;
 
 // Pause audio when user leaves the tab
 document.addEventListener('visibilitychange', () => {
@@ -176,12 +178,12 @@ start_button.addEventListener('click', () =>{
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
-    text = `<div class='attack_text'><img class= 'heart_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
+    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
     typeWriter2();
   }
   if(num_second == 1){
     img[num_second].src = "img/nothing.png"
-    text = "<img class= 'heart_img' src='img/heart.png'> * Mettaton NEO";
+    text = "<img class= 'heart_img smaller_img' src='img/heart.png'> * Mettaton NEO";
     typeWriter2();
 
   }
@@ -198,7 +200,7 @@ function check(num){
   }
   if(num_second == 3){
     img[num_second].src = "img/nothing.png"
-    text = "<img class= 'heart_img' src='img/heart.png'> * Spare";
+    text = "<img class= 'heart_img smaller_img' src='img/heart.png'> * Spare";
     typeWriter2();
   }
 }
@@ -214,7 +216,7 @@ function check2(num){
     attack_function();
   }
   if(num_second == 1){
-    text = `<img class= 'heart_img' src='img/heart.png'> * Check`;
+    text = `<img class= 'heart_img smaller_img' src='img/heart.png'> * Check`;
     typeWriter2 ();
   }
   if(num_second == 2){
@@ -311,45 +313,7 @@ function disappear(){
     } 
     canvas.style.display = "";
     canvas_t = true;
-    if(attack_num === false){
-    attack_num = 0;
-    }
-    if(attack_num == 8){
-    // attack9();
-    attack_num = 9;
-    }
-    if(attack_num == 7){
-      // attack8();
-      attack_num = 8;
-    }
-    if(attack_num == 6){
-      // attack7();
-      attack_num = 7;
-    }
-    if(attack_num == 5){
-      // attack6();
-      attack_num = 6;
-    }
-    if(attack_num == 4){
-      // attack5();
-      attack_num = 5;
-    }
-    if(attack_num == 3){
-      // attack4();
-      attack_num = 4;
-    }
-    if(attack_num == 2){
-      // attack3();
-      attack_num = 3;
-    }
-    if(attack_num == 1){
-      attack2_smoke();
-      attack_num = 2;
-    }
-    if(attack_num == 0){
-      attack1_legs();
-      attack_num = 1;
-    }
+    chat_box();
   },1000);
 }
 
@@ -441,6 +405,9 @@ function showHP(){
   hp.innerHTML = `${hp_string}/72`;
   hp_width.style.width = `${hp_string/(72/100)}%`;
   if(hp_string < 0){
+    busy = false;
+    hp_text = false;
+    food_text = false;
     audio3.play();
     top1 = 19.3;
     top2 = 19.3;
@@ -542,13 +509,16 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
+  audio7.currentTime = 0;
   audio7.play();
   text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   let i = 0;
   timeoutID = setInterval(() => {
     if (i >= text.length) {
-      audio7.pause();
+      setTimeout(() => {
+        audio7.pause();
+      },100);
       clearInterval(timeoutID);
       return;
     }
@@ -557,8 +527,29 @@ function typeWriter() {
   }, 40);
 }
 
+//Function that writes the text in the text box letter by letter
+function typeWriterBox(text_write) {
+  audio6.currentTime = 0;
+  audio6.play();
+  text_chatbox.innerHTML = "";
+  clearTimeout(timeoutID);
+  let i = 0;
+  timeoutID = setInterval(() => {
+    if (i >= text_write.length) {
+      setTimeout(() => {
+        audio6.pause();
+      },100);
+      clearInterval(timeoutID);
+      return;
+    }
+    text_chatbox.innerHTML += text_write[i];
+    i++;
+  }, 40);
+}
+
 //Function that writes the text in the text box instantly
 function typeWriter2() {
+  audio7.currentTime = 0;
   audio7.pause();
   clearTimeout(timeoutID);
   text_placeholder.innerHTML = "";
