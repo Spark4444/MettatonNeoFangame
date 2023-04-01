@@ -25,6 +25,7 @@ const objectHeight = 50;
 let moveX = 0;
 let moveY = 0;
 let player_moving = false;
+let orangeLaserTimer;
 
 //Removes the img_M
 img_M.remove();
@@ -116,19 +117,24 @@ function checkCollisionLaser(elements, target, damage) {
             }, 500);
           } else if (id === 'l2') {
             if (player_moving) {
+              clearTimeout(orangeLaserTimer); // reset timer if player is moving
               continue; // Player avoids damage by moving
             } else {
-              t_f_wait = true;
-              hp_hold = parseInt(parseInt(hp_string) - damage);
-              hp_string = hp_hold.toString();
-              audio8.play();
-              img_M.classList.add("flash");
-              flash = true;
-              setTimeout(function() {
-                flash = false;
-                img_M.classList.remove("flash");
-                t_f_wait = false;
-              }, 500);
+              if (!t_f_wait) {
+                t_f_wait = true;
+                orangeLaserTimer = setTimeout(function() {
+                  hp_hold = parseInt(parseInt(hp_string) - damage);
+                  hp_string = hp_hold.toString();
+                  audio8.play();
+                  img_M.classList.add("flash");
+                  flash = true;
+                  setTimeout(function() {
+                    flash = false;
+                    img_M.classList.remove("flash");
+                    t_f_wait = false;
+                  }, 500);
+                }, 500);
+              }
             }
           } else if (id === 'l1') {
             if (player_moving) {
