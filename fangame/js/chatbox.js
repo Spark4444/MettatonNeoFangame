@@ -10,7 +10,7 @@ let pressed_continue = false;
 
 // Wings: "Behold my Neo Wings, which seal your fate in my arena of destruction!"
 
-// Right hand: "My Neo Right Hand will unleash a barrage of blows upon you!"
+// Right hand: "My Neo Right Hand will smack you with an unstoppable barrage of blows!"
 
 // Head: "My Neo Head will dazzle you with a barrage of laser beams!"
 
@@ -50,6 +50,11 @@ function chat_box(){
         busy = true;
         pressed_continue = false;
         typeWriterBox("Watch as I unleash my impeccable aim and the full fury of my lasers!");
+    }
+    if(attack_num == 3 && busy == false){
+        busy = true;
+        pressed_continue = false;
+        typeWriterBox("My NEO Hand will smack you with an unstoppable barrage of blows!");
     }
 }
 document.addEventListener('keyup', e => {
@@ -117,7 +122,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
-    // attack4();
+    attack4_hand();
     attack_num = 4;
     busy = false;
     pressed_continue = true;

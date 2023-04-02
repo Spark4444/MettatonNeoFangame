@@ -115,6 +115,13 @@ div#l1 {
 div#l2 {
     background: orange;
 }
+.hand2{
+    width: 19%;
+    position: absolute;
+    top: 32%;
+    rotate: 90deg;
+    transition: 400ms;
+}
 .mettaton_hp {
     position: absolute;
     top: 11%;

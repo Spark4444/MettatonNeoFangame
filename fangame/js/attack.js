@@ -133,7 +133,7 @@ function checkCollisionLaser(elements, target, damage) {
                     img_M.classList.remove("flash");
                     t_f_wait = false;
                   }, 500);
-                }, 500);
+                }, 250);
               }
             }
           } else if (id === 'l1') {
@@ -202,6 +202,12 @@ function moveHeart() {
   // Check if heart is out of bounds
   if(canvas_t === true){
   check_out_of_bounds();
+  if(moveX == 0 && moveY == 0){
+    player_moving = false;
+  }
+  else if(moveX > 0 && moveY > 0){
+    player_moving = true;
+  }
   x += moveX;
   y += moveY;
   drawHeart(x, y);

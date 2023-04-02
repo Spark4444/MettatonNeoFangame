@@ -13,7 +13,9 @@ let hand;
 let count_laser;
 let randomNum;
 let laser_white;
-
+let hand_time;
+let hand2;
+let count_hand2;
 //Attack 1(legs)
 function attack1_legs(){ 
     moveHeartI = setInterval(moveHeart, 10);
@@ -250,5 +252,53 @@ function attack3_lasers(){
     appear("* Stage lights are blaring");
   }, 12000);
 } 
+
+//Attack 4 hand
+function attack4_hand(){
+  projectile.innerHTML = `<img src="img/hand2.png" class="hand2";" style="left: 40%;">`;
+  setTimeout(() => {
+    hand2 = document.querySelector(".hand2");
+  },10);
+  mettaton_gif.style.opacity = "0";
+  x = 47;
+  y = 31;
+  moveX = 0;
+  moveY = 0;
+  count_hand2 = 0;
+  drawHeart(x, y);
+  intervalId2 = setInterval(() => {
+    if(t_f_wait === false){
+      laser = document.querySelectorAll(".laser");
+      checkCollisionOne(hand2, img_M, 30);
+    }
+  }, 10);
+  HP_show = setInterval(() => {
+    showHP();
+  }, 10);
+  moveHeartI = setInterval(moveHeart, 10);
+  setTimeout(() => {
+  hand_time = setInterval(function(){
+    count_hand2++;
+    if(count_hand2 % 3 === 1){
+      hand2.style.top = "58%";
+    }
+    if(count_hand2 % 3 === 2){
+      hand2.style.top = "";
+    }
+    if(count_hand2 % 3 === 0){
+      hand2.style.left = `${img_M.getBoundingClientRect().left - 137}px`;
+    }
+  },250);
+  }, 400); 
+  ten_secs = setTimeout(() => {
+    clearInterval(hand_time);
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show);
+    img_M.style.animation = "";
+    appear("* Stage lights are blaring");
+  }, 12000);
+}
+
   //attack 4 heart on the chest gets up and follows the heart there mid-fast
   //attack 5 the wings one blocks one attacks reverse and then they attack together

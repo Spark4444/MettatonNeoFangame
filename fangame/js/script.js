@@ -64,7 +64,8 @@ let time2 = 0;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-audio.volume = 0.20;
+audio.volume = 0;
+// audio.volume = 0.20;
 audio.pause();
 audio1.pause();
 audio2.pause();
