@@ -6,6 +6,9 @@ let moveHeartI;
 let number_lightning;
 let lightningElem;
 let lightning;
+let leg1_l;
+let leg2_l;
+let hyp_l;
 let laser;
 let laser_num;
 let laser_time;
@@ -16,50 +19,47 @@ let laser_white;
 let hand_time;
 let hand2;
 let count_hand2;
+let laser_head;
+let head_time;
+let hyp_t;
+let leg_t;
+let leg2_t;
+let left;
+
 //Attack 1(legs)
 function attack1_legs(){ 
     moveHeartI = setInterval(moveHeart, 10);
     x = 47;
     y = 31;
     drawHeart(x, y);
-    projectile.innerHTML = `<img src="img/leg1.png" style="left:${left1}% top:${top1}%" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${left2}% top:${top2}%" class="leg2 legs" alt="">`
+    projectile.innerHTML = `<img src="img/leg1.png" style="left:${randomRange(23,71)}%" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${randomRange(23,71)}%" class="leg2 legs" alt="">`
     mettaton_gif.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
     leg2 = document.querySelector(".leg2");
     legs = document.querySelectorAll(".legs");
+    number = 1
   
-    //Moves the legs
-    function legs_move() {
-      if(number%3 === 1){
-        if(restarts == 0){
-          left1 = randomRange(23,71);
-          left2 = randomRange(23,71);
+    intervalId = setInterval(() => {
+        if(number%3 === 1){
+          leg1.classList.add("legs_down");
+          leg2.classList.add("legs_down");
         }
-        if(number > 1 && restarts > 0){
-          left1 = randomRange(23,71);
-          left2 = randomRange(23,71);
+        else if(number%3 === 2){
+          leg1.classList.remove("legs_down");
+          leg2.classList.remove("legs_down");
         }
-      }
-      else if(number%3 === 2){
-        top1 = 44;
-        top2 = 44;
-      }
-      else if(number%3 === 0 && number != 0){
-        top1 = 19.3;
-        top2 = 19.3;
-      }
-      number++;
-      leg1.style.top = `${top1}%`;
-      leg2.style.top = `${top2}%`;
-      leg1.style.left = `${left1}%`;
-      leg2.style.left = `${left2}%`;
-    }
-    intervalId = setInterval(legs_move, 333);
+        else if(number%3 === 0 && number != 0){
+          leg1.style.left = `${randomRange(23,71)}%`
+          leg2.style.left = `${randomRange(23,71)}%`
+        }
+        number++;
+    }, 333);
+
     intervalId2 = setInterval(() => {
-      if(t_f_wait === false){
-      checkCollision(legs, img_M, 20);
-      }
-      }, 10);
+    if(t_f_wait === false){
+    checkCollision(legs, img_M, 20);
+    }
+    }, 10);
       
     
     HP_show = setInterval(() => {
@@ -82,55 +82,82 @@ function attack2_smoke(){
   y = 31;
   moveX = 0;
   moveY = 0;
+  number_lightning = 0;
   mettaton_gif.style.filter = "brightness(50%)";
   drawHeart(x, y);
+
   setTimeout(() => {
     document.querySelector(".smoke").style.opacity = "1";
   },10);
-  number_lightning = 0;
-      lightning = setInterval(function(){
-      let point1 = { x: `${randomRange(0,97)}%`, y: `${randomRange(0,48)}%` };//initial position of element
-      let point2 = { x: `${randomRange(24,73)}%`, y: `${randomRange(57,74)}%` };//it moves to this position
-      number_lightning++;
-      if(number_lightning == 10){
-        number_lightning = 1;
-      }
-      let startX = parseInt(point1.x) * window.innerWidth / 100;
-      let startY = parseInt(point1.y) * document.documentElement.scrollHeight / 100;
-      let endX = parseInt(point2.x) * window.innerWidth / 100;
-      let endY = parseInt(point2.y) * document.documentElement.scrollHeight / 100;
-      projectile.innerHTML += `<img src="img/lightning.png" id="${number_lightning}" class="lightning" alt="" style="left:${point1.x}; top:${point1.y}; rotate:${findAngle(startX, startY, endX, endY)}deg">`;
-      img_M.style.animation = "beam 0.5s infinite";
-      setTimeout(() => {
-      if(number_lightning < 11){
-      lightningElem = document.querySelector(`#\\3${number_lightning}`);
-      }
-      lightningElem.style.left = `${point2.x}`;
-      lightningElem.style.top = `${point2.y}`;
-      }, 10);
-      setTimeout(() => {
-        lightningElem.remove();
-        }, 500);
-    },600);
-    HP_show = setInterval(() => {
-      showHP();
-    }, 10);
-    moveHeartI = setInterval(moveHeart, 10);
-    intervalId2 = setInterval(() => {
-      if(t_f_wait === false){
-        checkCollisionOne(lightningElem, img_M, 15);
-    }
-    }, 10);
-    ten_secs = setTimeout(() => {
-      clearInterval(lightning);
-      clearInterval(intervalId2);
-      clearInterval(moveHeartI);
-      clearInterval(HP_show);
-      img_M.style.animation = "";
-      mettaton_gif.style.filter = "";
-      appear("* Stage lights are blaring");
-    }, 11900);
+
+  lightning = setInterval(function(){
+  let point1 = { x: `${randomRange(0,97)}%`, y: `${randomRange(0,48)}%` };//initial position of element
+  let point2 = { x: `${randomRange(24,73)}%`, y: `${randomRange(57,74)}%` };//it moves to this position
+  number_lightning++;
+  if(number_lightning == 10){
+    number_lightning = 1;
   }
+  let startX = parseInt(point1.x) * window.innerWidth / 100;
+  let startY = parseInt(point1.y) * document.documentElement.scrollHeight / 100;
+  let endX = parseInt(point2.x) * window.innerWidth / 100;
+  let endY = parseInt(point2.y) * document.documentElement.scrollHeight / 100;
+  leg1_l = endY - startY;
+  leg2_l = endX - startX; 
+  if(leg2_l < 0){
+    leg2_l = leg2_l - leg2_l - leg2_l;
+    left = true;
+  }
+  else{
+    left = false;
+  }
+  hyp_l = calculateHypotenuse(leg2_l,leg1_l);
+  if(left === false){
+    let calcR = -calculateAngle(hyp_l,leg1_l);
+    projectile.innerHTML += `<img src="img/lightning.png" id="${number_lightning}" class="lightning" alt="" style="left:${point1.x}; top:${point1.y};rotate:${calcR}deg">`;
+  }
+  if(left === true){
+    let calcR = calculateAngle(hyp_l,leg1_l) 
+    projectile.innerHTML += `<img src="img/lightning.png" id="${number_lightning}" class="lightning" alt="" style="left:${point1.x}; top:${point1.y};rotate:${calcR}deg">`;
+  }
+  setTimeout(() => {
+  if(number_lightning < 11){
+  lightningElem = document.querySelector(`#\\3${number_lightning}`);
+  }
+
+  lightningElem.style.left = `${point2.x}`;
+  lightningElem.style.top = `${point2.y}`;
+  }, 10);
+
+  setTimeout(() => {
+    lightningElem.remove();
+  }, 500);
+
+  },600);
+
+  HP_show = setInterval(() => {
+    showHP();
+  }, 10);
+
+  moveHeartI = setInterval(moveHeart, 10);
+  
+  setTimeout(()=>{
+  intervalId2 = setInterval(() => {
+    if(t_f_wait === false){
+      checkCollisionOne(lightningElem, img_M, 15);
+  }
+  }, 10);
+  },601);
+  
+  ten_secs = setTimeout(() => {
+    clearInterval(lightning);
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show);
+    img_M.style.animation = "";
+    mettaton_gif.style.filter = "";
+    appear("* Stage lights are blaring");
+  }, 11900);
+}
 
 //Attack 3(hand and lasers)
 function attack3_lasers(){
@@ -140,6 +167,11 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
+      setTimeout(() => {
+        laser = document.querySelectorAll(".laser");
+        laser[laser.length-1].style.height = "69%";
+      },250);
     },10);
   }
   else{
@@ -148,44 +180,41 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
+      setTimeout(() => {
+      laser = document.querySelectorAll(".laser");
+      laser[laser.length-1].style.width = "86.5%"; 
+      laser[laser.length-1].style.left = "0%"; 
+      },250);
     },10);
   }
+
   mettaton_gif.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
   moveY = 0;
   count_laser = 0;
+  laser_num = 1;
   laser = 0;
   drawHeart(x, y);
-  laser_num = randomRange(1,2);
+
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser = document.querySelectorAll(".laser");
       checkCollisionLaser(laser, img_M, 30);
     }
   }, 10);
+
   HP_show = setInterval(() => {
     showHP();
   }, 10);
+
   moveHeartI = setInterval(moveHeart, 10);
-  laser_time = setInterval(function(){
+
+  setTimeout(function(){
     count_laser += 1;
-    if(count_laser > 4){
-      laser_num = 0;
-    }
-    if(count_laser == 1){
-      laser_num = 1;
-    }
-    if(count_laser == 2){
-      laser_num = 1;
-    }
-    if(count_laser == 3){
-      laser_num = 2;
-    }
-    if(count_laser == 4){
-      laser_num = 2;
-    }
+    laser_num = 1;
     if(hand.style.left == "90%"){
       if(count_laser != 1){
         setTimeout(() => {
@@ -203,16 +232,6 @@ function attack3_lasers(){
         }, 500);
         }, 10);
       }
-      else{
-        setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
-        setTimeout(() => {
-          laser = document.querySelectorAll(".laser");
-          laser[laser.length-1].style.width = "86.5%"; 
-          laser[laser.length-1].style.left = "0%"; 
-        },10);
-        }, 500);
-      }
     }
     else if(hand.style.top == "5%"){
       if(count_laser != 1){
@@ -229,20 +248,61 @@ function attack3_lasers(){
           laser[laser.length-1].style.width = "86.5%"; 
           laser[laser.length-1].style.left = "0%"; 
         },10);
-        }, 500);
+        }, 0);
         }, 10);
       }
-      else{
-        setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
-        setTimeout(() => {
-          laser = document.querySelectorAll(".laser");
-          laser[laser.length-1].style.height = "69%";
-        },10);
-        }, 500);
-      }
     }
-  }, 1000);
+  }, 10);
+
+  setTimeout(() => {
+    clearInterval(laser_time);
+    laser_time = setInterval(function(){
+      count_laser += 1;
+      if(count_laser > 4){
+        laser_num = 0;
+      }
+      if(count_laser == 3){
+        laser_num = 2;
+      }
+      if(hand.style.left == "90%"){
+        if(count_laser != 1){
+          setTimeout(() => {
+          randomNum = randomRange(21,74);
+          hand = document.querySelector(".hand1");
+          hand.style.top = `5%`;
+          hand.style.left = `${randomNum}%`;
+          hand.style.rotate = ``;
+          setTimeout(() => {
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
+          setTimeout(() => {
+            laser = document.querySelectorAll(".laser");
+            laser[laser.length-1].style.height = "69%";
+          },10);
+          }, 500);
+          }, 10);
+        }
+      }
+      else if(hand.style.top == "5%"){
+        if(count_laser != 1){
+          setTimeout(() => {
+          randomNum = randomRange(44,65);
+          hand = document.querySelector(".hand1");
+          hand.style.top = `${randomNum}%`;
+          hand.style.left = `90%`;
+          hand.style.rotate = `90deg`;
+          setTimeout(() => {
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
+          setTimeout(() => {
+            laser = document.querySelectorAll(".laser");
+            laser[laser.length-1].style.width = "86.5%"; 
+            laser[laser.length-1].style.left = "0%"; 
+          },10);
+          }, 500);
+          }, 10);
+        }
+      }
+    }, 1000); 
+  },11);
   ten_secs = setTimeout(() => {
     clearInterval(laser_time);
     clearInterval(intervalId2);
@@ -250,15 +310,17 @@ function attack3_lasers(){
     clearInterval(HP_show);
     img_M.style.animation = "";
     appear("* Stage lights are blaring");
-  }, 12000);
+  }, 11999);
 } 
 
 //Attack 4 hand
 function attack4_hand(){
-  projectile.innerHTML = `<img src="img/hand2.png" class="hand2";" style="left: 40%;">`;
+  projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 40%;">`;
+
   setTimeout(() => {
     hand2 = document.querySelector(".hand2");
   },10);
+
   mettaton_gif.style.opacity = "0";
   x = 47;
   y = 31;
@@ -266,30 +328,35 @@ function attack4_hand(){
   moveY = 0;
   count_hand2 = 0;
   drawHeart(x, y);
+
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser = document.querySelectorAll(".laser");
       checkCollisionOne(hand2, img_M, 30);
     }
   }, 10);
+
   HP_show = setInterval(() => {
     showHP();
   }, 10);
+
   moveHeartI = setInterval(moveHeart, 10);
+
   setTimeout(() => {
   hand_time = setInterval(function(){
     count_hand2++;
     if(count_hand2 % 3 === 1){
-      hand2.style.top = "58%";
+      hand2.classList.add("hand2_down");
     }
     if(count_hand2 % 3 === 2){
-      hand2.style.top = "";
+      hand2.classList.remove("hand2_down");
     }
     if(count_hand2 % 3 === 0){
       hand2.style.left = `${img_M.getBoundingClientRect().left - 137}px`;
     }
   },250);
-  }, 400); 
+  }, 400);
+
   ten_secs = setTimeout(() => {
     clearInterval(hand_time);
     clearInterval(intervalId2);
@@ -300,5 +367,68 @@ function attack4_hand(){
   }, 12000);
 }
 
+//Attack 5 head
+function attack5_head(){
+  mettaton_gif.style.opacity = "1";
+  x = 47;
+  y = 31;
+  moveX = 0;
+  moveY = 0;
+  drawHeart(x, y);
+
+  intervalId2 = setInterval(() => {
+    if(t_f_wait === false){
+      laser_head = document.querySelectorAll(".laser_head");
+      checkCollisionLaser(laser_head, img_M, 20);
+    }
+  }, 10);
+
+  HP_show = setInterval(() => {
+    showHP();
+  }, 10);
+
+  moveHeartI = setInterval(moveHeart, 10);
+
+  head_time = setInterval(function(){
+    leg_t = img_M.getBoundingClientRect().top - window.innerHeight/100 * 16;
+    leg2_t = img_M.getBoundingClientRect().left - window.innerWidth/100 * 48;
+    if(leg2_t < 0){
+      leg2_t = leg2_t - leg2_t - leg2_t;
+      left = true;
+    }
+    else{
+      left = false;
+    }
+    hyp_t = calculateHypotenuse(leg2_t,leg_t);
+    if(left === false){
+    let calcR = -calculateAngle(hyp_t,leg_t);
+    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="rotate:${calcR}deg"></div>`;
+    }
+    if(left === true){
+    let calcR = calculateAngle(hyp_t,leg_t) 
+    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="rotate:${calcR}deg"></div>`;
+    }
+    
+    setTimeout(() => {
+    laser_head = document.querySelectorAll(".laser_head");
+    laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left}px`;
+    laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top}px`;
+    setTimeout(() => {
+      laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left + img_M.getBoundingClientRect().left - window.innerWidth/100 * 48}px`;
+      laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top + img_M.getBoundingClientRect().top - window.innerHeight/100 * 16}px`;
+    }, 10);
+    }, 10);
+
+  },635);
+
+  ten_secs = setTimeout(() => {
+    clearInterval(head_time);
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show);
+    img_M.style.animation = "";
+    appear("* Stage lights are blaring");
+  }, 10120);
+}
   //attack 4 heart on the chest gets up and follows the heart there mid-fast
   //attack 5 the wings one blocks one attacks reverse and then they attack together

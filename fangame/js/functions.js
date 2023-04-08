@@ -21,10 +21,21 @@ function randomMultiRange(range1, range2, range3, range4) {
     return Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
 }
 
-//Finds the angle between angles that are in %
-function findAngle(x1, y1, x2, y2) {
-    const deltaX = x2 - x1;
-    const deltaY = y2 - y1;
-    const angleRadians = Math.atan2(deltaY, deltaX);
-    return angleRadians * (180 / Math.PI) + 45;
-} 
+//Calculates the hypotenuse
+function calculateHypotenuse(leg1, leg2) {
+    const hypotenuse = Math.sqrt(leg1 * leg1 + leg2 * leg2);
+    return hypotenuse;
+  }
+
+//Calculate the angle of a triangle
+function calculateAngle(hypotenuse, leg1) {
+    const angleRadians = Math.acos(leg1 / hypotenuse);
+    const angleDegrees = angleRadians * (180 / Math.PI);
+    return angleDegrees;
+}
+
+//Calculates a numbers percantage
+function calculatePercentage(number, total) {
+    const percentage = (number / total) * 100;
+    return percentage.toFixed(0);
+}

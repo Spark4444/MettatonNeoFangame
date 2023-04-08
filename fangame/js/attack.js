@@ -54,8 +54,8 @@ function checkCollision(element1, element2, damage) {
   audio8.play();
   count++;
   t_f_wait = true;
-  let hp_hold = parseInt(parseInt(hp_string) - damage);
-  hp_string = hp_hold.toString();
+  let hp_hold = parseInt(parseInt(hp_str) - damage);
+  hp_str = hp_hold.toString();
   img_M.classList.add("flash");
   flash = true;
   setTimeout(function(){
@@ -78,8 +78,8 @@ function checkCollisionOne(element, target, damage) {
       if (!t_f_wait) {
         audio8.play();
         t_f_wait = true;
-        let hp_hold = parseInt(parseInt(hp_string) - damage);
-        hp_string = hp_hold.toString();
+        let hp_hold = parseInt(parseInt(hp_str) - damage);
+        hp_str = hp_hold.toString();
         img_M.classList.add("flash");
         flash = true;
         setTimeout(function() {
@@ -105,8 +105,8 @@ function checkCollisionLaser(elements, target, damage) {
           let hp_hold;
           if (id === 'l0') {
             t_f_wait = true;
-            hp_hold = parseInt(parseInt(hp_string) - damage);
-            hp_string = hp_hold.toString();
+            hp_hold = parseInt(parseInt(hp_str) - damage);
+            hp_str = hp_hold.toString();
             audio8.play();
             img_M.classList.add("flash");
             flash = true;
@@ -114,17 +114,17 @@ function checkCollisionLaser(elements, target, damage) {
               flash = false;
               img_M.classList.remove("flash");
               t_f_wait = false;
-            }, 500);
+            }, 250);
           } else if (id === 'l2') {
             if (player_moving) {
-              clearTimeout(orangeLaserTimer); // reset timer if player is moving
-              continue; // Player avoids damage by moving
+              clearTimeout(orangeLaserTimer);
+              continue;
             } else {
               if (!t_f_wait) {
                 t_f_wait = true;
                 orangeLaserTimer = setTimeout(function() {
-                  hp_hold = parseInt(parseInt(hp_string) - damage);
-                  hp_string = hp_hold.toString();
+                  hp_hold = parseInt(parseInt(hp_str) - damage);
+                  hp_str = hp_hold.toString();
                   audio8.play();
                   img_M.classList.add("flash");
                   flash = true;
@@ -139,8 +139,8 @@ function checkCollisionLaser(elements, target, damage) {
           } else if (id === 'l1') {
             if (player_moving) {
               t_f_wait = true;
-              hp_hold = parseInt(parseInt(hp_string) - damage);
-              hp_string = hp_hold.toString();
+              hp_hold = parseInt(parseInt(hp_str) - damage);
+              hp_str = hp_hold.toString();
               audio8.play();
               img_M.classList.add("flash");
               flash = true;
@@ -202,12 +202,6 @@ function moveHeart() {
   // Check if heart is out of bounds
   if(canvas_t === true){
   check_out_of_bounds();
-  if(moveX == 0 && moveY == 0){
-    player_moving = false;
-  }
-  else if(moveX > 0 && moveY > 0){
-    player_moving = true;
-  }
   x += moveX;
   y += moveY;
   drawHeart(x, y);
@@ -215,32 +209,40 @@ function moveHeart() {
   }
 }
 
-//AWSD keys listeners
+//Checks if the player is moving
+setInterval(() => {
+  if(canvas_t === true){
+  if(moveX == 0 || moveY == 0){
+    player_moving = false;
+  }
+  if(moveX > 0 || moveY > 0 || moveY < 0 || moveX < 0){
+    player_moving = true;
+  }
+  }
+},10);
+
+//AWSD keys listener
 document.addEventListener('keydown', e => {
   if (canvas_t === true){
     switch (e.keyCode) {
       case 65: // A
       case 37: // ArrowLeft
         moveX = -speedX;
-        player_moving = true;
         moveHeart();
         break;
       case 68: // D
       case 39: // ArrowRight
         moveX = speedX;
-        player_moving = true;
         moveHeart();
         break;
       case 87: // W
       case 38: // ArrowUp
         moveY = -speedY;
-        player_moving = true;
         moveHeart();
         break;
       case 83: // S
       case 40: // ArrowDown
         moveY = speedY;
-        player_moving = true;
         moveHeart();
         break;
       default:
@@ -255,19 +257,19 @@ document.addEventListener('keyup', e => {
     switch (e.keyCode) {
       case 65: // A
       case 37: // ArrowLeft
-        if (moveX < 0) moveX = 0; player_moving = false;
+        if (moveX < 0) moveX = 0;
         break;
       case 68: // D
       case 39: // ArrowRight
-        if (moveX > 0) moveX = 0; player_moving = false;
+        if (moveX > 0) moveX = 0;
         break;
       case 87: // W
       case 38: // ArrowUp
-        if (moveY < 0) moveY = 0; player_moving = false;
+        if (moveY < 0) moveY = 0;
         break;
       case 83: // S
       case 40: // ArrowDown
-        if (moveY > 0) moveY = 0; player_moving = false;
+        if (moveY > 0) moveY = 0;
         break;
       default:
         break;

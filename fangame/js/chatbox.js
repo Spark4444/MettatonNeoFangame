@@ -24,7 +24,7 @@ function chat_box(){
         attack_num = 0;
     }
     text_chatbox_main.style.opacity = 1;
-    if(parseInt(hp_string) < 37 && hp_text == false && busy == false){
+    if(parseInt(hp_str) < 37 && hp_text == false && busy == false){
         hp_text = true;
         busy = true;
         pressed_continue = false;
@@ -56,6 +56,11 @@ function chat_box(){
         pressed_continue = false;
         typeWriterBox("My NEO Hand will smack you with an unstoppable barrage of blows!");
     }
+    if(attack_num == 4 && busy == false){
+        busy = true;
+        pressed_continue = false;
+        typeWriterBox("My Neo Head will dazzle you with a barrage of laser beams!");
+    }
 }
 document.addEventListener('keyup', e => {
 const key = e.keyCode || e.which;
@@ -68,6 +73,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     // attack10_finale();
     attack_num = 0;
     busy = false;
@@ -77,15 +83,17 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     // attack9();
     attack_num = 9;
     busy = false;
     pressed_continue = true;
     }
     if(attack_num == 7){
-     clearTimeout(timeoutID);
-     audio6.pause();
-     text_chatbox_main.style.opacity = 0;
+    clearTimeout(timeoutID);
+    audio6.pause();
+    text_chatbox_main.style.opacity = 0;
+    flash = false;
     // attack8();
     attack_num = 8;
     busy = false;
@@ -95,6 +103,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     // attack7();
     attack_num = 7;
     busy = false;
@@ -104,6 +113,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     // attack6();
     attack_num = 6;
     busy = false;
@@ -113,7 +123,8 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
-    // attack5();
+    flash = false;
+    attack5_head();
     attack_num = 5;
     busy = false;
     pressed_continue = true;
@@ -122,6 +133,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     attack4_hand();
     attack_num = 4;
     busy = false;
@@ -131,15 +143,18 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     attack3_lasers();
     attack_num = 3;
     busy = false;
+    flash = false;
     pressed_continue = true;
     }
     if(attack_num == 1){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     attack2_smoke();
     attack_num = 2;
     busy = false;
@@ -149,6 +164,7 @@ if(busy == true){
     clearTimeout(timeoutID);
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
+    flash = false;
     attack1_legs();
     attack_num = 1;
     busy = false;

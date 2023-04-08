@@ -80,6 +80,9 @@ img.legs{
     transition: 0.200s;
     z-index: 3;
 }
+img.legs_down{
+    top: 44% !important;
+}
 img.smoke {
     width: 53%;
     position: absolute;
@@ -122,6 +125,19 @@ div#l2 {
     rotate: 90deg;
     transition: 400ms;
 }
+.hand2_down{
+    top: 58% !important;
+}
+.laser_head {
+    transform-origin: top center;
+    height: 5%;
+    position: absolute;
+    left: 48%;
+    top: 16%;
+    width: 0.5%;
+    border: 3px black solid;
+    transition: 625ms;
+}
 .mettaton_hp {
     position: absolute;
     top: 11%;
@@ -138,7 +154,7 @@ div#l2 {
     color: red;
     font-size: 220%;
     font-family: 'attack';
-    animation: bounce 0.5s;
+    animation: bounce 750ms;
 }
 .hp_show_wrap2 {
     width: 100%;
@@ -161,11 +177,13 @@ div#l2 {
     background: yellow;
     height: 100%;
 }
-img.line_attack {
-    position: absolute;
-    left: 23.5%;
-    top: 59%;
+.line_attack {
     width: 1.14%;
+    position: relative;
+    height: 93%;
+    left: 0%;
+    border: 7px solid black;
+    background-color: white;
 }
 img.attack_png {
     position: absolute;
@@ -230,31 +248,31 @@ input#volume {
     left: 59%;
 }
 .slider input[type="range"] {
--webkit-appearance:none !important;
-width: 420px;
-height: 2px;
-background: #f9812b;
-border: none;
-outline: none;
-cursor: pointer;
+    -webkit-appearance:none !important;
+    width: 420px;
+    height: 2px;
+    background: #f9812b;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 .slider input[type="range"]::-webkit-slider-thumb {
--webkit-appearance: none !important;
-width: 20px;
-height: 20px;
-background: #000000;
-border: 2px solid #e58947;
-border-radius: 0;
+    -webkit-appearance: none !important;
+    width: 20px;
+    height: 20px;
+    background: #000000;
+    border: 2px solid #e58947;
+    border-radius: 0;
 }
 .slider input[type="range"]::-webkit-slider-thumb:hover {
-background: #000000;
-cursor: grab;
+    background: #000000;
+    cursor: grab;
 }
 .slider input[type="range"]::-webkit-slider-thumb:active {
   cursor: grabbing;
 }
 img#heart {
-    width: 2%;
+    width: 2.4%;
     position: absolute;
     left: 49%;
     top: 73%;
@@ -359,6 +377,15 @@ img#heart {
     white-space: pre;
     transition: 1s;
 }
+.text_bc_im{
+    background-image: url(../img/attack.png);
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    padding: 0% !important;
+    width: 53% !important;
+    height: 91% !important;
+}
 img.img_M {
     width: 4%;
     position: relative;
@@ -448,7 +475,7 @@ Nothing yet
     color: #fe8507;
     border: 2px solid #fe8507;
     background: 0;
-    font-size: 230%;
+    font-size: 198%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -550,14 +577,17 @@ img.attack {
     display: none;
 }
 .appear_hide{
-    animation: beam 0.2s infinite;
+    animation: black_white 0.2s infinite;
+}
+.appear_hide_yellow{
+    animation: yellow_white 0.2s infinite;
 }
 .flash{
     animation: beam 0.5s infinite;
 }
 .move_attack{
-    left: 75.5% !important;
-    transition: 1.6s cubic-bezier(0.4, 0, 1, 1);
+    left: 100% !important;
+    transition: 1.2s linear;
 } 
 .cube {
     width: 49% !important;
@@ -565,8 +595,8 @@ img.attack {
 }
 .move {
     transition: all 0.2s ease-in-out !important;
-    top: 94.5% !important;
-    left: 23.8% !important;
+    top: 94.8% !important;
+    left: 24.3% !important;
 }
 @keyframes beam {
     0% {
@@ -579,16 +609,48 @@ img.attack {
       opacity: 0;
     }
 }
+@keyframes black_white {
+    0% {
+        border: 7px solid black;
+        background-color: white;
+    }
+    50% {
+        border: 7px solid white;
+        background-color:   black;
+    }
+    100% {
+        border: 7px solid black;
+        background-color: white;
+    }
+}
+@keyframes yellow_white {
+    0% {
+        border: 7px solid yellow;
+        background-color:   black;
+    }
+    50% {
+        border: 7px solid black;
+        background-color:   yellow;
+    }
+    100% {
+        border: 7px solid yellow;
+        background-color: black;
+    }
+}
 @keyframes bounce {
     0% {
         position: relative;
+        bottom: 15%;
+    }
+    25%{
+        position: relative;
         bottom: 30%;
     }
-    100% {
+    100%{
         position: relative;
         bottom: 0%;
     }
-}  
+}
 @keyframes disepear {
     0% {
         display: block;

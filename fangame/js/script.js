@@ -28,10 +28,9 @@ let hp_mettaton_attacked = document.querySelector(".hp-");
 let elem_mettaton = document.querySelector(".mettaton_hp");
 let hp_left = document.querySelector(".hp_shower");
 let attack_gif = document.querySelector(".attack_png");
-let attack_line = document.querySelector(".line_attack");
 let mettaton_gif = document.querySelector(".mettaton_gif");
 let volume = document.querySelector("#volume");
-let hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
+let hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
 let hp_width = document.querySelector(".hpVis");
 let canvas = document.querySelector("#canvas");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
@@ -54,18 +53,19 @@ let started = false;
 let canvas_t = false;
 let attack_num = false;
 let anim = true;
-let hp_mettaton = 360;
-let attack2 = 0;
+let hp_mettaton = 396;
 let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
-let time = -200;
-let time2 = 0;
+let timer = 0;
+let attack_line;
+let attack_line_timeout;
+let timer_int;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-audio.volume = 0;
-// audio.volume = 0.20;
+// audio.volume = 0;
+audio.volume = 0.20;
 audio.pause();
 audio1.pause();
 audio2.pause();
@@ -221,7 +221,12 @@ function check2(num){
     x_disable = false;
     stage = false;
     num = false;
-    text = `<div class="attack_wrap"><img src="img/attack.png" class="attack"></div>`
+    text = `<div class="line_attack" alt="" style=""></div>`;
+    setTimeout(() => {
+      attack_line = document.querySelector(".line_attack"); 
+      attack = 0;
+      timer = 0;
+    },10);
     typeWriter2();
     attack_function();
   }
@@ -249,10 +254,10 @@ function check2(num){
 * Your HP was maxed out!`;
     }
     else if(food == "L. Hero"){
-      text = `* You eat the Legerndary Hero.
+      text = `* You eat the Legendary Hero.
 * You recovered ${hp_recover} HP!`;
     }
-    hp_string = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
+    hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
     HP_recover();
     typeWriter();
     position = false;
@@ -310,7 +315,7 @@ function disappear(){
     buttons[num_second].classList.remove('yellow');
     img[num_second].src = "";
     if(num_second == 0){
-      img[0].src = "img/fight.png";img
+      img[0].src = "img/fight.png";
     }
     if(num_second == 1){
       img[1].src = "img/act.png";
@@ -356,54 +361,49 @@ function imgH(){
 
 //Attack
 function attack_function(){
-  let timer;
-    setTimeout(function(){
-    audio7.pause();
-    clearTimeout(timeoutID);
-    attack_line.classList.remove("hidden");
-    attack = 0;
-    time = -50;
-    timer = setInterval(function() {
-    time += 10;
-    }, 10);
-  },100);
-  attack_line.classList.remove("move_attack");
-  attack_line.style.left =  "23.5%";
-  setTimeout(function(){
+  setTimeout(() => {
     attack_line.classList.add("move_attack");
-  },200);
-  setTimeout(function(){
-    clearInterval(timer);
-    if(attack !== false){
-      attack = "MISS";
-      attack_line.classList.add("appear_hide");
+    canvas.classList.add("text_bc_im");
+    timer_int  = setInterval(() => {
+      timer++;
+    }, 12);
+    attack_line_timeout = setTimeout(() => {
+      clearInterval(timer_int);
+      clearInterval(HP_show);
+      hp_mettaton_attacked.innerHTML = "MISS";
+      audio5.play();
+      elem_mettaton.classList.remove("hidden");
+      attack_gif.classList.remove("hidden");
+      attack_gif.src = "img/attack.gif";
       attack_line.classList.remove("move_attack");
       attack_line.classList.add("hidden");
-      elem_mettaton.classList.remove("hidden");
-      hp_mettaton_attacked.innerHTML = attack;
-      setTimeout(function() {
+      setTimeout(() => {
+        attack_line.classList.remove("appear_hide");
         attack_line.classList.add("hidden");
+        attack_gif.classList.add("hidden");
         elem_mettaton.classList.add("hidden");
+        canvas.classList.remove("text_bc_im");
+        attack_gif.src = "img/nothing.png";
         disappear();
-      }, 900);
-    }
-    time = -50;
-  },1600+200);
+        attack = false;
+      }, 999);
+    }, 1201);
+  }, 11);
 }
 
 //HP recovering
 function HP_recover(){
-  if(parseInt(hp_string) + parseInt(hp_recover) < 71 && parseInt(hp_string) + parseInt(hp_recover) > 0){
-  hp_string = parseInt(hp_string) + parseInt(hp_recover);
+  if(parseInt(hp_str) + parseInt(hp_recover) < 71 && parseInt(hp_str) + parseInt(hp_recover) > 0){
+  hp_str = parseInt(hp_str) + parseInt(hp_recover);
   }
-  else if(parseInt(hp_string) + parseInt(hp_recover) >= 72){
-  hp_string = 72;
+  else if(parseInt(hp_str) + parseInt(hp_recover) >= 72){
+  hp_str = 72;
   }
-  if(hp_string < 72){
-    hp.innerHTML = `${hp_string}/72`;
-    hp_width.style.width = `${hp_string/(72/100)}%`;
+  if(hp_str < 72){
+    hp.innerHTML = `${hp_str}/72`;
+    hp_width.style.width = `${hp_str/(72/100)}%`;
   }
-  if(hp_string > 72 && hp_string == 72){
+  if(hp_str > 72 && hp_str == 72){
     hp.innerHTML = `72/72`;
     hp_width.style.width = `100%`;
   }
@@ -412,9 +412,9 @@ function HP_recover(){
 
 //Shows hp and checks if game is over
 function showHP(){
-  hp.innerHTML = `${hp_string}/72`;
-  hp_width.style.width = `${hp_string/(72/100)}%`;
-  if(hp_string < 0){
+  hp.innerHTML = `${hp_str}/72`;
+  hp_width.style.width = `${hp_str/(72/100)}%`;
+  if(hp_str < 0){
     busy = false;
     hp_text = false;
     food_text = false;
@@ -437,15 +437,17 @@ function showHP(){
     clearInterval(ten_secs);
     clearInterval(lightning);
     clearInterval(laser_time);
+    clearInterval(hand_time);
+    clearInterval(head_time);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
-    hp_mettaton = 360;
+    hp_mettaton = 396;
     one = 0;
-    hp_string = "72";
+    hp_str = "72";
     hp.innerHTML = `72/72`;
     hp_width.style.width = `100%`;
-    hp_left.style.width = `${hp_mettaton/(360/100)}%`;
-    HP_width_small = `${hp_mettaton/(360/100)}%`;
+    hp_left.style.width = `${hp_mettaton/(396/100)}%`;
+    HP_width_small = `${hp_mettaton/(396/100)}%`;
     anim = false;
     attack_num = false;
     stage = false;
@@ -616,39 +618,49 @@ document.addEventListener('keyup', e => {
 
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
-        attack = false;
-        time2 = time/1000;
-        if(time2 > 1.11){
-          time2 = time2 - 1.11;
-          time2 = 1.11 - time2;
-        }
-        attack2 = ((time2/(0.8/100)/2 * (48/100)) + 2).toFixed(0);
-        if(attack2 <= 0 ){
-          attack2 = 0;
-        }
-        attack_gif.src = "img/attack.gif";
-        attack_gif.classList.remove("hidden");
-        elem_mettaton.classList.remove("hidden");
-        hp_mettaton = hp_mettaton - attack2;
-        hp_left.style.width = `${hp_mettaton/(360/100)}%`;
-        HP_width_small = `${hp_mettaton/(360/100)}%`;
-        hp_mettaton_attacked.innerHTML = `${attack2}`;
-        setTimeout(function(){
-          elem_mettaton.classList.add("hidden");
-          attack_gif.classList.add("hidden");
-          disappear();
-        },900);
-        width_pr = attack_line.getBoundingClientRect().left / window.innerWidth;
-        attack_line.style.left = `${width_pr*100}%`;
-        audio5.play();
-        attack_line.classList.add("appear_hide");
-        attack_line.classList.remove("move_attack");
-        setTimeout(function(){
-          attack_line.style.left = '';
-          attack_line.classList.add("hidden");
-          attack_line.classList.remove("appear_hide");
-        },400);
-
+        setTimeout(() => {
+          attack = false;
+          clearTimeout(attack_line_timeout);
+          clearInterval(timer_int);
+          clearInterval(HP_show);
+          attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0)-401}px`;
+          attack_line.classList.remove("move_attack");
+          audio5.play();
+          if(timer > 50){
+            timer = timer - 50;
+            timer = 50 - timer;
+            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,50)).toFixed(0);
+            hp_mettaton -= (0.35*calculatePercentage(timer,50)).toFixed(0);
+            attack_line.classList.add("appear_hide");
+          }
+          else if(timer > 47 && timer < 51){
+            hp_mettaton_attacked.innerHTML = "36";
+            hp_mettaton -= 36;
+            attack_line.classList.add("appear_hide_yellow");
+          }
+          else if(timer < 48){
+            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,47)).toFixed(0);
+            hp_mettaton -= (0.35*calculatePercentage(timer,47)).toFixed(0);
+            attack_line.classList.add("appear_hide");
+          }
+          hp_left.style.width = `${hp_mettaton/(396/100)}%`;
+          HP_width_small = `${hp_mettaton/(396/100)}%`;
+          elem_mettaton.classList.remove("hidden");
+          attack_gif.classList.remove("hidden");
+          attack_gif.src = "img/attack.gif";
+          attack_line.classList.remove("move_attack");
+          setTimeout(() => {
+            attack_line.classList.remove("appear_hide");
+            attack_line.classList.remove("appear_hide_yellow");
+            attack_line.classList.add("hidden");
+            attack_gif.classList.add("hidden");
+            elem_mettaton.classList.add("hidden");
+            attack_line.classList.add("hidden");
+            canvas.classList.remove("text_bc_im");
+            attack_gif.src = "img/nothing.png";
+            disappear();
+          }, 999);
+        },11);
       }
 
       //Movement between the text menus
