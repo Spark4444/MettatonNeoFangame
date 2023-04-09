@@ -99,6 +99,7 @@ start_menu.addEventListener('mousedown', () =>{
 
 //The bar will play a sound when you click on it
 volume.addEventListener("mousedown", () => {
+  audio1.currentTime = "0";
   audio1.play();
 });
 
@@ -111,6 +112,7 @@ volume.addEventListener("mouseup", () => {
 start_button.addEventListener('click', () =>{
   if(started !== true){
   audio2.muted = true;
+  audio1.currentTime = "0";
   audio1.play();
   html.classList.add("cursor_none");
   frisk.classList.remove("hidden");
@@ -370,6 +372,7 @@ function attack_function(){
     attack_line_timeout = setTimeout(() => {
       clearInterval(timer_int);
       clearInterval(HP_show);
+      attack = false;
       hp_mettaton_attacked.innerHTML = "MISS";
       audio5.play();
       elem_mettaton.classList.remove("hidden");
@@ -385,7 +388,6 @@ function attack_function(){
         canvas.classList.remove("text_bc_im");
         attack_gif.src = "img/nothing.png";
         disappear();
-        attack = false;
       }, 999);
     }, 1201);
   }, 11);
@@ -581,6 +583,7 @@ document.addEventListener('keyup', e => {
     case 97: // a key
       if(num !== false){
         num--;
+        audio1.currentTime = "0";
         audio1.play();
         classA();
       }
@@ -599,6 +602,7 @@ document.addEventListener('keyup', e => {
     case 100: // d key
       if(num !== false){
         num++;
+        audio1.currentTime = "0";
         audio1.play();
         classA();
       }
@@ -681,16 +685,19 @@ document.addEventListener('keyup', e => {
       if(stage == 3 && stage !== false && num_second == 1){
         stage = 4;
         check4(num_second);
+        audio1.currentTime = "0";
         audio1.play();
        }
       if(stage == 2 && stage !== false && num_second == 0 || stage == 2 && stage !== false && num_second == 1 || stage == 2 && stage !== false && num_second == 2){
         stage = 3;
         check3(num_second);
+        audio1.currentTime = "0";
         audio1.play();
        }
        if(stage == 1 && stage !== false){
         stage = 2;
         check2(num_second);
+        audio1.currentTime = "0";
         audio1.play();
         }
       if(stage == 0 && stage !== false){
@@ -698,6 +705,7 @@ document.addEventListener('keyup', e => {
         clearTimeout(timeoutID);
         stage = 1;
         check(num_second);
+        audio1.currentTime = "0";
         audio1.play();
         x_disable = true;
         num = false;
@@ -715,6 +723,7 @@ document.addEventListener('keyup', e => {
       img[num_second].src = "img/heart.png";
       text = "* Stage lights are blaring";
       typeWriter();
+      audio1.currentTime = "0";
       audio1.play();
       num = num_second;
       x_disable = false;
@@ -765,6 +774,7 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
+          audio1.currentTime = "0";
           audio1.play();
         }
 
@@ -794,6 +804,7 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
+          audio1.currentTime = "0";
           audio1.play();
         }
 
@@ -845,6 +856,7 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
+          audio1.currentTime = "0";
           audio1.play();
         }
 
@@ -878,6 +890,7 @@ const key = e.keyCode || e.which;
         imgH();
         img_h[position2].src = "img/heart.png";
         if(position_bf != position){
+        audio1.currentTime = "0";
         audio1.play();
         }
 

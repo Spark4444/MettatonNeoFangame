@@ -419,7 +419,7 @@ function attack5_head(){
     }, 10);
     }, 10);
 
-  },635);
+  },710);
 
   ten_secs = setTimeout(() => {
     clearInterval(head_time);
@@ -428,7 +428,7 @@ function attack5_head(){
     clearInterval(HP_show);
     img_M.style.animation = "";
     appear("* Stage lights are blaring");
-  }, 10120);
+  }, 10649);
 }
   //attack 4 heart on the chest gets up and follows the heart there mid-fast
   //attack 5 the wings one blocks one attacks reverse and then they attack together

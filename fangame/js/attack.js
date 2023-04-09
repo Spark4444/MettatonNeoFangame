@@ -51,6 +51,7 @@ function checkCollision(element1, element2, damage) {
   const elem1Rect = element1[i].getBoundingClientRect();
   if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
   if(count == 0){
+  audio8.currentTime = "0";
   audio8.play();
   count++;
   t_f_wait = true;
@@ -76,6 +77,7 @@ function checkCollisionOne(element, target, damage) {
     const targetRect = target.getBoundingClientRect();
     if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
       if (!t_f_wait) {
+        audio8.currentTime = "0";
         audio8.play();
         t_f_wait = true;
         let hp_hold = parseInt(parseInt(hp_str) - damage);
@@ -107,6 +109,7 @@ function checkCollisionLaser(elements, target, damage) {
             t_f_wait = true;
             hp_hold = parseInt(parseInt(hp_str) - damage);
             hp_str = hp_hold.toString();
+            audio8.currentTime = "0";
             audio8.play();
             img_M.classList.add("flash");
             flash = true;
@@ -125,6 +128,7 @@ function checkCollisionLaser(elements, target, damage) {
                 orangeLaserTimer = setTimeout(function() {
                   hp_hold = parseInt(parseInt(hp_str) - damage);
                   hp_str = hp_hold.toString();
+                  audio8.currentTime = "0";
                   audio8.play();
                   img_M.classList.add("flash");
                   flash = true;
@@ -141,6 +145,7 @@ function checkCollisionLaser(elements, target, damage) {
               t_f_wait = true;
               hp_hold = parseInt(parseInt(hp_str) - damage);
               hp_str = hp_hold.toString();
+              audio8.currentTime = "0";
               audio8.play();
               img_M.classList.add("flash");
               flash = true;
