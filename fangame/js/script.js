@@ -38,8 +38,6 @@ let health = ["72","72","60","40","40","40","40","40"];
 let text = "";
 let food = "";
 let HP_width_small = "100%";
-let text1;
-let text2;
 let width_pr;
 let stage = false;
 let audio_work = true;
@@ -58,14 +56,21 @@ let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
 let timer = 0;
+let letterId = 0;
 let attack_line;
 let attack_line_timeout;
 let timer_int;
+let intervalL;
+let shakeElement;
+let text1;
+let text2;
+let text_2;
+let text_3;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-// audio.volume = 0;
-audio.volume = 0.20;
+audio.volume = 0;
+// audio.volume = 0.20;
 audio.pause();
 audio1.pause();
 audio2.pause();
@@ -125,7 +130,7 @@ start_button.addEventListener('click', () =>{
     function start_animation(){
     if(started === true){
     setTimeout(function() {
-    appear("* Mettaton NEO blocks the way!");
+    appear(`* Mettaton NEO blocks the way!`);
     stage = false
     },1500);
     setTimeout(function() {
@@ -190,29 +195,37 @@ start_button.addEventListener('click', () =>{
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
-    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'> * Mettaton NEO  <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
+    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
+    setTimeout(() => {
+      shakeLetters();
+    }, 10);
     typeWriter2();
   }
   if(num_second == 1){
     img[num_second].src = "img/nothing.png"
-    text = "<img class= 'heart_img smaller_img' src='img/heart.png'> * Mettaton NEO";
+    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Mettaton NEO</div></div>`;
+    setTimeout(() => {
+      shakeLetters();
+    }, 10);
     typeWriter2();
-
   }
   if(num_second == 2){
     img[num_second].src = "img/nothing.png"
     position = 0;
     position_bf = 0;
-    text = ` ${food_list[0] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[0] + "</div>" : ""}${food_list[1] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[1] + "</div>" : ""}
-    ${food_list[2] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[2] + "</div>" : ""}${food_list[3] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[3] + "</div>" : ""}
-   <div class="p1">PAGE 1</div>`;
+    text = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
+    ${food_list[2] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[2] + "</div></div>" : `<div class="nothing"></div>`}${food_list[3] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[3] + "</div></div>" : `<div class="nothing"></div>`}
+   <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
     typeWriter2();
     imgH();
     img_h[0].src = "img/heart.png"
   }
   if(num_second == 3){
     img[num_second].src = "img/nothing.png"
-    text = "<img class= 'heart_img smaller_img' src='img/heart.png'> * Spare";
+    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Spare</div></div>`;
+    setTimeout(() => {
+      shakeLetters();
+    }, 10);
     typeWriter2();
   }
 }
@@ -233,7 +246,10 @@ function check2(num){
     attack_function();
   }
   if(num_second == 1){
-    text = `<img class= 'heart_img smaller_img' src='img/heart.png'> * Check`;
+    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Check</div></div>`;
+    setTimeout(() => {
+      shakeLetters();
+    }, 10);
     typeWriter2 ();
   }
   if(num_second == 2){
@@ -244,24 +260,28 @@ function check2(num){
     health.splice(position, 1);
 
     if(food == "Pie"){
-      text = `* You ate the ${food}.
-* Your HP was maxed out!`;
+      text = `* You ate the ${food}.`
+      text_2 = `* Your HP was maxed out!`;
+      text_3 = ``;
     }
     else if(food == "Steak"){
-      text = `* You ate the ${food}.
-* You recovered ${hp_recover} HP!`;
+      text = `* You ate the ${food}.`          
+      text_2 = `* You recovered ${hp_recover} HP!`;
+      text_3 = ``;
     }
     else if(food == "I. Noodles"){
-      text = `* You ate the Instant Noodles.
-* Your HP was maxed out!`;
+      text = `* You ate the Instant Noodles.`
+      text_2 = `* Your HP was maxed out!`;
+      text_3 = ``;
     }
     else if(food == "L. Hero"){
-      text = `* You eat the Legendary Hero.
-* You recovered ${hp_recover} HP!`;
+      text = `* You eat the Legendary Hero.`;
+      text_2 = `* You recovered ${hp_recover} HP!`;
+      text_3 = ``;
     }
     hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
     HP_recover();
-    typeWriter();
+    typeWriterArr();
     position = false;
   }
   if(num_second == 3){
@@ -277,10 +297,10 @@ function check3(num){
   }
   if(num_second == 1){
     x_disable = false;
-    text = `* METTATON NEO - 90 ATK 9 DEF
-* Dr. Alphys's greatest
-  invention.`;
-    typeWriter();
+    text = `* METTATON NEO - 90 ATK 9 DEF`;
+    text_2 = `* Dr. Alphys's greatest invention.`
+    text_3 = "";
+    typeWriterArr();
   }
   if(num_second == 2){
     num = false;
@@ -529,19 +549,73 @@ function typeWriter() {
   audio7.play();
   text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
-  let i = 0;
-  timeoutID = setInterval(() => {
-    if (i >= text.length) {
-      setTimeout(() => {
-        audio7.pause();
-      },100);
-      clearInterval(timeoutID);
-      return;
-    }
-    text_placeholder.innerHTML += text[i];
-    i++;
-  }, 40);
+  clearInterval(intervalL);
+    text_placeholder.innerHTML = `<div id="shake-element"></div>`;
+    setTimeout(() => {
+      shakeElement = document.querySelector("#shake-element");
+      let i = 0;
+      timeoutID = setInterval(() => {
+        if (i >= text.length) {
+          setTimeout(() => {
+            shakeLettersArr();
+            audio7.pause();
+          }, 100);
+          clearInterval(timeoutID);
+          return;
+        }
+        shakeElement.innerHTML += text[i];
+        i++;
+      }, 40);
+    }, 10);
 }
+
+//Function that writes the text in the text box letter by letter and works with arrays
+function typeWriterArr() {
+  audio7.currentTime = 0;
+  audio7.play();
+  text_placeholder.innerHTML = "";
+  clearTimeout(timeoutID);
+  clearInterval(intervalL);
+    text_placeholder.innerHTML = `<div class="flex wrap"><div id="shake-element"></div><div id="shake-element"></div><div id="shake-element"></div></div>`;
+    setTimeout(() => {
+      shakeElement = document.querySelectorAll("#shake-element");
+      let i = 0;
+      timeoutID = setInterval(() => {
+        if (i >= text.length) {
+          clearInterval(timeoutID);
+          let i = 0;
+          timeoutID = setInterval(() => {
+            if (i >= text_2.length) {
+              clearInterval(timeoutID);
+              let i = 0;
+              timeoutID = setInterval(() => {
+                if (i >= text_3.length) {
+                  clearInterval(timeoutID);
+                  setTimeout(() => {
+                    audio7.pause();
+                    shakeLettersArr();
+                  }, 100);
+                  return;
+                  }
+                  shakeElement = document.querySelectorAll("#shake-element");
+                  shakeElement[2].innerHTML += text_3[i];
+                  i++;
+              }, 40); 
+              return;
+            }
+            shakeElement = document.querySelectorAll("#shake-element");
+            shakeElement[1].innerHTML += text_2[i];
+            i++;
+          }, 40);
+          return;
+        }
+        shakeElement = document.querySelectorAll("#shake-element");
+        shakeElement[0].innerHTML += text[i];
+        i++;
+      }, 40);
+    }, 10);
+}
+
 
 //Function that writes the text in the text box letter by letter
 function typeWriterBox(text_write) {
@@ -549,6 +623,7 @@ function typeWriterBox(text_write) {
   audio6.play();
   text_chatbox.innerHTML = "";
   clearTimeout(timeoutID);
+  clearInterval(intervalL);
   let i = 0;
   timeoutID = setInterval(() => {
     if (i >= text_write.length) {
@@ -568,13 +643,16 @@ function typeWriter2() {
   audio7.currentTime = 0;
   audio7.pause();
   clearTimeout(timeoutID);
+  clearInterval(intervalL);
   text_placeholder.innerHTML = "";
   text_placeholder.innerHTML = text;
+  shakeLettersArr();
   return;
 }
 //End of the functions initialization
 
 //A,a and left arrow keys listeners, movement to the right of the buttons
+setTimeout(() => {
 document.addEventListener('keyup', e => {
   const key = e.keyCode || e.which;
   switch (key) {
@@ -611,7 +689,7 @@ document.addEventListener('keyup', e => {
       return;
   }
 });
-
+}, 3000);
 //Z and enter, x key listeners
 document.addEventListener('keyup', e => {
   const key = e.keyCode || e.which;
@@ -717,16 +795,16 @@ document.addEventListener('keyup', e => {
 
       //Go out of the text menu
       if(x_disable == true){
+      x_disable = false;
       position = false;
       stage = 0;
       attack = false
       img[num_second].src = "img/heart.png";
-      text = "* Stage lights are blaring";
+      text = `* Stage lights are blaring`;
       typeWriter();
       audio1.currentTime = "0";
       audio1.play();
       num = num_second;
-      x_disable = false;
       }
 
       break;
@@ -740,12 +818,12 @@ document.addEventListener('keyup', e => {
   if(position !== false){
     position_bf = position;
     //Sets the text1 and text2 to this every time
-    text1 = ` ${food_list[0] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[0] + "</div>" : ""}${food_list[1] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[1] + "</div>" : ""}
-    ${food_list[2] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[2] + "</div>" : ""}${food_list[3] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[3] + "</div>" : ""}
-   <div class="p1">PAGE 1</div>`;
-  text2 = ` ${food_list[4] !== undefined ? "<div class='i1'><img class='heart_img' src='img/nothing.png'> * " + food_list[4] + "</div>" : ""}${food_list[5] !== undefined ? "<div class='i2'><img class='heart_img' src='img/nothing.png'> * " + food_list[5] + "</div>" : ""}
- ${food_list[6] !== undefined ? "<div class='i3'><img class='heart_img' src='img/nothing.png'> * " + food_list[6] + "</div>" : ""}${food_list[7] !== undefined ? "<div class='i4'><img class='heart_img' src='img/nothing.png'> * " + food_list[7] + "</div>" : ""}
-<div class="p2">PAGE 2</div>`; 
+    text1 = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
+    ${food_list[2] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[2] + "</div></div>" : `<div class="nothing"></div>`}${food_list[3] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[3] + "</div></div>" : `<div class="nothing"></div>`}
+   <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
+  text2 = `<div class="grid-container">${food_list[4] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[4] + "</div></div>" : `<div class="nothing"></div>`}${food_list[5] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[5] + "</div></div>" : `<div class="nothing"></div>`}
+ ${food_list[6] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[6] + "</div></div>" : `<div class="nothing"></div>`}${food_list[7] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[7] + "</div></div>" : `<div class="nothing"></div>`}
+ <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 2</div></div>`; 
 const key = e.keyCode || e.which;
   //Movement in  the inventory
   switch (key) {
