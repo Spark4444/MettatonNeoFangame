@@ -672,7 +672,7 @@ img.attack {
       background-position: 0% 0%;
     }
     100% {
-        background-position: 98% 203%;
+        background-position: -98% 203%;
     }
   }
   @keyframes shake1 {

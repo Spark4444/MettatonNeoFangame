@@ -70,7 +70,7 @@ let text_3;
 
 //Sets volume of the music to 20%
 audio.volume = 0;
-// audio.volume = 0.20;
+audio.volume = 0.20;
 audio.pause();
 audio1.pause();
 audio2.pause();
