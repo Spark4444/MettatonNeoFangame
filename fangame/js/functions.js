@@ -13,6 +13,33 @@ function randomPick(num1, num2) {
     }
 }
 
+//Picks a number from 3
+function randomPick3(str1, str2, str3) {
+  const randomNumber = Math.floor(Math.random() * 3); // Generates a random number between 0 and 2
+
+  if (randomNumber === 0) {
+      return str1;
+  } else if (randomNumber === 1) {
+      return str2;
+  } else {
+      return str3;
+  }
+}
+
+//Picks a number from 4
+function randomPick4(num1, num2, num3, num4) {
+  let randomNumber = Math.floor(Math.random() * 4);
+  if (randomNumber === 0) {
+      return num1;
+  } else if (randomNumber === 1) {
+      return num2;
+  } else if (randomNumber === 2) {
+      return num3;
+  } else {
+      return num4;
+  }
+}
+
 //Gets a random number from ranges
 function randomMultiRange(range1, range2, range3, range4) {
     const ranges = [[range1, range2], [range3, range4]];

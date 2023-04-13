@@ -70,7 +70,7 @@ let text_3;
 
 //Sets volume of the music to 20%
 audio.volume = 0;
-audio.volume = 0.20;
+// audio.volume = 0.20;
 audio.pause();
 audio1.pause();
 audio2.pause();
@@ -461,6 +461,7 @@ function showHP(){
     clearInterval(laser_time);
     clearInterval(hand_time);
     clearInterval(head_time);
+    clearInterval(dash_leg);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
     hp_mettaton = 396;

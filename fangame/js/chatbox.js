@@ -2,23 +2,8 @@ let busy = false;
 let hp_text = false;
 let food_text = false;
 let pressed_continue = false;
-// Legs: "Get ready for my Neo Legs, the ultimate combination of elegance and power!"
-
-// Attack 2: "I'll strike you down with the lightning of my power!"
-
-// Left hand: "Watch as I unleash my impeccable aim and the full fury of my lasers!"
-
 // Wings: "Behold my Neo Wings, which seal your fate in my arena of destruction!"
-
-// Right hand: "My Neo Right Hand will smack you with an unstoppable barrage of blows!"
-
-// Head: "My Neo Head will dazzle you with a barrage of laser beams!"
-
-// Finale: "Behold my Neo Heart and the biggest, brightest, and most beautiful bullet you've ever seen!"
-
-// Less than half HP: "Get ready for the ultimate display of my power!"
-
-// Less than half inventory: "Hang on tight, the show must go on!"
+//Did you really think that you were going to beat me, darling? (Deal gone wrong playing)
 function chat_box(){
     if(attack_num === false){
         attack_num = 0;
@@ -60,6 +45,11 @@ function chat_box(){
         busy = true;
         pressed_continue = false;
         typeWriterBox("My Neo Head will dazzle you with a barrage of laser beams!");
+    }
+    if(attack_num == 5 && busy == false){
+        busy = true;
+        pressed_continue = false;
+        typeWriterBox("Prepare to be crushed under the force of my fabulous leg dash!");
     }
 }
 document.addEventListener('keyup', e => {
@@ -114,7 +104,7 @@ if(busy == true){
     audio6.pause();
     text_chatbox_main.style.opacity = 0;
     flash = false;
-    // attack6();
+    attack6_dash();
     attack_num = 6;
     busy = false;
     pressed_continue = true;

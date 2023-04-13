@@ -25,6 +25,13 @@ let hyp_t;
 let leg_t;
 let leg2_t;
 let left;
+let dash_leg;
+let leg_dash;
+let random_leg;
+let leg_dash_count;
+let leg_dash_count_top;
+let leg_dash_transition;
+let worked_legs_dash
 
 //Attack 1(legs)
 function attack1_legs(){ 
@@ -430,5 +437,90 @@ function attack5_head(){
     appear("* Stage lights are blaring");
   }, 10649);
 }
-  //attack 4 heart on the chest gets up and follows the heart there mid-fast
-  //attack 5 the wings one blocks one attacks reverse and then they attack together
+
+//attack 6 legs dashingg on you
+function attack6_dash(){
+  random_leg = randomRange(1,2);
+  projectile.innerHTML = `<img src="img/${random_leg + 3}.png" id="l${random_leg}" class="leg_dash">`;
+  mettaton_gif.style.opacity = "0";
+  x = 47;
+  y = 31;
+  moveX = 0;
+  moveY = 0;
+  drawHeart(x, y);
+  leg_dash_count = 0;
+  leg_dash_transition = 500;
+  leg_dash_count_top = "";
+  intervalId2 = setInterval(() => {
+    if(t_f_wait === false){
+      leg_dash = document.querySelector(".leg_dash");
+      leg_dash.style.transition = "0.5s";
+      checkCollisionLaserOne(leg_dash, img_M, 20);
+    }
+  }, 10);
+
+  HP_show = setInterval(() => {
+    showHP();
+  }, 10);
+
+  moveHeartI = setInterval(moveHeart, 10);
+
+  dash_leg = setInterval(() => {
+    leg_dash_count++;
+    if(leg_dash_count%3 == 1){
+      leg_dash.classList.add("leg_dash_right");
+    }
+    if(leg_dash_count%3 == 2){
+      leg_dash.classList.remove("leg_dash_right");
+    }
+    if(leg_dash_count%3 == 0){
+      if(leg_dash_count_top !== ""){
+        leg_dash.classList.remove(`${leg_dash_count_top}`);
+      }
+      worked_legs_dash = false;
+      if(leg_dash_count_top == "" && worked_legs_dash === false){
+        worked_legs_dash = true;
+        leg_dash_count_top = randomPick3("leg_dash_bottom","leg_dash_top","");
+        if(leg_dash_count_top == "leg_dash_bottom" || leg_dash_count_top == "leg_dash_top"){
+          random_leg = 0;
+        }
+        else{
+        random_leg = randomRange(1,2);
+        }
+        leg_dash.style.transition = "0.5s";
+        leg_dash_transition = 500;
+      }
+      if(leg_dash_count_top == "leg_dash_bottom" && worked_legs_dash === false){
+        worked_legs_dash = true;
+        leg_dash_count_top = "";
+        random_leg = randomRange(1,2);
+        leg_dash.style.transition = "1s";
+        leg_dash_transition = 1000;
+      }
+      if(leg_dash_count_top == "leg_dash_top" && worked_legs_dash === false){
+        worked_legs_dash = true;
+        leg_dash_count_top = "";
+        random_leg = randomRange(1,2);
+        leg_dash.style.transition = "1s";
+        leg_dash_transition = 1000;
+      }
+      leg_dash.src = `img/${random_leg + 3}.png`;
+      leg_dash.setAttribute('id', `l${random_leg}`);
+      if (leg_dash_count_top !== "") {
+        if (!leg_dash.classList.contains(leg_dash_count_top)) {
+          leg_dash.classList.add(leg_dash_count_top);
+        }
+      }
+    }
+  }, leg_dash_transition);
+
+  ten_secs = setTimeout(() => {
+    clearInterval(dash_leg);
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show);
+    img_M.style.animation = "";
+    appear("* Stage lights are blaring");
+  }, 20000);
+}
+

@@ -138,6 +138,24 @@ div#l2 {
     border: 3px black solid;
     transition: 700ms;
 }
+img.leg_dash{
+    width: 8%;
+    height: 40%;
+    position: relative;
+    top: 48%;
+    left: 15%;
+    background: none !important;
+    z-index: 3;
+}
+img.leg_dash_right{
+    left:77%;
+}
+img.leg_dash_top{
+    top:68%;
+}
+img.leg_dash_bottom{
+    top:34%;
+}
 .mettaton_hp {
     position: absolute;
     top: 11%;
