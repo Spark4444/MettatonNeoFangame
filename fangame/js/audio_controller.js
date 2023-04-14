@@ -31,7 +31,7 @@ class AudioController {
 
     /**
      * Pause all songs
-     * @returns {Audio} Audio
+     * @returns {AudioController} Audio
      */
     pauseAll() {
         for (const track of this.tracks) {
@@ -43,7 +43,7 @@ class AudioController {
     /**
      * Play a track
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     play(trackNumber) {
         this.tracks[trackNumber].play();
@@ -53,7 +53,7 @@ class AudioController {
     /**
      * Stop a track
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     pause(trackNumber) {
         this.tracks[trackNumber].pause();
@@ -63,7 +63,7 @@ class AudioController {
     /**
      * Mute a track
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     mute(trackNumber) {
         this.tracks[trackNumber].muted = true;
@@ -73,7 +73,7 @@ class AudioController {
     /**
      * Unmute a track
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     unmute(trackNumber) {
         this.tracks[trackNumber].muted = true;
@@ -83,7 +83,7 @@ class AudioController {
     /**
      * Set track position to 0
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     reset(trackNumber) {
         this.tracks[trackNumber].currentTime = 0;
@@ -94,7 +94,7 @@ class AudioController {
      * Change volume
      * @param {number} value 
      * @param {number} trackNumber 
-     * @returns {Audio} Audio
+     * @returns {AudioController} AudioController
      */
     changeVolume(value, trackNumber) {
         this.tracks[trackNumber].volume = value / 100;
