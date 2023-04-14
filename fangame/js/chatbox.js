@@ -56,8 +56,8 @@ document.addEventListener('keyup', e => {
     const key = e.keyCode || e.which;
     if (busy == true) {
         switch (key) {
-            case Key.enterKey:
-            case Key.keyZ:
+            case InputController.Key.enterKey:
+            case InputController.Key.keyZ:
                 if (attack_num == 9) {
                     clearTimeout(timeoutID);
                     audio.pause(AudioController.Track.mettatonSpeak);

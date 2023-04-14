@@ -1,5 +1,5 @@
 const audio = new AudioController();
-
+const input = new InputController();
 
 //Varaibles initilization
 let frisk = document.querySelector("#frisk");
@@ -649,8 +649,8 @@ setTimeout(() => {
     document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         switch (key) {
-            case Key.arrowKeyLeft:
-            case Key.keyA:
+            case InputController.Key.arrowKeyLeft:
+            case InputController.Key.keyA:
                 if (num !== false) {
                     num--;
                     audio
@@ -668,8 +668,8 @@ setTimeout(() => {
     document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         switch (key) {
-            case Key.arrowKeyRight:
-            case Key.keyD:
+            case InputController.Key.arrowKeyRight:
+            case InputController.Key.keyD:
                 if (num !== false) {
                     num++;
                     audio
@@ -687,8 +687,8 @@ setTimeout(() => {
 document.addEventListener('keyup', e => {
     const key = e.keyCode || e.which;
     switch (key) {
-        case Key.enterKey:
-        case Key.keyZ:
+        case InputController.Key.enterKey:
+        case InputController.Key.keyZ:
             //If the user pressed enter while the attack
             if (attack === 0 && stage == false && attack !== false) {
                 setTimeout(() => {
@@ -785,7 +785,7 @@ document.addEventListener('keyup', e => {
             }
 
             break;
-        case Key.keyX:
+        case InputController.Key.keyX:
             //Go out of the text menu
             if (x_disable == true) {
                 x_disable = false;
@@ -821,8 +821,8 @@ document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         //Movement in  the inventory
         switch (key) {
-            case Key.arrowKeyUp:
-            case Key.keyW:
+            case InputController.Key.arrowKeyUp:
+            case InputController.Key.keyW:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2 || position == 3) {
                     if (food_list[position - 2] !== undefined) {
@@ -851,8 +851,8 @@ document.addEventListener('keyup', e => {
                 }
 
                 break;
-            case Key.arrowKeyDown:
-            case Key.keyS:
+            case InputController.Key.arrowKeyDown:
+            case InputController.Key.keyS:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2 || position == 3) {
                     if (food_list[position - 2] !== undefined) {
@@ -881,8 +881,8 @@ document.addEventListener('keyup', e => {
                 }
 
                 break;
-            case Key.arrowKeyDown:
-            case Key.keyA:
+            case InputController.Key.arrowKeyDown:
+            case InputController.Key.keyA:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2) {
                     if (food_list.length > 6) {
@@ -933,8 +933,8 @@ document.addEventListener('keyup', e => {
                 }
 
                 break;
-            case Key.arrowKeyRight:
-            case Key.keyD:
+            case InputController.Key.arrowKeyRight:
+            case InputController.Key.keyD:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7) {
                     position += 1;
@@ -999,3 +999,46 @@ document.addEventListener('keyup', e => {
 
     }
 });
+
+// Game loop
+setInterval(() => {
+    const [action, state] = input.get();
+    console.log(action, state)
+    if (canvas_t !== true) return;
+
+    if (state === InputController.State.press) {
+        if (action === InputController.Action.moveLeft) {
+            moveX = -speedX;
+            moveHeart();
+        }
+        if (action === InputController.Action.moveUp) {
+            moveY = -speedY;
+            moveHeart();
+        }
+        if (action === InputController.Action.moveRight) {
+            moveX = speedX;
+            moveHeart();
+        }
+
+        if (action === InputController.Action.moveDown) {
+            moveY = speedY;
+            moveHeart();
+        }
+    }
+
+    if (state === InputController.State.release) {
+        if (action === InputController.Action.moveLeft) {
+            if (moveX < 0) moveX = 0;
+        }
+        if (action === InputController.Action.moveUp) {
+            if (moveY < 0) moveY = 0;
+        }
+        if (action === InputController.Action.moveRight) {
+            if (moveX > 0) moveX = 0;
+        }
+
+        if (action === InputController.Action.moveDown) {
+            if (moveY > 0) moveY = 0;
+        }
+    }
+}, 1000 / 60);
