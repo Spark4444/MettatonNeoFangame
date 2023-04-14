@@ -1,5 +1,5 @@
 class AudioController {
-    static track = Object.freeze({
+    static Track = Object.freeze({
         battleTheme: 0,
         select: 1,
         mainMenuTheme: 2,

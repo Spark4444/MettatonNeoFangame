@@ -56,12 +56,11 @@ document.addEventListener('keyup', e => {
     const key = e.keyCode || e.which;
     if (busy == true) {
         switch (key) {
-            case 13: // Enter key
-            case 90: // Z key
-            case 122: // z key
+            case Key.enterKey:
+            case Key.keyZ:
                 if (attack_num == 9) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     // attack10_finale();
@@ -71,7 +70,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 8) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     // attack9();
@@ -81,7 +80,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 7) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     // attack8();
@@ -91,7 +90,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 6) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     // attack7();
@@ -101,7 +100,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 5) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack6_dash();
@@ -111,7 +110,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 4) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack5_head();
@@ -121,7 +120,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 3) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack4_hand();
@@ -131,7 +130,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 2) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack3_lasers();
@@ -142,7 +141,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 1) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack2_smoke();
@@ -152,7 +151,7 @@ document.addEventListener('keyup', e => {
                 }
                 if (attack_num == 0) {
                     clearTimeout(timeoutID);
-                    audio.pause(AudioController.track.mettatonSpeak);
+                    audio.pause(AudioController.Track.mettatonSpeak);
                     text_chatbox_main.style.opacity = 0;
                     flash = false;
                     attack1_legs();

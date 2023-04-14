@@ -42,7 +42,6 @@ let invent = false;
 let position = false;
 let position_bf = false;
 let started = false;
-let canvas_t = false;
 let attack_num = false;
 let anim = true;
 let hp_mettaton = 396;
@@ -66,12 +65,12 @@ let text_3;
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         audio
-            .pause(AudioController.track.battleTheme)
-            .pause(AudioController.track.mainMenuTheme);
+            .pause(AudioController.Track.battleTheme)
+            .pause(AudioController.Track.mainMenuTheme);
     } else {
         audio
-            .play(AudioController.track.battleTheme)
-            .play(AudioController.track.mainMenuTheme);
+            .play(AudioController.Track.battleTheme)
+            .play(AudioController.Track.mainMenuTheme);
     }
 });
 
@@ -81,29 +80,29 @@ hp_width.style.width = "100%";
 //Plays starting music
 start_menu.addEventListener('mousedown', () => {
     if (started !== true) {
-        audio.play(AudioController.track.mainMenuTheme);
+        audio.play(AudioController.Track.mainMenuTheme);
     }
 });
 
 //The bar will play a sound when you click on it
 volume.addEventListener("mousedown", () => {
     audio
-        .reset(AudioController.track.select)
-        .play(AudioController.track.select);
+        .reset(AudioController.Track.select)
+        .play(AudioController.Track.select);
 });
 
 // Update the volume when the mouse is released from the slider
 volume.addEventListener("mouseup", () => {
-    audio.changeVolume(volume.value, AudioController.track.battleTheme);
+    audio.changeVolume(volume.value, AudioController.Track.battleTheme);
 });
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
 start_button.addEventListener('click', () => {
     if (started !== true) {
         audio
-            .mute(AudioController.track.mainMenuTheme)
-            .reset(AudioController.track.select)
-            .play(AudioController.track.select);
+            .mute(AudioController.Track.mainMenuTheme)
+            .reset(AudioController.Track.select)
+            .play(AudioController.Track.select);
         html.classList.add("cursor_none");
         frisk.classList.remove("hidden");
         start_menu.classList.add("hidden_anim");
@@ -120,7 +119,7 @@ start_button.addEventListener('click', () => {
                 }, 1500);
                 setTimeout(function () {
                     heart.classList.remove("hidden");
-                    audio.play(AudioController.track.encounter);
+                    audio.play(AudioController.Track.encounter);
                     frisk.classList.add("hidden");
                     start.classList.add("black");
                     setTimeout(function () {
@@ -130,9 +129,9 @@ start_button.addEventListener('click', () => {
                     }, 200);
                     setTimeout(function () {
                         audio
-                            .reset(AudioController.track.battleTheme)
-                            .unmute(AudioController.track.battleTheme)
-                            .play(AudioController.track.battleTheme);
+                            .reset(AudioController.Track.battleTheme)
+                            .unmute(AudioController.Track.battleTheme)
+                            .play(AudioController.Track.battleTheme);
                     }, 1000);
                 }, 2000);
                 setTimeout(function () {
@@ -140,7 +139,7 @@ start_button.addEventListener('click', () => {
                     start_button.style.width = "38%";
                     buttons[0].classList.add('yellow');
                     heart.classList.add("hidden");
-                    audio.play(AudioController.track.mettatonSpeakInBattle);
+                    audio.play(AudioController.Track.mettatonSpeakInBattle);
                     img[0].src = "img/heart.png";
                     num = 0;
                 }, 2400);
@@ -161,9 +160,9 @@ start_button.addEventListener('click', () => {
                 stage = false;
                 setTimeout(function () {
                     audio
-                        .reset(AudioController.track.battleTheme)
-                        .unmute(AudioController.track.battleTheme)
-                        .play(AudioController.track.battleTheme);
+                        .reset(AudioController.Track.battleTheme)
+                        .unmute(AudioController.Track.battleTheme)
+                        .play(AudioController.Track.battleTheme);
                 }, 10);
             }
         }
@@ -381,7 +380,7 @@ function attack_function() {
             clearInterval(HP_show);
             attack = false;
             hp_mettaton_attacked.innerHTML = "MISS";
-            audio.play(AudioController.track.attack);
+            audio.play(AudioController.Track.attack);
             elem_mettaton.classList.remove("hidden");
             attack_gif.classList.remove("hidden");
             attack_gif.src = "img/attack.gif";
@@ -425,10 +424,10 @@ function showHP() {
     hp_width.style.width = `${hp_str / (72 / 100)}%`;
     if (hp_str < 0) {
         audio
-            .play(AudioController.track.death)
-            .reset(AudioController.track.mainMenuTheme)
-            .unmute(AudioController.track.mainMenuTheme)
-            .mute(AudioController.track.battleTheme);
+            .play(AudioController.Track.death)
+            .reset(AudioController.Track.mainMenuTheme)
+            .unmute(AudioController.Track.mainMenuTheme)
+            .mute(AudioController.Track.battleTheme);
 
         busy = false;
         hp_text = false;
@@ -536,8 +535,8 @@ let timeoutID;
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
     audio
-        .reset(AudioController.track.mettatonSpeakInBattle)
-        .play(AudioController.track.mettatonSpeakInBattle);
+        .reset(AudioController.Track.mettatonSpeakInBattle)
+        .play(AudioController.Track.mettatonSpeakInBattle);
     text_placeholder.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -549,7 +548,7 @@ function typeWriter() {
             if (i >= text.length) {
                 setTimeout(() => {
                     shakeLettersArr();
-                    audio.pause(AudioController.track.mettatonSpeakInBattle);
+                    audio.pause(AudioController.Track.mettatonSpeakInBattle);
                 }, 100);
                 clearInterval(timeoutID);
                 return;
@@ -563,8 +562,8 @@ function typeWriter() {
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
     audio
-        .reset(AudioController.track.mettatonSpeakInBattle)
-        .play(AudioController.track.mettatonSpeakInBattle);
+        .reset(AudioController.Track.mettatonSpeakInBattle)
+        .play(AudioController.Track.mettatonSpeakInBattle);
     text_placeholder.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -584,7 +583,7 @@ function typeWriterArr() {
                             if (i >= text_3.length) {
                                 clearInterval(timeoutID);
                                 setTimeout(() => {
-                                    audio.pause(AudioController.track.mettatonSpeakInBattle);
+                                    audio.pause(AudioController.Track.mettatonSpeakInBattle);
                                     shakeLettersArr();
                                 }, 100);
                                 return;
@@ -612,8 +611,8 @@ function typeWriterArr() {
 //Function that writes the text in the text box letter by letter
 function typeWriterBox(text_write) {
     audio
-        .reset(AudioController.track.mettatonSpeak)
-        .play(AudioController.track.mettatonSpeak);
+        .reset(AudioController.Track.mettatonSpeak)
+        .play(AudioController.Track.mettatonSpeak);
     text_chatbox.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -621,7 +620,7 @@ function typeWriterBox(text_write) {
     timeoutID = setInterval(() => {
         if (i >= text_write.length) {
             setTimeout(() => {
-                audio.pause(AudioController.track.mettatonSpeak);
+                audio.pause(AudioController.Track.mettatonSpeak);
             }, 100);
             clearInterval(timeoutID);
             return;
@@ -634,8 +633,8 @@ function typeWriterBox(text_write) {
 //Function that writes the text in the text box instantly
 function typeWriter2() {
     audio
-        .reset(AudioController.track.mettatonSpeakInBattle)
-        .pause(AudioController.track.mettatonSpeakInBattle);
+        .reset(AudioController.Track.mettatonSpeakInBattle)
+        .pause(AudioController.Track.mettatonSpeakInBattle);
     clearTimeout(timeoutID);
     clearInterval(intervalL);
     text_placeholder.innerHTML = "";
@@ -650,14 +649,13 @@ setTimeout(() => {
     document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         switch (key) {
-            case 37: // Left arrow key
-            case 65: // A key
-            case 97: // a key
+            case Key.arrowKeyLeft:
+            case Key.keyA:
                 if (num !== false) {
                     num--;
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                     classA();
                 }
                 break;
@@ -670,14 +668,13 @@ setTimeout(() => {
     document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         switch (key) {
-            case 39: // Right arrow key
-            case 68: // D key
-            case 100: // d key
+            case Key.arrowKeyRight:
+            case Key.keyD:
                 if (num !== false) {
                     num++;
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                     classA();
                 }
                 break;
@@ -690,10 +687,8 @@ setTimeout(() => {
 document.addEventListener('keyup', e => {
     const key = e.keyCode || e.which;
     switch (key) {
-        case 13: // Enter key
-        case 90: // Z key
-        case 122: // z key
-
+        case Key.enterKey:
+        case Key.keyZ:
             //If the user pressed enter while the attack
             if (attack === 0 && stage == false && attack !== false) {
                 setTimeout(() => {
@@ -703,7 +698,7 @@ document.addEventListener('keyup', e => {
                     clearInterval(HP_show);
                     attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0) - 401}px`;
                     attack_line.classList.remove("move_attack");
-                    audio.play(AudioController.track.attack);
+                    audio.play(AudioController.Track.attack);
                     if (timer > 50) {
                         timer = timer - 50;
                         timer = 50 - timer;
@@ -760,28 +755,28 @@ document.addEventListener('keyup', e => {
                 stage = 4;
                 check4(num_second);
                 audio
-                    .reset(AudioController.track.select)
-                    .play(AudioController.track.select);
+                    .reset(AudioController.Track.select)
+                    .play(AudioController.Track.select);
             }
             if (stage == 2 && stage !== false && num_second == 0 || stage == 2 && stage !== false && num_second == 1 || stage == 2 && stage !== false && num_second == 2) {
                 stage = 3;
                 check3(num_second);
                 audio
-                    .reset(AudioController.track.select)
-                    .play(AudioController.track.select);
+                    .reset(AudioController.Track.select)
+                    .play(AudioController.Track.select);
             }
             if (stage == 1 && stage !== false) {
                 stage = 2;
                 check2(num_second);
                 audio
-                    .reset(AudioController.track.select)
-                    .play(AudioController.track.select);
+                    .reset(AudioController.Track.select)
+                    .play(AudioController.Track.select);
             }
             if (stage == 0 && stage !== false) {
                 audio
-                    .pause(AudioController.track.mettatonSpeakInBattle)
-                    .reset(AudioController.track.select)
-                    .play(AudioController.track.select);
+                    .pause(AudioController.Track.mettatonSpeakInBattle)
+                    .reset(AudioController.Track.select)
+                    .play(AudioController.Track.select);
                 clearTimeout(timeoutID);
                 stage = 1;
                 check(num_second);
@@ -790,9 +785,7 @@ document.addEventListener('keyup', e => {
             }
 
             break;
-        case 88: // X key
-        case 120: // x key
-
+        case Key.keyX:
             //Go out of the text menu
             if (x_disable == true) {
                 x_disable = false;
@@ -803,8 +796,8 @@ document.addEventListener('keyup', e => {
                 text = `* Stage lights are blaring`;
                 typeWriter();
                 audio
-                    .reset(AudioController.track.select)
-                    .play(AudioController.track.select);
+                    .reset(AudioController.Track.select)
+                    .play(AudioController.Track.select);
                 num = num_second;
             }
 
@@ -828,9 +821,8 @@ document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         //Movement in  the inventory
         switch (key) {
-            case 38: // ArrowUp
-            case 87: // W
-            case 119: // w
+            case Key.arrowKeyUp:
+            case Key.keyW:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2 || position == 3) {
                     if (food_list[position - 2] !== undefined) {
@@ -854,14 +846,13 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                 }
 
                 break;
-            case 40: // ArrowDown
-            case 83: // S
-            case 115: // s
+            case Key.arrowKeyDown:
+            case Key.keyS:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2 || position == 3) {
                     if (food_list[position - 2] !== undefined) {
@@ -885,14 +876,13 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                 }
 
                 break;
-            case 37: // ArrowLeft
-            case 65: // A
-            case 97: // a
+            case Key.arrowKeyDown:
+            case Key.keyA:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 2) {
                     if (food_list.length > 6) {
@@ -938,14 +928,13 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                 }
 
                 break;
-            case 39: // ArrowRight
-            case 68: // D
-            case 100: // d        
+            case Key.arrowKeyRight:
+            case Key.keyD:
                 img_h[position2].src = "img/nothing.png";
                 if (position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7) {
                     position += 1;
@@ -973,8 +962,8 @@ document.addEventListener('keyup', e => {
                 img_h[position2].src = "img/heart.png";
                 if (position_bf != position) {
                     audio
-                        .reset(AudioController.track.select)
-                        .play(AudioController.track.select);
+                        .reset(AudioController.Track.select)
+                        .play(AudioController.Track.select);
                 }
 
                 break;

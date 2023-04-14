@@ -26,6 +26,7 @@ let moveX = 0;
 let moveY = 0;
 let player_moving = false;
 let orangeLaserTimer;
+let canvas_t = false;
 
 //Removes the img_M
 img_M.remove();
@@ -52,8 +53,8 @@ function checkCollision(element1, element2, damage) {
             if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left) {
                 if (count == 0) {
                     audio
-                        .reset(AudioController.track.damage)
-                        .play(AudioController.track.damage);
+                        .reset(AudioController.Track.damage)
+                        .play(AudioController.Track.damage);
                     count++;
                     t_f_wait = true;
                     let hp_hold = parseInt(parseInt(hp_str) - damage);
@@ -79,8 +80,8 @@ function checkCollisionOne(element, target, damage) {
         if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
             if (!t_f_wait) {
                 audio
-                    .reset(AudioController.track.damage)
-                    .play(AudioController.track.damage);
+                    .reset(AudioController.Track.damage)
+                    .play(AudioController.Track.damage);
                 t_f_wait = true;
                 let hp_hold = parseInt(parseInt(hp_str) - damage);
                 hp_str = hp_hold.toString();
@@ -112,8 +113,8 @@ function checkCollisionLaser(elements, target, damage) {
                         hp_hold = parseInt(parseInt(hp_str) - damage);
                         hp_str = hp_hold.toString();
                         audio
-                            .reset(AudioController.track.damage)
-                            .play(AudioController.track.damage);
+                            .reset(AudioController.Track.damage)
+                            .play(AudioController.Track.damage);
                         img_M.classList.add("flash");
                         flash = true;
                         setTimeout(function () {
@@ -132,8 +133,8 @@ function checkCollisionLaser(elements, target, damage) {
                                     hp_hold = parseInt(parseInt(hp_str) - damage);
                                     hp_str = hp_hold.toString();
                                     audio
-                                        .reset(AudioController.track.damage)
-                                        .play(AudioController.track.damage);
+                                        .reset(AudioController.Track.damage)
+                                        .play(AudioController.Track.damage);
                                     img_M.classList.add("flash");
                                     flash = true;
                                     setTimeout(function () {
@@ -150,8 +151,8 @@ function checkCollisionLaser(elements, target, damage) {
                             hp_hold = parseInt(parseInt(hp_str) - damage);
                             hp_str = hp_hold.toString();
                             audio
-                                .reset(AudioController.track.damage)
-                                .play(AudioController.track.damage);
+                                .reset(AudioController.Track.damage)
+                                .play(AudioController.Track.damage);
                             img_M.classList.add("flash");
                             flash = true;
                             setTimeout(function () {
@@ -183,8 +184,8 @@ function checkCollisionLaserOne(element, target, damage) {
                     hp_hold = parseInt(parseInt(hp_str) - damage);
                     hp_str = hp_hold.toString();
                     audio
-                        .reset(AudioController.track.damage)
-                        .play(AudioController.track.damage);
+                        .reset(AudioController.Track.damage)
+                        .play(AudioController.Track.damage);
                     img_M.classList.add("flash");
                     flash = true;
                     setTimeout(function () {
@@ -203,8 +204,8 @@ function checkCollisionLaserOne(element, target, damage) {
                                 hp_hold = parseInt(parseInt(hp_str) - damage);
                                 hp_str = hp_hold.toString();
                                 audio
-                                    .reset(AudioController.track.damage)
-                                    .play(AudioController.track.damage);
+                                    .reset(AudioController.Track.damage)
+                                    .play(AudioController.Track.damage);
                                 img_M.classList.add("flash");
                                 flash = true;
                                 setTimeout(function () {
@@ -221,8 +222,8 @@ function checkCollisionLaserOne(element, target, damage) {
                         hp_hold = parseInt(parseInt(hp_str) - damage);
                         hp_str = hp_hold.toString();
                         audio
-                            .reset(AudioController.track.damage)
-                            .play(AudioController.track.damage);
+                            .reset(AudioController.Track.damage)
+                            .play(AudioController.Track.damage);
                         img_M.classList.add("flash");
                         flash = true;
                         setTimeout(function () {
@@ -304,23 +305,23 @@ setInterval(() => {
 document.addEventListener('keydown', e => {
     if (canvas_t === true) {
         switch (e.keyCode) {
-            case 65: // A
-            case 37: // ArrowLeft
+            case Key.keyA:
+            case Key.arrowKeyLeft:
                 moveX = -speedX;
                 moveHeart();
                 break;
-            case 68: // D
-            case 39: // ArrowRight
+            case Key.keyD:
+            case Key.arrowKeyRight:
                 moveX = speedX;
                 moveHeart();
                 break;
-            case 87: // W
-            case 38: // ArrowUp
+            case Key.keyW:
+            case Key.arrowKeyUp:
                 moveY = -speedY;
                 moveHeart();
                 break;
-            case 83: // S
-            case 40: // ArrowDown
+            case Key.keyS:
+            case Key.arrowKeyDown:
                 moveY = speedY;
                 moveHeart();
                 break;
@@ -334,20 +335,20 @@ document.addEventListener('keydown', e => {
 document.addEventListener('keyup', e => {
     if (canvas_t === true) {
         switch (e.keyCode) {
-            case 65: // A
-            case 37: // ArrowLeft
+            case Key.keyA:
+            case Key.arrowKeyLeft:
                 if (moveX < 0) moveX = 0;
                 break;
-            case 68: // D
-            case 39: // ArrowRight
+            case Key.keyD:
+            case Key.arrowKeyRight:
                 if (moveX > 0) moveX = 0;
                 break;
-            case 87: // W
-            case 38: // ArrowUp
+            case Key.keyW:
+            case Key.arrowKeyUp:
                 if (moveY < 0) moveY = 0;
                 break;
-            case 83: // S
-            case 40: // ArrowDown
+            case Key.keyS:
+            case Key.arrowKeyDown:
                 if (moveY > 0) moveY = 0;
                 break;
             default:
