@@ -39,7 +39,7 @@ function attack1_legs() {
     x = 47;
     y = 31;
     drawHeart(x, y);
-    projectile.innerHTML = `<img src="img/leg1.png" style="left:${randomRange(23, 71)}%" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${randomRange(23, 71)}%" class="leg2 legs" alt="">`;
+    projectile.innerHTML = `<img src="img/leg1.png" style="left:${getRandomInteger(23, 71)}%" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${getRandomInteger(23, 71)}%" class="leg2 legs" alt="">`;
     mettaton_gif.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
     leg2 = document.querySelector(".leg2");
@@ -56,8 +56,8 @@ function attack1_legs() {
             leg2.classList.remove("legs_down");
         }
         else if (number % 3 === 0 && number != 0) {
-            leg1.style.left = `${randomRange(23, 71)}%`;
-            leg2.style.left = `${randomRange(23, 71)}%`;
+            leg1.style.left = `${getRandomInteger(23, 71)}%`;
+            leg2.style.left = `${getRandomInteger(23, 71)}%`;
         }
         number++;
     }, 333);
@@ -98,8 +98,8 @@ function attack2_smoke() {
     }, 10);
 
     lightning = setInterval(function () {
-        let point1 = { x: `${randomRange(0, 97)}%`, y: `${randomRange(0, 48)}%` };//initial position of element
-        let point2 = { x: `${randomRange(24, 73)}%`, y: `${randomRange(57, 74)}%` };//it moves to this position
+        let point1 = { x: `${getRandomInteger(0, 97)}%`, y: `${getRandomInteger(0, 48)}%` };//initial position of element
+        let point2 = { x: `${getRandomInteger(24, 73)}%`, y: `${getRandomInteger(57, 74)}%` };//it moves to this position
         number_lightning++;
         if (number_lightning == 10) {
             number_lightning = 1;
@@ -117,7 +117,7 @@ function attack2_smoke() {
         else {
             left = false;
         }
-        hyp_l = calculateHypotenuse(leg2_l, leg1_l);
+        hyp_l = Math.hypot(leg2_l, leg1_l);
         if (left === false) {
             let calcR = -calculateAngle(hyp_l, leg1_l);
             projectile.innerHTML += `<img src="img/lightning.png" id="${number_lightning}" class="lightning" alt="" style="left:${point1.x}; top:${point1.y};rotate:${calcR}deg">`;
@@ -168,8 +168,8 @@ function attack2_smoke() {
 
 //Attack 3(hand and lasers)
 function attack3_lasers() {
-    if (randomPick(0, 1) == 1) {
-        randomNum = randomRange(21, 74);
+    if (getRandomArgument(0, 1) == 1) {
+        randomNum = getRandomInteger(21, 74);
         projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:5%; left:${randomNum}%;">`;
         setTimeout(() => {
             hand = document.querySelector(".hand1");
@@ -182,7 +182,7 @@ function attack3_lasers() {
         }, 10);
     }
     else {
-        randomNum = randomRange(44, 65);
+        randomNum = getRandomInteger(44, 65);
         projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:${randomNum}%; left:90%; rotate:90deg;">`;
         setTimeout(() => {
             hand = document.querySelector(".hand1");
@@ -225,7 +225,7 @@ function attack3_lasers() {
         if (hand.style.left == "90%") {
             if (count_laser != 1) {
                 setTimeout(() => {
-                    randomNum = randomRange(21, 74);
+                    randomNum = getRandomInteger(21, 74);
                     hand = document.querySelector(".hand1");
                     hand.style.top = `5%`;
                     hand.style.left = `${randomNum}%`;
@@ -243,7 +243,7 @@ function attack3_lasers() {
         else if (hand.style.top == "5%") {
             if (count_laser != 1) {
                 setTimeout(() => {
-                    randomNum = randomRange(44, 65);
+                    randomNum = getRandomInteger(44, 65);
                     hand = document.querySelector(".hand1");
                     hand.style.top = `${randomNum}%`;
                     hand.style.left = `90%`;
@@ -274,7 +274,7 @@ function attack3_lasers() {
             if (hand.style.left == "90%") {
                 if (count_laser != 1) {
                     setTimeout(() => {
-                        randomNum = randomRange(21, 74);
+                        randomNum = getRandomInteger(21, 74);
                         hand = document.querySelector(".hand1");
                         hand.style.top = `5%`;
                         hand.style.left = `${randomNum}%`;
@@ -292,7 +292,7 @@ function attack3_lasers() {
             else if (hand.style.top == "5%") {
                 if (count_laser != 1) {
                     setTimeout(() => {
-                        randomNum = randomRange(44, 65);
+                        randomNum = getRandomInteger(44, 65);
                         hand = document.querySelector(".hand1");
                         hand.style.top = `${randomNum}%`;
                         hand.style.left = `90%`;
@@ -406,14 +406,14 @@ function attack5_head() {
         else {
             left = false;
         }
-        hyp_t = calculateHypotenuse(leg2_t, leg_t);
+        hyp_t = Math.hypot(leg2_t, leg_t);
         if (left === false) {
             let calcR = -calculateAngle(hyp_t, leg_t);
-            projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0, 2)}" style="rotate:${calcR}deg"></div>`;
+            projectile.innerHTML += `<div class="laser_head" id="l${getRandomInteger(0, 2)}" style="rotate:${calcR}deg"></div>`;
         }
         if (left === true) {
             let calcR = calculateAngle(hyp_t, leg_t);
-            projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0, 2)}" style="rotate:${calcR}deg"></div>`;
+            projectile.innerHTML += `<div class="laser_head" id="l${getRandomInteger(0, 2)}" style="rotate:${calcR}deg"></div>`;
         }
 
         setTimeout(() => {
@@ -440,7 +440,7 @@ function attack5_head() {
 
 //attack 6 legs dashingg on you
 function attack6_dash() {
-    random_leg = randomRange(1, 2);
+    random_leg = getRandomInteger(1, 2);
     projectile.innerHTML = `<img src="img/${random_leg + 3}.png" id="l${random_leg}" class="leg_dash">`;
     mettaton_gif.style.opacity = "0";
     x = 47;
@@ -480,12 +480,12 @@ function attack6_dash() {
             worked_legs_dash = false;
             if (leg_dash_count_top == "" && worked_legs_dash === false) {
                 worked_legs_dash = true;
-                leg_dash_count_top = randomPick3("leg_dash_bottom", "leg_dash_top", "");
+                leg_dash_count_top = getRandomArgument("leg_dash_bottom", "leg_dash_top", "");
                 if (leg_dash_count_top == "leg_dash_bottom" || leg_dash_count_top == "leg_dash_top") {
                     random_leg = 0;
                 }
                 else {
-                    random_leg = randomRange(1, 2);
+                    random_leg = getRandomInteger(1, 2);
                 }
                 leg_dash.style.transition = "0.5s";
                 leg_dash_transition = 500;
@@ -493,14 +493,14 @@ function attack6_dash() {
             if (leg_dash_count_top == "leg_dash_bottom" && worked_legs_dash === false) {
                 worked_legs_dash = true;
                 leg_dash_count_top = "";
-                random_leg = randomRange(1, 2);
+                random_leg = getRandomInteger(1, 2);
                 leg_dash.style.transition = "1s";
                 leg_dash_transition = 1000;
             }
             if (leg_dash_count_top == "leg_dash_top" && worked_legs_dash === false) {
                 worked_legs_dash = true;
                 leg_dash_count_top = "";
-                random_leg = randomRange(1, 2);
+                random_leg = getRandomInteger(1, 2);
                 leg_dash.style.transition = "1s";
                 leg_dash_transition = 1000;
             }
