@@ -1,5 +1,6 @@
 const audio = new AudioController();
 
+
 //Varaibles initilization
 let frisk = document.querySelector("#frisk");
 let start = document.querySelector(".start");
@@ -65,12 +66,12 @@ let text_3;
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         audio
-            .pause(0)
-            .pause(2);
+            .pause(AudioController.track.battleTheme)
+            .pause(AudioController.track.mainMenuTheme);
     } else {
         audio
-            .play(0)
-            .play(2);
+            .play(AudioController.track.battleTheme)
+            .play(AudioController.track.mainMenuTheme);
     }
 });
 
@@ -80,29 +81,29 @@ hp_width.style.width = "100%";
 //Plays starting music
 start_menu.addEventListener('mousedown', () => {
     if (started !== true) {
-        audio.play(2);
+        audio.play(AudioController.track.mainMenuTheme);
     }
 });
 
 //The bar will play a sound when you click on it
 volume.addEventListener("mousedown", () => {
     audio
-        .reset(1)
-        .play(1);
+        .reset(AudioController.track.select)
+        .play(AudioController.track.select);
 });
 
 // Update the volume when the mouse is released from the slider
 volume.addEventListener("mouseup", () => {
-    audio.changeVolume(volume.value, 0);
+    audio.changeVolume(volume.value, AudioController.track.battleTheme);
 });
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
 start_button.addEventListener('click', () => {
     if (started !== true) {
         audio
-            .mute(2)
-            .reset(1)
-            .play(1)
+            .mute(AudioController.track.mainMenuTheme)
+            .reset(AudioController.track.select)
+            .play(AudioController.track.select);
         html.classList.add("cursor_none");
         frisk.classList.remove("hidden");
         start_menu.classList.add("hidden_anim");
@@ -119,7 +120,7 @@ start_button.addEventListener('click', () => {
                 }, 1500);
                 setTimeout(function () {
                     heart.classList.remove("hidden");
-                    audio.play(4);
+                    audio.play(AudioController.track.encounter);
                     frisk.classList.add("hidden");
                     start.classList.add("black");
                     setTimeout(function () {
@@ -129,9 +130,9 @@ start_button.addEventListener('click', () => {
                     }, 200);
                     setTimeout(function () {
                         audio
-                            .reset(0)
-                            .unmute(0)
-                            .play(0);
+                            .reset(AudioController.track.battleTheme)
+                            .unmute(AudioController.track.battleTheme)
+                            .play(AudioController.track.battleTheme);
                     }, 1000);
                 }, 2000);
                 setTimeout(function () {
@@ -139,7 +140,7 @@ start_button.addEventListener('click', () => {
                     start_button.style.width = "38%";
                     buttons[0].classList.add('yellow');
                     heart.classList.add("hidden");
-                    audio.play(7)
+                    audio.play(AudioController.track.mettatonSpeakInBattle);
                     img[0].src = "img/heart.png";
                     num = 0;
                 }, 2400);
@@ -160,9 +161,9 @@ start_button.addEventListener('click', () => {
                 stage = false;
                 setTimeout(function () {
                     audio
-                        .reset(0)
-                        .unmute(0)
-                        .play(0);
+                        .reset(AudioController.track.battleTheme)
+                        .unmute(AudioController.track.battleTheme)
+                        .play(AudioController.track.battleTheme);
                 }, 10);
             }
         }
@@ -380,7 +381,7 @@ function attack_function() {
             clearInterval(HP_show);
             attack = false;
             hp_mettaton_attacked.innerHTML = "MISS";
-            audio.play(5);
+            audio.play(AudioController.track.attack);
             elem_mettaton.classList.remove("hidden");
             attack_gif.classList.remove("hidden");
             attack_gif.src = "img/attack.gif";
@@ -424,11 +425,11 @@ function showHP() {
     hp_width.style.width = `${hp_str / (72 / 100)}%`;
     if (hp_str < 0) {
         audio
-            .play(3)
-            .reset(2)
-            .unmute(2)
-            .mute(0);
-        
+            .play(AudioController.track.death)
+            .reset(AudioController.track.mainMenuTheme)
+            .unmute(AudioController.track.mainMenuTheme)
+            .mute(AudioController.track.battleTheme);
+
         busy = false;
         hp_text = false;
         food_text = false;
@@ -535,8 +536,8 @@ let timeoutID;
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
     audio
-        .reset(7)
-        .play(7);
+        .reset(AudioController.track.mettatonSpeakInBattle)
+        .play(AudioController.track.mettatonSpeakInBattle);
     text_placeholder.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -548,7 +549,7 @@ function typeWriter() {
             if (i >= text.length) {
                 setTimeout(() => {
                     shakeLettersArr();
-                    audio.pause(7);
+                    audio.pause(AudioController.track.mettatonSpeakInBattle);
                 }, 100);
                 clearInterval(timeoutID);
                 return;
@@ -562,8 +563,8 @@ function typeWriter() {
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
     audio
-        .reset(7)
-        .play(7);
+        .reset(AudioController.track.mettatonSpeakInBattle)
+        .play(AudioController.track.mettatonSpeakInBattle);
     text_placeholder.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -583,7 +584,7 @@ function typeWriterArr() {
                             if (i >= text_3.length) {
                                 clearInterval(timeoutID);
                                 setTimeout(() => {
-                                    audio.pause(7);
+                                    audio.pause(AudioController.track.mettatonSpeakInBattle);
                                     shakeLettersArr();
                                 }, 100);
                                 return;
@@ -611,8 +612,8 @@ function typeWriterArr() {
 //Function that writes the text in the text box letter by letter
 function typeWriterBox(text_write) {
     audio
-        .reset(6)
-        .play(6);
+        .reset(AudioController.track.mettatonSpeak)
+        .play(AudioController.track.mettatonSpeak);
     text_chatbox.innerHTML = "";
     clearTimeout(timeoutID);
     clearInterval(intervalL);
@@ -620,7 +621,7 @@ function typeWriterBox(text_write) {
     timeoutID = setInterval(() => {
         if (i >= text_write.length) {
             setTimeout(() => {
-                audio.pause(6);
+                audio.pause(AudioController.track.mettatonSpeak);
             }, 100);
             clearInterval(timeoutID);
             return;
@@ -633,8 +634,8 @@ function typeWriterBox(text_write) {
 //Function that writes the text in the text box instantly
 function typeWriter2() {
     audio
-        .reset(7)
-        .pause(7);
+        .reset(AudioController.track.mettatonSpeakInBattle)
+        .pause(AudioController.track.mettatonSpeakInBattle);
     clearTimeout(timeoutID);
     clearInterval(intervalL);
     text_placeholder.innerHTML = "";
@@ -655,8 +656,8 @@ setTimeout(() => {
                 if (num !== false) {
                     num--;
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                     classA();
                 }
                 break;
@@ -675,8 +676,8 @@ setTimeout(() => {
                 if (num !== false) {
                     num++;
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                     classA();
                 }
                 break;
@@ -702,7 +703,7 @@ document.addEventListener('keyup', e => {
                     clearInterval(HP_show);
                     attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0) - 401}px`;
                     attack_line.classList.remove("move_attack");
-                    audio.play(5);
+                    audio.play(AudioController.track.attack);
                     if (timer > 50) {
                         timer = timer - 50;
                         timer = 50 - timer;
@@ -759,28 +760,28 @@ document.addEventListener('keyup', e => {
                 stage = 4;
                 check4(num_second);
                 audio
-                    .reset(1)
-                    .play(1);
+                    .reset(AudioController.track.select)
+                    .play(AudioController.track.select);
             }
             if (stage == 2 && stage !== false && num_second == 0 || stage == 2 && stage !== false && num_second == 1 || stage == 2 && stage !== false && num_second == 2) {
                 stage = 3;
                 check3(num_second);
                 audio
-                    .reset(1)
-                    .play(1);
+                    .reset(AudioController.track.select)
+                    .play(AudioController.track.select);
             }
             if (stage == 1 && stage !== false) {
                 stage = 2;
                 check2(num_second);
                 audio
-                    .reset(1)
-                    .play(1);
+                    .reset(AudioController.track.select)
+                    .play(AudioController.track.select);
             }
             if (stage == 0 && stage !== false) {
                 audio
-                    .pause(7)
-                    .reset(1)
-                    .play(1);
+                    .pause(AudioController.track.mettatonSpeakInBattle)
+                    .reset(AudioController.track.select)
+                    .play(AudioController.track.select);
                 clearTimeout(timeoutID);
                 stage = 1;
                 check(num_second);
@@ -802,8 +803,8 @@ document.addEventListener('keyup', e => {
                 text = `* Stage lights are blaring`;
                 typeWriter();
                 audio
-                    .reset(1)
-                    .play(1);
+                    .reset(AudioController.track.select)
+                    .play(AudioController.track.select);
                 num = num_second;
             }
 
@@ -853,8 +854,8 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                 }
 
                 break;
@@ -884,8 +885,8 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                 }
 
                 break;
@@ -937,8 +938,8 @@ document.addEventListener('keyup', e => {
                 }
                 if (position_bf != position) {
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                 }
 
                 break;
@@ -972,8 +973,8 @@ document.addEventListener('keyup', e => {
                 img_h[position2].src = "img/heart.png";
                 if (position_bf != position) {
                     audio
-                        .reset(1)
-                        .play(1);
+                        .reset(AudioController.track.select)
+                        .play(AudioController.track.select);
                 }
 
                 break;

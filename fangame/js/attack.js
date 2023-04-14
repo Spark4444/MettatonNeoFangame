@@ -52,8 +52,8 @@ function checkCollision(element1, element2, damage) {
             if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left) {
                 if (count == 0) {
                     audio
-                        .reset(8)
-                        .play(8);
+                        .reset(AudioController.track.damage)
+                        .play(AudioController.track.damage);
                     count++;
                     t_f_wait = true;
                     let hp_hold = parseInt(parseInt(hp_str) - damage);
@@ -79,8 +79,8 @@ function checkCollisionOne(element, target, damage) {
         if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
             if (!t_f_wait) {
                 audio
-                    .reset(8)
-                    .play(8);
+                    .reset(AudioController.track.damage)
+                    .play(AudioController.track.damage);
                 t_f_wait = true;
                 let hp_hold = parseInt(parseInt(hp_str) - damage);
                 hp_str = hp_hold.toString();
@@ -112,8 +112,8 @@ function checkCollisionLaser(elements, target, damage) {
                         hp_hold = parseInt(parseInt(hp_str) - damage);
                         hp_str = hp_hold.toString();
                         audio
-                            .reset(8)
-                            .play(8);
+                            .reset(AudioController.track.damage)
+                            .play(AudioController.track.damage);
                         img_M.classList.add("flash");
                         flash = true;
                         setTimeout(function () {
@@ -132,8 +132,8 @@ function checkCollisionLaser(elements, target, damage) {
                                     hp_hold = parseInt(parseInt(hp_str) - damage);
                                     hp_str = hp_hold.toString();
                                     audio
-                                        .reset(8)
-                                        .play(8);
+                                        .reset(AudioController.track.damage)
+                                        .play(AudioController.track.damage);
                                     img_M.classList.add("flash");
                                     flash = true;
                                     setTimeout(function () {
@@ -150,8 +150,8 @@ function checkCollisionLaser(elements, target, damage) {
                             hp_hold = parseInt(parseInt(hp_str) - damage);
                             hp_str = hp_hold.toString();
                             audio
-                                .reset(8)
-                                .play(8);
+                                .reset(AudioController.track.damage)
+                                .play(AudioController.track.damage);
                             img_M.classList.add("flash");
                             flash = true;
                             setTimeout(function () {
@@ -183,8 +183,8 @@ function checkCollisionLaserOne(element, target, damage) {
                     hp_hold = parseInt(parseInt(hp_str) - damage);
                     hp_str = hp_hold.toString();
                     audio
-                        .reset(8)
-                        .play(8);
+                        .reset(AudioController.track.damage)
+                        .play(AudioController.track.damage);
                     img_M.classList.add("flash");
                     flash = true;
                     setTimeout(function () {
@@ -203,8 +203,8 @@ function checkCollisionLaserOne(element, target, damage) {
                                 hp_hold = parseInt(parseInt(hp_str) - damage);
                                 hp_str = hp_hold.toString();
                                 audio
-                                    .reset(8)
-                                    .play(8);
+                                    .reset(AudioController.track.damage)
+                                    .play(AudioController.track.damage);
                                 img_M.classList.add("flash");
                                 flash = true;
                                 setTimeout(function () {
@@ -221,8 +221,8 @@ function checkCollisionLaserOne(element, target, damage) {
                         hp_hold = parseInt(parseInt(hp_str) - damage);
                         hp_str = hp_hold.toString();
                         audio
-                            .reset(8)
-                            .play(8);
+                            .reset(AudioController.track.damage)
+                            .play(AudioController.track.damage);
                         img_M.classList.add("flash");
                         flash = true;
                         setTimeout(function () {

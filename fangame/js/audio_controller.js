@@ -1,4 +1,17 @@
 class AudioController {
+    static track = Object.freeze({
+        battleTheme: 0,
+        select: 1,
+        mainMenuTheme: 2,
+        death: 3,
+        encounter: 4,
+        attack: 5,
+        mettatonSpeak: 6,
+        mettatonSpeakInBattle: 7,
+        damage: 8
+    });
+
+
     /**
      * @type {Array.<{HTMLElement}>} tracks
      */
