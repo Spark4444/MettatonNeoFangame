@@ -807,205 +807,253 @@ document.addEventListener('keyup', e => {
     }
 });
 
-//Movement in the inventory
-document.addEventListener('keyup', e => {
-    if (position !== false) {
-        position_bf = position;
-        //Sets the text1 and text2 to this every time
-        text1 = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
+function manageInventory(action, state) {
+    position_bf = position;
+    //Sets the text1 and text2 to this every time
+    text1 = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
     ${food_list[2] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[2] + "</div></div>" : `<div class="nothing"></div>`}${food_list[3] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[3] + "</div></div>" : `<div class="nothing"></div>`}
-   <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
-        text2 = `<div class="grid-container">${food_list[4] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[4] + "</div></div>" : `<div class="nothing"></div>`}${food_list[5] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[5] + "</div></div>" : `<div class="nothing"></div>`}
- ${food_list[6] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[6] + "</div></div>" : `<div class="nothing"></div>`}${food_list[7] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[7] + "</div></div>" : `<div class="nothing"></div>`}
- <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 2</div></div>`;
-        const key = e.keyCode || e.which;
-        //Movement in  the inventory
-        switch (key) {
-            case InputController.Key.arrowKeyUp:
-            case InputController.Key.keyW:
-                img_h[position2].src = "img/nothing.png";
-                if (position == 2 || position == 3) {
-                    if (food_list[position - 2] !== undefined) {
-                        position -= 2;
-                    }
-                }
-                else if (position == 0 || position == 1) {
-                    if (food_list[position + 2] !== undefined) {
-                        position += 2;
-                    }
-                }
-                else if (position == 4 || position == 5) {
-                    if (food_list[position + 2] !== undefined) {
-                        position += 2;
-                    }
-                }
-                else if (position == 6 || position == 7) {
-                    if (food_list[position - 2] !== undefined) {
-                        position -= 2;
-                    }
-                }
-                if (position_bf != position) {
-                    audio
-                        .reset(AudioController.Track.select)
-                        .play(AudioController.Track.select);
-                }
+    <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
+    text2 = `<div class="grid-container">${food_list[4] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[4] + "</div></div>" : `<div class="nothing"></div>`}${food_list[5] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[5] + "</div></div>" : `<div class="nothing"></div>`}
+    ${food_list[6] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[6] + "</div></div>" : `<div class="nothing"></div>`}${food_list[7] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[7] + "</div></div>" : `<div class="nothing"></div>`}
+    <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 2</div></div>`;
 
-                break;
-            case InputController.Key.arrowKeyDown:
-            case InputController.Key.keyS:
-                img_h[position2].src = "img/nothing.png";
-                if (position == 2 || position == 3) {
-                    if (food_list[position - 2] !== undefined) {
-                        position -= 2;
-                    }
-                }
-                else if (position == 0 || position == 1) {
-                    if (food_list[position + 2] !== undefined) {
-                        position += 2;
-                    }
-                }
-                else if (position == 4 || position == 5) {
-                    if (food_list[position + 2] !== undefined) {
-                        position += 2;
-                    }
-                }
-                else if (position == 6 || position == 7) {
-                    if (food_list[position - 2] !== undefined) {
-                        position -= 2;
-                    }
-                }
-                if (position_bf != position) {
-                    audio
-                        .reset(AudioController.Track.select)
-                        .play(AudioController.Track.select);
-                }
+    if (state === InputController.State.release) {
+        img_h[position2].src = "img/nothing.png";
+        if (position_bf != position) {
+            audio
+                .reset(AudioController.Track.select)
+                .play(AudioController.Track.select);
+        }
 
-                break;
-            case InputController.Key.arrowKeyDown:
-            case InputController.Key.keyA:
-                img_h[position2].src = "img/nothing.png";
-                if (position == 2) {
-                    if (food_list.length > 6) {
-                        position = food_list.length - 1;
-                    }
-                    else if (food_list.length < 7 && food_list.length > 3) {
-                        position = 3;
-                    }
+        // TODO: some weird stuff going here
+        if (action === InputController.Action.moveLeft) {
+            if (position === 2) {
+                if (food_list.length > 6) {
+                    position = food_list.length - 1;
                 }
-                else if (position == 0) {
-                    if (food_list.length == 8 || food_list.length == 7) {
-                        position = 5;
-                    }
-                    else if (food_list.length == 6 || food_list.length == 5) {
-                        position = food_list.length - 1;
-                    }
-                    else if (food_list.length < 5 && food_list.length != 1) {
-                        position = 1;
-                    }
-                    else if (food_list.length == 1) {
-                        position = 0;
-                    }
+                else if (food_list.length < 7 && food_list.length > 3) {
+                    position = 3;
                 }
-                else if (position == 4) {
-                    if (food_list[1] !== undefined) {
-                        position = 1;
-                    }
+            }
+            else if (position == 0) {
+                if (food_list.length == 8 || food_list.length == 7) {
+                    position = 5;
                 }
-                else if (position == 6) {
-                    if (food_list[3] !== undefined) {
-                        position = 3;
-                    }
+                else if (food_list.length == 6 || food_list.length == 5) {
+                    position = food_list.length - 1;
                 }
-                else if (1 == position || 3 == position) {
-                    if (food_list[position - 1] !== undefined) {
-                        position -= 1;
-                    }
+                else if (food_list.length < 5 && food_list.length != 1) {
+                    position = 1;
                 }
-                else if (7 == position || 5 == position) {
-                    if (food_list[position - 1] !== undefined) {
-                        position -= 1;
-                    }
-                }
-                if (position_bf != position) {
-                    audio
-                        .reset(AudioController.Track.select)
-                        .play(AudioController.Track.select);
-                }
-
-                break;
-            case InputController.Key.arrowKeyRight:
-            case InputController.Key.keyD:
-                img_h[position2].src = "img/nothing.png";
-                if (position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7) {
-                    position += 1;
-                }
-                else if (position == 7 && food_list.length > 7 || position == 5 && food_list.length > 5) {
-                    position -= 5;
-                }
-                else if (position == 1 && food_list.length > 4 || position == 3 && food_list.length > 6) {
-                    position += 3;
-                }
-                else if (food_list.length == 5 && position == 3 || food_list.length == 6 && position == 3) {
-                    position -= 1;
-                }
-                else if (position == 4 && food_list.length == 5) {
+                else if (food_list.length == 1) {
                     position = 0;
                 }
-                else if (position == 6 && food_list.length == 7) {
-                    position = 2;
+            }
+            else if (position == 4) {
+                if (food_list[1] !== undefined) {
+                    position = 1;
                 }
-                else if (position == 3 && food_list.length == 4 || position == 1 && food_list.length < 5 && food_list.length > 1) {
+            }
+            else if (position == 6) {
+                if (food_list[3] !== undefined) {
+                    position = 3;
+                }
+            }
+            else if (1 == position || 3 == position) {
+                if (food_list[position - 1] !== undefined) {
                     position -= 1;
                 }
-                typeWriter2();
-                imgH();
-                img_h[position2].src = "img/heart.png";
-                if (position_bf != position) {
-                    audio
-                        .reset(AudioController.Track.select)
-                        .play(AudioController.Track.select);
+            }
+            else if (7 == position || 5 == position) {
+                if (food_list[position - 1] !== undefined) {
+                    position -= 1;
                 }
-
-                break;
-            default:
-                return;
+            }
         }
-
-        //Sets the position for the img because theyre different
-        if (position == 4) {
-            position2 = 0;
+        if (action === InputController.Action.moveUp) {
+            if (position === 2 || position === 3 && food_list[position - 2]) position -= 2;
+            if (position === 0 || position === 1 && food_list[position + 2]) position += 2;
+            if (position === 4 || position === 5 && food_list[position + 2]) position += 2;
+            if (position === 6 || position === 7 && food_list[position - 2]) position -= 2;
         }
-        else if (position == 5) {
-            position2 = 1;
+        if (action === InputController.Action.moveRight) {
+            if (position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7) {
+                position += 1;
+            }
+            else if (position == 7 && food_list.length > 7 || position == 5 && food_list.length > 5) {
+                position -= 5;
+            }
+            else if (position == 1 && food_list.length > 4 || position == 3 && food_list.length > 6) {
+                position += 3;
+            }
+            else if (food_list.length == 5 && position == 3 || food_list.length == 6 && position == 3) {
+                position -= 1;
+            }
+            else if (position == 4 && food_list.length == 5) {
+                position = 0;
+            }
+            else if (position == 6 && food_list.length == 7) {
+                position = 2;
+            }
+            else if (position == 3 && food_list.length == 4 || position == 1 && food_list.length < 5 && food_list.length > 1) {
+                position -= 1;
+            }
+            typeWriter2();
+            imgH();
+            img_h[position2].src = "img/heart.png";
         }
-        else if (position == 6) {
-            position2 = 2;
+        if (action === InputController.Action.moveDown) {
+            if (position === 2 || position === 3 && food_list[position - 2]) position -= 2;
+            if (position === 0 || position === 1 && food_list[position + 2]) position += 2;
+            if (position === 4 || position === 5 && food_list[position + 2]) position += 2;
+            if (position === 6 || position === 7 && food_list[position - 2]) position -= 2;
         }
-        else if (position == 7) {
-            position2 = 3;
-        }
-        else if (position > -1 && position < 4) {
-            position2 = position;
-        }
-        if (position > -1 && position < 4) {
-            text = text1;
-        }
-        if (position > 3 && position < 8) {
-            text = text2;
-        }
-        typeWriter2();
-        imgH();
-        img_h[position2].src = "img/heart.png";
-
     }
-});
 
-// Game loop
-setInterval(() => {
-    const [action, state] = input.get();
-    console.log(action, state)
-    if (canvas_t !== true) return;
+    //Sets the position for the img because theyre different
+    if (position == 4) {
+        position2 = 0;
+    }
+    else if (position == 5) {
+        position2 = 1;
+    }
+    else if (position == 6) {
+        position2 = 2;
+    }
+    else if (position == 7) {
+        position2 = 3;
+    }
+    else if (position > -1 && position < 4) {
+        position2 = position;
+    }
+    if (position > -1 && position < 4) {
+        text = text1;
+    }
+    if (position > 3 && position < 8) {
+        text = text2;
+    }
+    typeWriter2();
+    imgH();
+    img_h[position2].src = "img/heart.png";
+}
 
+/**
+ * Probably this function for making attack
+ * @param {string} action 
+ * @param {string} state 
+ */
+function makeAttack(action, state) {
+    if (action === InputController.Action.select && state === InputController.State.release) {
+        if (attack_num == 9) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            // attack10_finale();
+            attack_num = 0;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 8) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            // attack9();
+            attack_num = 9;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 7) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            // attack8();
+            attack_num = 8;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 6) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            // attack7();
+            attack_num = 7;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 5) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack6_dash();
+            attack_num = 6;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 4) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack5_head();
+            attack_num = 5;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 3) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack4_hand();
+            attack_num = 4;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 2) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack3_lasers();
+            attack_num = 3;
+            busy = false;
+            flash = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 1) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack2_smoke();
+            attack_num = 2;
+            busy = false;
+            pressed_continue = true;
+        }
+        if (attack_num == 0) {
+            clearTimeout(timeoutID);
+            audio.pause(AudioController.Track.mettatonSpeak);
+            text_chatbox_main.style.opacity = 0;
+            flash = false;
+            attack1_legs();
+            attack_num = 1;
+            busy = false;
+            pressed_continue = true;
+        }
+    }
+}
+
+/**
+ * Move player's heart
+ * @param {string} action 
+ * @param {string} state 
+ */
+function movePlayerHeart(action, state) {
     if (state === InputController.State.press) {
         if (action === InputController.Action.moveLeft) {
             moveX = -speedX;
@@ -1025,7 +1073,6 @@ setInterval(() => {
             moveHeart();
         }
     }
-
     if (state === InputController.State.release) {
         if (action === InputController.Action.moveLeft) {
             if (moveX < 0) moveX = 0;
@@ -1036,9 +1083,18 @@ setInterval(() => {
         if (action === InputController.Action.moveRight) {
             if (moveX > 0) moveX = 0;
         }
-
         if (action === InputController.Action.moveDown) {
             if (moveY > 0) moveY = 0;
         }
     }
+}
+
+
+// Game loop
+setInterval(() => {
+    const [action, state] = input.get();
+    if (canvas_t === true) movePlayerHeart(action, state);
+    if (busy === true) makeAttack(action, state);
+    if (position !== false) manageInventory(action, state);
+
 }, 1000 / 60);
