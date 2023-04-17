@@ -156,6 +156,40 @@ img.leg_dash_top{
 img.leg_dash_bottom{
     top:34%;
 }
+img.heart_yellow {
+    width: 38.8%;
+    transition: 0.75s;
+}
+.yellow_heart_anim {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 10%;
+    position: absolute;
+    left: 47.2%;
+    top: 23%;
+    transition: 0.75s;
+}
+.yellow_heart_bc{
+    background-image: url(../img/heart_yellow_anim.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    animation: backgroundAnimation 1s infinite;
+}
+img.heart_yellow_border {
+    width: 2.8%;
+    position: absolute;
+    left: 48%;
+    top: 25%;
+    transition: 0.5s;
+}
+img.bullet{
+    position: absolute;
+    transition: 1s;
+    z-index: 3;
+}
 .mettaton_hp {
     position: absolute;
     top: 11%;
@@ -429,6 +463,7 @@ img.img_M {
     align-items: center;
     font-size: 246%;
     width: 100%;
+    transition: 1s;
 }
 .stats-wrap {
     display: flex;
@@ -444,6 +479,7 @@ img.img_M {
     height: 100%;
     display: flex;
     align-items: center;
+    transition: 1s;
 }
 .lv {
     padding-right: 5%;
@@ -451,6 +487,7 @@ img.img_M {
     height: 100%;
     display: flex;
     align-items: center;
+    transition: 1s;
 }
 .hp2 {
     display: flex;
@@ -492,6 +529,7 @@ Nothing yet
     font-family: "BUTTONS";
     padding: 0 0 0.5% 0;
     justify-content: space-evenly;
+    transition: 1s;
 }
 .inner_part {
     display: flex;
@@ -737,3 +775,14 @@ img.attack {
       transform: translateX(0);
     }
   }
+  @keyframes backgroundAnimation {
+    0% {
+        background-size: 40% 40%;
+    }
+    50% {
+        background-size: 65% 65%;
+    }
+    100% {
+        background-size: 40% 40%;
+    }
+}

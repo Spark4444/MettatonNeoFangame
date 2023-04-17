@@ -3,8 +3,8 @@ let hp_text = false;
 let food_text = false;
 let pressed_continue = false;
 // Wings: "Behold my Neo Wings, which seal your fate in my arena of destruction!"
-//Did you really think that you were going to beat me, darling? (Deal gone wrong playing)
 function chat_box(){
+    clearInterval(intervalL);
     if(attack_num === false){
         attack_num = 0;
     }
@@ -51,6 +51,15 @@ function chat_box(){
         pressed_continue = false;
         typeWriterBox("Prepare to be crushed under the force of my fabulous leg dash!");
     }
+    if(attack_num == 9 && busy == false){
+        busy = true;
+        pressed_continue = false;
+        typeWriterBox("Did you really think that you were going to beat me, darling?");
+        audio.muted = true;
+        audio.pause();
+        audio9.muted = false;
+        audio9.play();
+    }
 }
 document.addEventListener('keyup', e => {
 const key = e.keyCode || e.which;
@@ -59,16 +68,6 @@ if(busy == true){
     case 13: // Enter key
     case 90: // Z key
     case 122: // z key
-    if(attack_num == 9){
-    clearTimeout(timeoutID);
-    audio6.pause();
-    text_chatbox_main.style.opacity = 0;
-    flash = false;
-    // attack10_finale();
-    attack_num = 0;
-    busy = false;
-    pressed_continue = true;
-    }
     if(attack_num == 8){
     clearTimeout(timeoutID);
     audio6.pause();
@@ -157,6 +156,26 @@ if(busy == true){
     flash = false;
     attack1_legs();
     attack_num = 1;
+    busy = false;
+    pressed_continue = true;
+    }
+    if(attack_num == 9){
+    clearTimeout(timeoutID);
+    audio6.pause();
+    audio12.muted = false;
+    audio12.currentTime = 0;
+    audio12.play();
+    text_chatbox_main.style.opacity = 0;
+    flash = false;
+    attack10_finale();
+    audio9.pause();
+    audio9.muted = true;
+    audio10.play();
+    audio2.pause();
+    battle_menu.style.opacity = "0";
+    lv.style.opacity = "0";
+    name.style.opacity = "0";
+    attack_num = 0;
     busy = false;
     pressed_continue = true;
     }

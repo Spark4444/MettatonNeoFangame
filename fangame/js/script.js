@@ -12,6 +12,10 @@ let audio5 = document.querySelector("#audio5");
 let audio6 = document.querySelector("#audio6");
 let audio7 = document.querySelector("#audio7");
 let audio8 = document.querySelector("#audio8");
+let audio9 = document.querySelector("#audio9");
+let audio10 = document.querySelector("#audio10");
+let audio11 = document.querySelector("#audio11");
+let audio12 = document.querySelector("#audio12");
 let buttons = document.querySelectorAll('.button');
 let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
@@ -29,6 +33,9 @@ let elem_mettaton = document.querySelector(".mettaton_hp");
 let hp_left = document.querySelector(".hp_shower");
 let attack_gif = document.querySelector(".attack_png");
 let mettaton_gif = document.querySelector(".mettaton_gif");
+let battle_menu = document.querySelector(".battle-menu");
+let lv = document.querySelector(".lv");
+let name = document.querySelector(".name");
 let volume = document.querySelector("#volume");
 let hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
 let hp_width = document.querySelector(".hpVis");
@@ -69,8 +76,20 @@ let text_3;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-audio.volume = 0;
-// audio.volume = 0.20;
+audio.volume = 0.20;
+audio1.volume = 0.20;
+audio2.volume = 0.20;
+audio3.volume = 0.20;
+audio4.volume = 0.20;
+audio5.volume = 0.20;
+audio6.volume = 0.20;
+audio7.volume = 0.20;
+audio8.volume = 0.20;
+audio9.volume = 0.20;
+audio10.volume = 0.20;
+audio11.volume = 0.20;
+audio12.volume = 0.20;
+attack_num = 9
 audio.pause();
 audio1.pause();
 audio2.pause();
@@ -80,15 +99,22 @@ audio5.pause();
 audio6.pause();
 audio7.pause();
 audio8.pause();
-
+audio9.pause();
+audio10.pause();
+audio11.pause();
+audio12.pause();
 // Pause audio when user leaves the tab
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     audio.pause();
     audio2.pause();
+    audio9.pause();
+    audio12.pause();
   } else {
     audio.play();
     audio2.play();
+    audio9.play();
+    audio12.play();
   }
 });
 
@@ -111,6 +137,18 @@ volume.addEventListener("mousedown", () => {
 // Update the volume when the mouse is released from the slider
 volume.addEventListener("mouseup", () => {
   audio.volume = parseInt(volume.value) / 100;
+  audio1.volume = parseInt(volume.value) / 100;
+  audio2.volume = parseInt(volume.value) / 100;
+  audio3.volume = parseInt(volume.value) / 100;
+  audio4.volume = parseInt(volume.value) / 100;
+  audio5.volume = parseInt(volume.value) / 100;
+  audio6.volume = parseInt(volume.value) / 100;
+  audio7.volume = parseInt(volume.value) / 100;
+  audio8.volume = parseInt(volume.value) / 100;
+  audio9.volume = parseInt(volume.value) / 100;
+  audio10.volume = parseInt(volume.value) / 100;
+  audio11.volume = parseInt(volume.value) / 100;
+  audio12.volume = parseInt(volume.value) / 100;
 });
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
@@ -441,12 +479,17 @@ function showHP(){
     hp_text = false;
     food_text = false;
     audio3.play();
+    audio12.pause();
     top1 = 19.3;
     top2 = 19.3;
     left1 = 50;
     left2 = 50;
     projectile.innerHTML == "";
     mettaton_gif.style.filter = "";
+    battle_menu.style.opacity = "1";
+    name.style.opacity = "1";
+    lv.style.opacity = "1";
+    mettaton_gif.style.opacity = "1";
     audio2.muted = false;
     number = 1;
     restarts++;
@@ -462,6 +505,7 @@ function showHP(){
     clearInterval(hand_time);
     clearInterval(head_time);
     clearInterval(dash_leg);
+    clearInterval(yellow_heartMove);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
     hp_mettaton = 396;

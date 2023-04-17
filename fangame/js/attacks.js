@@ -31,7 +31,16 @@ let random_leg;
 let leg_dash_count;
 let leg_dash_count_top;
 let leg_dash_transition;
-let worked_legs_dash
+let worked_legs_dash;
+let yellow_heart;
+let yellow_heart_out;
+let yellow_heartMove;
+let bullet;
+let yellow_heart_red;
+let width_yellow;
+let src_yellow;
+let left_yellow;
+let top_yellow;
 
 //Attack 1(legs)
 function attack1_legs(){ 
@@ -524,3 +533,85 @@ function attack6_dash(){
   }, 20000);
 }
 
+//attack 10 HEART
+function attack10_finale(){
+  projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0;"><img src="img/heart_yellow.png" class="heart_yellow"></div><img src="img/heart_yellow_out.png" class="heart_yellow_border" style="opacity: 1;">`;
+  setTimeout(() => {
+    mettaton_gif.style.opacity = "0";
+  }, 700);
+  x = 47;
+  y = 31;
+  moveX = 0;
+  moveY = 0;
+  width_yellow = 4;
+  src_yellow = "img/bullet.png";
+  left_yellow = 82;
+  top_yellow = 20;
+  drawHeart(x, y);
+  setTimeout(() => {
+  yellow_heart = document.querySelector(".yellow_heart_anim");
+  yellow_heart_out = document.querySelector(".heart_yellow_border");
+  yellow_heart.style.opacity = "1";
+  yellow_heart_out.style.width = "4.8%"
+  yellow_heart_out.style.left = "47.3%"
+  yellow_heart_out.style.top = "23%"
+  setTimeout(() => {
+    yellow_heart_out.style.opacity = "0";
+    yellow_heart.style.rotate = "90deg";
+    yellow_heart.style.left = "82%";
+    yellow_heart_red = `${img_M.getBoundingClientRect().top}px`;
+    yellow_heart.style.top = yellow_heart_red;
+  }, 500);
+  setTimeout(() => {
+  intervalId2 = setInterval(() => {
+    if(t_f_wait === false){
+      checkCollisionDelete(bullet, img_M, 20);
+    }
+  }, 10);
+  }, 1550);
+  }, 10);
+  HP_show = setInterval(() => {
+    showHP();
+  }, 10);
+  yellow_heartMove = setInterval(() => {
+    yellow_heart = document.querySelector(".yellow_heart_anim");
+    yellow_heart.style.top = yellow_heart_red;
+    setTimeout(() => {
+    if(width_yellow == 5.6){
+      src_yellow = "img/bullet_big.png";
+      yellow_heart.classList.add("yellow_heart_bc");
+    }
+    left_yellow -= 0.9;
+    top_yellow -= 2.5;
+    projectile.innerHTML += `<img class="bullet" src="${src_yellow}" style="left:${left_yellow}%; top:${parseInt(yellow_heart_red) + top_yellow}px; width:${width_yellow}%">`;
+    audio11.play();
+    setTimeout(() => {
+      yellow_heart_red = `${img_M.getBoundingClientRect().top}px`;
+      bullet = document.querySelectorAll(".bullet");
+      bullet[bullet.length - 1].style.left = "-16%";
+      width_yellow += 0.8;
+      console.log(width_yellow);
+    }, 10);
+  }, 751);
+  }, 801);
+  moveHeartI = setInterval(moveHeart, 10);
+  ten_secs = setTimeout(() => {
+    clearInterval(yellow_heartMove);
+    setTimeout(() => {
+    clearInterval(intervalId2);
+    clearInterval(moveHeartI);
+    clearInterval(HP_show); 
+    audio12.muted = true;
+    setTimeout(() => {
+    audio.muted = false;
+    audio.currentTime = 0;
+    audio.play();
+    }, 500);
+    img_M.style.animation = "";
+    battle_menu.style.opacity = "1";
+    name.style.opacity = "1";
+    lv.style.opacity = "1";
+    appear("* Stage lights are blaring");
+    }, 1100);
+  }, 11500);
+}

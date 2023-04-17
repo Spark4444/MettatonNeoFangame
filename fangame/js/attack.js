@@ -70,6 +70,35 @@ function checkCollision(element1, element2, damage) {
   }
 }
 
+//Checks for collision and if it detects it it deletes the element
+function checkCollisionDelete(element1, element2, damage) {
+  if(canvas_t === true){
+  const elem2Rect = element2.getBoundingClientRect();
+  let count = 0;
+  for(let i = 0;element1.length > i;i++){
+  const elem1Rect = element1[i].getBoundingClientRect();
+  if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
+  if(count == 0){
+  element1[i].remove();
+  audio8.currentTime = "0";
+  audio8.play();
+  count++;
+  t_f_wait = true;
+  let hp_hold = parseInt(parseInt(hp_str) - damage);
+  hp_str = hp_hold.toString();
+  img_M.classList.add("flash");
+  flash = true;
+  setTimeout(function(){
+    flash = false;
+    img_M.classList.remove("flash");
+    t_f_wait = false;
+  }, 1000);
+  }
+  }
+  }
+  }
+}
+
 //Cheks for one element
 function checkCollisionOne(element, target, damage) {
   if (canvas_t === true) {
