@@ -89,7 +89,6 @@ audio9.volume = 0.20;
 audio10.volume = 0.20;
 audio11.volume = 0.20;
 audio12.volume = 0.20;
-attack_num = 9
 audio.pause();
 audio1.pause();
 audio2.pause();
