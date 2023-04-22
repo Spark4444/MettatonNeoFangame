@@ -65,10 +65,10 @@ function chat_box(){
         busy = true;
         pressed_continue = false;
         typeWriterBox("Did you really think that you were going to beat me, darling?");
-        audio.muted = true;
-        audio.pause();
-        audio9.muted = false;
-        audio9.play();
+        audio.mute(0);
+        audio.pause(0);
+        audio.unmute(9);
+        audio.play(9);
     }
 }
 document.addEventListener('keyup', e => {
@@ -80,7 +80,7 @@ if(busy == true){
     case 122: // z key
     if(attack_num == 7){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack8_wings();
@@ -90,7 +90,7 @@ if(busy == true){
     }
     if(attack_num == 6){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack7_bombs();
@@ -100,7 +100,7 @@ if(busy == true){
     }
     if(attack_num == 5){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack6_dash();
@@ -110,7 +110,7 @@ if(busy == true){
     }
     if(attack_num == 4){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack5_head();
@@ -120,7 +120,7 @@ if(busy == true){
     }
     if(attack_num == 3){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack4_hand();
@@ -130,7 +130,7 @@ if(busy == true){
     }
     if(attack_num == 2){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack3_lasers();
@@ -141,7 +141,7 @@ if(busy == true){
     }
     if(attack_num == 1){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack2_smoke();
@@ -151,7 +151,7 @@ if(busy == true){
     }
     if(attack_num == 0){
     clearTimeout(timeoutID);
-    audio6.pause();
+    audio.pause(6);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack1_legs();
@@ -161,17 +161,17 @@ if(busy == true){
     }
     if(attack_num == 8){
     clearTimeout(timeoutID);
-    audio6.pause();
-    audio12.muted = false;
-    audio12.currentTime = 0;
-    audio12.play();
+    audio.pause(6);
+    audio.unmute(12);
+    audio.reset(12);
+    audio.play(12);
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack10_finale();
-    audio9.pause();
-    audio9.muted = true;
-    audio10.play();
-    audio2.pause();
+    audio.pause(9);
+    audio.mute(9);
+    audio.play(10);
+    audio.pause(2);
     battle_menu.style.opacity = "0";
     lv.style.opacity = "0";
     name.style.opacity = "0";

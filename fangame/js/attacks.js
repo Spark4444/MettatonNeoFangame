@@ -582,7 +582,7 @@ function attack7_bombs(){
           setTimeout(() => {
           explosion = document.querySelector(".explosion");
           if (explosion !== null){
-          audio13.play();
+          audio.play(13);
           explosion.classList.add("transition");
           explosion.style.width = "0%";
           explosion.style.top = `74%`;
@@ -605,7 +605,7 @@ function attack7_bombs(){
       bomb.style.left = random_bomb;
       bomb.classList.add("bomb_down");
       bomb_timeout = setTimeout(() => {
-        audio13.play();
+        audio.play(13);
         bomb.src = "img/explosion.gif";
         bomb.classList.remove("bomb");
         bomb.classList.remove("bomb_down");
@@ -615,7 +615,7 @@ function attack7_bombs(){
           setTimeout(() => {
           explosion = document.querySelector(".explosion");
           if (explosion !== null){
-          audio13.play();
+          audio.play(13);
           explosion.classList.add("transition");
           explosion.style.width = "0%";
           explosion.style.top = `74%`;
@@ -731,7 +731,7 @@ function attack10_finale(){
     left_yellow -= 0.9;
     top_yellow -= 2.5;
     projectile.innerHTML += `<img class="bullet" src="${src_yellow}" style="left:${left_yellow}%; top:${parseInt(yellow_heart_red) + top_yellow}px; width:${width_yellow}%">`;
-    audio11.play();
+    audio.play(11);
 
     setTimeout(() => {
       yellow_heart_red = `${img_M.getBoundingClientRect().top}px`;
@@ -751,12 +751,12 @@ function attack10_finale(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show); 
-    audio12.muted = true;
+    audio.mute(12);
 
     setTimeout(() => {
-    audio.muted = false;
-    audio.currentTime = 0;
-    audio.play();
+    audio.unmute(0);
+    audio.reset(0);
+    audio.play(0);
     }, 500);
     img_M.style.animation = "";
     battle_menu.style.opacity = "1";

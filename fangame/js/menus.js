@@ -3,20 +3,6 @@ let frisk = document.querySelector("#frisk");
 let start = document.querySelector(".start");
 let wrapper = document.querySelector(".wrapper");
 let heart = document.querySelector("#heart");
-let audio = document.querySelector("#audio");
-let audio1 = document.querySelector("#audio1");
-let audio2 = document.querySelector("#audio2");
-let audio3 = document.querySelector("#audio3");
-let audio4 = document.querySelector("#audio4");
-let audio5 = document.querySelector("#audio5");
-let audio6 = document.querySelector("#audio6");
-let audio7 = document.querySelector("#audio7");
-let audio8 = document.querySelector("#audio8");
-let audio9 = document.querySelector("#audio9");
-let audio10 = document.querySelector("#audio10");
-let audio11 = document.querySelector("#audio11");
-let audio12 = document.querySelector("#audio12");
-let audio13 = document.querySelector("#audio13");
 let buttons = document.querySelectorAll('.button');
 let img = document.querySelectorAll('.but');
 let text_placeholder = document.querySelector(".text");
@@ -77,47 +63,40 @@ let text_3;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-audio.volume = 0.20;
-audio1.volume = 0.20;
-audio2.volume = 0.20;
-audio3.volume = 0.20;
-audio4.volume = 0.20;
-audio5.volume = 0.20;
-audio6.volume = 0.20;
-audio7.volume = 0.20;
-audio8.volume = 0.20;
-audio9.volume = 0.20;
-audio10.volume = 0.20;
-audio11.volume = 0.20;
-audio12.volume = 0.20;
-audio13.volume = 0.20;
-audio.pause();
-audio1.pause();
-audio2.pause();
-audio3.pause();
-audio4.pause();
-audio5.pause();
-audio6.pause();
-audio7.pause();
-audio8.pause();
-audio9.pause();
-audio10.pause();
-audio11.pause();
-audio12.pause();
-audio13.pause();
+setTimeout(() => {
+  audio.pauseAll();
+}, 100);
+
 // Pause audio when user leaves the tab
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
-    audio.pause();
-    audio2.pause();
-    audio9.pause();
-    audio12.pause();
-  } else {
-    audio.play();
-    audio2.play();
-    audio9.play();
-    audio12.play();
+    audio.pause(0);
+    audio.pause(2);
+    audio.pause(9);
+    audio.pause(12);
+  } 
+  else {
+    audio.play(0);
+    audio.play(2);
+    audio.play(9);
+    audio.play(12);
   }
+});
+
+// Pause audio when user leaves the tab or blocks the browser entirely
+window.addEventListener('blur', () => {
+  audio.pause(0);
+  audio.pause(2);
+  audio.pause(9);
+  audio.pause(12);
+});
+
+// Play audio when user returns to the tab or unblocks the browser
+window.addEventListener('focus', () => {
+  audio.play(0);
+  audio.play(2);
+  audio.play(9);
+  audio.play(12);
 });
 
 //Width for hp bar
@@ -126,39 +105,27 @@ hp_width.style.width = "100%"
 //Plays starting music
 start_menu.addEventListener('mousedown', () =>{
   if(started !== true){
-  audio2.play();
+  audio.play(2);
   }
 });
 
 //The bar will play a sound when you click on it
 volume.addEventListener("mousedown", () => {
-  audio1.currentTime = "0";
-  audio1.play();
+  audio.reset(1);
+  audio.play(1);
 });
 
 // Update the volume when the mouse is released from the slider
 volume.addEventListener("mouseup", () => {
-  audio.volume = parseInt(volume.value) / 100;
-  audio1.volume = parseInt(volume.value) / 100;
-  audio2.volume = parseInt(volume.value) / 100;
-  audio3.volume = parseInt(volume.value) / 100;
-  audio4.volume = parseInt(volume.value) / 100;
-  audio5.volume = parseInt(volume.value) / 100;
-  audio6.volume = parseInt(volume.value) / 100;
-  audio7.volume = parseInt(volume.value) / 100;
-  audio8.volume = parseInt(volume.value) / 100;
-  audio9.volume = parseInt(volume.value) / 100;
-  audio10.volume = parseInt(volume.value) / 100;
-  audio11.volume = parseInt(volume.value) / 100;
-  audio12.volume = parseInt(volume.value) / 100;
+  audio.volumeAll(volume.value);
 });
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
 start_button.addEventListener('click', () =>{
   if(started !== true){
-  audio2.muted = true;
-  audio1.currentTime = "0";
-  audio1.play();
+  audio.mute(2);
+  audio.reset(1);
+  audio.play(1);
   html.classList.add("cursor_none");
   frisk.classList.remove("hidden");
   start_menu.classList.add("hidden_anim");
@@ -175,7 +142,7 @@ start_button.addEventListener('click', () =>{
     },1500);
     setTimeout(function() {
     heart.classList.remove("hidden");
-    audio4.play();
+    audio.play(4);
     frisk.classList.add("hidden");
     start.classList.add("black");
     setTimeout(function() {
@@ -184,9 +151,9 @@ start_button.addEventListener('click', () =>{
       heart.classList.add("move");
     }, 200);
     setTimeout(function() {
-    audio.muted = false;
-    audio.currentTime = 0;
-    audio.play();
+    audio.unmute(0);
+    audio.reset(0);
+    audio.play(0);
     }, 1000);
     }, 2000); 
     setTimeout(function(){
@@ -194,7 +161,7 @@ start_button.addEventListener('click', () =>{
     start_button.style.width = "38%";
     buttons[0].classList.add('yellow');
     heart.classList.add("hidden");
-    audio7.play();
+    audio.play(7);
     img[0].src = "img/heart.png";
     num = 0;
     },2400);
@@ -214,9 +181,9 @@ start_button.addEventListener('click', () =>{
     num = 0;
     stage = false;
     setTimeout(function(){
-      audio.muted = false;
-      audio.currentTime = 0;
-      audio.play();
+      audio.unmute(0);
+      audio.reset(0);
+      audio.play(0);
     },10);
     }
     }
@@ -434,7 +401,7 @@ function attack_function(){
       clearInterval(HP_show);
       attack = false;
       hp_mettaton_attacked.innerHTML = "MISS";
-      audio5.play();
+      audio.play(5);
       elem_mettaton.classList.remove("hidden");
       attack_gif.classList.remove("hidden");
       attack_gif.src = "img/attack.gif";
@@ -480,8 +447,8 @@ function showHP(){
     busy = false;
     hp_text = false;
     food_text = false;
-    audio3.play();
-    audio12.pause();
+    audio.play(3);
+    audio.pause(12);
     top1 = 19.3;
     top2 = 19.3;
     left1 = 50;
@@ -492,11 +459,11 @@ function showHP(){
     name.style.opacity = "1";
     lv.style.opacity = "1";
     mettaton_gif.style.opacity = "1";
-    audio2.muted = false;
+    audio.unmute(2);
     number = 1;
     restarts++;
-    audio2.currentTime = 0;
-    audio.muted = true;
+    audio.reset(2);
+    audio.mute(0);
     clearInterval(intervalId);
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
@@ -593,8 +560,8 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
-  audio7.currentTime = 0;
-  audio7.play();
+  audio.reset(7);
+  audio.play(7);
   text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
@@ -606,7 +573,7 @@ function typeWriter() {
         if (i >= text.length) {
           setTimeout(() => {
             shakeLettersArr();
-            audio7.pause();
+            audio.pause(7);
           }, 100);
           clearInterval(timeoutID);
           return;
@@ -619,8 +586,8 @@ function typeWriter() {
 
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
-  audio7.currentTime = 0;
-  audio7.play();
+  audio.reset(7);
+  audio.play(7);
   text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
@@ -640,7 +607,7 @@ function typeWriterArr() {
                 if (i >= text_3.length) {
                   clearInterval(timeoutID);
                   setTimeout(() => {
-                    audio7.pause();
+                    audio.pause(7);
                     shakeLettersArr();
                   }, 100);
                   return;
@@ -667,8 +634,8 @@ function typeWriterArr() {
 
 //Function that writes the text in the text box letter by letter
 function typeWriterBox(text_write) {
-  audio6.currentTime = 0;
-  audio6.play();
+  audio.reset(6);
+  audio.play(6);
   text_chatbox.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
@@ -676,7 +643,7 @@ function typeWriterBox(text_write) {
   timeoutID = setInterval(() => {
     if (i >= text_write.length) {
       setTimeout(() => {
-        audio6.pause();
+        audio.pause(6);
       },100);
       clearInterval(timeoutID);
       return;
@@ -688,8 +655,8 @@ function typeWriterBox(text_write) {
 
 //Function that writes the text in the text box instantly
 function typeWriter2() {
-  audio7.currentTime = 0;
-  audio7.pause();
+  audio.reset(7);
+  audio.pause(7);
   clearTimeout(timeoutID);
   clearInterval(intervalL);
   text_placeholder.innerHTML = "";
@@ -709,8 +676,8 @@ document.addEventListener('keyup', e => {
     case 97: // a key
       if(num !== false){
         num--;
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
         classA();
       }
       break;
@@ -728,8 +695,8 @@ document.addEventListener('keyup', e => {
     case 100: // d key
       if(num !== false){
         num++;
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
         classA();
       }
       break;
@@ -755,7 +722,7 @@ document.addEventListener('keyup', e => {
           clearInterval(HP_show);
           attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0)-401}px`;
           attack_line.classList.remove("move_attack");
-          audio5.play();
+          audio.play(5);
           if(timer > 50){
             timer = timer - 50;
             timer = 50 - timer;
@@ -811,28 +778,28 @@ document.addEventListener('keyup', e => {
       if(stage == 3 && stage !== false && num_second == 1){
         stage = 4;
         check4(num_second);
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
        }
       if(stage == 2 && stage !== false && num_second == 0 || stage == 2 && stage !== false && num_second == 1 || stage == 2 && stage !== false && num_second == 2){
         stage = 3;
         check3(num_second);
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
        }
        if(stage == 1 && stage !== false){
         stage = 2;
         check2(num_second);
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
         }
       if(stage == 0 && stage !== false){
-        audio7.pause();
+        audio.pause(7);
         clearTimeout(timeoutID);
         stage = 1;
         check(num_second);
-        audio1.currentTime = "0";
-        audio1.play();
+        audio.reset(1);
+        audio.play(1);
         x_disable = true;
         num = false;
         }
@@ -850,8 +817,8 @@ document.addEventListener('keyup', e => {
       img[num_second].src = "img/heart.png";
       text = `* Stage lights are blaring`;
       typeWriter();
-      audio1.currentTime = "0";
-      audio1.play();
+      audio.reset(1);
+      audio.play(1);
       num = num_second;
       }
 
@@ -900,8 +867,8 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
-          audio1.currentTime = "0";
-          audio1.play();
+          audio.reset(1);
+          audio.play(1);
         }
 
       break;
@@ -930,8 +897,8 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
-          audio1.currentTime = "0";
-          audio1.play();
+          audio.reset(1);
+          audio.play(1);
         }
 
       break;
@@ -982,8 +949,8 @@ const key = e.keyCode || e.which;
           }
         }
         if(position_bf != position){
-          audio1.currentTime = "0";
-          audio1.play();
+          audio.reset(1);
+          audio.play(1);
         }
 
       break;
@@ -1016,8 +983,8 @@ const key = e.keyCode || e.which;
         imgH();
         img_h[position2].src = "img/heart.png";
         if(position_bf != position){
-        audio1.currentTime = "0";
-        audio1.play();
+          audio.reset(1);
+          audio.play(1);
         }
 
       break;
