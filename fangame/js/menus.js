@@ -63,6 +63,7 @@ let text_3;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
+attack_num = 7;
 setTimeout(() => {
   audio.pauseAll();
 }, 100);
@@ -476,6 +477,7 @@ function showHP(){
     clearInterval(dash_leg);
     clearInterval(yellow_heartMove);
     clearInterval(bomb_interval);
+    clearInterval(wings_rockets_inter);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
     hp_mettaton = 396;

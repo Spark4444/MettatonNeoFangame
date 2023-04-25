@@ -41,6 +41,21 @@ body {
     margin: 0;
     box-sizing: border-box;
 }
+.not-working{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-size: 163%;
+    font-family: "BUTTONS";
+    background-image: url(../img/background.png);
+    color: white;
+    text-align: center;
+}
 img{
     user-select: none;
     -webkit-user-drag: none;
@@ -172,6 +187,38 @@ img.explosion {
     position: absolute;
     top: 56%;
     z-index: 2;
+}
+img.wing2 {
+    width: 21%;
+    position: absolute;
+    left: 52.6%;
+    top: 19%;
+    z-index: 3;
+    transition: 1s;
+}
+img.wing2_down {
+    left: 57%;
+    top: 49%;
+}
+img.wing1 {
+    width: 21%;
+    position: absolute;
+    left: 25.6%;
+    top: 19%;
+    z-index: 3;
+    transition: 1s;
+}
+img.wing1_down {
+    left: 22%;
+    top: 49%;
+}
+img.rocket {
+    width: 5%;
+    position: absolute;
+    top: -14%;
+    animation: rocketDown 2s;
+    animation-iteration-count: 1;
+    z-index: 3;
 }
 img.heart_yellow {
     width: 38.8%;
@@ -804,5 +851,14 @@ img.attack {
     }
     100% {
         background-size: 40% 40%;
+    }
+}
+
+  @keyframes rocketDown {
+    0% {
+        top:-14%;
+    }
+    100% {
+        top:100%;
     }
 }

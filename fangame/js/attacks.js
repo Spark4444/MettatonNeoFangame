@@ -46,6 +46,16 @@ let bomb;
 let random_bomb;
 let explosion;
 let bomb_timeout;
+let wings_rockets_inter;
+let wing1;
+let wing2;
+let rocket;
+let rocket_count_left;
+let rocket_inter;
+let rocket_inter2;
+let rocket_random;
+let rocket_count_left_move;
+let wing;
 
 //Attack 1(legs)
 function attack1_legs(){ 
@@ -643,19 +653,31 @@ function attack7_bombs(){
   }, 20000);
 }
 
-//attack 8 wings
+//attack 8 wings,rockets
 function attack8_wings(){
-  projectile.innerHTML = ``;
-  mettaton_gif.style.opacity = "1";
+  projectile.innerHTML = `<img src="img/2.png" class="wing2 wing"><img src="img/1.png" class="wing1 wing">`;
+  mettaton_gif.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
   moveY = 0;
   drawHeart(x, y);
+  rocket_count_left_move = 0;
+  rocket_count_left = 17;
+
+  setInterval(() => {
+    wing1 = document.querySelector(".wing1");
+    wing2 = document.querySelector(".wing2");
+    wing2.classList.add("wing2_down");
+    wing1.classList.add("wing1_down");
+  }, 10);
   
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
-      checkCollisionLaserOne(leg_dash, img_M, 20);
+    wing = document.querySelectorAll(".wing");
+    rocket = document.querySelectorAll(".rocket");
+    if(t_f_wait === false && rocket.length > 1){
+      checkCollisionDelete(rocket, img_M, 20);
+      checkCollision(wing, img_M, 20);
     }
   }, 10);
 
@@ -663,20 +685,43 @@ function attack8_wings(){
     showHP();
   }, 10);
 
+  wings_rockets_inter = setInterval(() => {
+    rocket_count_left_move = 0;
+    rocket_count_left = 40;
+    rocket_random = randomRange(1,3);
+    rocket_inter2 = setInterval(() => {
+    rocket_count_left_move++;
+    rocket_count_left += 4;
+    if(rocket_count_left_move !== rocket_random){
+    projectile.innerHTML += `<img src="img/rocket.png" class="rocket" style="left: ${rocket_count_left}%">`;
+    }
+    if(rocket_count_left_move == 3){
+      clearInterval(rocket_inter2);
+      clearInterval(rocket_inter);
+      setTimeout(() => {
+        rocket.forEach(rocket1 => {
+          rocket1.remove();
+        });
+      }, 1900);
+    }
+    }, 20);
+  }, 2000);
+
   moveHeartI = setInterval(moveHeart, 10);
 
   ten_secs = setTimeout(() => {
-    clearInterval(dash_leg);
+    clearInterval(wings_rockets_inter);
+    clearInterval(rocket_inter);
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
     img_M.style.animation = "";
     appear("* Stage lights are blaring");
-  }, 10000);
+  }, 19000);
 }
 
-//attack 10 HEART
-function attack10_finale(){
+//attack 9 HEART
+function attack9_finale(){
   projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0;"><img src="img/heart_yellow.png" class="heart_yellow"></div><img src="img/heart_yellow_out.png" class="heart_yellow_border" style="opacity: 1;">`;
   setTimeout(() => {
     mettaton_gif.style.opacity = "0";

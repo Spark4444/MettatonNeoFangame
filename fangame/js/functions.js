@@ -203,3 +203,35 @@ function shakeLettersArr() {
     }, randomRange(250,500));
   }
 }
+
+//animate Element function 
+function animateElement(element, style, seconds, startValue, endValue) {
+  let currentValue = startValue;
+  const increment = (endValue - startValue) / (seconds * 60);
+  const interval = setInterval(() => {
+    if (currentValue >= endValue) {
+      clearInterval(interval);
+    } else {
+      currentValue += increment;
+      element.style[style] = currentValue;
+    }
+  }, 16.67);
+}
+
+//animates multiple elements
+function animateElements(elements, style, duration, startValue, endValue) {
+  var interval = (endendValue - startValue) / (duration * 60); // Calculate the increment value
+  var count = 0;
+
+  var animate = function() {
+    if (count < duration * 60) {
+      count++;
+      for (var i = 0; i < elements.length; i++) {
+        var currentVal = startValue + interval * count;
+        elements[i].style[style] = currentVal;
+      }
+      requestAnimationFrame(animate);
+    }
+  };
+  animate();
+}

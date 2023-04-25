@@ -84,7 +84,9 @@ if(busy == true){
     text_chatbox_main.style.opacity = 0;
     flash = false;
     attack8_wings();
-    attack_num = 8;
+    setTimeout(() => {
+        attack_num = 8;
+    }, 10);
     busy = false;
     pressed_continue = true;
     }
@@ -167,7 +169,7 @@ if(busy == true){
     audio.play(12);
     text_chatbox_main.style.opacity = 0;
     flash = false;
-    attack10_finale();
+    attack9_finale();
     audio.pause(9);
     audio.mute(9);
     audio.play(10);
