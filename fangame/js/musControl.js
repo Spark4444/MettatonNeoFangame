@@ -14,7 +14,9 @@ class Audio {
         document.querySelector("#audio10"),
         document.querySelector("#audio11"),
         document.querySelector("#audio12"),
-        document.querySelector("#audio13")
+        document.querySelector("#audio13"),
+        document.querySelector("#audio14"),
+        document.querySelector("#audio15")
     ]
 
     constructor() { this.pauseAll(); }

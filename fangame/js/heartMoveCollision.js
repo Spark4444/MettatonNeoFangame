@@ -10,7 +10,6 @@ let left1 = 50;
 let top2= 19.3;
 let left2 = 50;
 let number = 1;
-let restarts = 0;
 let t_f_wait = false;
 let x = 35;
 let y = 47;
@@ -56,6 +55,8 @@ function checkCollision(element1, element2, damage) {
   count++;
   t_f_wait = true;
   let hp_hold = parseInt(parseInt(hp_str) - damage);
+  damage_taken += damage;
+  damage_taken_times++;
   hp_str = hp_hold.toString();
   img_M.classList.add("flash");
   flash = true;
@@ -86,6 +87,8 @@ function checkCollisionDelete(element1, element2, damage) {
   count++;
   t_f_wait = true;
   let hp_hold = parseInt(parseInt(hp_str) - damage);
+  damage_taken += damage;
+  damage_taken_times++;
   hp_str = hp_hold.toString();
   img_M.classList.add("flash");
   flash = true;
@@ -112,6 +115,8 @@ function checkCollisionDeleteOne(element1, element2, damage) {
       clearTimeout(bomb_timeout);
       t_f_wait = true;
       let hp_hold = parseInt(parseInt(hp_str) - damage);
+      damage_taken += damage;
+      damage_taken_times++;
       hp_str = hp_hold.toString();
       img_M.classList.add("flash");
       flash = true;
@@ -136,6 +141,8 @@ function checkCollisionOne(element, target, damage) {
         audio.play(8);
         t_f_wait = true;
         let hp_hold = parseInt(parseInt(hp_str) - damage);
+        damage_taken += damage;
+        damage_taken_times++;
         hp_str = hp_hold.toString();
         img_M.classList.add("flash");
         flash = true;
@@ -163,6 +170,8 @@ function checkCollisionLaser(elements, target, damage) {
           if (id === 'l0') {
             t_f_wait = true;
             hp_hold = parseInt(parseInt(hp_str) - damage);
+            damage_taken += damage;
+            damage_taken_times++;
             hp_str = hp_hold.toString();
             audio.reset(8);
             audio.play(8);
@@ -182,6 +191,8 @@ function checkCollisionLaser(elements, target, damage) {
                 t_f_wait = true;
                 orangeLaserTimer = setTimeout(function() {
                   hp_hold = parseInt(parseInt(hp_str) - damage);
+                  damage_taken += damage;
+                  damage_taken_times++;
                   hp_str = hp_hold.toString();
                   audio.reset(8);
                   audio.play(8);
@@ -199,6 +210,8 @@ function checkCollisionLaser(elements, target, damage) {
             if (player_moving) {
               t_f_wait = true;
               hp_hold = parseInt(parseInt(hp_str) - damage);
+              damage_taken += damage;
+              damage_taken_times++;
               hp_str = hp_hold.toString();
               audio.reset(8);
               audio.play(8);
@@ -231,6 +244,8 @@ function checkCollisionLaserOne(element, target, damage) {
         if (id === 'l0') {
           t_f_wait = true;
           hp_hold = parseInt(parseInt(hp_str) - damage);
+          damage_taken += damage;
+          damage_taken_times++;
           hp_str = hp_hold.toString();
           audio.reset(8);
           audio.play(8);
@@ -250,6 +265,8 @@ function checkCollisionLaserOne(element, target, damage) {
               t_f_wait = true;
               orangeLaserTimer = setTimeout(function() {
                 hp_hold = parseInt(parseInt(hp_str) - damage);
+                damage_taken += damage;
+                damage_taken_times++;
                 hp_str = hp_hold.toString();
                 audio.reset(8);
                 audio.play(8);
@@ -267,6 +284,8 @@ function checkCollisionLaserOne(element, target, damage) {
           if (player_moving) {
             t_f_wait = true;
             hp_hold = parseInt(parseInt(hp_str) - damage);
+            damage_taken += damage;
+            damage_taken_times++;
             hp_str = hp_hold.toString();
             audio.reset(8);
             audio.play(8);

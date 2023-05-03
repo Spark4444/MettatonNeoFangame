@@ -235,3 +235,41 @@ function animateElements(elements, style, duration, startValue, endValue) {
   };
   animate();
 }
+
+//Encrypter
+function encrypt(num) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  let encryptedString = '';
+
+  while (num > 0) {
+    let remainder = (num - 1) % 26;
+    encryptedString = alphabet[remainder] + encryptedString;
+    num = Math.floor((num - remainder) / 26);
+  }
+
+  return encryptedString;
+}
+
+//Decrypter
+function decrypt(str) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  let decryptedNumber = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let charIndex = alphabet.indexOf(str[i]) + 1;
+    decryptedNumber = decryptedNumber * 26 + charIndex;
+  }
+
+  return decryptedNumber;
+}
+
+//Save
+function save(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+//Get
+function get(key) {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : 0;
+}

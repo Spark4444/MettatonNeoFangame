@@ -86,6 +86,7 @@ if(busy == true){
     attack8_wings();
     setTimeout(() => {
         attack_num = 8;
+        turns_complete++;
     }, 10);
     busy = false;
     pressed_continue = true;
@@ -97,6 +98,7 @@ if(busy == true){
     flash = false;
     attack7_bombs();
     attack_num = 7;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -107,6 +109,7 @@ if(busy == true){
     flash = false;
     attack6_dash();
     attack_num = 6;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -117,6 +120,7 @@ if(busy == true){
     flash = false;
     attack5_head();
     attack_num = 5;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -127,6 +131,7 @@ if(busy == true){
     flash = false;
     attack4_hand();
     attack_num = 4;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -137,6 +142,7 @@ if(busy == true){
     flash = false;
     attack3_lasers();
     attack_num = 3;
+    turns_complete++;
     busy = false;
     flash = false;
     pressed_continue = true;
@@ -148,6 +154,7 @@ if(busy == true){
     flash = false;
     attack2_smoke();
     attack_num = 2;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -158,6 +165,7 @@ if(busy == true){
     flash = false;
     attack1_legs();
     attack_num = 1;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }
@@ -178,6 +186,7 @@ if(busy == true){
     lv.style.opacity = "0";
     name.style.opacity = "0";
     attack_num = 0;
+    turns_complete++;
     busy = false;
     pressed_continue = true;
     }

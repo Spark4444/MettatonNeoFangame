@@ -29,6 +29,7 @@ let hp_width = document.querySelector(".hpVis");
 let canvas = document.querySelector("#canvas");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
+let food_used = [];
 let text = "";
 let food = "";
 let HP_width_small = "100%";
@@ -45,14 +46,28 @@ let started = false;
 let canvas_t = false;
 let attack_num = false;
 let anim = true;
-let hp_mettaton = 396;
+let hp_mettaton = 360;
 let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
 let timer = 0;
 let letterId = 0;
+let count_death = 0;
+let restarts = 0;
+let damage_taken = 0;
+let damage_taken_times = 0;
+let hits = 0;
+let critical_hits_given = 0;
+let misses = 0;
+let time_complete = 0;
+let turns_complete = 0;
 let attack_line;
+let finished;
+setTimeout(() => {
+  finished = get(1);
+}, 10);
 let attack_line_timeout;
+let time_complete_interval;
 let timer_int;
 let intervalL;
 let shakeElement;
@@ -63,7 +78,6 @@ let text_3;
 // alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
-attack_num = 7;
 setTimeout(() => {
   audio.pauseAll();
 }, 100);
@@ -191,9 +205,15 @@ start_button.addEventListener('click', () =>{
 
   if(anim === true){
     start_animation();
+    time_complete_interval = setInterval(() =>{
+      time_complete++;
+    }, 1000);
   }
   else if(anim === false){
     no_start_animation();
+    time_complete_interval = setInterval(() =>{
+      time_complete++;
+    }, 1000);
   }
 }
 });
@@ -261,10 +281,11 @@ function check2(num){
     typeWriter2 ();
   }
   if(num_second == 2){
+    audio.play(15);
     x_disable = false;
     food = food_list[position];
     hp_recover = health[position];
-    food_list.splice(position, 1);
+    food_used.push(food_list.splice(position, 1));
     health.splice(position, 1);
 
     if(food == "Pie"){
@@ -358,7 +379,30 @@ function disappear(){
     } 
     canvas.style.display = "";
     canvas_t = true;
-    chat_box();
+    if(hp_mettaton > 0){
+      chat_box();
+    }
+    else{
+      mettaton_gif.classList.add("mettaton_gif_left");
+      triangle.classList.add("triangle_left");
+      text_chatbox.classList.add("chat_box_left");
+      audio.mute(0);
+      setTimeout(() => {
+      deathMtt();
+      document.addEventListener('keyup', e => {
+        const key = e.keyCode || e.which;
+        switch (key) {
+          case 13: // Enter key
+          case 90: // Z key
+          case 122: // z key
+          deathMtt();
+          break;
+          default:
+          return;
+        }
+      });      
+    }, 1000);
+    }
   },1000);
 }
 
@@ -402,6 +446,7 @@ function attack_function(){
       clearInterval(HP_show);
       attack = false;
       hp_mettaton_attacked.innerHTML = "MISS";
+      misses++;
       audio.play(5);
       elem_mettaton.classList.remove("hidden");
       attack_gif.classList.remove("hidden");
@@ -462,6 +507,15 @@ function showHP(){
     mettaton_gif.style.opacity = "1";
     audio.unmute(2);
     number = 1;
+    count_death = 0;
+    turns_complete = 0;
+    hits = 0;
+    time_complete = 0;
+    damage_taken = 0;
+    damage_taken_times = 0;
+    critical_hits_given = 0;
+    misses = 0;
+    food_used = [];
     restarts++;
     audio.reset(2);
     audio.mute(0);
@@ -478,15 +532,16 @@ function showHP(){
     clearInterval(yellow_heartMove);
     clearInterval(bomb_interval);
     clearInterval(wings_rockets_inter);
+    clearInterval(time_complete_interval);
     food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
-    hp_mettaton = 396;
+    hp_mettaton = 360;
     one = 0;
     hp_str = "72";
     hp.innerHTML = `72/72`;
     hp_width.style.width = `100%`;
-    hp_left.style.width = `${hp_mettaton/(396/100)}%`;
-    HP_width_small = `${hp_mettaton/(396/100)}%`;
+    hp_left.style.width = `${hp_mettaton/(360/100)}%`;
+    HP_width_small = `${hp_mettaton/(360/100)}%`;
     anim = false;
     attack_num = false;
     stage = false;
@@ -655,6 +710,108 @@ function typeWriterBox(text_write) {
   }, 40);
 }
 
+//Mettaton death animation
+function deathMtt() {
+  text_chatbox_main.style.opacity = "1";
+  mettaton_gif.style.animation = "shake_death 0.2s steps(1, end) infinite";
+  if(count_death == 0){
+  mettaton_gif.src="img/f7.png";
+  typeWriterBox("G... GUESS SHE SHOULD HAVE WORKED MORE ON THE DEFENCES...");
+  count_death++;
+  }
+  else if(count_death == 1){
+  mettaton_gif.src="img/f7.png";
+  typeWriterBox("...");
+  count_death++;
+  }
+  else if(count_death == 2){
+  mettaton_gif.src="img/f7.png";
+  typeWriterBox("YOU MAY HAVE DEFEATED ME.. BUT..");
+  count_death++;
+  }
+  else if(count_death == 3){
+    mettaton_gif.src="img/f5.png";
+  typeWriterBox("I KNOW I CAN TELL FROM THAT STRIKE, DARLING.");
+  count_death++;
+  }
+  else if(count_death == 4){
+  mettaton_gif.src="img/f6.png";
+  typeWriterBox("YOU WERE HOLDING BACK.");
+  count_death++;
+  }
+  else if(count_death == 5){
+  mettaton_gif.src="img/f7.png";
+  typeWriterBox("YES, ASGORE WILL FALL EASILY TO YOU...");
+  count_death++;
+  }
+  else if(count_death == 6){
+  mettaton_gif.src="img/f6.png";
+  typeWriterBox("BUT YOU WON'T HARM HUMANITY, WILL YOU?");
+  count_death++;
+  }
+  else if(count_death == 7){
+  mettaton_gif.src="img/f2.png";
+  typeWriterBox("YOU AREN'T ABSOLUTELY EVIL.");
+  count_death++;
+  }
+  else if(count_death == 8){
+  mettaton_gif.src="img/f6.png";
+  typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
+  count_death++;
+  }
+  else if(count_death == 9){
+  mettaton_gif.src="img/f1.png";
+  typeWriterBox("AND SO LATE INTO THE SHOW, TOO.");
+  count_death++;
+  }
+  else if(count_death == 10){
+  mettaton_gif.src="img/f1.png";
+  typeWriterBox("HA... HA. AT LEAST NOW I CAN REST EASY.");
+  count_death++;
+  }
+  else if(count_death == 11){
+  mettaton_gif.src="img/f4.png";
+  typeWriterBox("KNOWING ALPHYS AND THE HUMANS WILL LIVE ON...!");
+  count_death++;
+  }
+  else if(count_death == 12){
+  count_death++;
+  audio.pause(6);
+  audio.reset(6);
+  audio.play(14);
+  projectile.classList.add("transition");
+  projectile.style.background = "white";
+  finished++;
+  setTimeout(() => {
+    html.classList.remove("cursor_none");
+    projectile.innerHTML = `<div class="statistics">
+    <div class="in_statistics">Game was finished : ${finished}(times)</div>
+    <div class="in_statistics">Restarts : ${restarts}</div>
+    <div class="in_statistics">Damage taken : ${damage_taken}</div>
+    <div class="in_statistics">Damage taken : ${damage_taken_times}(times)</div>
+    <div class="in_statistics">Hits : ${hits}</div>
+    <div class="in_statistics">Critical hits : ${critical_hits_given}</div>
+    <div class="in_statistics">Misses : ${misses}</div>
+    <div class="in_statistics">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
+    <div class="in_statistics">Time taken to complete the game : ${time_complete}s</div>
+    <div class="in_statistics">Turns taken to complete the game : ${turns_complete}</div>
+    <div class="in_statistics">Press f5 to restart the game</div>
+    </div>`;
+  }, 1000);
+  save(1,finished);
+  setTimeout(() => {
+    audio.unmute(2);
+    audio.reset(2);
+    audio.play(2);
+    projectile.style.background = "black";
+  }, 3000);
+  //END
+  }
+}
+function deathZ_Enter(){
+
+}
+
 //Function that writes the text in the text box instantly
 function typeWriter2() {
   audio.reset(7);
@@ -728,27 +885,56 @@ document.addEventListener('keyup', e => {
           if(timer > 50){
             timer = timer - 50;
             timer = 50 - timer;
+            hits++;
             hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,50)).toFixed(0);
-            hp_mettaton -= (0.35*calculatePercentage(timer,50)).toFixed(0);
+            if(hp_mettaton - (0.35*calculatePercentage(timer,50)).toFixed(0) < 0){
+              hp_mettaton = 0;
+              mettaton_gif.src = "img/f7.png";
+            }
+            else{
+              
+              hp_mettaton -= (0.35*calculatePercentage(timer,50)).toFixed(0);
+            }
             attack_line.classList.add("appear_hide");
           }
           else if(timer > 47 && timer < 51){
             hp_mettaton_attacked.innerHTML = "36";
+            critical_hits_given++;
+            hits++;
+            if(hp_mettaton - 36 < 0){
+              hp_mettaton = 0;
+              mettaton_gif.src = "img/f7.png";
+            }
+            else{
             hp_mettaton -= 36;
+            }
             attack_line.classList.add("appear_hide_yellow");
           }
           else if(timer < 48){
+            hits++;
             hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,47)).toFixed(0);
-            hp_mettaton -= (0.35*calculatePercentage(timer,47)).toFixed(0);
+            if(hp_mettaton - (0.35*calculatePercentage(timer,47)).toFixed(0) < 0){
+              hp_mettaton = 0;
+              mettaton_gif.src = "img/f7.png";
+            }
+            else{
+              hp_mettaton -= (0.35*calculatePercentage(timer,47)).toFixed(0);
+            }
             attack_line.classList.add("appear_hide");
           }
-          hp_left.style.width = `${hp_mettaton/(396/100)}%`;
-          HP_width_small = `${hp_mettaton/(396/100)}%`;
+          hp_left.style.width = `${hp_mettaton/(360/100)}%`;
+          HP_width_small = `${hp_mettaton/(360/100)}%`;
+          setTimeout(() => {
+            mettaton_gif.classList.add("animation_shake");
+          }, 10);
           elem_mettaton.classList.remove("hidden");
           attack_gif.classList.remove("hidden");
           attack_gif.src = "img/attack.gif";
           attack_line.classList.remove("move_attack");
           setTimeout(() => {
+            setTimeout(() => {
+              mettaton_gif.classList.remove("animation_shake");
+            }, 30);
             attack_line.classList.remove("appear_hide");
             attack_line.classList.remove("appear_hide_yellow");
             attack_line.classList.add("hidden");
