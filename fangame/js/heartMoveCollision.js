@@ -41,123 +41,8 @@ function drawHeart(x, y) {
   }
 }
 
-//Checks for collision
-function checkCollision(element1, element2, damage) {
-  if(canvas_t === true){
-  const elem2Rect = element2.getBoundingClientRect();
-  let count = 0;
-  for(let i = 0;element1.length > i;i++){
-  const elem1Rect = element1[i].getBoundingClientRect();
-  if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
-  if(count == 0){
-  audio.reset(8);
-  audio.play(8);
-  count++;
-  t_f_wait = true;
-  let hp_hold = parseInt(parseInt(hp_str) - damage);
-  damage_taken += damage;
-  damage_taken_times++;
-  hp_str = hp_hold.toString();
-  img_M.classList.add("flash");
-  flash = true;
-  setTimeout(function(){
-    flash = false;
-    img_M.classList.remove("flash");
-    t_f_wait = false;
-  }, 1000);
-  }
-  }
-  }
-  }
-}
-
-//Checks for collision and if it detects it it deletes the element
-function checkCollisionDelete(element1, element2, damage) {
-  if(canvas_t === true){
-  const elem2Rect = element2.getBoundingClientRect();
-  let count = 0;
-  for(let i = 0;element1.length > i;i++){
-  const elem1Rect = element1[i].getBoundingClientRect();
-  if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
-  if(count == 0){
-  element1[i].remove();
-  audio.reset(8);
-  audio.play(8);
-  clearTimeout(bomb_timeout);
-  count++;
-  t_f_wait = true;
-  let hp_hold = parseInt(parseInt(hp_str) - damage);
-  damage_taken += damage;
-  damage_taken_times++;
-  hp_str = hp_hold.toString();
-  img_M.classList.add("flash");
-  flash = true;
-  setTimeout(function(){
-    flash = false;
-    img_M.classList.remove("flash");
-    t_f_wait = false;
-  }, 1000);
-  }
-  }
-  }
-  }
-}
-
-//Checks for collision with one element and if it detects it it deletes the element
-function checkCollisionDeleteOne(element1, element2, damage) {
-  if(canvas_t === true){
-    const elem2Rect = element2.getBoundingClientRect();
-    const elem1Rect = element1.getBoundingClientRect();
-    if (elem1Rect.top <= elem2Rect.bottom && elem1Rect.bottom >= elem2Rect.top && elem1Rect.left <= elem2Rect.right && elem1Rect.right >= elem2Rect.left ) {
-      element1.remove();
-      audio.reset(8);
-      audio.play(8);
-      clearTimeout(bomb_timeout);
-      t_f_wait = true;
-      let hp_hold = parseInt(parseInt(hp_str) - damage);
-      damage_taken += damage;
-      damage_taken_times++;
-      hp_str = hp_hold.toString();
-      img_M.classList.add("flash");
-      flash = true;
-      setTimeout(function(){
-        flash = false;
-        img_M.classList.remove("flash");
-        t_f_wait = false;
-      }, 1000);
-    }
-  }
-}
-
-
-//Cheks for one element
-function checkCollisionOne(element, target, damage) {
-  if (canvas_t === true) {
-    const elemRect = element.getBoundingClientRect();
-    const targetRect = target.getBoundingClientRect();
-    if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
-      if (!t_f_wait) {
-        audio.reset(8);
-        audio.play(8);
-        t_f_wait = true;
-        let hp_hold = parseInt(parseInt(hp_str) - damage);
-        damage_taken += damage;
-        damage_taken_times++;
-        hp_str = hp_hold.toString();
-        img_M.classList.add("flash");
-        flash = true;
-        setTimeout(function() {
-          flash = false;
-          img_M.classList.remove("flash");
-          t_f_wait = false;
-        }, 500);
-      }
-    }
-  }
-}
-
 //Cheks for laser collision
-function checkCollisionLaser(elements, target, damage) {
+function checkCollision(elements, target, damage, delete1, obw) {
   if (canvas_t === true) {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
@@ -167,121 +52,11 @@ function checkCollisionLaser(elements, target, damage) {
         const id = element.id;
         if (!t_f_wait) {
           let hp_hold;
-          if (id === 'l0') {
-            t_f_wait = true;
-            hp_hold = parseInt(parseInt(hp_str) - damage);
-            damage_taken += damage;
-            damage_taken_times++;
-            hp_str = hp_hold.toString();
-            audio.reset(8);
-            audio.play(8);
-            img_M.classList.add("flash");
-            flash = true;
-            setTimeout(function() {
-              flash = false;
-              img_M.classList.remove("flash");
-              t_f_wait = false;
-            }, 250);
-          } else if (id === 'l2') {
-            if (player_moving) {
-              clearTimeout(orangeLaserTimer);
-              continue;
-            } else {
-              if (!t_f_wait) {
-                t_f_wait = true;
-                orangeLaserTimer = setTimeout(function() {
-                  hp_hold = parseInt(parseInt(hp_str) - damage);
-                  damage_taken += damage;
-                  damage_taken_times++;
-                  hp_str = hp_hold.toString();
-                  audio.reset(8);
-                  audio.play(8);
-                  img_M.classList.add("flash");
-                  flash = true;
-                  setTimeout(function() {
-                    flash = false;
-                    img_M.classList.remove("flash");
-                    t_f_wait = false;
-                  }, 500);
-                }, 250);
-              }
+          if (id === 'l0' || obw == false) {
+            if(delete1 == true){
+              element.remove();
+              clearInterval(bomb_timeout);
             }
-          } else if (id === 'l1') {
-            if (player_moving) {
-              t_f_wait = true;
-              hp_hold = parseInt(parseInt(hp_str) - damage);
-              damage_taken += damage;
-              damage_taken_times++;
-              hp_str = hp_hold.toString();
-              audio.reset(8);
-              audio.play(8);
-              img_M.classList.add("flash");
-              flash = true;
-              setTimeout(function() {
-                flash = false;
-                img_M.classList.remove("flash");
-                t_f_wait = false;
-              }, 500);
-            } else {
-              continue; // Player avoids damage by not moving
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// Checks for laser collision with a single target element
-function checkCollisionLaserOne(element, target, damage) {
-  if (canvas_t === true) {
-    const elemRect = element.getBoundingClientRect();
-    const targetRect = target.getBoundingClientRect();
-    if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
-      const id = element.id;
-      if (!t_f_wait) {
-        let hp_hold;
-        if (id === 'l0') {
-          t_f_wait = true;
-          hp_hold = parseInt(parseInt(hp_str) - damage);
-          damage_taken += damage;
-          damage_taken_times++;
-          hp_str = hp_hold.toString();
-          audio.reset(8);
-          audio.play(8);
-          img_M.classList.add("flash");
-          flash = true;
-          setTimeout(function() {
-            flash = false;
-            img_M.classList.remove("flash");
-            t_f_wait = false;
-          }, 250);
-        } else if (id === 'l2') {
-          if (player_moving) {
-            clearTimeout(orangeLaserTimer);
-            return; // Changed from continue to return
-          } else {
-            if (!t_f_wait) {
-              t_f_wait = true;
-              orangeLaserTimer = setTimeout(function() {
-                hp_hold = parseInt(parseInt(hp_str) - damage);
-                damage_taken += damage;
-                damage_taken_times++;
-                hp_str = hp_hold.toString();
-                audio.reset(8);
-                audio.play(8);
-                img_M.classList.add("flash");
-                flash = true;
-                setTimeout(function() {
-                  flash = false;
-                  img_M.classList.remove("flash");
-                  t_f_wait = false;
-                }, 500);
-              }, 250);
-            }
-          }
-        } else if (id === 'l1') {
-          if (player_moving) {
             t_f_wait = true;
             hp_hold = parseInt(parseInt(hp_str) - damage);
             damage_taken += damage;
@@ -296,8 +71,60 @@ function checkCollisionLaserOne(element, target, damage) {
               img_M.classList.remove("flash");
               t_f_wait = false;
             }, 500);
-          } else {
-            return; // Player avoids damage by not moving
+          } 
+          else if (id === 'l2') {
+            if (player_moving) {
+              clearTimeout(orangeLaserTimer);
+              continue;
+            }
+            else {
+              if (!t_f_wait) {
+                if(delete1 == true){
+                  element.remove();
+                  clearInterval(bomb_timeout);
+                }
+                t_f_wait = true;
+                orangeLaserTimer = setTimeout(function() {
+                  hp_hold = parseInt(parseInt(hp_str) - damage);
+                  damage_taken += damage;
+                  damage_taken_times++;
+                  hp_str = hp_hold.toString();
+                  audio.reset(8);
+                  audio.play(8);
+                  img_M.classList.add("flash");
+                  flash = true;
+                  setTimeout(function() {
+                    flash = false;
+                    img_M.classList.remove("flash");
+                    t_f_wait = false;
+                  }, 250);
+                }, 250);
+              }
+            }
+          } else if (id === 'l1') {
+            if (player_moving) {
+              if(delete1 == true){
+                element.remove();
+                clearInterval(bomb_timeout);
+              }
+              t_f_wait = true;
+              hp_hold = parseInt(parseInt(hp_str) - damage);
+              damage_taken += damage;
+              damage_taken_times++;
+              hp_str = hp_hold.toString();
+              audio.reset(8);
+              audio.play(8);
+              img_M.classList.add("flash");
+              flash = true;
+              setTimeout(function() {
+                flash = false;
+                img_M.classList.remove("flash");
+                t_f_wait = false;
+              }, 500);
+            } 
+            else {
+              continue; // Player avoids damage by not moving
+            }
           }
         }
       }

@@ -88,7 +88,7 @@ function attack1_legs(){
 
     intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-    checkCollision(legs, img_M, 20);
+    checkCollision(legs, img_M, 20, false, false);
     }
     }, 10);
       
@@ -152,15 +152,15 @@ function attack2_smoke(){
   }
   setTimeout(() => {
   if(number_lightning < 11){
-  lightningElem = document.querySelector(`#\\3${number_lightning}`);
+  lightningElem = document.querySelectorAll(`#\\3${number_lightning}`);
   }
 
-  lightningElem.style.left = `${point2.x}`;
-  lightningElem.style.top = `${point2.y}`;
+  lightningElem[lightningElem.length - 1].style.left = `${point2.x}`;
+  lightningElem[lightningElem.length - 1].style.top = `${point2.y}`;
   }, 10);
 
   setTimeout(() => {
-    lightningElem.remove();
+    lightningElem[lightningElem.length - 1].remove();
   }, 500);
 
   },600);
@@ -174,7 +174,7 @@ function attack2_smoke(){
   setTimeout(()=>{
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      checkCollisionOne(lightningElem, img_M, 15);
+      checkCollision(lightningElem, img_M, 15, false, false);
   }
   }, 10);
   },601);
@@ -198,7 +198,7 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
       setTimeout(() => {
         laser = document.querySelectorAll(".laser");
         laser[laser.length-1].style.height = "69%";
@@ -211,7 +211,7 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
       setTimeout(() => {
       laser = document.querySelectorAll(".laser");
       laser[laser.length-1].style.width = "86.5%"; 
@@ -233,7 +233,7 @@ function attack3_lasers(){
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser = document.querySelectorAll(".laser");
-      checkCollisionLaser(laser, img_M, 30);
+      checkCollision(laser, img_M, 30, false, true);
     }
   }, 10);
 
@@ -255,7 +255,7 @@ function attack3_lasers(){
         hand.style.left = `${randomNum}%`;
         hand.style.rotate = ``;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
           laser[laser.length-1].style.height = "69%";
@@ -273,7 +273,7 @@ function attack3_lasers(){
         hand.style.left = `90%`;
         hand.style.rotate = `90deg`;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
           laser[laser.length-1].style.width = "86.5%"; 
@@ -304,7 +304,7 @@ function attack3_lasers(){
           hand.style.left = `${randomNum}%`;
           hand.style.rotate = ``;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: 31%; left:${randomNum + 2.3}%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
             laser[laser.length-1].style.height = "69%";
@@ -322,7 +322,7 @@ function attack3_lasers(){
           hand.style.left = `90%`;
           hand.style.rotate = `90deg`;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + 15}%; left:86%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
             laser[laser.length-1].style.width = "86.5%"; 
@@ -349,7 +349,7 @@ function attack4_hand(){
   projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 40%;">`;
 
   setTimeout(() => {
-    hand2 = document.querySelector(".hand2");
+    hand2 = document.querySelectorAll(".hand2");
   },10);
 
   mettaton_gif.style.opacity = "0";
@@ -362,8 +362,8 @@ function attack4_hand(){
 
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      laser = document.querySelectorAll(".laser");
-      checkCollisionOne(hand2, img_M, 30);
+      hand2 = document.querySelectorAll(".hand2");
+      checkCollision(hand2, img_M, 30, false, false);
     }
   }, 10);
 
@@ -377,13 +377,13 @@ function attack4_hand(){
   hand_time = setInterval(function(){
     count_hand2++;
     if(count_hand2 % 3 === 1){
-      hand2.classList.add("hand2_down");
+      hand2[hand2.length - 1].classList.add("hand2_down");
     }
     if(count_hand2 % 3 === 2){
-      hand2.classList.remove("hand2_down");
+      hand2[hand2.length - 1].classList.remove("hand2_down");
     }
     if(count_hand2 % 3 === 0){
-      hand2.style.left = `${img_M.getBoundingClientRect().left - 137}px`;
+      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left - 137}px`;
     }
   },250);
   }, 400);
@@ -410,7 +410,7 @@ function attack5_head(){
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser_head = document.querySelectorAll(".laser_head");
-      checkCollisionLaser(laser_head, img_M, 20);
+      checkCollision(laser_head, img_M, 20, false, true);
     }
   }, 10);
 
@@ -477,9 +477,9 @@ function attack6_dash(){
   leg_dash_count_top = "";
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      leg_dash = document.querySelector(".leg_dash");
-      leg_dash.style.transition = "0.5s";
-      checkCollisionLaserOne(leg_dash, img_M, 20);
+      leg_dash = document.querySelectorAll(".leg_dash");
+      leg_dash[leg_dash.length - 1].style.transition = "0.5s";
+      checkCollision(leg_dash, img_M, 20, false, true);
     }
   }, 10);
 
@@ -492,14 +492,14 @@ function attack6_dash(){
   dash_leg = setInterval(() => {
     leg_dash_count++;
     if(leg_dash_count%3 == 1){
-      leg_dash.classList.add("leg_dash_right");
+      leg_dash[leg_dash.length - 1].classList.add("leg_dash_right");
     }
     if(leg_dash_count%3 == 2){
-      leg_dash.classList.remove("leg_dash_right");
+      leg_dash[leg_dash.length - 1].classList.remove("leg_dash_right");
     }
     if(leg_dash_count%3 == 0){
       if(leg_dash_count_top !== ""){
-        leg_dash.classList.remove(`${leg_dash_count_top}`);
+        leg_dash[leg_dash.length - 1].classList.remove(`${leg_dash_count_top}`);
       }
       worked_legs_dash = false;
       if(leg_dash_count_top == "" && worked_legs_dash === false){
@@ -511,28 +511,28 @@ function attack6_dash(){
         else{
         random_leg = randomRange(1,2);
         }
-        leg_dash.style.transition = "0.5s";
+        leg_dash[leg_dash.length - 1].style.transition = "0.5s";
         leg_dash_transition = 500;
       }
       if(leg_dash_count_top == "leg_dash_bottom" && worked_legs_dash === false){
         worked_legs_dash = true;
         leg_dash_count_top = "";
         random_leg = randomRange(1,2);
-        leg_dash.style.transition = "1s";
+        leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
       if(leg_dash_count_top == "leg_dash_top" && worked_legs_dash === false){
         worked_legs_dash = true;
         leg_dash_count_top = "";
         random_leg = randomRange(1,2);
-        leg_dash.style.transition = "1s";
+        leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
-      leg_dash.src = `img/${random_leg + 3}.png`;
-      leg_dash.setAttribute('id', `l${random_leg}`);
+      leg_dash[leg_dash.length - 1].src = `img/${random_leg + 3}.png`;
+      leg_dash[leg_dash.length - 1].setAttribute('id', `l${random_leg}`);
       if (leg_dash_count_top !== "") {
-        if (!leg_dash.classList.contains(leg_dash_count_top)) {
-          leg_dash.classList.add(leg_dash_count_top);
+        if (!leg_dash[leg_dash.length - 1].classList.contains(leg_dash_count_top)) {
+          leg_dash[leg_dash.length - 1].classList.add(leg_dash_count_top);
         }
       }
     }
@@ -560,13 +560,13 @@ function attack7_bombs(){
 
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      bomb = document.querySelector(".bomb");
-      explosion = document.querySelector(".explosion");
+      bomb = document.querySelectorAll(".bomb");
+      explosion = document.querySelectorAll(".explosion");
       if (explosion !== null){
-      checkCollisionOne(explosion, img_M, 20);
+      checkCollision(explosion, img_M, 20, false, false);
       }
-      else if(bomb !== null){
-        checkCollisionDeleteOne(bomb, img_M, 10);
+      if(bomb !== null){
+        checkCollision(bomb, img_M, 10, true, false);
       }
     }
   }, 10);
@@ -579,27 +579,27 @@ function attack7_bombs(){
     random_bomb = `${randomRange(23,69)}%`;
     projectile.innerHTML += '<img src="img/bomb.gif" class="bomb">';
     setTimeout(() => {
-      bomb = document.querySelector(".bomb");
-      bomb.style.left = random_bomb;
-      bomb.classList.add("bomb_down");
+      bomb[bomb.length - 1] = document.querySelectorAll(".bomb");
+      bomb[bomb.length - 1].style.left = random_bomb;
+      bomb[bomb.length - 1].classList.add("bomb_down");
       bomb_timeout = setTimeout(() => {
-        bomb.src = "img/explosion.gif";
-        bomb.classList.remove("bomb");
-        bomb.classList.remove("bomb_down");
-        bomb.style.left = `${parseInt(random_bomb) - 5}%`;
-        bomb.classList.add("explosion");
-        explosion = bomb;
+        bomb[bomb.length - 1].src = "img/explosion.gif";
+        bomb[bomb.length - 1].classList.remove("bomb");
+        bomb[bomb.length - 1].classList.remove("bomb_down");
+        bomb[bomb.length - 1].style.left = `${parseInt(random_bomb) - 5}%`;
+        bomb[bomb.length - 1].classList.add("explosion");
+        explosion[explosion.length - 1] = bomb[bomb.length - 1];
           setTimeout(() => {
-          explosion = document.querySelector(".explosion");
+          explosion = document.querySelectorAll(".explosion");
           if (explosion !== null){
           audio.play(13);
-          explosion.classList.add("transition");
-          explosion.style.width = "0%";
-          explosion.style.top = `74%`;
-          explosion.style.left = `${parseInt(explosion.style.left) + 9}%`;
+          explosion[explosion.length - 1].classList.add("transition");
+          explosion[explosion.length - 1].style.width = "0%";
+          explosion[explosion.length - 1].style.top = `74%`;
+          explosion[explosion.length - 1].style.left = `${parseInt(explosion[explosion.length - 1].style.left) + 9}%`;
           setTimeout(() => {
-          explosion = document.querySelector(".explosion");
-          explosion.remove();
+          explosion = document.querySelectorAll(".explosion");
+          explosion[explosion.length - 1].remove();
         }, 900);
         }
        }, 10);
@@ -611,28 +611,28 @@ function attack7_bombs(){
     random_bomb = `${randomRange(23,69)}%`;
     projectile.innerHTML += '<img src="img/bomb.gif" class="bomb">';
     setTimeout(() => {
-      bomb = document.querySelector(".bomb");
-      bomb.style.left = random_bomb;
-      bomb.classList.add("bomb_down");
+      bomb = document.querySelectorAll(".bomb");
+      bomb[bomb.length - 1].style.left = random_bomb;
+      bomb[bomb.length - 1].classList.add("bomb_down");
       bomb_timeout = setTimeout(() => {
         audio.play(13);
-        bomb.src = "img/explosion.gif";
-        bomb.classList.remove("bomb");
-        bomb.classList.remove("bomb_down");
-        bomb.style.left = `${parseInt(random_bomb) - 5}%`;
-        bomb.classList.add("explosion");
-        explosion = bomb;
+        bomb[bomb.length - 1].src = "img/explosion.gif";
+        bomb[bomb.length - 1].classList.remove("bomb");
+        bomb[bomb.length - 1].classList.remove("bomb_down");
+        bomb[bomb.length - 1].style.left = `${parseInt(random_bomb) - 5}%`;
+        bomb[bomb.length - 1].classList.add("explosion");
+        explosion[explosion.length - 1] = bomb[bomb.length - 1];
           setTimeout(() => {
-          explosion = document.querySelector(".explosion");
-          if (explosion !== null){
+          explosion = document.querySelectorAll(".explosion");
+          if (explosion[explosion.length - 1] !== null){
           audio.play(13);
-          explosion.classList.add("transition");
-          explosion.style.width = "0%";
-          explosion.style.top = `74%`;
-          explosion.style.left = `${parseInt(explosion.style.left) + 9}%`;
+          explosion[explosion.length - 1].classList.add("transition");
+          explosion[explosion.length - 1].style.width = "0%";
+          explosion[explosion.length - 1].style.top = `74%`;
+          explosion[explosion.length - 1].style.left = `${parseInt(explosion[explosion.length - 1].style.left) + 9}%`;
           setTimeout(() => {
-            explosion = document.querySelector(".explosion");
-            explosion.remove();
+            explosion = document.querySelectorAll(".explosion");
+            explosion[explosion.length - 1].remove();
         }, 900);
         }
        }, 10);
@@ -666,18 +666,18 @@ function attack8_wings(){
   rocket_count_left = 17;
 
   setInterval(() => {
-    wing1 = document.querySelector(".wing1");
-    wing2 = document.querySelector(".wing2");
-    wing2.classList.add("wing2_down");
-    wing1.classList.add("wing1_down");
+    wing1 = document.querySelectorAll(".wing1");
+    wing2 = document.querySelectorAll(".wing2");
+    wing2[wing2.length - 1].classList.add("wing2_down");
+    wing1[wing1.length - 1].classList.add("wing1_down");
   }, 10);
   
   intervalId2 = setInterval(() => {
     wing = document.querySelectorAll(".wing");
     rocket = document.querySelectorAll(".rocket");
     if(t_f_wait === false && rocket.length > 1){
-      checkCollisionDelete(rocket, img_M, 20);
-      checkCollision(wing, img_M, 20);
+      checkCollision(rocket, img_M, 20, true, false);
+      checkCollision(wing, img_M, 20, false, false);
     }
   }, 10);
 
@@ -732,8 +732,8 @@ function attack9_finale(){
   moveY = 0;
   width_yellow = 4;
   src_yellow = "img/bullet.png";
-  left_yellow = 82;
-  top_yellow = 20;
+  left_yellow = get(2)
+  top_yellow = get(3);
   drawHeart(x, y);
 
   setTimeout(() => {
@@ -755,7 +755,7 @@ function attack9_finale(){
   setTimeout(() => {
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      checkCollisionDelete(bullet, img_M, 20);
+      checkCollision(bullet, img_M, 20, true, false);
     }
   }, 10);
   }, 1550);
@@ -774,7 +774,8 @@ function attack9_finale(){
       yellow_heart.classList.add("yellow_heart_bc");
     }
     left_yellow -= 0.9;
-    top_yellow -= 2.5;
+    console.log(top_yellow);
+    top_yellow += minus_yellow;
     projectile.innerHTML += `<img class="bullet" src="${src_yellow}" style="left:${left_yellow}%; top:${parseInt(yellow_heart_red) + top_yellow}px; width:${width_yellow}%">`;
     audio.play(11);
 
@@ -783,7 +784,6 @@ function attack9_finale(){
       bullet = document.querySelectorAll(".bullet");
       bullet[bullet.length - 1].style.left = "-16%";
       width_yellow += 0.8;
-      console.log(width_yellow);
     }, 10);
   }, 751);
   }, 801);

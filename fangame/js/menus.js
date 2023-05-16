@@ -21,6 +21,7 @@ let hp_left = document.querySelector(".hp_shower");
 let attack_gif = document.querySelector(".attack_png");
 let mettaton_gif = document.querySelector(".mettaton_gif");
 let battle_menu = document.querySelector(".battle-menu");
+let fullscreenBtn = document.querySelector("#fullscreenBtn");
 let lv = document.querySelector(".lv");
 let name = document.querySelector(".name");
 let volume = document.querySelector("#volume");
@@ -75,47 +76,42 @@ let text1;
 let text2;
 let text_2;
 let text_3;
-// alert(window.innerHeight + " " + window.innerWidth);
 
 //Sets volume of the music to 20%
 setTimeout(() => {
   audio.pauseAll();
 }, 100);
 
-// Pause audio when user leaves the tab
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    audio.pause(0);
-    audio.pause(2);
-    audio.pause(9);
-    audio.pause(12);
-  } 
-  else {
-    audio.play(0);
-    audio.play(2);
-    audio.play(9);
-    audio.play(12);
-  }
-});
-
-// Pause audio when user leaves the tab or blocks the browser entirely
-window.addEventListener('blur', () => {
-  audio.pause(0);
-  audio.pause(2);
-  audio.pause(9);
-  audio.pause(12);
-});
-
-// Play audio when user returns to the tab or unblocks the browser
-window.addEventListener('focus', () => {
-  audio.play(0);
-  audio.play(2);
-  audio.play(9);
-  audio.play(12);
-});
+//Sets the volume in percantages
+document.querySelector("#rangeValue").innerHTML = `${volume.value}%`;
 
 //Width for hp bar
-hp_width.style.width = "100%"
+hp_width.style.width = "100%";
+
+//Fullscreen enabler
+if (document.fullscreenEnabled) {
+  fullscreenBtn.addEventListener("click", toggleFullscreen);
+} else {
+  fullscreenBtn.disabled = true;
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+setInterval(function() {
+  if (isFullScreen()) {
+      fullscreenBtn.src = "img/exit fullscreen.png"
+  } else {
+      fullscreenBtn.src = "img/fullscreen.png"
+  }
+}, 10);
 
 //Plays starting music
 start_menu.addEventListener('mousedown', () =>{
@@ -137,6 +133,37 @@ volume.addEventListener("mouseup", () => {
 
 //Waits for the button to be clicked and here you can change the animation in the start parameter
 start_button.addEventListener('click', () =>{
+  // Pause audio when user leaves the tab
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      audio.pause(0);
+      audio.pause(2);
+      audio.pause(9);
+      audio.pause(12);
+    } 
+    else {
+      audio.play(0);
+      audio.play(2);
+      audio.play(9);
+      audio.play(12);
+    }
+  });
+
+  // Pause audio when user leaves the tab or blocks the browser entirely
+  window.addEventListener('blur', () => {
+    audio.pause(0);
+    audio.pause(2);
+    audio.pause(9);
+    audio.pause(12);
+  });
+
+  // Play audio when user returns to the tab or unblocks the browser
+  window.addEventListener('focus', () => {
+    audio.play(0);
+    audio.play(2);
+    audio.play(9);
+    audio.play(12);
+  });
   if(started !== true){
   audio.mute(2);
   audio.reset(1);
@@ -219,22 +246,17 @@ start_button.addEventListener('click', () =>{
 });
 
 //All functions initialization
+
 //Function that will check for the num and then display check
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
     text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
-    setTimeout(() => {
-      shakeLetters();
-    }, 10);
     typeWriter2();
   }
   if(num_second == 1){
     img[num_second].src = "img/nothing.png"
     text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Mettaton NEO</div></div>`;
-    setTimeout(() => {
-      shakeLetters();
-    }, 10);
     typeWriter2();
   }
   if(num_second == 2){
@@ -251,9 +273,6 @@ function check(num){
   if(num_second == 3){
     img[num_second].src = "img/nothing.png"
     text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Spare</div></div>`;
-    setTimeout(() => {
-      shakeLetters();
-    }, 10);
     typeWriter2();
   }
 }
@@ -275,9 +294,6 @@ function check2(num){
   }
   if(num_second == 1){
     text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Check</div></div>`;
-    setTimeout(() => {
-      shakeLetters();
-    }, 10);
     typeWriter2 ();
   }
   if(num_second == 2){
@@ -353,6 +369,11 @@ function check4(num){
   }
   if(num_second == 3){
   }
+}
+
+//Checks for full screen
+function isFullScreen() {
+  return (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) ? true : false;
 }
 
 //text_menu disappear
@@ -619,7 +640,6 @@ let timeoutID;
 function typeWriter() {
   audio.reset(7);
   audio.play(7);
-  text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
     text_placeholder.innerHTML = `<div id="shake-element"></div>`;
@@ -629,7 +649,7 @@ function typeWriter() {
       timeoutID = setInterval(() => {
         if (i >= text.length) {
           setTimeout(() => {
-            shakeLettersArr();
+            shakeLetters();
             audio.pause(7);
           }, 100);
           clearInterval(timeoutID);
@@ -641,11 +661,23 @@ function typeWriter() {
     }, 10);
 }
 
+//Function that writes the text in the text box instantly
+function typeWriter2() {
+  audio.reset(7);
+  audio.pause(7);
+  clearTimeout(timeoutID);
+  clearInterval(intervalL);
+  text_placeholder.innerHTML = "";
+  text_placeholder.innerHTML = text;
+  clearTimeout(timeoutID);
+  shakeLetters();
+  return;
+}
+
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
   audio.reset(7);
   audio.play(7);
-  text_placeholder.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
     text_placeholder.innerHTML = `<div class="flex wrap"><div id="shake-element"></div><div id="shake-element"></div><div id="shake-element"></div></div>`;
@@ -665,7 +697,7 @@ function typeWriterArr() {
                   clearInterval(timeoutID);
                   setTimeout(() => {
                     audio.pause(7);
-                    shakeLettersArr();
+                    shakeLetters();
                   }, 100);
                   return;
                   }
@@ -716,7 +748,7 @@ function deathMtt() {
   mettaton_gif.style.animation = "shake_death 0.2s steps(1, end) infinite";
   if(count_death == 0){
   mettaton_gif.src="img/f7.png";
-  typeWriterBox("G... GUESS SHE SHOULD HAVE WORKED MORE ON THE DEFENCES...");
+  typeWriterBox("YOU WON, BUT AT WHAT COST?");
   count_death++;
   }
   else if(count_death == 1){
@@ -726,12 +758,17 @@ function deathMtt() {
   }
   else if(count_death == 2){
   mettaton_gif.src="img/f7.png";
-  typeWriterBox("YOU MAY HAVE DEFEATED ME.. BUT..");
+  typeWriterBox("YOU MAY HAVE DEFEATED ME, BUT...");
   count_death++;
   }
   else if(count_death == 3){
     mettaton_gif.src="img/f5.png";
-  typeWriterBox("I KNOW I CAN TELL FROM THAT STRIKE, DARLING.");
+  if(misses > 0){
+  typeWriterBox("I CAN TELL FROM THAT MISS, DARLING.");
+  }
+  else{
+  typeWriterBox("I KNOW YOU'RE NOT THAT BAD, DARLING.");
+  }
   count_death++;
   }
   else if(count_death == 4){
@@ -741,37 +778,42 @@ function deathMtt() {
   }
   else if(count_death == 5){
   mettaton_gif.src="img/f7.png";
-  typeWriterBox("YES, ASGORE WILL FALL EASILY TO YOU...");
+  typeWriterBox("YES, ASGORE WILL LOSE EASILY TO YOU...");
   count_death++;
   }
   else if(count_death == 6){
   mettaton_gif.src="img/f6.png";
-  typeWriterBox("BUT YOU WON'T HARM HUMANITY, WILL YOU?");
+  typeWriterBox("BUT YOU WON'T MURDER ALL HUMANS, WILL YOU?");
   count_death++;
   }
   else if(count_death == 7){
   mettaton_gif.src="img/f2.png";
-  typeWriterBox("YOU AREN'T ABSOLUTELY EVIL.");
+  typeWriterBox("YOU'RE NOT THAT BAD.");
   count_death++;
   }
   else if(count_death == 8){
   mettaton_gif.src="img/f6.png";
-  typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
+  if(misses > 0){
+    typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MISSED UP.");
+  }
+  else{
+    typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
+  }
   count_death++;
   }
   else if(count_death == 9){
   mettaton_gif.src="img/f1.png";
-  typeWriterBox("AND SO LATE INTO THE SHOW, TOO.");
+  typeWriterBox("AND SO LATE INTO THE FIGHT, TOO.");
   count_death++;
   }
   else if(count_death == 10){
   mettaton_gif.src="img/f1.png";
-  typeWriterBox("HA... HA. AT LEAST NOW I CAN REST EASY.");
+  typeWriterBox("AT LEAST NOW I CAN REST EASILY.");
   count_death++;
   }
   else if(count_death == 11){
   mettaton_gif.src="img/f4.png";
-  typeWriterBox("KNOWING ALPHYS AND THE HUMANS WILL LIVE ON...!");
+  typeWriterBox("KNOWING THAT ALPHYS AND THE HUMANS WILL LIVE ON...!");
   count_death++;
   }
   else if(count_death == 12){
@@ -808,21 +850,7 @@ function deathMtt() {
   //END
   }
 }
-function deathZ_Enter(){
 
-}
-
-//Function that writes the text in the text box instantly
-function typeWriter2() {
-  audio.reset(7);
-  audio.pause(7);
-  clearTimeout(timeoutID);
-  clearInterval(intervalL);
-  text_placeholder.innerHTML = "";
-  text_placeholder.innerHTML = text;
-  shakeLettersArr();
-  return;
-}
 //End of the functions initialization
 
 //A,a and left arrow keys listeners, movement to the right of the buttons
@@ -864,7 +892,9 @@ document.addEventListener('keyup', e => {
   }
 });
 }, 3000);
+
 //Z and enter, x key listeners
+setTimeout(() => {
 document.addEventListener('keyup', e => {
   const key = e.keyCode || e.which;
   switch (key) {
@@ -879,7 +909,8 @@ document.addEventListener('keyup', e => {
           clearTimeout(attack_line_timeout);
           clearInterval(timer_int);
           clearInterval(HP_show);
-          attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0)-401}px`;
+          console.log(left_minus);
+          attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0)-left_minus}px`;
           attack_line.classList.remove("move_attack");
           audio.play(5);
           if(timer > 50){
@@ -1015,6 +1046,7 @@ document.addEventListener('keyup', e => {
       return;
   }
 });
+},4000);
 
 //Movement in the inventory
 document.addEventListener('keyup', e => {

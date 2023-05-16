@@ -30,6 +30,10 @@
 html {
     width: 100%;
     height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none; 
 }
 .cursor_none{
     cursor: none;
@@ -364,6 +368,20 @@ img.smaller_img {
     align-items: center;
     cursor: pointer;
 }
+img#fullscreenBtn {
+    width: 3%;
+    position: absolute;
+    padding: 0 0 1% 1%;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+.game_knowledge {
+    font-family: "BUTTONS";
+    color: #f9812b;
+    padding: 3% 0 0 0;
+    font-size: 238%;
+}
 .slider {
     width: 23%;
     height: 7%;
@@ -533,7 +551,6 @@ img#heart {
 }
 div#shake-element {
     display: flex;
-    white-space: pre;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -552,7 +569,7 @@ div#shake-element {
 img.img_M {
     width: 4%;
     position: relative;
-    z-index: 2;
+    z-index: 0;
 }
 .stats-menu {
     font-family: "8bit_small";
@@ -976,4 +993,145 @@ img.attack {
     100% {
         top:100%;
     }
+}
+
+@media screen and (min-width: 1700px) and (min-height: 956px) {
+
+}
+
+@media screen and (min-width: 2560px) and (min-height: 1440px) {
+    .start_button {
+        display: flex;
+        justify-content: center;
+        width: 25%;
+        height: 21%;
+        font-family: "BUTTONS";
+        color: #f9812b;
+        background: black;
+        border: 8px solid #f9812b;
+        font-size: 998%;
+        padding: 0 0 1% 1%;
+        align-items: center;
+        cursor: pointer;
+    }
+    .button {
+        height: 96%;
+        width: 19%;
+        color: #fe8507;
+        border: 2px solid #fe8507;
+        background: 0;
+        font-size: 323%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .text {
+        width: 51.5%;
+        height: 73%;
+        border: 10px solid white;
+        font-size: 365%;
+        color: white;
+        padding: 1%;
+        white-space: pre;
+        transition: 1s;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 0.5fr 0.5fr;
+        grid-template-rows: 33% 33% 33%;
+        width: 100%;
+        height: 100%;
+        font-size: 56px;
+    }
+    .chat_box {
+        width: 20%;
+        height: 18%;
+        background-color: white;
+        border-radius: 10%;
+        position: absolute;
+        color: black;
+        top: 13%;
+        left: 65%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1%;
+        font-family: "mtt_speak";
+        font-size: 224%;
+        letter-spacing: -2px;
+        transition: 1s;
+    }
+    .triangle {
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 17%;
+        left: 63%;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-right: 56px solid white;
+        transition: 1s;
+    }
+    .stats-menu {
+        font-family: "8bit_small";
+        display: flex;
+        height: 7%;
+        justify-content: center;
+        align-items: center;
+        font-size: 375%;
+        width: 100%;
+        transition: 1s;
+    }
+    .hp- {
+        color: red;
+        font-size: 342%;
+        font-family: 'attack';
+        animation: bounce 750ms;
+    }
+    .hand2_down {
+        top: 63% !important;
+    }
+    .hand2 {
+        width: 17%;
+        position: absolute;
+        top: 32%;
+        rotate: 90deg;
+        transition: 400ms;
+    }
+    img.legs_down {
+        top: 47% !important;
+    }
+    img.smoke {
+        width: 53%;
+        position: absolute;
+        top: 58%;
+        left: 24%;
+        z-index: 2;
+        transition: 1s;
+    }
+    .laser_head {
+        transform-origin: top center;
+        height: 5%;
+        position: absolute;
+        left: 48%;
+        top: 21%;
+        width: 0.5%;
+        border: 3px black solid;
+        transition: 700ms;
+    }
+
+    @keyframes moveBackground {
+        0% {
+            background-position: 0% 0%;
+            background-position-x: 0%;
+            background-position-y: 0%;
+        }
+
+        100% {
+            background-position: -51% 77%;
+        }
+}
 }

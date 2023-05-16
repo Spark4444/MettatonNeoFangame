@@ -30,9 +30,11 @@
     <img src="" class="heart_img none" alt="">
     <div class="start_menu">
     <div class="start_button">PLAY</div>
+    <div class="game_knowledge">Game runs better in full screen mode</div>
+    <img src="img/full screen.png" id="fullscreenBtn">
     <div class="slider">
-    <input type="range" id="volume" min="0" max="100" value="60" oninput="rangeValue.innerText =`${this.value}%`">
-    <p id="rangeValue">60%</p>
+    <input type="range" id="volume" min="0" max="100" value="0" oninput="rangeValue.innerText =`${this.value}%`">
+    <p id="rangeValue"></p>
     </div>
     </div>
     <img class="hidden" id="heart" src="img/heart.png" alt="">
