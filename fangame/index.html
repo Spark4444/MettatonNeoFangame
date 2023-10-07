@@ -23,6 +23,8 @@
     <audio id="audio13" src="audio/sbexp.mp3" autoplay></audio>
     <audio id="audio14" src="audio/mettaton_death.mp3" autoplay></audio>
     <audio id="audio15" src="audio/heal.mp3" autoplay></audio>
+
+    <div class="screenWrapper">
     <div class="particles"></div>
     <div class="mettaton_hp hidden"><div class="hp-">72</div> <div class='hp_show_wrap2'><div class="hp_shower"></div></div></div>
     <img src="img/heart.png" class="img_M hidden" alt="">
@@ -30,7 +32,6 @@
     <img src="" class="heart_img none" alt="">
     <div class="start_menu">
     <div class="start_button">PLAY</div>
-    <div class="game_knowledge">Game runs better in full screen mode</div>
     <img src="img/full screen.png" id="fullscreenBtn">
     <div class="slider">
     <input type="range" id="volume" min="0" max="100" value="0" oninput="rangeValue.innerText =`${this.value}%`">
@@ -72,6 +73,7 @@
       <div class="option button" id="item item-btn"><img class="but heart" src="img/item.png">ITEM</div>
       <div class="option button" id="mercy mercy-btn"><img class="but heart" src="img/mercy.png">MERCY</div>
       </div>
+    </div>
     </div>
     </div>
     <script src="js/menus.js"></script>
