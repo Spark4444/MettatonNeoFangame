@@ -353,7 +353,7 @@ img.smaller_img {
     position: absolute;
     background-image: url(../img/background.png);
     animation: moveBackground 2s linear infinite;
-    background-size: 2000px;
+    background-size: 100%;
     background-repeat: repeat;
     transition: 1s;
     z-index: 3;
@@ -850,12 +850,12 @@ img.attack {
 }  
 @keyframes moveBackground {
     0% {
-      background-position: 0% 0%;
+      background-position: 0vw 0vw;
     }
     100% {
-        background-position: -98% 203%;
+        background-position: 14.3vw -16.6vw;
     }
-  }
+}
   @keyframes shake1 {
     0%{
       transform: translateY(0);
