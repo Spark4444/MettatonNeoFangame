@@ -324,7 +324,7 @@ img.bullet{
     position: relative;
     height: 93%;
     left: 0%;
-    border: 7px solid black;
+    border: 0.6vw solid black;
     background-color: white;
 }
 img.attack_png {
@@ -815,15 +815,15 @@ img.attack {
 }
 @keyframes yellow_white {
     0% {
-        border: 7px solid yellow;
+        border: 0.6vw solid yellow;
         background-color:   black;
     }
     50% {
-        border: 7px solid black;
+        border: 0.6vw solid black;
         background-color:   yellow;
     }
     100% {
-        border: 7px solid yellow;
+        border: 0.6vw solid yellow;
         background-color: black;
     }
 }
