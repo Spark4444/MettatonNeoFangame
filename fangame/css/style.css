@@ -39,6 +39,7 @@ html {
     cursor: none;
 }
 body {
+    background: black;
     width: 100%;
     height: 100%;
     padding: 0;

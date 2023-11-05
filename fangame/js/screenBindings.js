@@ -12,55 +12,5 @@ let xbounds;
 let ybounds;
 let y_minus_bounds;
 let x_minus_bounds;
-let screenWrapper = document.querySelector(".screenWrapper")
 console.log(screenWidth + " " + screenHeight);
-
-
-if (screenWidth <= 800 && screenHeight <= 600) {
-    
-} 
-
-else if (screenWidth <= 1024 && screenHeight <= 768) {
-
-} 
-
-else if (screenWidth <= 1128 && screenHeight <= 634) {
-
-} 
-
-else if (screenWidth <= 1280 && screenHeight <= 720) {
-
-}
-
-else if (screenWidth <= 1366 && screenHeight <= 768) {
-
-}
-
-else if (screenWidth <= 1600 && screenHeight <= 900) {
-
-}
-
-else if (screenWidth <= 1600 && screenHeight <= 1200) {
-
-}
-
-else if (screenWidth <= 1680 && screenHeight <= 1050) {
-
-}
-
-else if (screenWidth <= 1760 && screenHeight <= 990) {
-
-}
-
-else if (screenWidth <= 1920 && screenHeight <= 1080) {
-
-} 
-
-else if (screenWidth <= 1920 && screenHeight <= 1200) {
-
-} 
-
-else if (screenWidth <= 2560 && screenHeight <= 1440) {
-
-} 
   
