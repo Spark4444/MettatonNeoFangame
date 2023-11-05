@@ -693,7 +693,7 @@ function attack8_wings(){
     rocket_count_left_move++;
     rocket_count_left += 4;
     if(rocket_count_left_move !== rocket_random){
-    projectile.innerHTML += `<img src="img/rocket.png" class="rocket" style="left: ${rocket_count_left}%">`;
+    projectile.innerHTML += `<img src="img/rocket.gif" class="rocket" style="left: ${rocket_count_left}%">`;
     }
     if(rocket_count_left_move == 3){
       clearInterval(rocket_inter2);
