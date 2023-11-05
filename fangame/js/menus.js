@@ -131,17 +131,17 @@ volume.addEventListener("mouseup", () => {
   audio.volumeAll(volume.value);
 });
 
-//Waits for the button to be clicked and here you can change the animation in the start parameter
-start_button.addEventListener('click', () =>{
+// Waits for the button to be clicked and here you can change the animation in the start parameter
+start_button.addEventListener('click', () => {
+
   // Pause audio when user leaves the tab
-document.addEventListener('visibilitychange', () => {
+  document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       audio.pause(0);
       audio.pause(2);
       audio.pause(9);
       audio.pause(12);
-    } 
-    else {
+    } else {
       audio.play(0);
       audio.play(2);
       audio.play(9);
@@ -150,12 +150,12 @@ document.addEventListener('visibilitychange', () => {
   });
 
   // Pause audio when user leaves the tab or blocks the browser entirely
-  window.addEventListener('blur', () => {
-    audio.pause(0);
-    audio.pause(2);
-    audio.pause(9);
-    audio.pause(12);
-  });
+  // window.addEventListener('blur', () => {
+  //   audio.pause(0);
+  //   audio.pause(2);
+  //   audio.pause(9);
+  //   audio.pause(12);
+  // });
 
   // Play audio when user returns to the tab or unblocks the browser
   window.addEventListener('focus', () => {
@@ -164,85 +164,94 @@ document.addEventListener('visibilitychange', () => {
     audio.play(9);
     audio.play(12);
   });
+
   if(started !== true){
-  audio.mute(2);
-  audio.reset(1);
-  audio.play(1);
-  html.classList.add("cursor_none");
-  frisk.classList.remove("hidden");
-  start_menu.classList.add("hidden_anim");
-  setTimeout(function() {
-  start_menu.classList.add("hidden");
-  },1000);
-  started = true;
-    //Starting animation
+    audio.mute(2);
+    audio.reset(1);
+    audio.play(1);
+    html.classList.add("cursor_none");
+    frisk.classList.remove("hidden");
+    start_menu.classList.add("hidden_anim");
+
+    setTimeout(function() {
+      start_menu.classList.add("hidden");
+    },1000);
+
+    started = true;
+
+    // Starting animation
     function start_animation(){
-    if(started === true){
-    setTimeout(function() {
-    appear(`* Mettaton NEO blocks the way!`);
-    stage = false
-    },1500);
-    setTimeout(function() {
-    heart.classList.remove("hidden");
-    audio.play(4);
-    frisk.classList.add("hidden");
-    start.classList.add("black");
-    setTimeout(function() {
-      wrapper.classList.remove("hidden");
-      start.classList.add("hidden");
-      heart.classList.add("move");
-    }, 200);
-    setTimeout(function() {
-    audio.unmute(0);
-    audio.reset(0);
-    audio.play(0);
-    }, 1000);
-    }, 2000); 
-    setTimeout(function(){
-    start_button.innerHTML = "RESTART";
-    start_button.style.width = "38%";
-    buttons[0].classList.add('yellow');
-    heart.classList.add("hidden");
-    audio.play(7);
-    img[0].src = "img/heart.png";
-    num = 0;
-    },2400);
-    }
+      if(started === true){
+        setTimeout(function() {
+          appear(`* Mettaton NEO blocks the way!`);
+          stage = false;
+        },1500);
+
+        setTimeout(function() {
+          heart.classList.remove("hidden");
+          audio.play(4);
+          frisk.classList.add("hidden");
+          start.classList.add("black");
+
+          setTimeout(function() {
+            wrapper.classList.remove("hidden");
+            start.classList.add("hidden");
+            heart.classList.add("move");
+          }, 200);
+
+          setTimeout(function() {
+            audio.unmute(0);
+            audio.reset(0);
+            audio.play(0);
+          }, 1000);
+        }, 2000); 
+
+        setTimeout(function(){
+          start_button.innerHTML = "RESTART";
+          start_button.style.width = "38%";
+          buttons[0].classList.add('yellow');
+          heart.classList.add("hidden");
+          audio.play(7);
+          img[0].src = "img/heart.png";
+          num = 0;
+        },2600);
+      }
     }
 
-    //No start animation
+    // No start animation
     function no_start_animation(){
-    if(started === true){
-    setTimeout(function() {
-      appear("* Mettaton NEO blocks the way!");
-    },10);
-    start.classList.add("hidden");
-    wrapper.classList.remove("hidden");
-    img[0].src = "img/heart.png";
-    buttons[0].classList.add('yellow');
-    num = 0;
-    stage = false;
-    setTimeout(function(){
-      audio.unmute(0);
-      audio.reset(0);
-      audio.play(0);
-    },10);
-    }
+      if(started === true){
+        setTimeout(function() {
+          appear("* Mettaton NEO blocks the way!");
+        },10);
+
+        start.classList.add("hidden");
+        wrapper.classList.remove("hidden");
+        img[0].src = "img/heart.png";
+        buttons[0].classList.add('yellow');
+        num = 0;
+        stage = false;
+
+        setTimeout(function(){
+          audio.unmute(0);
+          audio.reset(0);
+          audio.play(0);
+        },10);
+      }
     }
 
-  if(anim === true){
-    start_animation();
-    time_complete_interval = setInterval(() =>{
-      time_complete++;
-    }, 1000);
+    if(anim === true){
+      start_animation();
+      time_complete_interval = setInterval(() =>{
+        time_complete++;
+      }, 1000);
+    } else if(anim === false){
+      no_start_animation();
+      time_complete_interval = setInterval(() =>{
+        time_complete++;
+      }, 1000);
+    }
   }
-  else if(anim === false){
-    no_start_animation();
-    time_complete_interval = setInterval(() =>{
-      time_complete++;
-    }, 1000);
-  }
-}
 });
 
 //All functions initialization
@@ -579,8 +588,6 @@ function showHP(){
   }
 }
 
-//Removes img that is needed to make the inventory work because of the DOM initialization
-img_h[0].remove();
 
 //Movement between buttons
 function classA(){

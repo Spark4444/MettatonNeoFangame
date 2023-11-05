@@ -1,5 +1,4 @@
 //Initializing variables
-// Set initial position
 let img_M = document.querySelector(".img_M");
 let projectile = document.querySelector(".particles");
 let leg1 = document.querySelector(".leg1");
@@ -11,6 +10,7 @@ let top2= 19.3;
 let left2 = 50;
 let number = 1;
 let t_f_wait = false;
+// Set initial position
 let x = 35;
 let y = 47;
 let damage = 0;

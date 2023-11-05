@@ -430,17 +430,14 @@ input#volume {
   cursor: grabbing;
 }
 img#heart {
-    width: 2.4%;
+    width: 2vw;
     position: absolute;
     left: 49%;
     top: 73%;
-    transform: translate(-50%, -50%);
-    background-image: url("../img/heart.png");
-    background-size: contain;
-    background-repeat: no-repeat;
     animation: beam 0.5s infinite;
-    opacity: 1;
     -webkit-animation: beam 0.5s infinite;
+    opacity: 1;
+    z-index: 2;
 }
 .start {
     display: flex;
@@ -448,6 +445,7 @@ img#heart {
     justify-content: center;
     width: 100%;
     height: 100%;
+    background: white;
 }
 #frisk {
     width: 4%;
@@ -786,9 +784,9 @@ img.attack {
     height: 77% !important;
 }
 .move {
-    transition: all 0.2s ease-in-out !important;
-    top: 94.8% !important;
-    left: 24.3% !important;
+    transition: all 0.4s ease-in-out !important;
+    top: 92.8% !important;
+    left: 23.8% !important;
 }
 @keyframes beam {
     0% {
@@ -845,11 +843,9 @@ img.attack {
 }
 @keyframes disepear {
     0% {
-        display: block;
         opacity: 1;
     }
     100% {
-        display: block;
         opacity: 0;
     }
 }  
