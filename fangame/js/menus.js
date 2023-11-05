@@ -909,6 +909,7 @@ document.addEventListener('keyup', e => {
     case 90: // Z key
     case 122: // z key
 
+      //fix this
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
         setTimeout(() => {
