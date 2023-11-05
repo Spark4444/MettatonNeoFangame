@@ -916,8 +916,7 @@ document.addEventListener('keyup', e => {
           clearTimeout(attack_line_timeout);
           clearInterval(timer_int);
           clearInterval(HP_show);
-          console.log(left_minus);
-          attack_line.style.left = `${attack_line.getBoundingClientRect().left.toFixed(0)-left_minus}px`;
+          attack_line.style.left = `${attack_line.getBoundingClientRect().left}px`;
           attack_line.classList.remove("move_attack");
           audio.play(5);
           if(timer > 50){
@@ -981,7 +980,7 @@ document.addEventListener('keyup', e => {
             attack_line.classList.add("hidden");
             canvas.classList.remove("text_bc_im");
             attack_gif.src = "img/nothing.png";
-            disappear();
+            // disappear();
           }, 999);
         },11);
       }

@@ -320,10 +320,10 @@ img.bullet{
     height: 100%;
 }
 .line_attack {
-    width: 1.14%;
-    position: relative;
-    height: 93%;
-    left: 0%;
+    width: 0.6%;
+    position: absolute;
+    height: 18%;
+    left: 24%;
     border: 0.4vw solid black;
     background-color: white;
 }
