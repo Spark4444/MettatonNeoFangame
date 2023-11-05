@@ -475,6 +475,7 @@ img#heart {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    position: relative;
 }
 .mettaton_gif {
     width: 59%;
@@ -489,19 +490,24 @@ img#heart {
     left: -10%;
 }
 .wrap_box_text {
-    width: 0;
-    height: 0;
+    width: 52vw;
+    height: 27vw;
+    position: absolute;
     transition: 0.5s;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 .triangle {
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: 12%;
-    left: 63%;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-right: 56px solid white;
+    width: 0%;
+    height: 0%;
+    position: relative;
+    left: 1%;
+    top: 22%;
+    border-top: 1.5vw solid transparent;
+    border-bottom: 1.5vw solid transparent;
+    border-right: 3.2vw solid white;
     transition: 1s;
 }
 .triangle_left{
@@ -509,14 +515,13 @@ img#heart {
     transition: 0s;
 }
 .chat_box {
-    width: 20%;
-    height: 18%;
+    width: 36%;
+    height: 34%;
     background-color: white;
-    border-radius: 10%;
-    position: absolute;
+    position: relative;
+    top: 9%;
+    border-radius: 1vw;
     color: black;
-    top: 7%;
-    left: 66%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -524,7 +529,7 @@ img#heart {
     flex-wrap: wrap;
     padding: 1%;
     font-family: "mtt_speak";
-    font-size: 155%;
+    font-size: 1.5vw;
     letter-spacing: -2px;
     transition: 1s;
 }
@@ -544,8 +549,8 @@ img#heart {
 .text {
     width: 51.5%;
     height: 73%;
-    border: 10px solid white;
-    font-size: 230%;
+    border: 0.3vw solid white;
+    font-size: 2vw;
     color: white;
     padding: 1%;
     white-space: pre;
@@ -593,7 +598,7 @@ img.img_M {
 }
 .name {
     padding-right: 5%;
-    font-size: 100%;
+    font-size: 2vw;
     height: 100%;
     display: flex;
     align-items: center;
@@ -601,7 +606,7 @@ img.img_M {
 }
 .lv {
     padding-right: 5%;
-    font-size: 100%;
+    font-size: 2vw;
     height: 100%;
     display: flex;
     align-items: center;
@@ -612,13 +617,13 @@ img.img_M {
     flex-direction: row;
     width: 30%;
     justify-content: flex-start;
-    font-size: 100%;
+    font-size: 2.3vw;
     height: 100%;
     align-items: center;
 }
 .small_hp {
     font-family: "HP";
-    font-size: 50%;
+    font-size: 1.25vw;
     padding: 0 4% 0 0;
     display: flex;
     align-items: center;
@@ -659,9 +664,9 @@ Nothing yet
     height: 96%;
     width: 19%;
     color: #fe8507;
-    border: 2px solid #fe8507;
+    border: 0.2vw solid #fe8507;
     background: 0;
-    font-size: 198%;
+    font-size: 1.5vw;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -672,12 +677,12 @@ Nothing yet
 }
 .button.yellow {
     color: #d4d415;
-    border: 2px solid #d4d415;
+    border: 0.2vw solid #d4d415;
 }
 img.heart {
-    height: 40%;
+    width: 2vw;
+    height: 2vw;
     vertical-align: middle;
-    padding: 0 4% 0 0;
     position: relative;
     top: 3%;
 }
@@ -687,7 +692,7 @@ img.heart {
     grid-template-rows: 33% 33% 33%;
     width: 100%;
     height: 100%;
-    font-size: 35px;
+    font-size: 2vw;
 
 }
 .left-element {
