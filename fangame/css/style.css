@@ -530,7 +530,7 @@ img#heart {
     padding: 1%;
     font-family: "mtt_speak";
     font-size: 1.5vw;
-    letter-spacing: -2px;
+    letter-spacing: -0.15vw;
     transition: 1s;
 }
 .chat_box_left{
