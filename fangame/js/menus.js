@@ -909,7 +909,6 @@ document.addEventListener('keyup', e => {
     case 90: // Z key
     case 122: // z key
 
-      //fix this
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
         setTimeout(() => {
@@ -917,7 +916,7 @@ document.addEventListener('keyup', e => {
           clearTimeout(attack_line_timeout);
           clearInterval(timer_int);
           clearInterval(HP_show);
-          attack_line.style.left = `${attack_line.getBoundingClientRect().left}px`;
+          attack_line.style.left = `${attack_line.getBoundingClientRect().left-window.innerWidth/100*24.25}px`;
           attack_line.classList.remove("move_attack");
           audio.play(5);
           if(timer > 50){
@@ -981,7 +980,7 @@ document.addEventListener('keyup', e => {
             attack_line.classList.add("hidden");
             canvas.classList.remove("text_bc_im");
             attack_gif.src = "img/nothing.png";
-            // disappear();
+            disappear();
           }, 999);
         },11);
       }
