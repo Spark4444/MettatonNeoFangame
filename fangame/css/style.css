@@ -294,7 +294,7 @@ img.bullet{
 }
 .hp- {
     color: red;
-    font-size: 220%;
+    font-size: 2vw;
     font-family: 'attack';
     animation: bounce 750ms;
 }

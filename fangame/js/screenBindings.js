@@ -4,7 +4,6 @@
 
 const screenWidth = window.screen.width;
 const screenHeight = window.screen.height;
-let left_minus = 500;
 let top_laser;
 let top_laser2;
 let minus_yellow
