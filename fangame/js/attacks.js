@@ -383,7 +383,7 @@ function attack4_hand(){
       hand2[hand2.length - 1].classList.remove("hand2_down");
     }
     if(count_hand2 % 3 === 0){
-      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left - 137}px`;
+      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left-window.innerWidth/100*8}px`;
     }
   },250);
   }, 400);
