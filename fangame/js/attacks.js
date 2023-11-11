@@ -102,7 +102,7 @@ function attack1_legs(){
       clearInterval(intervalId2);
       clearInterval(moveHeartI);
       clearInterval(HP_show);
-      appear("* Stage lights are blaring");
+      // appear("* Stage lights are blaring");
     }, 9999);
   }
 

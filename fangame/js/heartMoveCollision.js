@@ -11,6 +11,7 @@ let left2 = 50;
 let number = 1;
 let t_f_wait = false;
 // Set initial position
+let yMax;
 let x = 35;
 let y = 47;
 let damage = 0;
@@ -135,35 +136,36 @@ function checkCollision(elements, target, damage, delete1, obw) {
 //Checks if the heart is out of bounds
 function check_out_of_bounds() {
   if(canvas_t === true){
+  yMax = 100-(img_M.offsetWidth*100)/(text_placeholder.offsetHeight);
   if((moveX == 0.25 || moveX == -0.25) &&(moveY == 1 || moveY == -1)){
-    if(98 < x && 82 < y){
-      x = 98;
-      y = 82;
+    if(96 < x && yMax < y){
+      x = 96;
+      y = yMax;
     }
-    else if(98 < x && y < -17){
-      x = 98;
-      y = -17;
+    else if(96 < x && y < 0){
+      x = 96;
+      y = 0;
     }
-    else if(-2 > x && 82 < y){
-      x = -2;
-      y = 82;
+    else if(0 > x && yMax < y){
+      x = 0;
+      y = yMax;
     }
-    else if(-2 > x && y < -17){
-      x = -2;
-      y = -17;
+    else if(0 > x && y < 0){
+      x = 0;
+      y = 0;
     }
   }
-  if(98 < x){
-    x = 98;
+  if(96 < x){
+    x = 96;
   }
-  else if(-2 > x){
-    x = -2;
+  else if(0 > x){
+    x = 0;
   }
-  else if(82 < y){
-    y = 82;
+  else if(yMax < y){
+    y = yMax;
   }
-  else if(y < -17){
-    y = -17;
+  else if(y < 0){
+    y = 0;
   }
 }
 }

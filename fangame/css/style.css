@@ -27,6 +27,9 @@
     font-family: "mtt_speak";
     src: url('fonts/mtt_speak.ttf');
 }
+*{
+    box-sizing: border-box;
+}
 html {
     width: 100%;
     height: 100%;
@@ -320,8 +323,8 @@ img.bullet{
     height: 100%;
 }
 .line_attack {
-    width: 1.5%;
-    height: 98%;
+    width: 2.3%;
+    height: 100%;
     position: relative;
     left: 0%;
     border: 0.3vw solid black;
@@ -463,7 +466,7 @@ img#heart {
 }
 .mettaton {
     width: 100%;
-    height: 51.5%;
+    height: 54.5%;
     display: flex;
     justify-content: center;
     padding: 0 0 0.5% 0;
@@ -527,7 +530,7 @@ img#heart {
     flex-wrap: wrap;
     padding: 1%;
     font-family: "mtt_speak";
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     letter-spacing: -0.15vw;
     transition: 1s;
 }
@@ -545,10 +548,11 @@ img#heart {
     align-items: center;
 }
 .text {
-    width: 51.5%;
-    height: 73%;
+    width: 54.5%;
+    height: 92%;
     border: 0.3vw solid white;
     font-size: 2vw;
+    position: relative;
     color: white;
     padding: 1%;
     white-space: pre;
@@ -573,13 +577,13 @@ div#shake-element {
 }
 img.img_M {
     width: 4%;
-    position: relative;
+    position: absolute;
     z-index: 0;
 }
 .stats-menu {
     font-family: "8bit_small";
     display: flex;
-    height: 7%;
+    height: 9%;
     justify-content: center;
     align-items: center;
     font-size: 246%;
@@ -643,7 +647,7 @@ Nothing yet
 */
 .battle-menu {
     width: 100%;
-    height: 9.5%;
+    height: 11.5%;
     background-color: black;
     display: flex;
     align-items: flex-end;
@@ -733,7 +737,7 @@ img.attack {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 18%;
+    height: 32%;
     padding: 2% 0 0 0;
 }
 .hidden{
@@ -781,7 +785,8 @@ img.attack {
 } 
 .cube {
     width: 49% !important;
-    height: 77% !important;
+    height: 97% !important;
+    padding: 0;
 }
 .move {
     transition: all 0.4s ease-in-out !important;
