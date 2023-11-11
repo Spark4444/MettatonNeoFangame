@@ -72,12 +72,14 @@ function attack1_legs(){
   
     intervalId = setInterval(() => {
         if(number%3 === 1){
-          leg1.classList.add("legs_down");
-          leg2.classList.add("legs_down");
+          let legs_down = window.innerHeight*0.795-(window.innerWidth * 0.08) * (313.73/132.16);
+          console.log(legs_down);
+          leg1.style.top = `${legs_down}px`;
+          leg2.style.top = `${legs_down}px`;
         }
         else if(number%3 === 2){
-          leg1.classList.remove("legs_down");
-          leg2.classList.remove("legs_down");
+          leg1.style.top = "";
+          leg2.style.top = "";
         }
         else if(number%3 === 0 && number != 0){
           leg1.style.left = `${randomRange(23,71)}%`
@@ -102,7 +104,7 @@ function attack1_legs(){
       clearInterval(intervalId2);
       clearInterval(moveHeartI);
       clearInterval(HP_show);
-      // appear("* Stage lights are blaring");
+      appear("* Stage lights are blaring");
     }, 9999);
   }
 

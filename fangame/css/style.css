@@ -107,9 +107,6 @@ img.legs{
     transition: 0.200s;
     z-index: 1;
 }
-img.legs_down{
-    top: 44% !important;
-}
 img.smoke {
     width: 53%;
     position: absolute;
