@@ -18,7 +18,6 @@ let hp = document.querySelector(".txt");
 let hp_mettaton_attacked = document.querySelector(".hp-");
 let elem_mettaton = document.querySelector(".mettaton_hp");
 let hp_left = document.querySelector(".hp_shower");
-let attack_gif = document.querySelector(".attack_png");
 let mettaton_gif = document.querySelector(".mettaton_gif");
 let battle_menu = document.querySelector(".battle-menu");
 let fullscreenBtn = document.querySelector("#fullscreenBtn");
@@ -479,17 +478,13 @@ function attack_function(){
       misses++;
       audio.play(5);
       elem_mettaton.classList.remove("hidden");
-      attack_gif.classList.remove("hidden");
-      attack_gif.src = "img/attack.gif";
       attack_line.classList.remove("move_attack");
       attack_line.classList.add("hidden");
       setTimeout(() => {
         attack_line.classList.remove("appear_hide");
         attack_line.classList.add("hidden");
-        attack_gif.classList.add("hidden");
         elem_mettaton.classList.add("hidden");
         canvas.classList.remove("text_bc_im");
-        attack_gif.src = "img/nothing.png";
         disappear();
       }, 999);
     }, 1201);
@@ -965,8 +960,6 @@ document.addEventListener('keyup', e => {
             mettaton_gif.classList.add("animation_shake");
           }, 10);
           elem_mettaton.classList.remove("hidden");
-          attack_gif.classList.remove("hidden");
-          attack_gif.src = "img/attack.gif";
           attack_line.classList.remove("move_attack");
           setTimeout(() => {
             setTimeout(() => {
@@ -975,11 +968,9 @@ document.addEventListener('keyup', e => {
             attack_line.classList.remove("appear_hide");
             attack_line.classList.remove("appear_hide_yellow");
             attack_line.classList.add("hidden");
-            attack_gif.classList.add("hidden");
             elem_mettaton.classList.add("hidden");
             attack_line.classList.add("hidden");
             canvas.classList.remove("text_bc_im");
-            attack_gif.src = "img/nothing.png";
             disappear();
           }, 999);
         },11);
