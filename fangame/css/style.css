@@ -958,7 +958,6 @@ img.attack {
       transform: translateX(-1px);
     }
   }  
-  /*    animation: shake_death 0.2s steps(1, end) infinite;*/
   @keyframes shake_death {
     0%{
         transform: translateX(-2px);
