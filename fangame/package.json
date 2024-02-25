@@ -1,0 +1,18 @@
+{
+  "name": "Mettaton Neo Fight",
+  "version": "1.0.0",
+  "description": "A fangame that ive made in my free time based on a boss in undertale that doesnt actually have any in game attacks and is just skip, but this game makes it playable",
+  "main": "src/main.js",
+  "author": "ME ONLY",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.1.4"
+  },
+  "scripts": {
+    "start": "electron .",
+    "install": "npm install"
+  },
+  "dependencies": {
+    "update-electron-app": "^3.0.0"
+  }
+}
