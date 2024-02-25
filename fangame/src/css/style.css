@@ -66,7 +66,6 @@ audio{
     width: 100%;
     height: 100%;
     z-index: 2;
-    overflow: hidden;
 }
 img.leg1 {
     width: 8%;
@@ -99,10 +98,11 @@ img.hand1 {
     width: 4.5%;
     position: absolute;
     transition: 0.5s;
+    transform-origin: left top;
 }
 .laser {
     width: 0.5%;
-    height: 1%;
+    height: 0.5vw;
     position: absolute;
     transition: 1s;
     z-index: 3;

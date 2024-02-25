@@ -80,7 +80,7 @@ if(busy == true){
     case 122: // z key
     mettatonBottom = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.545;
     canvasBottom = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.795;
-    // attack_num = 0;
+    attack_num = 2;
     if(attack_num == 7){
     clearTimeout(timeoutID);
     audio.pause(6);

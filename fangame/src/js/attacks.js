@@ -12,8 +12,6 @@ let hyp_l;
 let laser;
 let laser_num;
 let laser_time;
-let top_laser;
-let top_laser2;
 let hand;
 let count_laser;
 let randomNum;
@@ -199,12 +197,12 @@ function attack2_smoke(){
 //Attack 3(hand and lasers)
 function attack3_lasers(){
   if(randomPick(0,1) == 1){
-    randomNum = randomRange(21,74);
+    randomNum = randomRange(23,71);
     projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:5%; left:${randomNum}%;">`;
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
       setTimeout(() => {
         laser = document.querySelectorAll(".laser");
         laser[laser.length-1].style.height = "69%";
@@ -212,15 +210,15 @@ function attack3_lasers(){
     },10);
   }
   else{
-    randomNum = randomRange(44,65);
-    projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:${randomNum}%; left:90%; rotate:90deg;">`;
+    randomNum = randomRange(mettatonBottom,canvasBottom - window.innerWidth * 0.045);
+    projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:${randomNum}px; left:90%; transform: rotate(90deg);">`;
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
       setTimeout(() => {
       laser = document.querySelectorAll(".laser");
-      laser[laser.length-1].style.width = "86.5%"; 
+      laser[laser.length-1].style.width = "76.5%"; 
       laser[laser.length-1].style.left = "0%"; 
       },250);
     },10);
@@ -235,8 +233,6 @@ function attack3_lasers(){
   laser_num = 1;
   laser = 0;
   drawHeart(x, y);
-  top_laser = 14;
-  top_laser2 = 30;
 
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
@@ -257,13 +253,13 @@ function attack3_lasers(){
     if(hand.style.left == "90%"){
       if(count_laser != 1){
         setTimeout(() => {
-        randomNum = randomRange(21,74);
+        randomNum = randomRange(23,71);
         hand = document.querySelector(".hand1");
         hand.style.top = `5%`;
         hand.style.left = `${randomNum}%`;
-        hand.style.rotate = ``;
+        hand.style.transform = ``;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
           laser[laser.length-1].style.height = "69%";
@@ -275,16 +271,16 @@ function attack3_lasers(){
     else if(hand.style.top == "5%"){
       if(count_laser != 1){
         setTimeout(() => {
-        randomNum = randomRange(44,65);
+        randomNum = randomRange(mettatonBottom,canvasBottom - window.innerWidth * 0.045);
         hand = document.querySelector(".hand1");
-        hand.style.top = `${randomNum}%`;
+        hand.style.top = `${randomNum}px`;
         hand.style.left = `90%`;
-        hand.style.rotate = `90deg`;
+        hand.style.transform = `rotate(90deg)`;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
-          laser[laser.length-1].style.width = "86.5%"; 
+          laser[laser.length-1].style.width = "76.5%"; 
           laser[laser.length-1].style.left = "0%"; 
         },10);
         }, 0);
@@ -306,13 +302,13 @@ function attack3_lasers(){
       if(hand.style.left == "90%"){
         if(count_laser != 1){
           setTimeout(() => {
-          randomNum = randomRange(21,74);
+          randomNum = randomRange(23,71);
           hand = document.querySelector(".hand1");
           hand.style.top = `5%`;
           hand.style.left = `${randomNum}%`;
-          hand.style.rotate = ``;
+          hand.style.transform = ``;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${top_laser2}%; left:${randomNum + 2.3}%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
             laser[laser.length-1].style.height = "69%";
@@ -324,16 +320,16 @@ function attack3_lasers(){
       else if(hand.style.top == "5%"){
         if(count_laser != 1){
           setTimeout(() => {
-          randomNum = randomRange(44,65);
+          randomNum = randomRange(mettatonBottom,canvasBottom - window.innerWidth * 0.045);
           hand = document.querySelector(".hand1");
-          hand.style.top = `${randomNum}%`;
+          hand.style.top = `${randomNum}px`;
           hand.style.left = `90%`;
-          hand.style.rotate = `90deg`;
+          hand.style.transform = `rotate(90deg)`;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + top_laser}%; left:86%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
-            laser[laser.length-1].style.width = "86.5%"; 
+            laser[laser.length-1].style.width = "76.5%"; 
             laser[laser.length-1].style.left = "0%"; 
           },10);
           }, 500);
@@ -348,7 +344,7 @@ function attack3_lasers(){
     clearInterval(moveHeartI);
     clearInterval(HP_show);
     img_M.style.animation = "";
-    appear("* Stage lights are blaring");
+    // appear("* Stage lights are blaring");
   }, 11999);
 } 
 
