@@ -62,8 +62,8 @@ let canvasBottom = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * win
 //Attack 1(legs)
 function attack1_legs(){ 
     moveHeartI = setInterval(moveHeart, 10);
-    let mov1 = mettatonBottom - (window.innerWidth * 0.08 / 51) * 121;
-    let mov2 = canvasBottom - (window.innerWidth * 0.08 / 51) * 121;
+    let mov1 = mettatonBottom - window.innerWidth * 0.189;
+    let mov2 = canvasBottom - window.innerWidth * 0.189;
     x = 47;
     y = 31;
     drawHeart(x, y);
@@ -350,7 +350,7 @@ function attack3_lasers(){
 
 //Attack 4 hand
 function attack4_hand(){
-  projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 40%;">`;
+  projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 40%; top:${mettatonBottom - window.innerWidth*0.045/77*277}px">`;
 
   setTimeout(() => {
     hand2 = document.querySelectorAll(".hand2");
@@ -381,13 +381,13 @@ function attack4_hand(){
   hand_time = setInterval(function(){
     count_hand2++;
     if(count_hand2 % 3 === 1){
-      hand2[hand2.length - 1].classList.add("hand2_down");
+      hand2[hand2.length - 1].style.top = `${canvasBottom - window.innerWidth*0.045/77*277}px`;
     }
     if(count_hand2 % 3 === 2){
-      hand2[hand2.length - 1].classList.remove("hand2_down");
+      hand2[hand2.length - 1].style.top = `${mettatonBottom - window.innerWidth*0.045/77*277}px`;
     }
     if(count_hand2 % 3 === 0){
-      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left-window.innerWidth/100*8}px`;
+      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left}px`;
     }
   },250);
   }, 400);
@@ -409,6 +409,7 @@ function attack5_head(){
   y = 31;
   moveX = 0;
   moveY = 0;
+  let eyeDistance = (window.innerHeight - 0.5 * window.innerWidth)/2 + window.innerWidth * 0.068;
   drawHeart(x, y);
 
   intervalId2 = setInterval(() => {
@@ -425,8 +426,8 @@ function attack5_head(){
   moveHeartI = setInterval(moveHeart, 10);
 
   head_time = setInterval(function(){
-    leg_t = img_M.getBoundingClientRect().top - window.innerHeight/100 * 16;
-    leg2_t = img_M.getBoundingClientRect().left - window.innerWidth/100 * 48;
+    leg_t = img_M.getBoundingClientRect().top - eyeDistance;
+    leg2_t = img_M.getBoundingClientRect().left - window.innerWidth * 0.48;
     if(leg2_t < 0){
       leg2_t = leg2_t - leg2_t - leg2_t;
       left = true;
@@ -437,21 +438,20 @@ function attack5_head(){
     hyp_t = calculateHypotenuse(leg2_t,leg_t);
     if(left === false){
     let calcR = -calculateAngle(hyp_t,leg_t);
-    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="rotate:${calcR}deg"></div>`;
+    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
     }
     if(left === true){
     let calcR = calculateAngle(hyp_t,leg_t) 
-    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="rotate:${calcR}deg"></div>`;
+    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
     }
     
     setTimeout(() => {
     laser_head = document.querySelectorAll(".laser_head");
-    laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left}px`;
-    laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top}px`;
+    laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left * 2 - window.innerWidth * 0.48}px`;
+    laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top * 2 - eyeDistance}px`;
     setTimeout(() => {
-      laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left + img_M.getBoundingClientRect().left - window.innerWidth/100 * 48}px`;
-      laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top + img_M.getBoundingClientRect().top - window.innerHeight/100 * 16}px`;
-    }, 10);
+      laser_head[laser_head.length - 1].style.opacity = 0; 
+    }, 350);
     }, 10);
 
   },710);

@@ -117,23 +117,17 @@ img.hand1 {
     background: orange;
 }
 .hand2{
-    width: 19%;
+    width: 4.5%;
     position: absolute;
-    top: 32%;
-    rotate: 90deg;
     transition: 400ms;
-}
-.hand2_down{
-    top: 58% !important;
 }
 .laser_head {
     transform-origin: top center;
-    height: 5%;
+    height: 4vw;
     position: absolute;
     left: 48%;
-    top: 16%;
-    width: 0.5%;
-    border: 3px black solid;
+    width: 0.7vw;
+    border: 0.156vw black solid;
     transition: 700ms;
 }
 img.leg_dash{
