@@ -132,7 +132,6 @@ img.hand1 {
 }
 img.leg_dash{
     width: 8%;
-    height: 40%;
     position: relative;
     top: 48%;
     left: 15%;
@@ -142,17 +141,10 @@ img.leg_dash{
 img.leg_dash_right{
     left:77%;
 }
-img.leg_dash_top{
-    top:68%;
-}
-img.leg_dash_bottom{
-    top:34%;
-}
 img.bomb {
     width: 12%;
     position: absolute;
     left: 45%;
-    top: 16%;
     transition: 1s;
     z-index: 3;
 }
@@ -162,7 +154,6 @@ img.bomb {
 img.explosion {
     width: 21%;
     position: absolute;
-    top: 56%;
     z-index: 2;
 }
 img.wing2 {
@@ -192,9 +183,7 @@ img.wing1_down {
 img.rocket {
     width: 5%;
     position: absolute;
-    top: -14%;
-    animation: rocketDown 2s;
-    animation-iteration-count: 1;
+    transition: 2s linear;
     z-index: 3;
 }
 img.heart_yellow {
@@ -206,7 +195,7 @@ img.heart_yellow {
     align-items: center;
     justify-content: center;
     width: 5%;
-    height: 10%;
+    height: 5vw;
     position: absolute;
     left: 47.2%;
     top: 23%;
@@ -408,7 +397,6 @@ img#heart {
     width: 2vw;
     position: absolute;
     left: 49%;
-    top: 73%;
     animation: beam 0.5s infinite;
     -webkit-animation: beam 0.5s infinite;
     opacity: 1;
@@ -424,7 +412,8 @@ img#heart {
 }
 #frisk {
     width: 4%;
-    padding: 0 0 10% 0;
+    position: absolute;
+    top: 75%;
 }
 .wrapper {
     width: 100vw;
@@ -483,7 +472,7 @@ img#heart {
     transition: 1s;
 }
 .triangle_left{
-    left:54%;
+    left: -16%;
     transition: 0s;
 }
 .chat_box {
@@ -506,7 +495,7 @@ img#heart {
     transition: 1s;
 }
 .chat_box_left{
-    left:57%;
+    left:-16%;
     transition: 0s;
 }
 .text-menu {
@@ -952,21 +941,4 @@ img.attack {
     100% {
         background-size: 40% 40%;
     }
-}
-
-  @keyframes rocketDown {
-    0% {
-        top:-14%;
-    }
-    100% {
-        top:100%;
-    }
-}
-
-@media screen and (min-width: 1700px) and (min-height: 956px) {
-
-}
-
-@media screen and (min-width: 2560px) and (min-height: 1440px) {
- 
 }

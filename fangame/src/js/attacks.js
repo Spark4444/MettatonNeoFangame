@@ -39,8 +39,7 @@ let bullet;
 let yellow_heart_red;
 let width_yellow;
 let src_yellow;
-let left_yellow;
-let top_yellow;
+let ratio_yellow;
 let bomb_interval;
 let bomb;
 let random_bomb;
@@ -344,7 +343,7 @@ function attack3_lasers(){
     clearInterval(moveHeartI);
     clearInterval(HP_show);
     img_M.style.animation = "";
-    // appear("* Stage lights are blaring");
+    appear("* Stage lights are blaring");
   }, 11999);
 } 
 
@@ -478,7 +477,7 @@ function attack6_dash(){
   drawHeart(x, y);
   leg_dash_count = 0;
   leg_dash_transition = 500;
-  leg_dash_count_top = "";
+  leg_dash_count_top = 1;
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       leg_dash = document.querySelectorAll(".leg_dash");
@@ -502,14 +501,14 @@ function attack6_dash(){
       leg_dash[leg_dash.length - 1].classList.remove("leg_dash_right");
     }
     if(leg_dash_count%3 == 0){
-      if(leg_dash_count_top !== ""){
-        leg_dash[leg_dash.length - 1].classList.remove(`${leg_dash_count_top}`);
+      if(leg_dash_count_top !== 1){
+        leg_dash[leg_dash.length - 1].style.top = "";
       }
       worked_legs_dash = false;
-      if(leg_dash_count_top == "" && worked_legs_dash === false){
+      if(leg_dash_count_top == 1 && worked_legs_dash === false){
         worked_legs_dash = true;
-        leg_dash_count_top = randomPick3("leg_dash_bottom","leg_dash_top","");
-        if(leg_dash_count_top == "leg_dash_bottom" || leg_dash_count_top == "leg_dash_top"){
+        leg_dash_count_top = randomRange(0,2);
+        if(leg_dash_count_top == 2 || leg_dash_count_top == 0){
           random_leg = 0;
         }
         else{
@@ -518,25 +517,28 @@ function attack6_dash(){
         leg_dash[leg_dash.length - 1].style.transition = "0.5s";
         leg_dash_transition = 500;
       }
-      if(leg_dash_count_top == "leg_dash_bottom" && worked_legs_dash === false){
+      if(leg_dash_count_top == 2 && worked_legs_dash === false){
         worked_legs_dash = true;
-        leg_dash_count_top = "";
+        leg_dash_count_top = 1;
         random_leg = randomRange(1,2);
         leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
-      if(leg_dash_count_top == "leg_dash_top" && worked_legs_dash === false){
+      if(leg_dash_count_top == 0 && worked_legs_dash === false){
         worked_legs_dash = true;
-        leg_dash_count_top = "";
+        leg_dash_count_top = 1;
         random_leg = randomRange(1,2);
         leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
       leg_dash[leg_dash.length - 1].src = `img/${random_leg + 3}.png`;
       leg_dash[leg_dash.length - 1].setAttribute('id', `l${random_leg}`);
-      if (leg_dash_count_top !== "") {
-        if (!leg_dash[leg_dash.length - 1].classList.contains(leg_dash_count_top)) {
-          leg_dash[leg_dash.length - 1].classList.add(leg_dash_count_top);
+      if (leg_dash_count_top !== 1) {
+        if (leg_dash_count_top == 0) {
+          leg_dash[leg_dash.length - 1].style.top = `${(canvasBottom - mettatonBottom)*0.6666+mettatonBottom - window.innerWidth*0.18919}px`;
+        }
+        if (leg_dash_count_top == 2) {
+          leg_dash[leg_dash.length - 1].style.top = `${(canvasBottom - mettatonBottom)*0.3333+mettatonBottom}px`;
         }
       }
     }
@@ -581,17 +583,18 @@ function attack7_bombs(){
 
   setTimeout(() => {
     random_bomb = `${randomRange(23,69)}%`;
-    projectile.innerHTML += '<img src="img/bomb.gif" class="bomb">';
+    projectile.innerHTML += `<img src="img/bomb.gif" style="top: ${(window.innerHeight - window.innerWidth*0.50)/2+window.innerWidth*0.07}px" class="bomb">`;
     setTimeout(() => {
       bomb[bomb.length - 1] = document.querySelectorAll(".bomb");
       bomb[bomb.length - 1].style.left = random_bomb;
-      bomb[bomb.length - 1].classList.add("bomb_down");
+      bomb[bomb.length - 1].style.top = `${canvasBottom - window.innerWidth * 0.1355}px`;
       bomb_timeout = setTimeout(() => {
         bomb[bomb.length - 1].src = "img/explosion.gif";
         bomb[bomb.length - 1].classList.remove("bomb");
-        bomb[bomb.length - 1].classList.remove("bomb_down");
+        bomb[bomb.length - 1].style.top = ``;
         bomb[bomb.length - 1].style.left = `${parseInt(random_bomb) - 5}%`;
         bomb[bomb.length - 1].classList.add("explosion");
+        bomb[bomb.length - 1].style.top = `${canvasBottom-window.innerWidth * 0.1495}px`;
         explosion[explosion.length - 1] = bomb[bomb.length - 1];
           setTimeout(() => {
           explosion = document.querySelectorAll(".explosion");
@@ -599,7 +602,7 @@ function attack7_bombs(){
           audio.play(13);
           explosion[explosion.length - 1].classList.add("transition");
           explosion[explosion.length - 1].style.width = "0%";
-          explosion[explosion.length - 1].style.top = `74%`;
+          explosion[explosion.length - 1].style.top = `${canvasBottom-window.innerWidth*0.056}px`;
           explosion[explosion.length - 1].style.left = `${parseInt(explosion[explosion.length - 1].style.left) + 9}%`;
           setTimeout(() => {
           explosion = document.querySelectorAll(".explosion");
@@ -613,18 +616,19 @@ function attack7_bombs(){
 
   bomb_interval = setInterval(() => {
     random_bomb = `${randomRange(23,69)}%`;
-    projectile.innerHTML += '<img src="img/bomb.gif" class="bomb">';
+    projectile.innerHTML += `<img src="img/bomb.gif" style="top: ${(window.innerHeight - window.innerWidth*0.50)/2+window.innerWidth*0.07}px" class="bomb">`;
     setTimeout(() => {
       bomb = document.querySelectorAll(".bomb");
       bomb[bomb.length - 1].style.left = random_bomb;
-      bomb[bomb.length - 1].classList.add("bomb_down");
+      bomb[bomb.length - 1].style.top = `${canvasBottom - window.innerWidth * 0.1355}px`;
       bomb_timeout = setTimeout(() => {
         audio.play(13);
         bomb[bomb.length - 1].src = "img/explosion.gif";
         bomb[bomb.length - 1].classList.remove("bomb");
-        bomb[bomb.length - 1].classList.remove("bomb_down");
+        bomb[bomb.length - 1].style.top = ``;
         bomb[bomb.length - 1].style.left = `${parseInt(random_bomb) - 5}%`;
         bomb[bomb.length - 1].classList.add("explosion");
+        bomb[bomb.length - 1].style.top = `${canvasBottom-window.innerWidth * 0.1495}px`;
         explosion[explosion.length - 1] = bomb[bomb.length - 1];
           setTimeout(() => {
           explosion = document.querySelectorAll(".explosion");
@@ -632,7 +636,7 @@ function attack7_bombs(){
           audio.play(13);
           explosion[explosion.length - 1].classList.add("transition");
           explosion[explosion.length - 1].style.width = "0%";
-          explosion[explosion.length - 1].style.top = `74%`;
+          explosion[explosion.length - 1].style.top = `${canvasBottom-window.innerWidth*0.056}px`;
           explosion[explosion.length - 1].style.left = `${parseInt(explosion[explosion.length - 1].style.left) + 9}%`;
           setTimeout(() => {
             explosion = document.querySelectorAll(".explosion");
@@ -669,7 +673,7 @@ function attack8_wings(){
   rocket_count_left_move = 0;
   rocket_count_left = 17;
 
-  setInterval(() => {
+  setTimeout(() => {
     wing1 = document.querySelectorAll(".wing1");
     wing2 = document.querySelectorAll(".wing2");
     wing2[wing2.length - 1].classList.add("wing2_down");
@@ -697,11 +701,16 @@ function attack8_wings(){
     rocket_count_left_move++;
     rocket_count_left += 4;
     if(rocket_count_left_move !== rocket_random){
-    projectile.innerHTML += `<img src="img/rocket.gif" class="rocket" style="left: ${rocket_count_left}%">`;
+    projectile.innerHTML += `<img src="img/rocket.gif" class="rocket" style="left: ${rocket_count_left}%; top:-8vw;">`;
     }
     if(rocket_count_left_move == 3){
       clearInterval(rocket_inter2);
       clearInterval(rocket_inter);
+      setTimeout(() => {
+        rocket.forEach(rocket1 => {
+          rocket1.style.top = "100%";
+        });
+      }, 10);
       setTimeout(() => {
         rocket.forEach(rocket1 => {
           rocket1.remove();
@@ -736,8 +745,7 @@ function attack9_finale(){
   moveY = 0;
   width_yellow = 4;
   src_yellow = "img/bullet.png";
-  left_yellow = get(2)
-  top_yellow = get(3);
+  ratio_yellow = 42/23;
   drawHeart(x, y);
 
   setTimeout(() => {
@@ -752,7 +760,7 @@ function attack9_finale(){
     yellow_heart_out.style.opacity = "0";
     yellow_heart.style.rotate = "90deg";
     yellow_heart.style.left = "82%";
-    yellow_heart_red = `${img_M.getBoundingClientRect().top}px`;
+    yellow_heart_red = `${img_M.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
     yellow_heart.style.top = yellow_heart_red;
   }, 500);
 
@@ -775,16 +783,14 @@ function attack9_finale(){
     setTimeout(() => {
     if(width_yellow == 5.6){
       src_yellow = "img/bullet_big.png";
+      ratio_yellow = 155/83;
       yellow_heart.classList.add("yellow_heart_bc");
     }
-    left_yellow -= 0.9;
-    console.log(top_yellow);
-    top_yellow += minus_yellow;
-    projectile.innerHTML += `<img class="bullet" src="${src_yellow}" style="left:${left_yellow}%; top:${parseInt(yellow_heart_red) + top_yellow}px; width:${width_yellow}%">`;
+    projectile.innerHTML += `<img class="bullet" src="${src_yellow}" style="left:${84 - width_yellow}%; top:${parseInt(yellow_heart_red)+window.innerWidth*0.025-window.innerWidth/100*width_yellow/ratio_yellow/2}px; width:${width_yellow}%">`;
     audio.play(11);
 
     setTimeout(() => {
-      yellow_heart_red = `${img_M.getBoundingClientRect().top}px`;
+      yellow_heart_red = `${img_M.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
       bullet = document.querySelectorAll(".bullet");
       bullet[bullet.length - 1].style.left = "-16%";
       width_yellow += 0.8;

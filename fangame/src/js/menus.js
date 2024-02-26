@@ -18,6 +18,7 @@ let html = document.querySelector("html");
 let hp = document.querySelector(".txt");
 let hp_mettaton_attacked = document.querySelector(".hp-");
 let elem_mettaton = document.querySelector(".mettaton_hp");
+let attack_png = document.querySelector(".attack_png");
 let hp_left = document.querySelector(".hp_shower");
 let mettaton_gif = document.querySelector(".mettaton_gif");
 let battle_menu = document.querySelector(".battle-menu");
@@ -177,6 +178,7 @@ start_button.addEventListener('click', () => {
 
         setTimeout(function() {
           heart.classList.remove("hidden");
+          heart.style.top = `${window.innerWidth*0.0303+window.innerHeight*0.75}px`
           audio.play(4);
           frisk.classList.add("hidden");
           start.classList.add("black");
@@ -464,12 +466,14 @@ function attack_function(){
       audio.play(5);
       elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
       elem_mettaton.classList.remove("hidden");
+      attack_png.src = "img/attack.gif";
       attack_line.classList.remove("move_attack");
       attack_line.classList.add("hidden");
       setTimeout(() => {
         attack_line.classList.remove("appear_hide");
         attack_line.classList.add("hidden");
         elem_mettaton.classList.add("hidden");
+        attack_png.src = "";
         canvas.classList.remove("text_bc_im");
         disappear();
       }, 999);
@@ -626,6 +630,7 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
+  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -651,6 +656,7 @@ function typeWriter() {
 
 //Function that writes the text in the text box instantly
 function typeWriter2() {
+  console.log(text);
   audio.reset(7);
   audio.pause(7);
   clearTimeout(timeoutID);
@@ -664,6 +670,7 @@ function typeWriter2() {
 
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
+  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -947,6 +954,7 @@ document.addEventListener('keyup', e => {
           }, 10);
           elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
           elem_mettaton.classList.remove("hidden");
+          attack_png.src = "img/attack.gif";
           attack_line.classList.remove("move_attack");
           setTimeout(() => {
             setTimeout(() => {
@@ -956,6 +964,7 @@ document.addEventListener('keyup', e => {
             attack_line.classList.remove("appear_hide_yellow");
             attack_line.classList.add("hidden");
             elem_mettaton.classList.add("hidden");
+            attack_png.src = "";
             attack_line.classList.add("hidden");
             canvas.classList.remove("text_bc_im");
             disappear();
