@@ -1,4 +1,0 @@
-f11 bug
-configure icon in json
-menus bug
-convert icon into ico

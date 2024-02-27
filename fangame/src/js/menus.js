@@ -93,9 +93,13 @@ function enableFullScreen(){
 
 document.addEventListener('keydown', function(e) {
   const key = e.keyCode || e.which;
-  console.log(key);
-  if (key === 122) {
-    enableFullScreen();
+  switch(key){
+    case 122:
+      enableFullScreen();
+      break;
+    case 27:
+      this.location.reload()
+      break;
   }
 });
 
@@ -302,7 +306,7 @@ function check2(num){
   }
   if(num_second == 1){
     text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Check</div></div>`;
-    typeWriter2 ();
+    typeWriter2();
   }
   if(num_second == 2){
     audio.play(15);
@@ -831,6 +835,7 @@ function deathMtt() {
     <div class="in_statistics">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
     <div class="in_statistics">Time taken to complete the game : ${time_complete}s</div>
     <div class="in_statistics">Turns taken to complete the game : ${turns_complete}</div>
+    <div class="in_statistics">Press esc to restart</div>
     </div>`;
   }, 1000);
   save(1,finished);

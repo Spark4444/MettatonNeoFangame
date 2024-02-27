@@ -232,9 +232,10 @@ img.bullet{
 }
 .in_statistics {
     color: white;
-    font-size: 321%;
+    font-size: 2vw;
     font-family: "buttons";
     padding: 1% 0 1% 0;
+    user-select: text;
 }
 .mettaton_hp {
     position: absolute;
@@ -324,6 +325,14 @@ img.smaller_img {
     align-items: center;
     cursor: pointer;
 }
+.update_page {
+    color: #f9812b;
+    font-family: 'buttons';
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 img.fullScreen_btn {
     width: 3%;
     position: absolute;
@@ -392,6 +401,7 @@ input#volume {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1% 0 0 0;
 }
 img#heart {
     width: 2vw;

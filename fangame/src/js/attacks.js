@@ -386,7 +386,7 @@ function attack4_hand(){
       hand2[hand2.length - 1].style.top = `${mettatonBottom - window.innerWidth*0.045/77*277}px`;
     }
     if(count_hand2 % 3 === 0){
-      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left}px`;
+      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left+window.innerWidth*0.49*0.04/2 - window.innerWidth*0.045/2}px`;
     }
   },250);
   }, 400);
@@ -599,6 +599,7 @@ function attack7_bombs(){
           setTimeout(() => {
           explosion = document.querySelectorAll(".explosion");
           if (explosion !== null){
+          audio.reset(13);
           audio.play(13);
           explosion[explosion.length - 1].classList.add("transition");
           explosion[explosion.length - 1].style.width = "0%";
@@ -622,6 +623,7 @@ function attack7_bombs(){
       bomb[bomb.length - 1].style.left = random_bomb;
       bomb[bomb.length - 1].style.top = `${canvasBottom - window.innerWidth * 0.1355}px`;
       bomb_timeout = setTimeout(() => {
+        audio.reset(13);
         audio.play(13);
         bomb[bomb.length - 1].src = "img/explosion.gif";
         bomb[bomb.length - 1].classList.remove("bomb");
@@ -633,6 +635,7 @@ function attack7_bombs(){
           setTimeout(() => {
           explosion = document.querySelectorAll(".explosion");
           if (explosion[explosion.length - 1] !== null){
+          audio.reset(13);
           audio.play(13);
           explosion[explosion.length - 1].classList.add("transition");
           explosion[explosion.length - 1].style.width = "0%";

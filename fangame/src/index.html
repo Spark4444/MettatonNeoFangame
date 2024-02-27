@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mettaton NEO Battle</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="img/app.ico">
   </head>
   <body> 
     <!-- audio files -->
@@ -33,6 +33,7 @@
     <input type="range" id="volume" min="0" max="100" value="0" oninput="rangeValue.innerText =`${this.value}%`">
     <p id="rangeValue"></p>
     </div>
+    <div class="update_page">press esc to restart the game</div>
     <div class="exit_btn" onclick="window.close()">exit</div>
     <img src="img/fullscreen.png" class="fullScreen_btn" onclick="enableFullScreen()">
     </div>
