@@ -630,7 +630,6 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
-  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -656,7 +655,6 @@ function typeWriter() {
 
 //Function that writes the text in the text box instantly
 function typeWriter2() {
-  console.log(text);
   audio.reset(7);
   audio.pause(7);
   clearTimeout(timeoutID);
@@ -670,7 +668,6 @@ function typeWriter2() {
 
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
-  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -788,12 +785,7 @@ function deathMtt() {
   }
   else if(count_death == 8){
   mettaton_gif.src="img/f6.png";
-  if(misses > 0){
-    typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MISSED UP.");
-  }
-  else{
-    typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
-  }
+  typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
   count_death++;
   }
   else if(count_death == 9){
@@ -828,11 +820,9 @@ function deathMtt() {
     <div class="in_statistics">Damage taken : ${damage_taken_times}(times)</div>
     <div class="in_statistics">Hits : ${hits}</div>
     <div class="in_statistics">Critical hits : ${critical_hits_given}</div>
-    <div class="in_statistics">Misses : ${misses}</div>
     <div class="in_statistics">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
     <div class="in_statistics">Time taken to complete the game : ${time_complete}s</div>
     <div class="in_statistics">Turns taken to complete the game : ${turns_complete}</div>
-    <div class="in_statistics">Press f5 to restart the game</div>
     </div>`;
   }, 1000);
   save(1,finished);
