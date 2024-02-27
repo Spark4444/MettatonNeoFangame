@@ -1,16 +1,8 @@
-const { app, BrowserWindow, Menu, globalShortcut} = require('electron');
+const { app, BrowserWindow, Menu} = require('electron');
 const path = require('path');
 
 
 const createWindow = () => {
-    
-    globalShortcut.register('F11', () => {
-        const mainWindow = BrowserWindow.getFocusedWindow();
-        if (mainWindow) {
-            mainWindow.setFullScreen(!mainWindow.isFullScreen());
-        }
-    });
-
     let mainWindow = new BrowserWindow({
         width: 600,
         height: 800,

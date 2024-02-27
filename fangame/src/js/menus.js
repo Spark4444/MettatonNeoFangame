@@ -91,6 +91,14 @@ function enableFullScreen(){
   }
 }
 
+document.addEventListener('keydown', function(e) {
+  const key = e.keyCode || e.which;
+  console.log(key);
+  if (key === 122) {
+    enableFullScreen();
+  }
+});
+
 //Sets volume of the music to 20%
 setTimeout(() => {
   audio.pauseAll();
@@ -885,7 +893,6 @@ document.addEventListener('keyup', e => {
   switch (key) {
     case 13: // Enter key
     case 90: // Z key
-    case 122: // z key
 
       //If the user pressed enter while the attack
       if(attack === 0 && stage == false && attack !== false){
