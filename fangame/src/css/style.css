@@ -1,31 +1,31 @@
 @font-face {
     font-family: "buttons";
-    src: url('../fonts/attack_buttons.otf');
+    src: url("../fonts/attack_buttons.otf");
     font-weight: normal;
 }
 @font-face {
     font-family: "attack";
-    src: url('../fonts/attack.ttf');
+    src: url("../fonts/attack.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "8bit";
-    src: url('../fonts/8bit.ttf');
+    src: url("../fonts/8bit.ttf");
 }
 
 @font-face {
     font-family: "8bit_small";
-    src: url('../fonts/small_8bit.ttf');
+    src: url("../fonts/small_8bit.ttf");
 }
 
 @font-face {
     font-family: "HP";
-    src: url('../fonts/HP.ttf');
+    src: url("../fonts/HP.ttf");
 }
 @font-face {
     font-family: "mtt_speak";
-    src: url('../fonts/mtt_speak.ttf');
+    src: url("../fonts/mtt_speak.ttf");
 }
 *{
     box-sizing: border-box;
@@ -67,34 +67,34 @@ audio{
     height: 100%;
     z-index: 2;
 }
-img.leg1 {
+.leg1 {
     width: 8%;
     position: absolute;
     left: 50%;
 }
-img.leg2 {
+.leg2 {
     width: 8%;
     position: absolute;
     left: 50%;
 }
-img.legs{
+.legs{
     transition: 0.200s;
     z-index: 1;
 }
-img.smoke {
+.smoke {
     width: 53%;
     position: absolute;
     left: 24%;
     z-index: 2;
     transition: 1s;
 }
-img.lightning {
+.lightning {
     width: 3%;
     position: absolute;
     transition: 499ms;
     z-index: 1;
 }
-img.hand1 {
+.hand1 {
     width: 4.5%;
     position: absolute;
     transition: 0.5s;
@@ -130,7 +130,7 @@ img.hand1 {
     border: 0.156vw black solid;
     transition: 700ms;
 }
-img.leg_dash{
+.leg_dash{
     width: 8%;
     position: relative;
     top: 48%;
@@ -138,10 +138,10 @@ img.leg_dash{
     background: none !important;
     z-index: 3;
 }
-img.leg_dash_right{
+.leg_dash_right{
     left:77%;
 }
-img.bomb {
+.bomb {
     width: 12%;
     position: absolute;
     left: 45%;
@@ -151,12 +151,12 @@ img.bomb {
 .bomb_down{
     top: 58% !important;
 }
-img.explosion {
+.explosion {
     width: 21%;
     position: absolute;
     z-index: 2;
 }
-img.wing2 {
+.wing2 {
     width: 21%;
     position: absolute;
     left: 52.6%;
@@ -164,11 +164,11 @@ img.wing2 {
     z-index: 3;
     transition: 1s;
 }
-img.wing2_down {
+.wing2_down {
     left: 57%;
     top: 49%;
 }
-img.wing1 {
+.wing1 {
     width: 21%;
     position: absolute;
     left: 25.6%;
@@ -176,17 +176,17 @@ img.wing1 {
     z-index: 3;
     transition: 1s;
 }
-img.wing1_down {
+.wing1_down {
     left: 22%;
     top: 49%;
 }
-img.rocket {
+.rocket {
     width: 5%;
     position: absolute;
     transition: 2s linear;
     z-index: 3;
 }
-img.heart_yellow {
+.heart_yellow {
     width: 38.8%;
     transition: 0.75s;
 }
@@ -208,14 +208,14 @@ img.heart_yellow {
     background-size: 40%;
     animation: backgroundAnimation 1s infinite;
 }
-img.heart_yellow_border {
+.heart_yellow_border {
     width: 2.8%;
     position: absolute;
     left: 48%;
     top: 25%;
     transition: 0.5s;
 }
-img.bullet{
+.bullet{
     position: absolute;
     transition: 1s;
     z-index: 3;
@@ -230,14 +230,14 @@ img.bullet{
     width: 100%;
     height: 100%;
 }
-.in_statistics {
+.stat {
     color: white;
     font-size: 2vw;
     font-family: "buttons";
     padding: 1% 0 1% 0;
     user-select: text;
 }
-.mettaton_hp {
+.attackingSection {
     position: absolute;
     top: 0%;
     width: 48%;
@@ -248,18 +248,18 @@ img.bullet{
     flex-direction: column;
     z-index: 2;
 }
-img.attack_png {
+.attackingGIF {
     width: 33%;
     z-index: 2;
 }
-.hp- {
+.damageDealt {
     color: red;
     font-size: 2vw;
-    font-family: 'attack';
+    font-family: "attack";
     margin: 4% 0 1% 0;
     animation: bounce 750ms;
 }
-.hp_show_wrap2 {
+.mettatonsHPBackground {
     width: 9vw;
     height: 2.5vw;
     margin: 1% 0 0 0;
@@ -270,12 +270,12 @@ img.attack_png {
     height: 100%;
     background: #414041;
 }
-.hp_shower {
+.mettatonsHP {
     width: 100%;
     height: 100%;
     background: #00d800;
 }
-.hp_shower.fisrt_hp {
+.mettatonsHP.fisrt_hp {
     background: #00d800;
     height: 100%;
 }
@@ -287,16 +287,16 @@ img.attack_png {
     border: 0.3vw solid black;
     background-color: white;
 }
-img.heart_img {
+.heart_img {
     width: 8%;
 }
-img.heart_img.smaller_img_heart {
+.heart_.smaller_img_heart {
     width: 7%;
 }
-img.smaller_img {
+.smaller_img {
     width: 3% !important;
 }
-.start_menu {
+.startingMenu {
     width: 100%;
     height: 100%;
     display: flex;
@@ -311,7 +311,7 @@ img.smaller_img {
     transition: 1s;
     z-index: 3;
 }
-.start_button {
+.play {
     display: flex;
     justify-content: center;
     width: 23vw;
@@ -325,27 +325,21 @@ img.smaller_img {
     align-items: center;
     cursor: pointer;
 }
-.update_page {
+.updatePageInfo {
     color: #f9812b;
-    font-family: 'buttons';
+    font-family: "buttons";
     font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-img.fullScreen_btn {
+.fullScreen_btn {
     width: 3%;
     position: absolute;
     padding: 0 0 1% 1%;
     left: 0;
     bottom: 0;
     cursor: pointer;
-}
-.game_knowledge {
-    font-family: "buttons";
-    color: #f9812b;
-    padding: 3% 0 0 0;
-    font-size: 238%;
 }
 .slider {
     width: 23%;
@@ -356,7 +350,7 @@ img.fullScreen_btn {
     align-items: center;
     flex-direction: row;
 }
-input#volume {
+.volume {
     width: 20%;
     height: 0.35%;
     margin: 3%;
@@ -391,11 +385,11 @@ input#volume {
 .slider input[type="range"]::-webkit-slider-thumb:active {
   cursor: grabbing;
 }
-.exit_btn {
+.exitButton {
     width: 3%;
     height: 3%;
     color: #f9812b;
-    font-family: 'buttons';
+    font-family: "buttons";
     font-size: 1vw;
     cursor: pointer;
     display: flex;
@@ -403,7 +397,7 @@ input#volume {
     align-items: center;
     margin: 1% 0 0 0;
 }
-img#heart {
+#heart {
     width: 2vw;
     position: absolute;
     left: 49%;
@@ -412,7 +406,7 @@ img#heart {
     opacity: 1;
     z-index: 2;
 }
-.start {
+.startingAnimation {
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -425,30 +419,24 @@ img#heart {
     position: absolute;
     top: 75%;
 }
-.wrapper {
+.inGameScreen {
     width: 100vw;
     height: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: center;
     background: black;
     color: white;
     z-index: 1;
 }
-.mettaton {
-    width: 100%;
+.mettatonSection {
+    width: 82.5%;
     height: 54.5%;
     display: flex;
     justify-content: center;
 }
-.area {
-    width: 82.5%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    position: relative;
-}
-.mettaton_gif {
+.mettatonGIF {
     width: 59%;
     transition: 0.5s;
     left: 0;
@@ -460,7 +448,7 @@ img#heart {
     transition: 1s;
     left: -10%;
 }
-.wrap_box_text {
+.chatBox {
     width: 52vw;
     height: 27vw;
     position: absolute;
@@ -485,7 +473,7 @@ img#heart {
     left: -16%;
     transition: 0s;
 }
-.chat_box {
+.textBox {
     width: 36%;
     height: 34%;
     background-color: white;
@@ -508,7 +496,7 @@ img#heart {
     left:-16%;
     transition: 0s;
 }
-.text-menu {
+.playerMovingSection {
     font-family: "8bit";
     display: flex;
     flex-direction: row;
@@ -517,7 +505,7 @@ img#heart {
     justify-content: center;
     align-items: center;
 }
-.text {
+.playerMovementBox {
     width: 51.5%;
     height: 100%;
     border: 0.3vw solid white;
@@ -545,28 +533,19 @@ img#heart {
     width: 53% !important;
     height: 91% !important;
 }
-img.img_M {
+.player {
     width: 4%;
     position: absolute;
     z-index: 0;
 }
-.stats-menu {
+.statSection {
     font-family: "8bit_small";
     display: flex;
     height: 9%;
-    justify-content: center;
-    align-items: center;
-    font-size: 246%;
-    width: 100%;
-    transition: 1s;
-}
-.stats-wrap {
-    display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     width: 54.5%;
-    height: 100%;
+    transition: 1s;
 }
 .name {
     padding-right: 5%;
@@ -593,40 +572,37 @@ img.img_M {
     height: 100%;
     align-items: center;
 }
-.small_hp {
+.hpText {
     font-family: "HP";
     font-size: 1.25vw;
-    padding: 0 4% 0 0;
+    padding: 0 1% 0 0;
     display: flex;
     align-items: center;
 }
-.hp {
-    width: 33%;
-    margin: 0 4% 0 0;
+.playersHPBackground {
+    width: 10%;
+    margin: 0 1% 0 0;
     height: 43%;
     background: #bf0000;
 }
-.hpVis {
+.playersHP {
     background: #ffff00;
     height: 100%;
 }
-.battle-menu {
-    width: 100%;
+.playersHPText {
+    font-size: 2.5vw;
+}
+.battleSection {
+    width: 54.5%;
     height: 11.5%;
     background-color: black;
     display: flex;
     align-items: flex-end;
     font-family: "buttons";
-    justify-content: space-evenly;
+    justify-content: space-between;
     transition: 1s;
 }
-.inner_part {
-    display: flex;
-    justify-content: space-between;
-    width: 54.5%;
-    height: 100%;
-}
-.button {
+.actionButton {
     height: 96%;
     width: 19%;
     color: #fe8507;
@@ -638,14 +614,14 @@ img.img_M {
     justify-content: space-evenly;
     align-items: center;
 }
-.button:focus {
+.actionButton:focus {
     outline:none;
 }
-.button.yellow {
+.actionButton.yellow {
     color: #d4d415;
     border: 0.2vw solid #d4d415;
 }
-img.heart {
+.buttonImg {
     width: 2vw;
     height: 2vw;
     vertical-align: middle;
@@ -684,7 +660,7 @@ img.heart {
     height: 10%;
     background: black;
 }
-img.attack {
+.attack {
     width: 107%;
     height: 137%;
 }

@@ -91,7 +91,7 @@ function attack1_legs(){
 
     intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-    checkCollision(legs, img_M, 20, false, false);
+    checkCollision(legs, player, 20, false, false);
     }
     }, 10);
       
@@ -177,7 +177,7 @@ function attack2_smoke(){
   setTimeout(()=>{
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      checkCollision(lightningElem, img_M, 15, false, false);
+      checkCollision(lightningElem, player, 15, false, false);
   }
   }, 10);
   },601);
@@ -187,7 +187,7 @@ function attack2_smoke(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     mettaton_gif.style.filter = "";
     appear("* Stage lights are blaring");
   }, 11900);
@@ -236,7 +236,7 @@ function attack3_lasers(){
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser = document.querySelectorAll(".laser");
-      checkCollision(laser, img_M, 30, false, true);
+      checkCollision(laser, player, 30, false, true);
     }
   }, 10);
 
@@ -342,7 +342,7 @@ function attack3_lasers(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 11999);
 } 
@@ -366,7 +366,7 @@ function attack4_hand(){
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       hand2 = document.querySelectorAll(".hand2");
-      checkCollision(hand2, img_M, 30, false, false);
+      checkCollision(hand2, player, 30, false, false);
     }
   }, 10);
 
@@ -386,7 +386,7 @@ function attack4_hand(){
       hand2[hand2.length - 1].style.top = `${mettatonBottom - window.innerWidth*0.045/77*277}px`;
     }
     if(count_hand2 % 3 === 0){
-      hand2[hand2.length - 1].style.left = `${img_M.getBoundingClientRect().left+window.innerWidth*0.49*0.04/2 - window.innerWidth*0.045/2}px`;
+      hand2[hand2.length - 1].style.left = `${player.getBoundingClientRect().left+window.innerWidth*0.49*0.04/2 - window.innerWidth*0.045/2}px`;
     }
   },250);
   }, 400);
@@ -396,7 +396,7 @@ function attack4_hand(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 12000);
 }
@@ -414,7 +414,7 @@ function attack5_head(){
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
       laser_head = document.querySelectorAll(".laser_head");
-      checkCollision(laser_head, img_M, 20, false, true);
+      checkCollision(laser_head, player, 20, false, true);
     }
   }, 10);
 
@@ -425,8 +425,8 @@ function attack5_head(){
   moveHeartI = setInterval(moveHeart, 10);
 
   head_time = setInterval(function(){
-    leg_t = img_M.getBoundingClientRect().top - eyeDistance;
-    leg2_t = img_M.getBoundingClientRect().left - window.innerWidth * 0.48;
+    leg_t = player.getBoundingClientRect().top - eyeDistance;
+    leg2_t = player.getBoundingClientRect().left - window.innerWidth * 0.48;
     if(leg2_t < 0){
       leg2_t = leg2_t - leg2_t - leg2_t;
       left = true;
@@ -446,8 +446,8 @@ function attack5_head(){
     
     setTimeout(() => {
     laser_head = document.querySelectorAll(".laser_head");
-    laser_head[laser_head.length - 1].style.left = `${img_M.getBoundingClientRect().left * 2 - window.innerWidth * 0.48}px`;
-    laser_head[laser_head.length - 1].style.top = `${img_M.getBoundingClientRect().top * 2 - eyeDistance}px`;
+    laser_head[laser_head.length - 1].style.left = `${player.getBoundingClientRect().left * 2 - window.innerWidth * 0.48}px`;
+    laser_head[laser_head.length - 1].style.top = `${player.getBoundingClientRect().top * 2 - eyeDistance}px`;
     setTimeout(() => {
       laser_head[laser_head.length - 1].style.opacity = 0; 
     }, 350);
@@ -460,7 +460,7 @@ function attack5_head(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 10649);
 }
@@ -482,7 +482,7 @@ function attack6_dash(){
     if(t_f_wait === false){
       leg_dash = document.querySelectorAll(".leg_dash");
       leg_dash[leg_dash.length - 1].style.transition = "0.5s";
-      checkCollision(leg_dash, img_M, 20, false, true);
+      checkCollision(leg_dash, player, 20, false, true);
     }
   }, 10);
 
@@ -549,7 +549,7 @@ function attack6_dash(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 20000);
 }
@@ -569,10 +569,10 @@ function attack7_bombs(){
       bomb = document.querySelectorAll(".bomb");
       explosion = document.querySelectorAll(".explosion");
       if (explosion !== null){
-      checkCollision(explosion, img_M, 20, false, false);
+      checkCollision(explosion, player, 20, false, false);
       }
       if(bomb !== null){
-        checkCollision(bomb, img_M, 10, true, false);
+        checkCollision(bomb, player, 10, true, false);
       }
     }
   }, 10);
@@ -659,7 +659,7 @@ function attack7_bombs(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 20000);
 }
@@ -687,8 +687,8 @@ function attack8_wings(){
     wing = document.querySelectorAll(".wing");
     rocket = document.querySelectorAll(".rocket");
     if(t_f_wait === false && rocket.length > 1){
-      checkCollision(rocket, img_M, 20, true, false);
-      checkCollision(wing, img_M, 20, false, false);
+      checkCollision(rocket, player, 20, true, false);
+      checkCollision(wing, player, 20, false, false);
     }
   }, 10);
 
@@ -731,7 +731,7 @@ function attack8_wings(){
     clearInterval(intervalId2);
     clearInterval(moveHeartI);
     clearInterval(HP_show);
-    img_M.style.animation = "";
+    player.style.animation = "";
     appear("* Stage lights are blaring");
   }, 19000);
 }
@@ -763,14 +763,14 @@ function attack9_finale(){
     yellow_heart_out.style.opacity = "0";
     yellow_heart.style.rotate = "90deg";
     yellow_heart.style.left = "82%";
-    yellow_heart_red = `${img_M.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
+    yellow_heart_red = `${player.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
     yellow_heart.style.top = yellow_heart_red;
   }, 500);
 
   setTimeout(() => {
   intervalId2 = setInterval(() => {
     if(t_f_wait === false){
-      checkCollision(bullet, img_M, 20, true, false);
+      checkCollision(bullet, player, 20, true, false);
     }
   }, 10);
   }, 1550);
@@ -793,7 +793,7 @@ function attack9_finale(){
     audio.play(11);
 
     setTimeout(() => {
-      yellow_heart_red = `${img_M.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
+      yellow_heart_red = `${player.getBoundingClientRect().top - window.innerWidth * 0.0152}px`;
       bullet = document.querySelectorAll(".bullet");
       bullet[bullet.length - 1].style.left = "-16%";
       width_yellow += 0.8;
@@ -816,8 +816,8 @@ function attack9_finale(){
     audio.reset(0);
     audio.play(0);
     }, 500);
-    img_M.style.animation = "";
-    battle_menu.style.opacity = "1";
+    player.style.animation = "";
+    battleSection.style.opacity = "1";
     name.style.opacity = "1";
     lv.style.opacity = "1";
     appear("* Stage lights are blaring");

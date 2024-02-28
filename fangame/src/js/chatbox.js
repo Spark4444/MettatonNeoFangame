@@ -8,7 +8,7 @@ function chat_box(){
     if(attack_num === false){
         attack_num = 0;
     }
-    text_chatbox_main.style.opacity = 1;
+    chatBox.style.opacity = 1;
     if(parseInt(hp_str) < 37 && hp_text == false && busy == false){
         hp_text = true;
         busy = true;
@@ -83,7 +83,7 @@ if(busy == true){
     if(attack_num == 7){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack8_wings();
     setTimeout(() => {
@@ -96,7 +96,7 @@ if(busy == true){
     if(attack_num == 6){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack7_bombs();
     attack_num = 7;
@@ -107,7 +107,7 @@ if(busy == true){
     if(attack_num == 5){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack6_dash();
     attack_num = 6;
@@ -118,7 +118,7 @@ if(busy == true){
     if(attack_num == 4){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack5_head();
     attack_num = 5;
@@ -129,7 +129,7 @@ if(busy == true){
     if(attack_num == 3){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack4_hand();
     attack_num = 4;
@@ -140,7 +140,7 @@ if(busy == true){
     if(attack_num == 2){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack3_lasers();
     attack_num = 3;
@@ -152,7 +152,7 @@ if(busy == true){
     if(attack_num == 1){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack2_smoke();
     attack_num = 2;
@@ -163,7 +163,7 @@ if(busy == true){
     if(attack_num == 0){
     clearTimeout(timeoutID);
     audio.pause(6);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack1_legs();
     attack_num = 1;
@@ -177,14 +177,14 @@ if(busy == true){
     audio.unmute(12);
     audio.reset(12);
     audio.play(12);
-    text_chatbox_main.style.opacity = 0;
+    chatBox.style.opacity = 0;
     flash = false;
     attack9_finale();
     audio.pause(9);
     audio.mute(9);
     audio.play(10);
     audio.pause(2);
-    battle_menu.style.opacity = "0";
+    battleSection.style.opacity = "0";
     lv.style.opacity = "0";
     name.style.opacity = "0";
     attack_num = 0;

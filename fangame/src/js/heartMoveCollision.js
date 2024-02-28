@@ -1,5 +1,5 @@
 //Initializing variables
-let img_M = document.querySelector(".img_M");
+let player = document.querySelector(".player");
 let projectile = document.querySelector(".particles");
 let leg1 = document.querySelector(".leg1");
 let leg2 = document.querySelector(".leg2");
@@ -27,18 +27,18 @@ let moveY = 0;
 let player_moving = false;
 let orangeLaserTimer;
 
-//Removes the img_M
-img_M.remove();
+//Removes the player
+player.remove();
 
 //Draw heart
 function drawHeart(x, y) {
   if(canvas_t === true){
   if(flash === false){
-  text_placeholder.innerHTML = `<img class="img_M" src="img/heart.png" alt="">`;
+  playerMovementBox.innerHTML = `<img class="player" src="img/heart.png" alt="">`;
   }
-  img_M = document.querySelector(".img_M");
-  img_M.style.top = `${y}%`;
-  img_M.style.left = `${x}%`;
+  player = document.querySelector(".player");
+  player.style.top = `${y}%`;
+  player.style.left = `${x}%`;
   }
 }
 
@@ -65,11 +65,11 @@ function checkCollision(elements, target, damage, delete1, obw) {
             hp_str = hp_hold.toString();
             audio.reset(8);
             audio.play(8);
-            img_M.classList.add("flash");
+            player.classList.add("flash");
             flash = true;
             setTimeout(function() {
               flash = false;
-              img_M.classList.remove("flash");
+              player.classList.remove("flash");
               t_f_wait = false;
             }, 500);
           } 
@@ -92,11 +92,11 @@ function checkCollision(elements, target, damage, delete1, obw) {
                   hp_str = hp_hold.toString();
                   audio.reset(8);
                   audio.play(8);
-                  img_M.classList.add("flash");
+                  player.classList.add("flash");
                   flash = true;
                   setTimeout(function() {
                     flash = false;
-                    img_M.classList.remove("flash");
+                    player.classList.remove("flash");
                     t_f_wait = false;
                   }, 250);
                 }, 250);
@@ -115,11 +115,11 @@ function checkCollision(elements, target, damage, delete1, obw) {
               hp_str = hp_hold.toString();
               audio.reset(8);
               audio.play(8);
-              img_M.classList.add("flash");
+              player.classList.add("flash");
               flash = true;
               setTimeout(function() {
                 flash = false;
-                img_M.classList.remove("flash");
+                player.classList.remove("flash");
                 t_f_wait = false;
               }, 500);
             } 
@@ -136,7 +136,7 @@ function checkCollision(elements, target, damage, delete1, obw) {
 //Checks if the heart is out of bounds
 function check_out_of_bounds() {
   if(canvas_t === true){
-  yMax = 100-(img_M.offsetWidth*100)/(text_placeholder.offsetHeight);
+  yMax = 100-(player.offsetWidth*100)/(playerMovementBox.offsetHeight);
   if((moveX == 0.25 || moveX == -0.25) &&(moveY == 1 || moveY == -1)){
     if(96 < x && yMax < y){
       x = 96;

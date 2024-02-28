@@ -1,33 +1,32 @@
 //Varaibles initilization
 let frisk = document.querySelector("#frisk");
-let start = document.querySelector(".start");
-let wrapper = document.querySelector(".wrapper");
+let start = document.querySelector(".startingAnimation");
+let inGameScreen = document.querySelector(".inGameScreen");
 let heart = document.querySelector("#heart");
-let buttons = document.querySelectorAll('.button');
-let img = document.querySelectorAll('.but');
-let text_placeholder = document.querySelector(".text");
-let text_chatbox_main = document.querySelector(".wrap_box_text");
-let text_chatbox = document.querySelector(".chat_box");
+let buttons = document.querySelectorAll(".actionButton");
+let img = document.querySelectorAll(".buttonImg");
+let playerMovementBox = document.querySelector(".playerMovementBox");
+let chatBox = document.querySelector(".chatBox");
+let textBox = document.querySelector(".textBox");
 let triangle = document.querySelector(".triangle");
 let img_h = document.querySelectorAll(".heart_img");  
-let start_button = document.querySelector(".start_button");
-let start_menu = document.querySelector(".start_menu");
+let play = document.querySelector(".play");
+let startingMenu = document.querySelector(".startingMenu");
 let fullScreenBtn = document.querySelector(".fullScreen_btn");
 let sound = document.querySelector(".sound");
 let html = document.querySelector("html");
-let hp = document.querySelector(".txt");
-let hp_mettaton_attacked = document.querySelector(".hp-");
-let elem_mettaton = document.querySelector(".mettaton_hp");
-let attack_png = document.querySelector(".attack_png");
-let hp_left = document.querySelector(".hp_shower");
-let mettaton_gif = document.querySelector(".mettaton_gif");
-let battle_menu = document.querySelector(".battle-menu");
+let hp = document.querySelector(".playersHPText");
+let damageDealt = document.querySelector(".damageDealt");
+let elem_mettaton = document.querySelector(".attackingSection");
+let attackingGIF = document.querySelector(".attackingGIF");
+let hp_left = document.querySelector(".mettatonsHP");
+let mettaton_gif = document.querySelector(".mettatonGIF");
+let battleSection = document.querySelector(".battleSection");
 let lv = document.querySelector(".lv");
 let name = document.querySelector(".name");
-let volume = document.querySelector("#volume");
-let hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
-let hp_width = document.querySelector(".hpVis");
-let canvas = document.querySelector("#canvas");
+let volume = document.querySelector(".volume");
+let hp_str = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
+let hp_width = document.querySelector(".playersHP");
 let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
 let food_used = [];
@@ -113,7 +112,7 @@ document.querySelector("#rangeValue").innerHTML = `${volume.value}%`;
 hp_width.style.width = "100%";
 
 //Plays starting music
-start_menu.addEventListener('mousedown', () =>{
+startingMenu.addEventListener('mousedown', () =>{
   if(started !== true){
   audio.play(2);
   }
@@ -131,7 +130,7 @@ volume.addEventListener("mouseup", () => {
 });
 
 // Waits for the button to be clicked and here you can change the animation in the start parameter
-start_button.addEventListener('click', () => {
+play.addEventListener('click', () => {
 
   // Pause audio when user leaves the tab
   document.addEventListener('visibilitychange', () => {
@@ -170,10 +169,10 @@ start_button.addEventListener('click', () => {
     audio.play(1);
     html.classList.add("cursor_none");
     frisk.classList.remove("hidden");
-    start_menu.classList.add("hidden_anim");
+    startingMenu.classList.add("hidden_anim");
 
     setTimeout(function() {
-      start_menu.classList.add("hidden");
+      startingMenu.classList.add("hidden");
     },1000);
 
     started = true;
@@ -194,7 +193,7 @@ start_button.addEventListener('click', () => {
           start.classList.add("black");
 
           setTimeout(function() {
-            wrapper.classList.remove("hidden");
+            inGameScreen.classList.remove("hidden");
             start.classList.add("hidden");
             heart.classList.add("move");
             heart.style.top = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.923 + "px";
@@ -208,8 +207,8 @@ start_button.addEventListener('click', () => {
         }, 2000); 
 
         setTimeout(function(){
-          start_button.innerHTML = "RESTART";
-          start_button.style.width = "38%";
+          play.innerHTML = "RESTART";
+          play.style.width = "38%";
           buttons[0].classList.add('yellow');
           heart.classList.add("hidden");
           audio.play(7);
@@ -227,7 +226,7 @@ start_button.addEventListener('click', () => {
         },10);
 
         start.classList.add("hidden");
-        wrapper.classList.remove("hidden");
+        inGameScreen.classList.remove("hidden");
         img[0].src = "img/heart.png";
         buttons[0].classList.add('yellow');
         num = 0;
@@ -261,7 +260,7 @@ start_button.addEventListener('click', () => {
 function check(num){
   if(num_second == 0){
     img[num_second].src = "img/nothing.png"
-    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='hp_shower fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
+    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='mettatonsHP fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
     typeWriter2();
   }
   if(num_second == 1){
@@ -333,7 +332,7 @@ function check2(num){
       text_2 = `* You recovered ${hp_recover} HP!`;
       text_3 = ``;
     }
-    hp_str = document.querySelector(".txt").innerHTML[0] + document.querySelector(".txt").innerHTML[1];
+    hp_str = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
     HP_recover();
     typeWriterArr();
     position = false;
@@ -386,7 +385,7 @@ function disappear(){
   num = false;
   text = "";
   typeWriter2();
-  text_placeholder.classList.add("cube")
+  playerMovementBox.classList.add("cube")
   setTimeout(function(){
     buttons[num_second].classList.remove('yellow');
     img[num_second].src = "";
@@ -402,7 +401,7 @@ function disappear(){
     if(num_second == 3){
       img[3].src = "img/mercy.png";
     } 
-    canvas.style.display = "";
+    playerMovementBox.style.display = "";
     canvas_t = true;
     if(hp_mettaton > 0){
       chat_box();
@@ -410,7 +409,7 @@ function disappear(){
     else{
       mettaton_gif.classList.add("mettaton_gif_left");
       triangle.classList.add("triangle_left");
-      text_chatbox.classList.add("chat_box_left");
+      textBox.classList.add("chat_box_left");
       audio.mute(0);
       setTimeout(() => {
       deathMtt();
@@ -440,9 +439,9 @@ function appear(text1){
   text = "";
   typeWriter2();
   classA();
-  text_placeholder.classList.remove("hidden");
+  playerMovementBox.classList.remove("hidden");
   setTimeout(function(){
-    text_placeholder.classList.remove("cube");
+    playerMovementBox.classList.remove("cube");
   },100);
   
   setTimeout(function(){
@@ -462,24 +461,24 @@ function imgH(){
 function attack_function(){
   setTimeout(() => {
     attack_line.classList.add("move_attack");
-    canvas.classList.add("text_bc_im");
+    playerMovementBox.classList.add("text_bc_im");
     attack_line_timeout = setTimeout(() => {
       clearInterval(HP_show);
       attack = false;
-      hp_mettaton_attacked.innerHTML = "MISS";
+      damageDealt.innerHTML = "MISS";
       misses++;
       audio.play(5);
       elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
       elem_mettaton.classList.remove("hidden");
       attack_line.classList.remove("move_attack");
       attack_line.classList.add("hidden");
-      attack_png.src = "img/attack.gif";
+      attackingGIF.src = "img/attack.gif";
       setTimeout(() => {
         attack_line.classList.remove("appear_hide");
         attack_line.classList.add("hidden");
         elem_mettaton.classList.add("hidden");
-        attack_png.src = "";
-        canvas.classList.remove("text_bc_im");
+        attackingGIF.src = "";
+        playerMovementBox.classList.remove("text_bc_im");
         disappear();
       }, 980);
     }, 1201);
@@ -521,7 +520,7 @@ function showHP(){
     left2 = 50;
     projectile.innerHTML == "";
     mettaton_gif.style.filter = "";
-    battle_menu.style.opacity = "1";
+    battleSection.style.opacity = "1";
     name.style.opacity = "1";
     lv.style.opacity = "1";
     mettaton_gif.style.opacity = "1";
@@ -567,12 +566,12 @@ function showHP(){
     stage = false;
     num = false;
     html.classList.remove("cursor_none");
-    wrapper.classList.add("hidden");
-    start_menu.classList.remove("hidden");
-    start_menu.classList.remove("hidden_anim");
-    start_menu.style.opacity = "0";
+    inGameScreen.classList.add("hidden");
+    startingMenu.classList.remove("hidden");
+    startingMenu.classList.remove("hidden_anim");
+    startingMenu.style.opacity = "0";
     setTimeout(function(){
-      start_menu.style.opacity = "";
+      startingMenu.style.opacity = "";
     },10)
     started = false;
   }
@@ -639,7 +638,7 @@ function typeWriter() {
   audio.play(7);
   clearTimeout(timeoutID);
   clearInterval(intervalL);
-    text_placeholder.innerHTML = `<div id="shake-element"></div>`;
+    playerMovementBox.innerHTML = `<div id="shake-element"></div>`;
     setTimeout(() => {
       shakeElement = document.querySelector("#shake-element");
       let i = 0;
@@ -664,8 +663,8 @@ function typeWriter2() {
   audio.pause(7);
   clearTimeout(timeoutID);
   clearInterval(intervalL);
-  text_placeholder.innerHTML = "";
-  text_placeholder.innerHTML = text;
+  playerMovementBox.innerHTML = "";
+  playerMovementBox.innerHTML = text;
   clearTimeout(timeoutID);
   shakeLetters();
   return;
@@ -677,7 +676,7 @@ function typeWriterArr() {
   audio.play(7);
   clearTimeout(timeoutID);
   clearInterval(intervalL);
-    text_placeholder.innerHTML = `<div class="flex wrap"><div id="shake-element"></div><div id="shake-element"></div><div id="shake-element"></div></div>`;
+    playerMovementBox.innerHTML = `<div class="flex wrap"><div id="shake-element"></div><div id="shake-element"></div><div id="shake-element"></div></div>`;
     setTimeout(() => {
       shakeElement = document.querySelectorAll("#shake-element");
       let i = 0;
@@ -722,7 +721,7 @@ function typeWriterArr() {
 function typeWriterBox(text_write) {
   audio.reset(6);
   audio.play(6);
-  text_chatbox.innerHTML = "";
+  textBox.innerHTML = "";
   clearTimeout(timeoutID);
   clearInterval(intervalL);
   let i = 0;
@@ -734,14 +733,14 @@ function typeWriterBox(text_write) {
       clearInterval(timeoutID);
       return;
     }
-    text_chatbox.innerHTML += text_write[i];
+    textBox.innerHTML += text_write[i];
     i++;
   }, 40);
 }
 
 //Mettaton death animation
 function deathMtt() {
-  text_chatbox_main.style.opacity = "1";
+  chatBox.style.opacity = "1";
   mettaton_gif.style.animation = "shake_death 0.2s steps(1, end) infinite";
   if(count_death == 0){
   mettaton_gif.src="img/f7.png";
@@ -819,16 +818,16 @@ function deathMtt() {
   setTimeout(() => {
     html.classList.remove("cursor_none");
     projectile.innerHTML = `<div class="statistics">
-    <div class="in_statistics">Game was finished : ${finished}(times)</div>
-    <div class="in_statistics">Restarts : ${restarts}</div>
-    <div class="in_statistics">Damage taken : ${damage_taken}</div>
-    <div class="in_statistics">Damage taken : ${damage_taken_times}(times)</div>
-    <div class="in_statistics">Hits : ${hits}</div>
-    <div class="in_statistics">Critical hits : ${critical_hits_given}</div>
-    <div class="in_statistics">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
-    <div class="in_statistics">Time taken to complete the game : ${time_complete}s</div>
-    <div class="in_statistics">Turns taken to complete the game : ${turns_complete}</div>
-    <div class="in_statistics">Press esc to restart</div>
+    <div class="stat">Game was finished : ${finished}(times)</div>
+    <div class="stat">Restarts : ${restarts}</div>
+    <div class="stat">Damage taken : ${damage_taken}</div>
+    <div class="stat">Damage taken : ${damage_taken_times}(times)</div>
+    <div class="stat">Hits : ${hits}</div>
+    <div class="stat">Critical hits : ${critical_hits_given}</div>
+    <div class="stat">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
+    <div class="stat">Time taken to complete the game : ${time_complete}s</div>
+    <div class="stat">Turns taken to complete the game : ${turns_complete}</div>
+    <div class="stat">Press esc to restart</div>
     </div>`;
   }, 1000);
   save(1,finished);
@@ -904,7 +903,7 @@ document.addEventListener('keyup', e => {
           audio.play(5);
           if(attack_amount > 49){
             hits++;
-            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0);
+            damageDealt.innerHTML = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0);
             if(hp_mettaton - (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0) < 0){
               hp_mettaton = 0;
               mettaton_gif.src = "img/f7.png";
@@ -916,7 +915,7 @@ document.addEventListener('keyup', e => {
             attack_line.classList.add("appear_hide");
           }
           else if(attack_amount > 48.49 && attack_amount < 49.01){
-            hp_mettaton_attacked.innerHTML = "36";
+            damageDealt.innerHTML = "36";
             critical_hits_given++;
             hits++;
             if(hp_mettaton - 36 < 0){
@@ -930,7 +929,7 @@ document.addEventListener('keyup', e => {
           }
           else if(attack_amount < 48.49){
             hits++;
-            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
+            damageDealt.innerHTML = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
             if(hp_mettaton - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
               hp_mettaton = 0;
               mettaton_gif.src = "img/f7.png";
@@ -948,7 +947,7 @@ document.addEventListener('keyup', e => {
           elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
           elem_mettaton.classList.remove("hidden");
           attack_line.classList.remove("move_attack");
-          attack_png.src = "img/attack.gif";
+          attackingGIF.src = "img/attack.gif";
           setTimeout(() => {
             setTimeout(() => {
               mettaton_gif.classList.remove("animation_shake");
@@ -957,9 +956,9 @@ document.addEventListener('keyup', e => {
             attack_line.classList.remove("appear_hide_yellow");
             attack_line.classList.add("hidden");
             elem_mettaton.classList.add("hidden");
-            attack_png.src = "";
+            attackingGIF.src = "";
             attack_line.classList.add("hidden");
-            canvas.classList.remove("text_bc_im");
+            playerMovementBox.classList.remove("text_bc_im");
             disappear();
           }, 980);
         },11);
