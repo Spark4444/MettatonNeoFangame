@@ -901,7 +901,6 @@ document.addEventListener('keyup', e => {
           attack_line.style.left = `${attack_line.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
           attack_line.classList.remove("move_attack");
           let attack_amount = parseFloat(((attack_line.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
-          console.log(attack_amount);
           audio.play(5);
           if(attack_amount > 49){
             hits++;
