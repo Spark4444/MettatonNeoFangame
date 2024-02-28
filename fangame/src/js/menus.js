@@ -52,7 +52,6 @@ let hp_mettaton = 360;
 let position2 = 0;
 let hp_recover = 0;
 let num_second = 0;
-let timer = 0;
 let letterId = 0;
 let count_death = 0;
 let restarts = 0;
@@ -70,7 +69,6 @@ setTimeout(() => {
 }, 10);
 let attack_line_timeout;
 let time_complete_interval;
-let timer_int;
 let intervalL;
 let shakeElement;
 let text1;
@@ -299,7 +297,6 @@ function check2(num){
     setTimeout(() => {
       attack_line = document.querySelector(".line_attack"); 
       attack = 0;
-      timer = 0;
     },10);
     typeWriter2();
     attack_function();
@@ -466,11 +463,7 @@ function attack_function(){
   setTimeout(() => {
     attack_line.classList.add("move_attack");
     canvas.classList.add("text_bc_im");
-    timer_int  = setInterval(() => {
-      timer++;
-    }, 12);
     attack_line_timeout = setTimeout(() => {
-      clearInterval(timer_int);
       clearInterval(HP_show);
       attack = false;
       hp_mettaton_attacked.innerHTML = "MISS";
@@ -904,27 +897,26 @@ document.addEventListener('keyup', e => {
         setTimeout(() => {
           attack = false;
           clearTimeout(attack_line_timeout);
-          clearInterval(timer_int);
           clearInterval(HP_show);
-          attack_line.style.left = `${attack_line.getBoundingClientRect().left-window.innerWidth/100*24.25}px`;
+          attack_line.style.left = `${attack_line.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
           attack_line.classList.remove("move_attack");
+          let attack_amount = parseFloat(((attack_line.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
+          console.log(attack_amount);
           audio.play(5);
-          if(timer > 50){
-            timer = timer - 50;
-            timer = 50 - timer;
+          if(attack_amount > 49){
             hits++;
-            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,50)).toFixed(0);
-            if(hp_mettaton - (0.35*calculatePercentage(timer,50)).toFixed(0) < 0){
+            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0);
+            if(hp_mettaton - (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0) < 0){
               hp_mettaton = 0;
               mettaton_gif.src = "img/f7.png";
             }
             else{
               
-              hp_mettaton -= (0.35*calculatePercentage(timer,50)).toFixed(0);
+              hp_mettaton -= (0.35*calculatePercentage(attack_amount,100)).toFixed(0);
             }
             attack_line.classList.add("appear_hide");
           }
-          else if(timer > 47 && timer < 51){
+          else if(attack_amount > 48.49 && attack_amount < 49.01){
             hp_mettaton_attacked.innerHTML = "36";
             critical_hits_given++;
             hits++;
@@ -937,15 +929,15 @@ document.addEventListener('keyup', e => {
             }
             attack_line.classList.add("appear_hide_yellow");
           }
-          else if(timer < 48){
+          else if(attack_amount < 48.49){
             hits++;
-            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(timer,47)).toFixed(0);
-            if(hp_mettaton - (0.35*calculatePercentage(timer,47)).toFixed(0) < 0){
+            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);
+            if(hp_mettaton - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
               hp_mettaton = 0;
               mettaton_gif.src = "img/f7.png";
             }
             else{
-              hp_mettaton -= (0.35*calculatePercentage(timer,47)).toFixed(0);
+              hp_mettaton -= (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);
             }
             attack_line.classList.add("appear_hide");
           }

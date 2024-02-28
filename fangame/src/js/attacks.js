@@ -349,7 +349,7 @@ function attack3_lasers(){
 
 //Attack 4 hand
 function attack4_hand(){
-  projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 40%; top:${mettatonBottom - window.innerWidth*0.045/77*277}px">`;
+  projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 47%; top:${mettatonBottom - window.innerWidth*0.045/77*277}px">`;
 
   setTimeout(() => {
     hand2 = document.querySelectorAll(".hand2");
