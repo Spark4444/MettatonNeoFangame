@@ -471,9 +471,9 @@ function attack_function(){
       audio.play(5);
       elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
       elem_mettaton.classList.remove("hidden");
-      attack_png.src = "img/attack.gif";
       attack_line.classList.remove("move_attack");
       attack_line.classList.add("hidden");
+      attack_png.src = "img/attack.gif";
       setTimeout(() => {
         attack_line.classList.remove("appear_hide");
         attack_line.classList.add("hidden");
@@ -481,7 +481,7 @@ function attack_function(){
         attack_png.src = "";
         canvas.classList.remove("text_bc_im");
         disappear();
-      }, 999);
+      }, 980);
     }, 1201);
   }, 11);
 }
@@ -931,7 +931,7 @@ document.addEventListener('keyup', e => {
           }
           else if(attack_amount < 48.49){
             hits++;
-            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);
+            hp_mettaton_attacked.innerHTML = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
             if(hp_mettaton - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
               hp_mettaton = 0;
               mettaton_gif.src = "img/f7.png";
@@ -948,8 +948,8 @@ document.addEventListener('keyup', e => {
           }, 10);
           elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
           elem_mettaton.classList.remove("hidden");
-          attack_png.src = "img/attack.gif";
           attack_line.classList.remove("move_attack");
+          attack_png.src = "img/attack.gif";
           setTimeout(() => {
             setTimeout(() => {
               mettaton_gif.classList.remove("animation_shake");
@@ -962,7 +962,7 @@ document.addEventListener('keyup', e => {
             attack_line.classList.add("hidden");
             canvas.classList.remove("text_bc_im");
             disappear();
-          }, 999);
+          }, 980);
         },11);
       }
 
