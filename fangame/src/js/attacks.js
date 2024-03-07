@@ -67,7 +67,7 @@ function attack1_legs(){
     y = 31;
     drawHeart(x, y);
     projectile.innerHTML = `<img src="img/leg1.png" style="left:${randomRange(23,71)}%; top:${mov1}px;" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${randomRange(23,71)}%; top:${mov1}px;" class="leg2 legs" alt="">`
-    mettaton_gif.style.opacity = "0";
+    mettatonGIF.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
     leg2 = document.querySelector(".leg2");
     legs = document.querySelectorAll(".legs");
@@ -117,7 +117,7 @@ function attack2_smoke(){
   moveX = 0;
   moveY = 0;
   number_lightning = 0;
-  mettaton_gif.style.filter = "brightness(50%)";
+  mettatonGIF.style.filter = "brightness(50%)";
   drawHeart(x, y);
 
   setTimeout(() => {
@@ -188,7 +188,7 @@ function attack2_smoke(){
     clearInterval(moveHeartI);
     clearInterval(HP_show);
     player.style.animation = "";
-    mettaton_gif.style.filter = "";
+    mettatonGIF.style.filter = "";
     appear("* Stage lights are blaring");
   }, 11900);
 }
@@ -223,7 +223,7 @@ function attack3_lasers(){
     },10);
   }
 
-  mettaton_gif.style.opacity = "0";
+  mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
@@ -355,7 +355,7 @@ function attack4_hand(){
     hand2 = document.querySelectorAll(".hand2");
   },10);
 
-  mettaton_gif.style.opacity = "0";
+  mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
@@ -403,7 +403,7 @@ function attack4_hand(){
 
 //Attack 5 head
 function attack5_head(){
-  mettaton_gif.style.opacity = "1";
+  mettatonGIF.style.opacity = "1";
   x = 47;
   y = 31;
   moveX = 0;
@@ -469,7 +469,7 @@ function attack5_head(){
 function attack6_dash(){
   random_leg = randomRange(1,2);
   projectile.innerHTML = `<img src="img/${random_leg + 3}.png" id="l${random_leg}" class="leg_dash">`;
-  mettaton_gif.style.opacity = "0";
+  mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
@@ -557,7 +557,7 @@ function attack6_dash(){
 //attack 7 bombs
 function attack7_bombs(){
   projectile.innerHTML = ``;
-  mettaton_gif.style.opacity = "1";
+  mettatonGIF.style.opacity = "1";
   x = 47;
   y = 31;
   moveX = 0;
@@ -667,7 +667,7 @@ function attack7_bombs(){
 //attack 8 wings,rockets
 function attack8_wings(){
   projectile.innerHTML = `<img src="img/2.png" class="wing2 wing"><img src="img/1.png" class="wing1 wing">`;
-  mettaton_gif.style.opacity = "0";
+  mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
   moveX = 0;
@@ -740,7 +740,7 @@ function attack8_wings(){
 function attack9_finale(){
   projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0;"><img src="img/heart_yellow.png" class="heart_yellow"></div><img src="img/heart_yellow_out.png" class="heart_yellow_border" style="opacity: 1;">`;
   setTimeout(() => {
-    mettaton_gif.style.opacity = "0";
+    mettatonGIF.style.opacity = "0";
   }, 700);
   x = 47;
   y = 31;

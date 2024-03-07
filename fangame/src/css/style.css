@@ -39,7 +39,7 @@ html {
     -ms-user-select: none; 
     user-select: none; 
 }
-.cursor_none{
+.cursorNone{
     cursor: none;
 }
 body {
@@ -290,7 +290,7 @@ audio{
 .heart_img {
     width: 8%;
 }
-.heart_.smaller_img_heart {
+.heartImg {
     width: 7%;
 }
 .smaller_img {
@@ -333,7 +333,7 @@ audio{
     justify-content: center;
     align-items: center;
 }
-.fullScreen_btn {
+.fullScreenButton {
     width: 3%;
     position: absolute;
     padding: 0 0 1% 1%;
@@ -397,7 +397,7 @@ audio{
     align-items: center;
     margin: 1% 0 0 0;
 }
-#heart {
+.heart {
     width: 2vw;
     position: absolute;
     left: 49%;
@@ -414,7 +414,7 @@ audio{
     height: 100%;
     background: white;
 }
-#frisk {
+.frisk {
     width: 4%;
     position: absolute;
     top: 75%;
@@ -448,6 +448,20 @@ audio{
     transition: 1s;
     left: -10%;
 }
+/* .stageLightsCover {
+    position: relative;
+    left: -59.5%;
+    top: 17%;
+    width: 0;
+    overflow: visible;
+    transition: 1s;
+}
+.stageLights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48vw;
+} */
 .chatBox {
     width: 52vw;
     height: 27vw;
@@ -601,6 +615,7 @@ audio{
     font-family: "buttons";
     justify-content: space-between;
     transition: 1s;
+    overflow: visible;
 }
 .actionButton {
     height: 96%;

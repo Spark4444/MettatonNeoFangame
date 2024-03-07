@@ -1,79 +1,75 @@
 //Varaibles initilization
-let frisk = document.querySelector("#frisk");
+let frisk = document.querySelector(".frisk");
 let start = document.querySelector(".startingAnimation");
 let inGameScreen = document.querySelector(".inGameScreen");
-let heart = document.querySelector("#heart");
+let heart = document.querySelector(".heart");
 let buttons = document.querySelectorAll(".actionButton");
 let img = document.querySelectorAll(".buttonImg");
 let playerMovementBox = document.querySelector(".playerMovementBox");
 let chatBox = document.querySelector(".chatBox");
 let textBox = document.querySelector(".textBox");
 let triangle = document.querySelector(".triangle");
-let img_h = document.querySelectorAll(".heart_img");  
+let heartImg = document.querySelectorAll(".heartImg");  
 let play = document.querySelector(".play");
 let startingMenu = document.querySelector(".startingMenu");
-let fullScreenBtn = document.querySelector(".fullScreen_btn");
+let fullScreenBtn = document.querySelector(".fullScreenButton");
 let sound = document.querySelector(".sound");
 let html = document.querySelector("html");
 let hp = document.querySelector(".playersHPText");
 let damageDealt = document.querySelector(".damageDealt");
-let elem_mettaton = document.querySelector(".attackingSection");
+let attackingSection = document.querySelector(".attackingSection");
 let attackingGIF = document.querySelector(".attackingGIF");
-let hp_left = document.querySelector(".mettatonsHP");
-let mettaton_gif = document.querySelector(".mettatonGIF");
+let mettatonsHP = document.querySelector(".mettatonsHP");
+let mettatonGIF = document.querySelector(".mettatonGIF");
 let battleSection = document.querySelector(".battleSection");
 let lv = document.querySelector(".lv");
 let name = document.querySelector(".name");
 let volume = document.querySelector(".volume");
-let hp_str = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
-let hp_width = document.querySelector(".playersHP");
-let food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
+let playersHPString = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
+let playersHP = document.querySelector(".playersHP");
+let foodList = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
-let food_used = [];
+let foodUsed = [];
 let text = "";
 let food = "";
-let HP_width_small = "100%";
-let width_pr;
+let hpWidth = "100%";
 let stage = false;
-let audio_work = true;
 let attack = false;
 let num = false;
-let x_disable = false;
-let invent = false;
+let disableX = false;
 let position = false;
-let position_bf = false;
+let positionBefore = false;
 let started = false;
-let canvas_t = false;
-let attack_num = false;
-let anim = true;
+let playerFighting = false;
+let attackNumber = false;
+let animation = true;
 let fullScreen = false;
-let hp_mettaton = 360;
-let position2 = 0;
-let hp_recover = 0;
-let num_second = 0;
+let MettatonHP = 360;
+let secondPosition = 0;
+let HPRecovered = 0;
+let secondNumber = 0;
 let letterId = 0;
-let count_death = 0;
+let deathDialogue = 0;
 let restarts = 0;
-let damage_taken = 0;
-let damage_taken_times = 0;
+let damageTaken = 0;
+let damageTakenTimes = 0;
 let hits = 0;
-let critical_hits_given = 0;
+let criticalHitsGiven = 0;
 let misses = 0;
-let time_complete = 0;
-let turns_complete = 0;
-let attack_line;
+let timeToComplete = 0;
+let turnsToComplete = 0;
+let attackLine;
 let finished;
 setTimeout(() => {
   finished = get(1);
 }, 10);
-let attack_line_timeout;
-let time_complete_interval;
-let intervalL;
+let attackLineTimeout;
+let timeToCompleteInterval;
 let shakeElement;
-let text1;
-let text2;
-let text_2;
-let text_3;
+let firstInventoryRow;
+let secondInventoryRow;
+let secondColumn;
+let thirdColumn;
 
 function enableFullScreen(){
   if(fullScreen){
@@ -109,7 +105,7 @@ setTimeout(() => {
 document.querySelector("#rangeValue").innerHTML = `${volume.value}%`;
 
 //Width for hp bar
-hp_width.style.width = "100%";
+playersHP.style.width = "100%";
 
 //Plays starting music
 startingMenu.addEventListener('mousedown', () =>{
@@ -167,7 +163,7 @@ play.addEventListener('click', () => {
     audio.mute(2);
     audio.reset(1);
     audio.play(1);
-    html.classList.add("cursor_none");
+    html.classList.add("cursorNone");
     frisk.classList.remove("hidden");
     startingMenu.classList.add("hidden_anim");
 
@@ -240,15 +236,15 @@ play.addEventListener('click', () => {
       }
     }
 
-    if(anim === true){
+    if(animation === true){
       start_animation();
-      time_complete_interval = setInterval(() =>{
-        time_complete++;
+      timeToCompleteInterval = setInterval(() =>{
+        timeToComplete++;
       }, 1000);
-    } else if(anim === false){
+    } else if(animation === false){
       no_start_animation();
-      time_complete_interval = setInterval(() =>{
-        time_complete++;
+      timeToCompleteInterval = setInterval(() =>{
+        timeToComplete++;
       }, 1000);
     }
   }
@@ -258,124 +254,124 @@ play.addEventListener('click', () => {
 
 //Function that will check for the num and then display check
 function check(num){
-  if(num_second == 0){
-    img[num_second].src = "img/nothing.png"
-    text = `<div class='attack_text'><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='mettatonsHP fisrt_hp' style='width:${HP_width_small};'></div></div></div>`;
+  if(secondNumber == 0){
+    img[secondNumber].src = "img/nothing.png"
+    text = `<div class='attack_text'><img class= 'heartImg smaller_img' src='img/heart.png'><div id="shake-element" class="WidthN"> * Mettaton NEO </div> <div class='hp_show_wrap'><div class='mettatonsHP fisrt_hp' style='width:${hpWidth};'></div></div></div>`;
     typeWriter2();
   }
-  if(num_second == 1){
-    img[num_second].src = "img/nothing.png"
-    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Mettaton NEO</div></div>`;
+  if(secondNumber == 1){
+    img[secondNumber].src = "img/nothing.png"
+    text = `<div class="flex"><img class= 'heartImg smaller_img' src='img/heart.png'><div id="shake-element"> * Mettaton NEO</div></div>`;
     typeWriter2();
   }
-  if(num_second == 2){
-    img[num_second].src = "img/nothing.png"
+  if(secondNumber == 2){
+    img[secondNumber].src = "img/nothing.png"
     position = 0;
-    position_bf = 0;
-    text = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
-    ${food_list[2] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[2] + "</div></div>" : `<div class="nothing"></div>`}${food_list[3] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[3] + "</div></div>" : `<div class="nothing"></div>`}
+    positionBefore = 0;
+    text = `<div class="grid-container">${foodList[0] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
+    ${foodList[2] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
    <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
     typeWriter2();
     imgH();
-    img_h[0].src = "img/heart.png"
+    heartImg[0].src = "img/heart.png"
   }
-  if(num_second == 3){
-    img[num_second].src = "img/nothing.png"
-    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Spare</div></div>`;
+  if(secondNumber == 3){
+    img[secondNumber].src = "img/nothing.png"
+    text = `<div class="flex"><img class= 'heartImg smaller_img' src='img/heart.png'><div id="shake-element"> * Spare</div></div>`;
     typeWriter2();
   }
 }
 
 //Second checker
 function check2(num){
-  if(num_second == 0){
-    x_disable = false;
+  if(secondNumber == 0){
+    disableX = false;
     stage = false;
     num = false;
     text = `<div class="line_attack" alt="" style=""></div>`;
     setTimeout(() => {
-      attack_line = document.querySelector(".line_attack"); 
+      attackLine = document.querySelector(".line_attack"); 
       attack = 0;
     },10);
     typeWriter2();
     attack_function();
   }
-  if(num_second == 1){
-    text = `<div class="flex"><img class= 'heart_img smaller_img' src='img/heart.png'><div id="shake-element"> * Check</div></div>`;
+  if(secondNumber == 1){
+    text = `<div class="flex"><img class= 'heartImg smaller_img' src='img/heart.png'><div id="shake-element"> * Check</div></div>`;
     typeWriter2();
   }
-  if(num_second == 2){
+  if(secondNumber == 2){
     audio.play(15);
-    x_disable = false;
-    food = food_list[position];
-    hp_recover = health[position];
-    food_used.push(food_list.splice(position, 1));
+    disableX = false;
+    food = foodList[position];
+    HPRecovered = health[position];
+    foodUsed.push(foodList.splice(position, 1));
     health.splice(position, 1);
 
     if(food == "Pie"){
       text = `* You ate the ${food}.`
-      text_2 = `* Your HP was maxed out!`;
-      text_3 = ``;
+      secondColumn = `* Your HP was maxed out!`;
+      thirdColumn = ``;
     }
     else if(food == "Steak"){
       text = `* You ate the ${food}.`          
-      text_2 = `* You recovered ${hp_recover} HP!`;
-      text_3 = ``;
+      secondColumn = `* You recovered ${HPRecovered} HP!`;
+      thirdColumn = ``;
     }
     else if(food == "I. Noodles"){
       text = `* You ate the Instant Noodles.`
-      text_2 = `* Your HP was maxed out!`;
-      text_3 = ``;
+      secondColumn = `* Your HP was maxed out!`;
+      thirdColumn = ``;
     }
     else if(food == "L. Hero"){
       text = `* You eat the Legendary Hero.`;
-      text_2 = `* You recovered ${hp_recover} HP!`;
-      text_3 = ``;
+      secondColumn = `* You recovered ${HPRecovered} HP!`;
+      thirdColumn = ``;
     }
-    hp_str = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
+    playersHPString = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
     HP_recover();
     typeWriterArr();
     position = false;
   }
-  if(num_second == 3){
-    x_disable = false;
+  if(secondNumber == 3){
+    disableX = false;
     disappear();
   }
 }
 
 //Third checker
 function check3(num){
-  if(num_second == 0){
+  if(secondNumber == 0){
     //continue
   }
-  if(num_second == 1){
-    x_disable = false;
+  if(secondNumber == 1){
+    disableX = false;
     text = `* METTATON NEO - 90 ATK 9 DEF`;
-    text_2 = `* Dr. Alphys's greatest invention.`
-    text_3 = "";
+    secondColumn = `* Dr. Alphys's greatest invention.`
+    thirdColumn = "";
     typeWriterArr();
   }
-  if(num_second == 2){
+  if(secondNumber == 2){
     num = false;
     stage = false;
     disappear();
-  if(num_second == 3){
+  if(secondNumber == 3){
   }
 }
 }
 
 //Fourth checker
 function check4(num){
-  if(num_second == 0){
+  if(secondNumber == 0){
   }
-  if(num_second == 1){
+  if(secondNumber == 1){
     num = false;
     stage = false;
     disappear();
   }
-  if(num_second == 2){
+  if(secondNumber == 2){
   }
-  if(num_second == 3){
+  if(secondNumber == 3){
   }
 }
 
@@ -387,33 +383,33 @@ function disappear(){
   typeWriter2();
   playerMovementBox.classList.add("cube")
   setTimeout(function(){
-    buttons[num_second].classList.remove('yellow');
-    img[num_second].src = "";
-    if(num_second == 0){
+    buttons[secondNumber].classList.remove('yellow');
+    img[secondNumber].src = "";
+    if(secondNumber == 0){
       img[0].src = "img/fight.png";
     }
-    if(num_second == 1){
+    if(secondNumber == 1){
       img[1].src = "img/act.png";
     }
-    if(num_second == 2){
+    if(secondNumber == 2){
       img[2].src = "img/item.png";
     }
-    if(num_second == 3){
+    if(secondNumber == 3){
       img[3].src = "img/mercy.png";
     } 
     playerMovementBox.style.display = "";
-    canvas_t = true;
-    if(hp_mettaton > 0){
+    playerFighting = true;
+    if(MettatonHP > 0){
       chat_box();
     }
     else{
-      mettaton_gif.classList.add("mettaton_gif_left");
+      mettatonGIF.classList.add("mettaton_gif_left");
       triangle.classList.add("triangle_left");
       textBox.classList.add("chat_box_left");
       audio.mute(0);
       setTimeout(() => {
       deathMtt();
-      document.addEventListener('keyup', e => {
+      document.addEventListener('keydown', e => {
         const key = e.keyCode || e.which;
         switch (key) {
           case 13: // Enter key
@@ -433,8 +429,8 @@ function disappear(){
 //text_menu appear
 function appear(text1){
   projectile.innerHTML = ``;
-  mettaton_gif.style.opacity = "1";
-  canvas_t = false;
+  mettatonGIF.style.opacity = "1";
+  playerFighting = false;
   num = 0;
   text = "";
   typeWriter2();
@@ -453,30 +449,30 @@ function appear(text1){
 
 //img_h initialization
 function imgH(){
-  img_h = document.querySelectorAll(".heart_img");  
+  heartImg = document.querySelectorAll(".heartImg");  
   return;
 }
 
 //Attack
 function attack_function(){
   setTimeout(() => {
-    attack_line.classList.add("move_attack");
+    attackLine.classList.add("move_attack");
     playerMovementBox.classList.add("text_bc_im");
-    attack_line_timeout = setTimeout(() => {
+    attackLineTimeout = setTimeout(() => {
       clearInterval(HP_show);
       attack = false;
       damageDealt.innerHTML = "MISS";
       misses++;
       audio.play(5);
-      elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
-      elem_mettaton.classList.remove("hidden");
-      attack_line.classList.remove("move_attack");
-      attack_line.classList.add("hidden");
+      attackingSection.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
+      attackingSection.classList.remove("hidden");
+      attackLine.classList.remove("move_attack");
+      attackLine.classList.add("hidden");
       attackingGIF.src = "img/attack.gif";
       setTimeout(() => {
-        attack_line.classList.remove("appear_hide");
-        attack_line.classList.add("hidden");
-        elem_mettaton.classList.add("hidden");
+        attackLine.classList.remove("appear_hide");
+        attackLine.classList.add("hidden");
+        attackingSection.classList.add("hidden");
         attackingGIF.src = "";
         playerMovementBox.classList.remove("text_bc_im");
         disappear();
@@ -487,28 +483,28 @@ function attack_function(){
 
 //HP recovering
 function HP_recover(){
-  if(parseInt(hp_str) + parseInt(hp_recover) < 71 && parseInt(hp_str) + parseInt(hp_recover) > 0){
-  hp_str = parseInt(hp_str) + parseInt(hp_recover);
+  if(parseInt(playersHPString) + parseInt(HPRecovered) < 71 && parseInt(playersHPString) + parseInt(HPRecovered) > 0){
+  playersHPString = parseInt(playersHPString) + parseInt(HPRecovered);
   }
-  else if(parseInt(hp_str) + parseInt(hp_recover) >= 72){
-  hp_str = 72;
+  else if(parseInt(playersHPString) + parseInt(HPRecovered) >= 72){
+  playersHPString = 72;
   }
-  if(hp_str < 72){
-    hp.innerHTML = `${hp_str}/72`;
-    hp_width.style.width = `${hp_str/(72/100)}%`;
+  if(playersHPString < 72){
+    hp.innerHTML = `${playersHPString}/72`;
+    playersHP.style.width = `${playersHPString/(72/100)}%`;
   }
-  if(hp_str > 72 && hp_str == 72){
+  if(playersHPString > 72 && playersHPString == 72){
     hp.innerHTML = `72/72`;
-    hp_width.style.width = `100%`;
+    playersHP.style.width = `100%`;
   }
   showHP();
 }
 
 //Shows hp and checks if game is over
 function showHP(){
-  hp.innerHTML = `${hp_str}/72`;
-  hp_width.style.width = `${hp_str/(72/100)}%`;
-  if(hp_str < 0){
+  hp.innerHTML = `${playersHPString}/72`;
+  playersHP.style.width = `${playersHPString/(72/100)}%`;
+  if(playersHPString < 0){
     busy = false;
     hp_text = false;
     food_text = false;
@@ -519,22 +515,22 @@ function showHP(){
     left1 = 50;
     left2 = 50;
     projectile.innerHTML == "";
-    mettaton_gif.style.filter = "";
+    mettatonGIF.style.filter = "";
     battleSection.style.opacity = "1";
     name.style.opacity = "1";
     lv.style.opacity = "1";
-    mettaton_gif.style.opacity = "1";
+    mettatonGIF.style.opacity = "1";
     audio.unmute(2);
     number = 1;
-    count_death = 0;
-    turns_complete = 0;
+    deathDialogue = 0;
+    turnsToComplete = 0;
     hits = 0;
-    time_complete = 0;
-    damage_taken = 0;
-    damage_taken_times = 0;
-    critical_hits_given = 0;
+    timeToComplete = 0;
+    damageTaken = 0;
+    damageTakenTimes = 0;
+    criticalHitsGiven = 0;
     misses = 0;
-    food_used = [];
+    foodUsed = [];
     restarts++;
     audio.reset(2);
     audio.mute(0);
@@ -551,21 +547,21 @@ function showHP(){
     clearInterval(yellow_heartMove);
     clearInterval(bomb_interval);
     clearInterval(wings_rockets_inter);
-    clearInterval(time_complete_interval);
-    food_list = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
+    clearInterval(timeToCompleteInterval);
+    foodList = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
-    hp_mettaton = 360;
+    MettatonHP = 360;
     one = 0;
-    hp_str = "72";
+    playersHPString = "72";
     hp.innerHTML = `72/72`;
-    hp_width.style.width = `100%`;
-    hp_left.style.width = `${hp_mettaton/(360/100)}%`;
-    HP_width_small = `${hp_mettaton/(360/100)}%`;
-    anim = false;
-    attack_num = false;
+    playersHP.style.width = `100%`;
+    mettatonsHP.style.width = `${MettatonHP/(360/100)}%`;
+    hpWidth = `${MettatonHP/(360/100)}%`;
+    animation = false;
+    attackNumber = false;
     stage = false;
     num = false;
-    html.classList.remove("cursor_none");
+    html.classList.remove("cursorNone");
     inGameScreen.classList.add("hidden");
     startingMenu.classList.remove("hidden");
     startingMenu.classList.remove("hidden_anim");
@@ -580,12 +576,12 @@ function showHP(){
 
 //Movement between buttons
 function classA(){
-  num_second = num;
-  if(num_second > 3){
-    num_second = 0;
+  secondNumber = num;
+  if(secondNumber > 3){
+    secondNumber = 0;
   }
-  if(num_second < 0){
-    num_second = 3;
+  if(secondNumber < 0){
+    secondNumber = 3;
   }
   if(num > 3){
     num = 0;
@@ -637,7 +633,6 @@ function typeWriter() {
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
-  clearInterval(intervalL);
     playerMovementBox.innerHTML = `<div id="shake-element"></div>`;
     setTimeout(() => {
       shakeElement = document.querySelector("#shake-element");
@@ -662,7 +657,6 @@ function typeWriter2() {
   audio.reset(7);
   audio.pause(7);
   clearTimeout(timeoutID);
-  clearInterval(intervalL);
   playerMovementBox.innerHTML = "";
   playerMovementBox.innerHTML = text;
   clearTimeout(timeoutID);
@@ -675,7 +669,6 @@ function typeWriterArr() {
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
-  clearInterval(intervalL);
     playerMovementBox.innerHTML = `<div class="flex wrap"><div id="shake-element"></div><div id="shake-element"></div><div id="shake-element"></div></div>`;
     setTimeout(() => {
       shakeElement = document.querySelectorAll("#shake-element");
@@ -685,11 +678,11 @@ function typeWriterArr() {
           clearInterval(timeoutID);
           let i = 0;
           timeoutID = setInterval(() => {
-            if (i >= text_2.length) {
+            if (i >= secondColumn.length) {
               clearInterval(timeoutID);
               let i = 0;
               timeoutID = setInterval(() => {
-                if (i >= text_3.length) {
+                if (i >= thirdColumn.length) {
                   clearInterval(timeoutID);
                   setTimeout(() => {
                     audio.pause(7);
@@ -698,13 +691,13 @@ function typeWriterArr() {
                   return;
                   }
                   shakeElement = document.querySelectorAll("#shake-element");
-                  shakeElement[2].innerHTML += text_3[i];
+                  shakeElement[2].innerHTML += thirdColumn[i];
                   i++;
               }, 40); 
               return;
             }
             shakeElement = document.querySelectorAll("#shake-element");
-            shakeElement[1].innerHTML += text_2[i];
+            shakeElement[1].innerHTML += secondColumn[i];
             i++;
           }, 40);
           return;
@@ -723,7 +716,6 @@ function typeWriterBox(text_write) {
   audio.play(6);
   textBox.innerHTML = "";
   clearTimeout(timeoutID);
-  clearInterval(intervalL);
   let i = 0;
   timeoutID = setInterval(() => {
     if (i >= text_write.length) {
@@ -741,74 +733,74 @@ function typeWriterBox(text_write) {
 //Mettaton death animation
 function deathMtt() {
   chatBox.style.opacity = "1";
-  mettaton_gif.style.animation = "shake_death 0.2s steps(1, end) infinite";
-  if(count_death == 0){
-  mettaton_gif.src="img/f7.png";
+  mettatonGIF.style.animation = "shake_death 0.2s steps(1, end) infinite";
+  if(deathDialogue == 0){
+  mettatonGIF.src="img/f7.png";
   typeWriterBox("YOU WON, BUT AT WHAT COST?");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 1){
-  mettaton_gif.src="img/f7.png";
+  else if(deathDialogue == 1){
+  mettatonGIF.src="img/f7.png";
   typeWriterBox("...");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 2){
-  mettaton_gif.src="img/f7.png";
+  else if(deathDialogue == 2){
+  mettatonGIF.src="img/f7.png";
   typeWriterBox("YOU MAY HAVE DEFEATED ME, BUT...");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 3){
-    mettaton_gif.src="img/f5.png";
+  else if(deathDialogue == 3){
+    mettatonGIF.src="img/f5.png";
   if(misses > 0){
   typeWriterBox("I CAN TELL FROM THAT MISS, DARLING.");
   }
   else{
   typeWriterBox("I KNOW YOU'RE NOT THAT BAD, DARLING.");
   }
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 4){
-  mettaton_gif.src="img/f6.png";
+  else if(deathDialogue == 4){
+  mettatonGIF.src="img/f6.png";
   typeWriterBox("YOU WERE HOLDING BACK.");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 5){
-  mettaton_gif.src="img/f7.png";
+  else if(deathDialogue == 5){
+  mettatonGIF.src="img/f7.png";
   typeWriterBox("YES, ASGORE WILL LOSE EASILY TO YOU...");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 6){
-  mettaton_gif.src="img/f6.png";
+  else if(deathDialogue == 6){
+  mettatonGIF.src="img/f6.png";
   typeWriterBox("BUT YOU WON'T MURDER ALL HUMANS, WILL YOU?");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 7){
-  mettaton_gif.src="img/f2.png";
+  else if(deathDialogue == 7){
+  mettatonGIF.src="img/f2.png";
   typeWriterBox("YOU'RE NOT THAT BAD.");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 8){
-  mettaton_gif.src="img/f6.png";
+  else if(deathDialogue == 8){
+  mettatonGIF.src="img/f6.png";
   typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 9){
-  mettaton_gif.src="img/f1.png";
+  else if(deathDialogue == 9){
+  mettatonGIF.src="img/f1.png";
   typeWriterBox("AND SO LATE INTO THE FIGHT, TOO.");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 10){
-  mettaton_gif.src="img/f1.png";
+  else if(deathDialogue == 10){
+  mettatonGIF.src="img/f1.png";
   typeWriterBox("AT LEAST NOW I CAN REST EASILY.");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 11){
-  mettaton_gif.src="img/f4.png";
+  else if(deathDialogue == 11){
+  mettatonGIF.src="img/f4.png";
   typeWriterBox("KNOWING THAT ALPHYS AND THE MONSTERS WILL LIVE ON...!");
-  count_death++;
+  deathDialogue++;
   }
-  else if(count_death == 12){
-  count_death++;
+  else if(deathDialogue == 12){
+  deathDialogue++;
   audio.pause(6);
   audio.reset(6);
   audio.play(14);
@@ -816,17 +808,17 @@ function deathMtt() {
   projectile.style.background = "white";
   finished++;
   setTimeout(() => {
-    html.classList.remove("cursor_none");
+    html.classList.remove("cursorNone");
     projectile.innerHTML = `<div class="statistics">
     <div class="stat">Game was finished : ${finished}(times)</div>
     <div class="stat">Restarts : ${restarts}</div>
-    <div class="stat">Damage taken : ${damage_taken}</div>
-    <div class="stat">Damage taken : ${damage_taken_times}(times)</div>
+    <div class="stat">Damage taken : ${damageTaken}</div>
+    <div class="stat">Damage taken : ${damageTakenTimes}(times)</div>
     <div class="stat">Hits : ${hits}</div>
-    <div class="stat">Critical hits : ${critical_hits_given}</div>
-    <div class="stat">Food used : ${food_used.length === 0 ? 0 : food_used.join(" ")} , ${food_used.length}</div>
-    <div class="stat">Time taken to complete the game : ${time_complete}s</div>
-    <div class="stat">Turns taken to complete the game : ${turns_complete}</div>
+    <div class="stat">Critical hits : ${criticalHitsGiven}</div>
+    <div class="stat">Food used : ${foodUsed.length === 0 ? 0 : foodUsed.join(" ")} , ${foodUsed.length}</div>
+    <div class="stat">Time taken to complete the game : ${timeToComplete}s</div>
+    <div class="stat">Turns taken to complete the game : ${turnsToComplete}</div>
     <div class="stat">Press esc to restart</div>
     </div>`;
   }, 1000);
@@ -845,7 +837,7 @@ function deathMtt() {
 
 //A,a and left arrow keys listeners, movement to the right of the buttons
 setTimeout(() => {
-document.addEventListener('keyup', e => {
+document.addEventListener('keydown', e => {
   const key = e.keyCode || e.which;
   switch (key) {
     case 37: // Left arrow key
@@ -864,7 +856,7 @@ document.addEventListener('keyup', e => {
 });
 
 //D,d and right arrow keys listener, movement to the left of the buttons
-document.addEventListener('keyup', e => {
+document.addEventListener('keydown', e => {
   const key = e.keyCode || e.which;
   switch (key) {
     case 39: // Right arrow key
@@ -885,7 +877,7 @@ document.addEventListener('keyup', e => {
 
 //Z and enter, x key listeners
 setTimeout(() => {
-document.addEventListener('keyup', e => {
+document.addEventListener('keydown', e => {
   const key = e.keyCode || e.which;
   switch (key) {
     case 13: // Enter key
@@ -895,69 +887,69 @@ document.addEventListener('keyup', e => {
       if(attack === 0 && stage == false && attack !== false){
         setTimeout(() => {
           attack = false;
-          clearTimeout(attack_line_timeout);
+          clearTimeout(attackLineTimeout);
           clearInterval(HP_show);
-          attack_line.style.left = `${attack_line.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
-          attack_line.classList.remove("move_attack");
-          let attack_amount = parseFloat(((attack_line.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
+          attackLine.style.left = `${attackLine.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
+          attackLine.classList.remove("move_attack");
+          let attack_amount = parseFloat(((attackLine.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
           audio.play(5);
           if(attack_amount > 49){
             hits++;
             damageDealt.innerHTML = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0);
-            if(hp_mettaton - (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0) < 0){
-              hp_mettaton = 0;
-              mettaton_gif.src = "img/f7.png";
+            if(MettatonHP - (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0) < 0){
+              MettatonHP = 0;
+              mettatonGIF.src = "img/f7.png";
             }
             else{
               
-              hp_mettaton -= (0.35*calculatePercentage(attack_amount,100)).toFixed(0);
+              MettatonHP -= (0.35*calculatePercentage(attack_amount,100)).toFixed(0);
             }
-            attack_line.classList.add("appear_hide");
+            attackLine.classList.add("appear_hide");
           }
           else if(attack_amount > 48.49 && attack_amount < 49.01){
             damageDealt.innerHTML = "36";
-            critical_hits_given++;
+            criticalHitsGiven++;
             hits++;
-            if(hp_mettaton - 36 < 0){
-              hp_mettaton = 0;
-              mettaton_gif.src = "img/f7.png";
+            if(MettatonHP - 36 < 0){
+              MettatonHP = 0;
+              mettatonGIF.src = "img/f7.png";
             }
             else{
-            hp_mettaton -= 36;
+            MettatonHP -= 36;
             }
-            attack_line.classList.add("appear_hide_yellow");
+            attackLine.classList.add("appear_hide_yellow");
           }
           else if(attack_amount < 48.49){
             hits++;
             damageDealt.innerHTML = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
-            if(hp_mettaton - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
-              hp_mettaton = 0;
-              mettaton_gif.src = "img/f7.png";
+            if(MettatonHP - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
+              MettatonHP = 0;
+              mettatonGIF.src = "img/f7.png";
             }
             else{
-              hp_mettaton -= (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);
+              MettatonHP -= (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);
             }
-            attack_line.classList.add("appear_hide");
+            attackLine.classList.add("appear_hide");
           }
-          hp_left.style.width = `${hp_mettaton/(360/100)}%`;
-          HP_width_small = `${hp_mettaton/(360/100)}%`;
+          mettatonsHP.style.width = `${MettatonHP/(360/100)}%`;
+          hpWidth = `${MettatonHP/(360/100)}%`;
           setTimeout(() => {
-            mettaton_gif.classList.add("animation_shake");
+            mettatonGIF.classList.add("animation_shake");
           }, 10);
-          elem_mettaton.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
-          elem_mettaton.classList.remove("hidden");
-          attack_line.classList.remove("move_attack");
+          attackingSection.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
+          attackingSection.classList.remove("hidden");
+          attackLine.classList.remove("move_attack");
           attackingGIF.src = "img/attack.gif";
           setTimeout(() => {
             setTimeout(() => {
-              mettaton_gif.classList.remove("animation_shake");
+              mettatonGIF.classList.remove("animation_shake");
             }, 30);
-            attack_line.classList.remove("appear_hide");
-            attack_line.classList.remove("appear_hide_yellow");
-            attack_line.classList.add("hidden");
-            elem_mettaton.classList.add("hidden");
+            attackLine.classList.remove("appear_hide");
+            attackLine.classList.remove("appear_hide_yellow");
+            attackLine.classList.add("hidden");
+            attackingSection.classList.add("hidden");
             attackingGIF.src = "";
-            attack_line.classList.add("hidden");
+            attackLine.classList.add("hidden");
             playerMovementBox.classList.remove("text_bc_im");
             disappear();
           }, 980);
@@ -965,11 +957,11 @@ document.addEventListener('keyup', e => {
       }
 
       //Movement between the text menus
-      if(num_second > 3){
-        num_second = 0;
+      if(secondNumber > 3){
+        secondNumber = 0;
       }
-      if(num_second < 0){
-        num_second = 3;
+      if(secondNumber < 0){
+        secondNumber = 3;
       }
       if(num > 3){
         num = 0;
@@ -979,21 +971,21 @@ document.addEventListener('keyup', e => {
       }
 
       //Movement between text 
-      if(stage == 3 && stage !== false && num_second == 1){
+      if(stage == 3 && stage !== false && secondNumber == 1){
         stage = 4;
-        check4(num_second);
+        check4(secondNumber);
         audio.reset(1);
         audio.play(1);
        }
-      if(stage == 2 && stage !== false && num_second == 0 || stage == 2 && stage !== false && num_second == 1 || stage == 2 && stage !== false && num_second == 2){
+      if(stage == 2 && stage !== false && secondNumber == 0 || stage == 2 && stage !== false && secondNumber == 1 || stage == 2 && stage !== false && secondNumber == 2){
         stage = 3;
-        check3(num_second);
+        check3(secondNumber);
         audio.reset(1);
         audio.play(1);
        }
        if(stage == 1 && stage !== false){
         stage = 2;
-        check2(num_second);
+        check2(secondNumber);
         audio.reset(1);
         audio.play(1);
         }
@@ -1001,10 +993,10 @@ document.addEventListener('keyup', e => {
         audio.pause(7);
         clearTimeout(timeoutID);
         stage = 1;
-        check(num_second);
+        check(secondNumber);
         audio.reset(1);
         audio.play(1);
-        x_disable = true;
+        disableX = true;
         num = false;
         }
 
@@ -1013,17 +1005,17 @@ document.addEventListener('keyup', e => {
       case 120: // x key
 
       //Go out of the text menu
-      if(x_disable == true){
-      x_disable = false;
+      if(disableX == true){
+      disableX = false;
       position = false;
       stage = 0;
       attack = false
-      img[num_second].src = "img/heart.png";
+      img[secondNumber].src = "img/heart.png";
       text = `* Stage lights are blaring`;
       typeWriter();
       audio.reset(1);
       audio.play(1);
-      num = num_second;
+      num = secondNumber;
       }
 
       break;
@@ -1034,15 +1026,15 @@ document.addEventListener('keyup', e => {
 },4000);
 
 //Movement in the inventory
-document.addEventListener('keyup', e => {
+document.addEventListener('keydown', e => {
   if(position !== false){
-    position_bf = position;
-    //Sets the text1 and text2 to this every time
-    text1 = `<div class="grid-container">${food_list[0] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[0] + "</div></div>" : `<div class="nothing"></div>`}${food_list[1] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[1] + "</div></div>" : `<div class="nothing"></div>`}
-    ${food_list[2] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[2] + "</div></div>" : `<div class="nothing"></div>`}${food_list[3] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[3] + "</div></div>" : `<div class="nothing"></div>`}
+    positionBefore = position;
+    //Sets the firstInventoryRow and secondInventoryRow to this every time
+    firstInventoryRow = `<div class="grid-container">${foodList[0] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
+    ${foodList[2] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
    <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 1</div></div>`;
-  text2 = `<div class="grid-container">${food_list[4] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[4] + "</div></div>" : `<div class="nothing"></div>`}${food_list[5] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[5] + "</div></div>" : `<div class="nothing"></div>`}
- ${food_list[6] !== undefined ? "<div class='left-element'><img class='heart_img smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + food_list[6] + "</div></div>" : `<div class="nothing"></div>`}${food_list[7] !== undefined ? "<div class='right-element'><img class='heart_img' src='img/nothing.png'><div id='shake-element'> * " + food_list[7] + "</div></div>" : `<div class="nothing"></div>`}
+  secondInventoryRow = `<div class="grid-container">${foodList[4] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[4] + "</div></div>" : `<div class="nothing"></div>`}${foodList[5] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[5] + "</div></div>" : `<div class="nothing"></div>`}
+ ${foodList[6] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div id='shake-element'> * " + foodList[6] + "</div></div>" : `<div class="nothing"></div>`}${foodList[7] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div id='shake-element'> * " + foodList[7] + "</div></div>" : `<div class="nothing"></div>`}
  <div class="nothing"></div><div class="right-element-page" id="shake-element">PAGE 2</div></div>`; 
 const key = e.keyCode || e.which;
   //Movement in  the inventory
@@ -1050,28 +1042,28 @@ const key = e.keyCode || e.which;
       case 38: // ArrowUp
       case 87: // W
       case 119: // w
-        img_h[position2].src = "img/nothing.png";
+        heartImg[secondPosition].src = "img/nothing.png";
         if(position == 2 || position == 3){
-          if(food_list[position - 2] !== undefined){
+          if(foodList[position - 2] !== undefined){
           position -= 2;
           }
         }
         else if(position == 0 || position == 1){
-          if(food_list[position + 2] !== undefined){
+          if(foodList[position + 2] !== undefined){
           position += 2;
           }
         }
         else if(position == 4 || position == 5){
-          if(food_list[position + 2] !== undefined){
+          if(foodList[position + 2] !== undefined){
           position += 2;
           }
         }
         else if(position == 6 || position == 7){
-          if(food_list[position - 2] !== undefined){
+          if(foodList[position - 2] !== undefined){
           position -= 2;
           }
         }
-        if(position_bf != position){
+        if(positionBefore != position){
           audio.reset(1);
           audio.play(1);
         }
@@ -1080,28 +1072,28 @@ const key = e.keyCode || e.which;
       case 40: // ArrowDown
       case 83: // S
       case 115: // s
-        img_h[position2].src = "img/nothing.png";
+        heartImg[secondPosition].src = "img/nothing.png";
         if(position == 2 || position == 3){
-          if(food_list[position - 2] !== undefined){
+          if(foodList[position - 2] !== undefined){
           position -= 2;
           }
         }
         else if(position == 0 || position == 1){
-          if(food_list[position + 2] !== undefined){
+          if(foodList[position + 2] !== undefined){
           position += 2;
           }
         }
         else if(position == 4 || position == 5){
-          if(food_list[position + 2] !== undefined){
+          if(foodList[position + 2] !== undefined){
           position += 2;
           }
         }
         else if(position == 6 || position == 7){
-          if(food_list[position - 2] !== undefined){
+          if(foodList[position - 2] !== undefined){
           position -= 2;
           }
         }
-        if(position_bf != position){
+        if(positionBefore != position){
           audio.reset(1);
           audio.play(1);
         }
@@ -1110,50 +1102,50 @@ const key = e.keyCode || e.which;
       case 37: // ArrowLeft
       case 65: // A
       case 97: // a
-        img_h[position2].src = "img/nothing.png";
+        heartImg[secondPosition].src = "img/nothing.png";
         if(position == 2){
-          if(food_list.length > 6){
-          position = food_list.length - 1;
+          if(foodList.length > 6){
+          position = foodList.length - 1;
           }
-          else if(food_list.length < 7 && food_list.length > 3){
+          else if(foodList.length < 7 && foodList.length > 3){
             position = 3;
           }
         }
         else if(position == 0){
-            if(food_list.length == 8 || food_list.length == 7){
+            if(foodList.length == 8 || foodList.length == 7){
             position = 5;
             }
-            else if(food_list.length == 6 || food_list.length == 5){
-            position = food_list.length - 1;
+            else if(foodList.length == 6 || foodList.length == 5){
+            position = foodList.length - 1;
             }
-            else if(food_list.length < 5 && food_list.length != 1){
+            else if(foodList.length < 5 && foodList.length != 1){
             position = 1;
             }
-            else if(food_list.length == 1){
+            else if(foodList.length == 1){
             position = 0;
             }
         }
         else if(position == 4){
-          if(food_list[1] !== undefined){
+          if(foodList[1] !== undefined){
           position = 1;
           }
         }
         else if(position == 6){
-          if(food_list[3] !== undefined){
+          if(foodList[3] !== undefined){
           position = 3;
           }
         }
         else if(1 == position || 3 == position){
-          if(food_list[position - 1] !== undefined){
+          if(foodList[position - 1] !== undefined){
           position -= 1;
           }
         }
         else if(7 == position || 5 == position){
-          if(food_list[position - 1] !== undefined){
+          if(foodList[position - 1] !== undefined){
           position -= 1;
           }
         }
-        if(position_bf != position){
+        if(positionBefore != position){
           audio.reset(1);
           audio.play(1);
         }
@@ -1162,32 +1154,32 @@ const key = e.keyCode || e.which;
       case 39: // ArrowRight
       case 68: // D
       case 100: // d        
-        img_h[position2].src = "img/nothing.png";
-        if(position == 0 && food_list.length > 1 || position == 2 && food_list.length > 3 || position == 4 && food_list.length > 5 || position == 6 && food_list.length > 7 ){
+        heartImg[secondPosition].src = "img/nothing.png";
+        if(position == 0 && foodList.length > 1 || position == 2 && foodList.length > 3 || position == 4 && foodList.length > 5 || position == 6 && foodList.length > 7 ){
           position += 1;
         }
-        else if(position == 7 && food_list.length > 7 || position == 5 && food_list.length > 5){
+        else if(position == 7 && foodList.length > 7 || position == 5 && foodList.length > 5){
           position -= 5;
         }
-        else if(position == 1 && food_list.length > 4 || position == 3 && food_list.length > 6){
+        else if(position == 1 && foodList.length > 4 || position == 3 && foodList.length > 6){
           position += 3;
         }
-        else if(food_list.length == 5 && position == 3 || food_list.length == 6 && position == 3){
+        else if(foodList.length == 5 && position == 3 || foodList.length == 6 && position == 3){
           position -= 1;
         }
-        else if(position == 4 && food_list.length == 5){
+        else if(position == 4 && foodList.length == 5){
           position = 0;
         }
-        else if(position == 6 && food_list.length == 7){
+        else if(position == 6 && foodList.length == 7){
           position = 2;
         }
-        else if(position == 3 && food_list.length == 4 || position == 1  && food_list.length < 5 && food_list.length > 1){
+        else if(position == 3 && foodList.length == 4 || position == 1  && foodList.length < 5 && foodList.length > 1){
           position -= 1;
         }
         typeWriter2();
         imgH();
-        img_h[position2].src = "img/heart.png";
-        if(position_bf != position){
+        heartImg[secondPosition].src = "img/heart.png";
+        if(positionBefore != position){
           audio.reset(1);
           audio.play(1);
         }
@@ -1199,29 +1191,29 @@ const key = e.keyCode || e.which;
 
   //Sets the position for the img because theyre different
   if(position == 4){
-    position2 = 0;
+    secondPosition = 0;
   }
   else if(position == 5){
-    position2 = 1;
+    secondPosition = 1;
   }
   else if(position == 6){
-    position2 = 2;
+    secondPosition = 2;
   }
   else if(position == 7){
-    position2 = 3;
+    secondPosition = 3;
   }
   else if(position > -1 && position < 4){
-    position2 = position;
+    secondPosition = position;
   }
   if(position > -1 && position < 4){
-    text = text1;
+    text = firstInventoryRow;
   }
   if(position > 3 && position < 8){
-    text = text2;
+    text = secondInventoryRow;
   }
 typeWriter2();
 imgH();
-img_h[position2].src = "img/heart.png";
+heartImg[secondPosition].src = "img/heart.png";
 
 }
 });

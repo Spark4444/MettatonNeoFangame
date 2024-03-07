@@ -32,7 +32,7 @@ player.remove();
 
 //Draw heart
 function drawHeart(x, y) {
-  if(canvas_t === true){
+  if(playerFighting === true){
   if(flash === false){
   playerMovementBox.innerHTML = `<img class="player" src="img/heart.png" alt="">`;
   }
@@ -44,7 +44,7 @@ function drawHeart(x, y) {
 
 //Cheks for laser collision
 function checkCollision(elements, target, damage, delete1, obw) {
-  if (canvas_t === true) {
+  if (playerFighting === true) {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
       const elemRect = element.getBoundingClientRect();
@@ -59,10 +59,10 @@ function checkCollision(elements, target, damage, delete1, obw) {
               clearInterval(bomb_timeout);
             }
             t_f_wait = true;
-            hp_hold = parseInt(parseInt(hp_str) - damage);
-            damage_taken += damage;
-            damage_taken_times++;
-            hp_str = hp_hold.toString();
+            hp_hold = parseInt(parseInt(playersHPString) - damage);
+            damageTaken += damage;
+            damageTakenTimes++;
+            playersHPString = hp_hold.toString();
             audio.reset(8);
             audio.play(8);
             player.classList.add("flash");
@@ -86,10 +86,10 @@ function checkCollision(elements, target, damage, delete1, obw) {
                 }
                 t_f_wait = true;
                 orangeLaserTimer = setTimeout(function() {
-                  hp_hold = parseInt(parseInt(hp_str) - damage);
-                  damage_taken += damage;
-                  damage_taken_times++;
-                  hp_str = hp_hold.toString();
+                  hp_hold = parseInt(parseInt(playersHPString) - damage);
+                  damageTaken += damage;
+                  damageTakenTimes++;
+                  playersHPString = hp_hold.toString();
                   audio.reset(8);
                   audio.play(8);
                   player.classList.add("flash");
@@ -109,10 +109,10 @@ function checkCollision(elements, target, damage, delete1, obw) {
                 clearInterval(bomb_timeout);
               }
               t_f_wait = true;
-              hp_hold = parseInt(parseInt(hp_str) - damage);
-              damage_taken += damage;
-              damage_taken_times++;
-              hp_str = hp_hold.toString();
+              hp_hold = parseInt(parseInt(playersHPString) - damage);
+              damageTaken += damage;
+              damageTakenTimes++;
+              playersHPString = hp_hold.toString();
               audio.reset(8);
               audio.play(8);
               player.classList.add("flash");
@@ -135,7 +135,7 @@ function checkCollision(elements, target, damage, delete1, obw) {
 
 //Checks if the heart is out of bounds
 function check_out_of_bounds() {
-  if(canvas_t === true){
+  if(playerFighting === true){
   yMax = 100-(player.offsetWidth*100)/(playerMovementBox.offsetHeight);
   if((moveX == 0.25 || moveX == -0.25) &&(moveY == 1 || moveY == -1)){
     if(96 < x && yMax < y){
@@ -174,7 +174,7 @@ function check_out_of_bounds() {
 function moveHeart() {
   if(pressed_continue){
   // Check if heart is out of bounds
-  if(canvas_t === true){
+  if(playerFighting === true){
   check_out_of_bounds();
   x += moveX;
   y += moveY;
@@ -185,7 +185,7 @@ function moveHeart() {
 
 //Checks if the player is moving
 setInterval(() => {
-  if(canvas_t === true){
+  if(playerFighting === true){
   if(moveX == 0 || moveY == 0){
     player_moving = false;
   }
@@ -197,7 +197,7 @@ setInterval(() => {
 
 //AWSD keys listener
 document.addEventListener('keydown', e => {
-  if (canvas_t === true){
+  if (playerFighting === true){
     switch (e.keyCode) {
       case 65: // A
       case 37: // ArrowLeft
@@ -227,7 +227,7 @@ document.addEventListener('keydown', e => {
 
 //AWSD keys listeners
 document.addEventListener('keyup', e => {
-  if (canvas_t === true){
+  if (playerFighting === true){
     switch (e.keyCode) {
       case 65: // A
       case 37: // ArrowLeft
