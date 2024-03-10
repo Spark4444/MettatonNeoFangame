@@ -725,22 +725,22 @@ function deathMtt() {
   chatBox.style.opacity = "1";
   mettatonGIF.style.animation = "shake_death 0.2s steps(1, end) infinite";
   if(deathDialogue == 0){
-  mettatonGIF.src="img/f7.png";
+  mettatonGIF.src="img/face7.png";
   typeWriterBox("YOU WON, BUT AT WHAT COST?");
   deathDialogue++;
   }
   else if(deathDialogue == 1){
-  mettatonGIF.src="img/f7.png";
+  mettatonGIF.src="img/face7.png";
   typeWriterBox("...");
   deathDialogue++;
   }
   else if(deathDialogue == 2){
-  mettatonGIF.src="img/f7.png";
+  mettatonGIF.src="img/face7.png";
   typeWriterBox("YOU MAY HAVE DEFEATED ME, BUT...");
   deathDialogue++;
   }
   else if(deathDialogue == 3){
-    mettatonGIF.src="img/f5.png";
+    mettatonGIF.src="img/face5.png";
   if(misses > 0){
   typeWriterBox("I CAN TELL FROM THAT MISS, DARLING.");
   }
@@ -750,42 +750,42 @@ function deathMtt() {
   deathDialogue++;
   }
   else if(deathDialogue == 4){
-  mettatonGIF.src="img/f6.png";
+  mettatonGIF.src="img/face6.png";
   typeWriterBox("YOU WERE HOLDING BACK.");
   deathDialogue++;
   }
   else if(deathDialogue == 5){
-  mettatonGIF.src="img/f7.png";
+  mettatonGIF.src="img/face7.png";
   typeWriterBox("YES, ASGORE WILL LOSE EASILY TO YOU...");
   deathDialogue++;
   }
   else if(deathDialogue == 6){
-  mettatonGIF.src="img/f6.png";
+  mettatonGIF.src="img/face6.png";
   typeWriterBox("BUT YOU WON'T MURDER ALL HUMANS, WILL YOU?");
   deathDialogue++;
   }
   else if(deathDialogue == 7){
-  mettatonGIF.src="img/f2.png";
+  mettatonGIF.src="img/face2.png";
   typeWriterBox("YOU'RE NOT THAT BAD.");
   deathDialogue++;
   }
   else if(deathDialogue == 8){
-  mettatonGIF.src="img/f6.png";
+  mettatonGIF.src="img/face6.png";
   typeWriterBox("IF YOU WERE TRYING TO BE, THEN YOU MESSED UP.");
   deathDialogue++;
   }
   else if(deathDialogue == 9){
-  mettatonGIF.src="img/f1.png";
+  mettatonGIF.src="img/face1.png";
   typeWriterBox("AND SO LATE INTO THE FIGHT, TOO.");
   deathDialogue++;
   }
   else if(deathDialogue == 10){
-  mettatonGIF.src="img/f1.png";
+  mettatonGIF.src="img/face1.png";
   typeWriterBox("AT LEAST NOW I CAN REST EASILY.");
   deathDialogue++;
   }
   else if(deathDialogue == 11){
-  mettatonGIF.src="img/f4.png";
+  mettatonGIF.src="img/face4.png";
   typeWriterBox("KNOWING THAT ALPHYS AND THE MONSTERS WILL LIVE ON...!");
   deathDialogue++;
   }
@@ -886,7 +886,7 @@ document.addEventListener('keydown', e => {
             damageDealt.innerHTML = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0);
             if(MettatonHP - (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0) < 0){
               MettatonHP = 0;
-              mettatonGIF.src = "img/f7.png";
+              mettatonGIF.src = "img/face7.png";
             }
             else{
               
@@ -900,7 +900,7 @@ document.addEventListener('keydown', e => {
             hits++;
             if(MettatonHP - 36 < 0){
               MettatonHP = 0;
-              mettatonGIF.src = "img/f7.png";
+              mettatonGIF.src = "img/face7.png";
             }
             else{
             MettatonHP -= 36;
@@ -912,7 +912,7 @@ document.addEventListener('keydown', e => {
             damageDealt.innerHTML = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
             if(MettatonHP - (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0) < 0){
               MettatonHP = 0;
-              mettatonGIF.src = "img/f7.png";
+              mettatonGIF.src = "img/face7.png";
             }
             else{
               MettatonHP -= (0.35*calculatePercentage(attack_amount,47.49)).toFixed(0);

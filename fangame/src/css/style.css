@@ -1,31 +1,28 @@
 @font-face {
-    font-family: "buttons";
-    src: url("../fonts/attack_buttons.otf");
+    font-family: "8bitOperator";
+    src: url("../fonts/8bitOperator.ttf");
+}
+@font-face {
+    font-family: "greaterDeterminationSpeechBubble";
+    src: url("../fonts/greaterDeterminationSpeechBubble.ttf");
+}
+@font-face {
+    font-family: "houseSansHeavy";
+    src: url("../fonts/houseSansHeavy.ttf");
+}
+@font-face {
+    font-family: "marsNeedsCunnilingus";
+    src: url("../fonts/marsNeedsCunnilingus.ttf");
+}
+@font-face {
+    font-family: "mercy";
+    src: url("../fonts/mercy.otf");
     font-weight: normal;
 }
 @font-face {
-    font-family: "attack";
-    src: url("../fonts/attack.ttf");
+    font-family: "UndertaleAttackFont(reversed)";
+    src: url("../fonts/UndertaleAttackFont(reversed).ttf");
     font-weight: normal;
-}
-
-@font-face {
-    font-family: "8bit";
-    src: url("../fonts/8bit.ttf");
-}
-
-@font-face {
-    font-family: "8bit_small";
-    src: url("../fonts/small_8bit.ttf");
-}
-
-@font-face {
-    font-family: "HP";
-    src: url("../fonts/HP.ttf");
-}
-@font-face {
-    font-family: "mtt_speak";
-    src: url("../fonts/mtt_speak.ttf");
 }
 *{
     box-sizing: border-box;
@@ -107,13 +104,13 @@ audio{
     transition: 1s;
     z-index: 3;
 }
-#l0 {
+#White {
     background: white;
 }
-#l1 {
+#Blue {
     background: blue;
 }
-#l2 {
+#Orange {
     background: orange;
 }
 .hand2{
@@ -156,29 +153,29 @@ audio{
     position: absolute;
     z-index: 2;
 }
+.wing1 {
+    width: 21%;
+    position: absolute;
+    left: 22%;
+    top: 19%;
+    z-index: 3;
+    transition: 1s;
+}
 .wing2 {
     width: 21%;
     position: absolute;
-    left: 52.6%;
+    left: 57%;
     top: 19%;
     z-index: 3;
     transition: 1s;
 }
 .wing2_down {
     left: 57%;
-    top: 49%;
-}
-.wing1 {
-    width: 21%;
-    position: absolute;
-    left: 25.6%;
-    top: 19%;
-    z-index: 3;
-    transition: 1s;
+    top: 52%;
 }
 .wing1_down {
     left: 22%;
-    top: 49%;
+    top: 52%;
 }
 .rocket {
     width: 5%;
@@ -198,11 +195,10 @@ audio{
     height: 5vw;
     position: absolute;
     left: 47.2%;
-    top: 23%;
     transition: 0.75s;
 }
 .yellow_heart_bc{
-    background-image: url(../img/heart_yellow_anim.png);
+    background-image: url(../img/yellowHeartBackground.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
@@ -212,7 +208,6 @@ audio{
     width: 2.8%;
     position: absolute;
     left: 48%;
-    top: 25%;
     transition: 0.5s;
 }
 .bullet{
@@ -233,7 +228,7 @@ audio{
 .stat {
     color: white;
     font-size: 2vw;
-    font-family: "buttons";
+    font-family: "mercy";
     padding: 1% 0 1% 0;
     user-select: text;
 }
@@ -255,7 +250,7 @@ audio{
 .damageDealt {
     color: red;
     font-size: 2vw;
-    font-family: "attack";
+    font-family: "UndertaleAttackFont(reversed)";
     margin: 4% 0 1% 0;
     animation: bounce 750ms;
 }
@@ -316,7 +311,7 @@ audio{
     justify-content: center;
     width: 23vw;
     height: 11vw;
-    font-family: "buttons";
+    font-family: "mercy";
     color: #f9812b;
     background: black;
     border: 0.35vw solid #f9812b;
@@ -327,7 +322,7 @@ audio{
 }
 .updatePageInfo {
     color: #f9812b;
-    font-family: "buttons";
+    font-family: "mercy";
     font-size: 1vw;
     display: flex;
     justify-content: center;
@@ -364,7 +359,7 @@ audio{
     overflow: visible !important;
 }
 #rangeValue {
-    font-family: "attack";
+    font-family: "UndertaleAttackFont(reversed)";
     color: #f9812b;
     position: absolute;
     left: 59%;
@@ -389,7 +384,7 @@ audio{
     width: 3%;
     height: 3%;
     color: #f9812b;
-    font-family: "buttons";
+    font-family: "mercy";
     font-size: 1vw;
     cursor: pointer;
     display: flex;
@@ -487,7 +482,7 @@ audio{
     flex-direction: row;
     flex-wrap: wrap;
     padding: 1%;
-    font-family: "mtt_speak";
+    font-family: "greaterDeterminationSpeechBubble";
     font-size: 1.4vw;
     letter-spacing: -0.15vw;
     transition: 1s;
@@ -497,7 +492,7 @@ audio{
     transition: 0s;
 }
 .playerMovingSection {
-    font-family: "8bit";
+    font-family: "8bitOperator";
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -539,7 +534,7 @@ audio{
     z-index: 0;
 }
 .statSection {
-    font-family: "8bit_small";
+    font-family: "marsNeedsCunnilingus";
     display: flex;
     height: 9%;
     justify-content: flex-start;
@@ -573,7 +568,7 @@ audio{
     align-items: center;
 }
 .hpText {
-    font-family: "HP";
+    font-family: "houseSansHeavy";
     font-size: 1.25vw;
     padding: 0 1% 0 0;
     display: flex;
@@ -598,7 +593,7 @@ audio{
     background-color: black;
     display: flex;
     align-items: flex-end;
-    font-family: "buttons";
+    font-family: "mercy";
     justify-content: space-between;
     transition: 1s;
     overflow: visible;

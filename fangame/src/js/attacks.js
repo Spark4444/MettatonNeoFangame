@@ -201,7 +201,7 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
       setTimeout(() => {
         laser = document.querySelectorAll(".laser");
         laser[laser.length-1].style.height = "69%";
@@ -214,7 +214,7 @@ function attack3_lasers(){
     setTimeout(() => {
       hand = document.querySelector(".hand1");
       hand.style.opacity = "1";
-      projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
+      projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
       setTimeout(() => {
       laser = document.querySelectorAll(".laser");
       laser[laser.length-1].style.width = "76.5%"; 
@@ -229,7 +229,7 @@ function attack3_lasers(){
   moveX = 0;
   moveY = 0;
   count_laser = 0;
-  laser_num = 1;
+  laser_num = "Blue";
   laser = 0;
   drawHeart(x, y);
 
@@ -248,7 +248,7 @@ function attack3_lasers(){
 
   setTimeout(function(){
     count_laser += 1;
-    laser_num = 1;
+    laser_num = "Blue";
     if(hand.style.left == "90%"){
       if(count_laser != 1){
         setTimeout(() => {
@@ -258,7 +258,7 @@ function attack3_lasers(){
         hand.style.left = `${randomNum}%`;
         hand.style.transform = ``;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
           laser[laser.length-1].style.height = "69%";
@@ -276,7 +276,7 @@ function attack3_lasers(){
         hand.style.left = `90%`;
         hand.style.transform = `rotate(90deg)`;
         setTimeout(() => {
-        projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
+        projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
         setTimeout(() => {
           laser = document.querySelectorAll(".laser");
           laser[laser.length-1].style.width = "76.5%"; 
@@ -293,10 +293,10 @@ function attack3_lasers(){
     laser_time = setInterval(function(){
       count_laser += 1;
       if(count_laser > 4){
-        laser_num = 0;
+        laser_num = "White";
       }
       if(count_laser == 3){
-        laser_num = 2;
+        laser_num = "Orange";
       }
       if(hand.style.left == "90%"){
         if(count_laser != 1){
@@ -307,7 +307,7 @@ function attack3_lasers(){
           hand.style.left = `${randomNum}%`;
           hand.style.transform = ``;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${window.innerHeight * 0.05 + window.innerWidth * 0.133}px; left:${randomNum + 2.3}%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
             laser[laser.length-1].style.height = "69%";
@@ -325,7 +325,7 @@ function attack3_lasers(){
           hand.style.left = `90%`;
           hand.style.transform = `rotate(90deg)`;
           setTimeout(() => {
-          projectile.innerHTML += `<div class="laser" id="l${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
+          projectile.innerHTML += `<div class="laser" id="${laser_num}" style="top: ${randomNum + window.innerWidth * 0.045 / 2}px; left:76.5%"></div>`;
           setTimeout(() => {
             laser = document.querySelectorAll(".laser");
             laser[laser.length-1].style.width = "76.5%"; 
@@ -437,11 +437,11 @@ function attack5_head(){
     hyp_t = calculateHypotenuse(leg2_t,leg_t);
     if(left === false){
     let calcR = -calculateAngle(hyp_t,leg_t);
-    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
+    projectile.innerHTML += `<div class="laser_head" id="${randomPick3("White","Blue","Orange")}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
     }
     if(left === true){
     let calcR = calculateAngle(hyp_t,leg_t) 
-    projectile.innerHTML += `<div class="laser_head" id="l${randomRange(0,2)}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
+    projectile.innerHTML += `<div class="laser_head" id="${randomPick3("White","Blue","Orange")}" style="top:${eyeDistance}px; rotate:${calcR}deg"></div>`;
     }
     
     setTimeout(() => {
@@ -467,8 +467,8 @@ function attack5_head(){
 
 //attack 6 legs dashing on you
 function attack6_dash(){
-  random_leg = randomRange(1,2);
-  projectile.innerHTML = `<img src="img/${random_leg + 3}.png" id="l${random_leg}" class="leg_dash">`;
+  random_leg = randomPick("Blue","Orange");
+  projectile.innerHTML = `<img src="img/leg${random_leg}.png" id="${random_leg}" class="leg_dash">`;
   mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
@@ -493,6 +493,7 @@ function attack6_dash(){
   moveHeartI = setInterval(moveHeart, 10);
 
   dash_leg = setInterval(() => {
+
     leg_dash_count++;
     if(leg_dash_count%3 == 1){
       leg_dash[leg_dash.length - 1].classList.add("leg_dash_right");
@@ -509,10 +510,10 @@ function attack6_dash(){
         worked_legs_dash = true;
         leg_dash_count_top = randomRange(0,2);
         if(leg_dash_count_top == 2 || leg_dash_count_top == 0){
-          random_leg = 0;
+          random_leg = "White";
         }
         else{
-        random_leg = randomRange(1,2);
+        random_leg = randomPick("Blue","Orange");
         }
         leg_dash[leg_dash.length - 1].style.transition = "0.5s";
         leg_dash_transition = 500;
@@ -520,19 +521,19 @@ function attack6_dash(){
       if(leg_dash_count_top == 2 && worked_legs_dash === false){
         worked_legs_dash = true;
         leg_dash_count_top = 1;
-        random_leg = randomRange(1,2);
+        random_leg = randomPick("Blue","Orange");
         leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
       if(leg_dash_count_top == 0 && worked_legs_dash === false){
         worked_legs_dash = true;
         leg_dash_count_top = 1;
-        random_leg = randomRange(1,2);
+        random_leg = randomPick("Blue","Orange");
         leg_dash[leg_dash.length - 1].style.transition = "1s";
         leg_dash_transition = 1000;
       }
-      leg_dash[leg_dash.length - 1].src = `img/${random_leg + 3}.png`;
-      leg_dash[leg_dash.length - 1].setAttribute('id', `l${random_leg}`);
+      leg_dash[leg_dash.length - 1].src = `img/leg${random_leg}.png`;
+      leg_dash[leg_dash.length - 1].setAttribute('id', `${random_leg}`)
       if (leg_dash_count_top !== 1) {
         if (leg_dash_count_top == 0) {
           leg_dash[leg_dash.length - 1].style.top = `${(canvasBottom - mettatonBottom)*0.6666+mettatonBottom - window.innerWidth*0.18919}px`;
@@ -666,7 +667,7 @@ function attack7_bombs(){
 
 //attack 8 wings,rockets
 function attack8_wings(){
-  projectile.innerHTML = `<img src="img/2.png" class="wing2 wing"><img src="img/1.png" class="wing1 wing">`;
+  projectile.innerHTML = `<img src="img/wing2.png" class="wing1"><img src="img/wing1.png" class="wing2">`;
   mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
@@ -738,7 +739,7 @@ function attack8_wings(){
 
 //attack 9 HEART
 function attack9_finale(){
-  projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0;"><img src="img/heart_yellow.png" class="heart_yellow"></div><img src="img/heart_yellow_out.png" class="heart_yellow_border" style="opacity: 1;">`;
+  projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0; top:${window.innerHeight/2 - window.innerWidth*0.25+window.innerWidth*0.109}px"><img src="img/yellowHeart.png" class="heart_yellow"></div><img src="img/yellowHeartBorder.png" class="heart_yellow_border" style="opacity: 1; top: ${window.innerHeight/2 - window.innerWidth*0.25+window.innerWidth*0.12}px">`;
   setTimeout(() => {
     mettatonGIF.style.opacity = "0";
   }, 700);
@@ -757,7 +758,7 @@ function attack9_finale(){
   yellow_heart.style.opacity = "1";
   yellow_heart_out.style.width = "4.8%"
   yellow_heart_out.style.left = "47.3%"
-  yellow_heart_out.style.top = "23%"
+  yellow_heart_out.style.top = `${window.innerHeight/2 - window.innerWidth*0.25+window.innerWidth*0.108}px`
 
   setTimeout(() => {
     yellow_heart_out.style.opacity = "0";
@@ -820,7 +821,7 @@ function attack9_finale(){
     battleSection.style.opacity = "1";
     name.style.opacity = "1";
     lv.style.opacity = "1";
-    appear("* Stage lights are blaring");
+    // appear("* Stage lights are blaring");
     }, 1100);
   }, 11500);
 }

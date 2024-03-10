@@ -50,10 +50,10 @@ function checkCollision(elements, target, damage, delete1, obw) {
       const elemRect = element.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
       if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
-        const id = element.id;
+        const id = element.id.toLowerCase();
         if (!t_f_wait) {
           let hp_hold;
-          if (id === 'l0' || obw == false) {
+          if (id === 'white' || obw == false) {
             if(delete1 == true){
               element.remove();
               clearInterval(bomb_timeout);
@@ -73,7 +73,7 @@ function checkCollision(elements, target, damage, delete1, obw) {
               t_f_wait = false;
             }, 500);
           } 
-          else if (id === 'l2') {
+          else if (id === 'orange') {
             if (player_moving) {
               clearTimeout(orangeLaserTimer);
               continue;
@@ -102,7 +102,7 @@ function checkCollision(elements, target, damage, delete1, obw) {
                 }, 250);
               }
             }
-          } else if (id === 'l1') {
+          } else if (id === 'blue') {
             if (player_moving) {
               if(delete1 == true){
                 element.remove();
