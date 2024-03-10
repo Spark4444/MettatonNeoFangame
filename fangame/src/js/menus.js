@@ -44,6 +44,7 @@ let playerFighting = false;
 let attackNumber = false;
 let animation = true;
 let fullScreen = false;
+let keythrottle = false;
 let MettatonHP = 360;
 let secondPosition = 0;
 let HPRecovered = 0;
@@ -86,7 +87,7 @@ function enableFullScreen(){
 }
 
 // f11 keylistener to enable fullscreen
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keyup', function(e) {
   const key = e.keyCode || e.which;
   switch(key){
     case 122:
@@ -247,12 +248,12 @@ function display(){
   if(secondNumber == 0){
     img[secondNumber].src = "img/nothing.png"
     text = `<div class='attackingText'><img class= 'smallerHeart' src='img/heart.png'><div class="shakeElement" class="WidthN"> * Mettaton NEO </div> <div class='mettatonsHP2'><div class='mettatonsHP' style='width:${hpWidth};'></div></div></div>`;
-    typeWriter2();
+    typeWriterInstant();
   }
   if(secondNumber == 1){
     img[secondNumber].src = "img/nothing.png"
     text = `<div class="flex"><img class= 'smallerHeart' src='img/heart.png'><div class="shakeElement"> * Mettaton NEO</div></div>`;
-    typeWriter2();
+    typeWriterInstant();
   }
   if(secondNumber == 2){
     img[secondNumber].src = "img/nothing.png"
@@ -261,14 +262,14 @@ function display(){
     text = `<div class="invetory">${foodList[0] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
     ${foodList[2] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
    <div class="nothing"></div><div class="right-element-page" class="shakeElement">PAGE 1</div></div>`;
-    typeWriter2();
+    typeWriterInstant();
     imgH();
     heartImg[0].src = "img/heart.png"
   }
   if(secondNumber == 3){
     img[secondNumber].src = "img/nothing.png"
     text = `<div class="flex"><img class= 'smallerHeart' src='img/heart.png'><div class="shakeElement"> * Spare</div></div>`;
-    typeWriter2();
+    typeWriterInstant();
   }
 }
 
@@ -283,12 +284,12 @@ function display2(){
       attackLine = document.querySelector(".line_attack"); 
       attack = 0;
     },10);
-    typeWriter2();
-    attack_function();
+    typeWriterInstant();
+    attackFunction();
   }
   if(secondNumber == 1){
     text = `<div class="flex"><img class= 'smallerHeart' src='img/heart.png'><div class="shakeElement"> * Check</div></div>`;
-    typeWriter2();
+    typeWriterInstant();
   }
   if(secondNumber == 2){
     audio.play(15);
@@ -319,7 +320,7 @@ function display2(){
       thirdColumn = ``;
     }
     playersHPString = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
-    HP_recover();
+    recoverHP();
     typeWriterArr();
     position = false;
   }
@@ -365,12 +366,12 @@ function display4(){
   }
 }
 
-//text_menu disappear
+//Transition from menu into an attack
 function disappear(){
   stage = false;
   num = false;
   text = "";
-  typeWriter2();
+  typeWriterInstant();
   playerMovementBox.classList.add("cube")
   setTimeout(function(){
     buttons[secondNumber].classList.remove('yellow');
@@ -399,7 +400,7 @@ function disappear(){
       audio.mute(0);
       setTimeout(() => {
       deathMtt();
-      document.addEventListener('keydown', e => {
+      document.addEventListener('keyup', e => {
         const key = e.keyCode || e.which;
         switch (key) {
           case 13: // Enter key
@@ -416,15 +417,15 @@ function disappear(){
   },1000);
 }
 
-//text_menu appear
+//text menu appears
 function appear(text1){
   projectile.innerHTML = ``;
   mettatonGIF.style.opacity = "1";
   playerFighting = false;
   num = 0;
   text = "";
-  typeWriter2();
-  classA();
+  typeWriterInstant();
+  buttonsMovement();
   playerMovementBox.classList.remove("hidden");
   setTimeout(function(){
     playerMovementBox.classList.remove("cube");
@@ -437,14 +438,14 @@ function appear(text1){
   },1000 + 100);
 }
 
-//img_h initialization
+//img heart initilization
 function imgH(){
   heartImg = document.querySelectorAll(".heartImg");  
   return;
 }
 
-//Attack
-function attack_function(){
+//Player attacking mettaton
+function attackFunction(){
   setTimeout(() => {
     attackLine.classList.add("move_attack");
     playerMovementBox.classList.add("text_bc_im");
@@ -472,7 +473,7 @@ function attack_function(){
 }
 
 //HP recovering
-function HP_recover(){
+function recoverHP(){
   if(parseInt(playersHPString) + parseInt(HPRecovered) < 71 && parseInt(playersHPString) + parseInt(HPRecovered) > 0){
   playersHPString = parseInt(playersHPString) + parseInt(HPRecovered);
   }
@@ -490,7 +491,7 @@ function HP_recover(){
   showHP();
 }
 
-//Shows hp and checks if game is over
+//Updates hp and checks if game is over
 function showHP(){
   hp.innerHTML = `${playersHPString}/72`;
   playersHP.style.width = `${playersHPString/(72/100)}%`;
@@ -566,7 +567,7 @@ function showHP(){
 
 
 //Movement between buttons
-function classA(){
+function buttonsMovement(){
   secondNumber = num;
   if(secondNumber > 3){
     secondNumber = 0;
@@ -621,7 +622,6 @@ let timeoutID;
 
 //Function that writes the text in the text box letter by letter
 function typeWriter() {
-  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -643,8 +643,7 @@ function typeWriter() {
 }
 
 //Function that writes the text in the text box instantly
-function typeWriter2() {
-  console.log(text);
+function typeWriterInstant() {
   audio.reset(7);
   audio.pause(7);
   clearTimeout(timeoutID);
@@ -657,7 +656,6 @@ function typeWriter2() {
 
 //Function that writes the text in the text box letter by letter and works with arrays
 function typeWriterArr() {
-  console.log(text);
   audio.reset(7);
   audio.play(7);
   clearTimeout(timeoutID);
@@ -703,21 +701,21 @@ function typeWriterArr() {
 
 
 //Function that writes the text in the text box letter by letter
-function typeWriterBox(text_write) {
+function typeWriterBox(textWritten) {
   audio.reset(6);
   audio.play(6);
   textBox.innerHTML = "";
   clearTimeout(timeoutID);
   let i = 0;
   timeoutID = setInterval(() => {
-    if (i >= text_write.length) {
+    if (i >= textWritten.length) {
       setTimeout(() => {
         audio.pause(6);
       },100);
       clearInterval(timeoutID);
       return;
     }
-    textBox.innerHTML += text_write[i];
+    textBox.innerHTML += textWritten[i];
     i++;
   }, 40);
 }
@@ -829,7 +827,7 @@ function deathMtt() {
 
 //A,a and left arrow keys listeners, movement to the right of the buttons
 setTimeout(() => {
-document.addEventListener('keydown', e => {
+document.addEventListener('keyup', e => {
   const key = e.keyCode || e.which;
   switch (key) {
     case 37: // Left arrow key
@@ -839,7 +837,7 @@ document.addEventListener('keydown', e => {
         num--;
         audio.reset(1);
         audio.play(1);
-        classA();
+        buttonsMovement();
       }
       break;
     default:
@@ -848,7 +846,7 @@ document.addEventListener('keydown', e => {
 });
 
 //D,d and right arrow keys listener, movement to the left of the buttons
-document.addEventListener('keydown', e => {
+document.addEventListener('keyup', e => {
   const key = e.keyCode || e.which;
   switch (key) {
     case 39: // Right arrow key
@@ -858,7 +856,7 @@ document.addEventListener('keydown', e => {
         num++;
         audio.reset(1);
         audio.play(1);
-        classA();
+        buttonsMovement();
       }
       break;
     default:
@@ -867,8 +865,6 @@ document.addEventListener('keydown', e => {
 });
 }, 3000);
 
-//Z and enter, x key listeners
-setTimeout(() => {
 document.addEventListener('keydown', e => {
   const key = e.keyCode || e.which;
   switch (key) {
@@ -947,6 +943,18 @@ document.addEventListener('keydown', e => {
           }, 980);
         },11);
       }
+      break;
+    }
+
+});
+
+//Z and enter, x key listeners
+setTimeout(() => {
+document.addEventListener('keyup', e => {
+  const key = e.keyCode || e.which;
+  switch (key) {
+    case 13: // Enter key
+    case 90: // Z key
 
       //Movement between the text menus
       if(secondNumber > 3){
@@ -1018,7 +1026,7 @@ document.addEventListener('keydown', e => {
 },4000);
 
 //Movement in the inventory
-document.addEventListener('keydown', e => {
+document.addEventListener('keyup', e => {
   if(position !== false){
     positionBefore = position;
     //Sets the firstInventoryRow and secondInventoryRow to this every time
@@ -1168,7 +1176,7 @@ const key = e.keyCode || e.which;
         else if(position == 3 && foodList.length == 4 || position == 1  && foodList.length < 5 && foodList.length > 1){
           position -= 1;
         }
-        typeWriter2();
+        typeWriterInstant();
         imgH();
         heartImg[secondPosition].src = "img/heart.png";
         if(positionBefore != position){
@@ -1203,7 +1211,7 @@ const key = e.keyCode || e.which;
   if(position > 3 && position < 8){
     text = secondInventoryRow;
   }
-typeWriter2();
+typeWriterInstant();
 imgH();
 heartImg[secondPosition].src = "img/heart.png";
 

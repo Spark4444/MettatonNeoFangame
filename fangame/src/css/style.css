@@ -448,20 +448,6 @@ audio{
     transition: 1s;
     left: -10%;
 }
-/* .stageLightsCover {
-    position: relative;
-    left: -59.5%;
-    top: 17%;
-    width: 0;
-    overflow: visible;
-    transition: 1s;
-}
-.stageLights {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 48vw;
-} */
 .chatBox {
     width: 52vw;
     height: 27vw;
