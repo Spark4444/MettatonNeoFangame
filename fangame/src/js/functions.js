@@ -69,7 +69,7 @@ function calculatePercentage(number, total) {
 
 //Shaking letters function
 function shakeLetters(){
-  let shake = document.querySelectorAll("#shake-element");
+  let shake = document.querySelectorAll(".shakeElement");
   shake.forEach(shakes => {
     let textInside = shakes.innerHTML;
     shakes.innerHTML = "";
