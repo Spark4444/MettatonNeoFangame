@@ -391,7 +391,7 @@ function disappear(){
     playerMovementBox.style.display = "";
     playerFighting = true;
     if(MettatonHP > 0){
-      chat_box();
+      dialogue();
     }
     else{
       mettatonGIF.classList.add("mettaton_gif_left");
@@ -497,8 +497,8 @@ function showHP(){
   playersHP.style.width = `${playersHPString/(72/100)}%`;
   if(playersHPString < 0){
     busy = false;
-    hp_text = false;
-    food_text = false;
+    HPDialogue = false;
+    foodDialogue = false;
     audio.play(3);
     audio.pause(12);
     top1 = 19.3;

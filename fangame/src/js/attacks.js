@@ -821,7 +821,7 @@ function attack9_finale(){
     battleSection.style.opacity = "1";
     name.style.opacity = "1";
     lv.style.opacity = "1";
-    // appear("* Stage lights are blaring");
+    appear("* Stage lights are blaring");
     }, 1100);
   }, 11500);
 }

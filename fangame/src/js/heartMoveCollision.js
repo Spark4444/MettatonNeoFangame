@@ -1,5 +1,5 @@
 //Initializing variables
-let player = document.querySelector(".player");
+let player;
 let projectile = document.querySelector(".particles");
 let leg1 = document.querySelector(".leg1");
 let leg2 = document.querySelector(".leg2");
@@ -26,9 +26,6 @@ let moveX = 0;
 let moveY = 0;
 let player_moving = false;
 let orangeLaserTimer;
-
-//Removes the player
-player.remove();
 
 //Draw heart
 function drawHeart(x, y) {
@@ -172,7 +169,7 @@ function check_out_of_bounds() {
 
 // Move heart and check collision
 function moveHeart() {
-  if(pressed_continue){
+  if(pressedContinue){
   // Check if heart is out of bounds
   if(playerFighting === true){
   check_out_of_bounds();
