@@ -1,3 +1,4 @@
+//Varaibles initilization
 let busy = false;
 let HPDialogue = false;
 let foodDialogue = false;

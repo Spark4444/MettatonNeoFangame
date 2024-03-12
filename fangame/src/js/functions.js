@@ -1,32 +1,32 @@
-//Gets a number from random range
+//Gets a number from a random range
 function randomRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//Picks a number
-function randomPick(num1, num2) {
+//Picks a random value
+function randomPick(value, value2) {
     if(Math.floor(Math.random() * (2 - 1 + 1)) + 1 == 1){
-        return num1;
+        return value;
     }
     else{
-        return num2;
+        return value2;
     }
 }
 
-//Picks a number from 3
-function randomPick3(str1, str2, str3) {
-  const randomNumber = Math.floor(Math.random() * 3); // Generates a random number between 0 and 2
+//Picks a random value from 3
+function randomPick3(value, value2, value3) {
+  const randomNumber = Math.floor(Math.random() * 3);
 
   if (randomNumber === 0) {
-      return str1;
+      return value;
   } else if (randomNumber === 1) {
-      return str2;
+      return value2;
   } else {
-      return str3;
+      return value3;
   }
 }
 
-//Picks a number from 4
+//Picks a random value from 3
 function randomPick4(num1, num2, num3, num4) {
   let randomNumber = Math.floor(Math.random() * 4);
   if (randomNumber === 0) {
@@ -40,7 +40,7 @@ function randomPick4(num1, num2, num3, num4) {
   }
 }
 
-//Gets a random number from ranges
+//Gets a random number from two ranges
 function randomMultiRange(range1, range2, range3, range4) {
     const ranges = [[range1, range2], [range3, range4]];
     const rangeIndex = Math.floor(Math.random() * ranges.length);
@@ -48,26 +48,26 @@ function randomMultiRange(range1, range2, range3, range4) {
     return Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
 }
 
-//Calculates the hypotenuse
-function calculateHypotenuse(leg1, leg2) {
-    const hypotenuse = Math.sqrt(leg1 * leg1 + leg2 * leg2);
+//Calculates the hypotenuse from two legs
+function calculateHypotenuse(leg, leg2) {
+    const hypotenuse = Math.sqrt(leg * leg + leg2 * leg2);
     return hypotenuse;
   }
 
-//Calculate the angle of a triangle
-function calculateAngle(hypotenuse, leg1) {
-    const angleRadians = Math.acos(leg1 / hypotenuse);
+//Calculate the angle of a right angle triangle
+function calculateAngle(hypotenuse, leg) {
+    const angleRadians = Math.acos(leg / hypotenuse);
     const angleDegrees = angleRadians * (180 / Math.PI);
     return angleDegrees;
 }
 
-//Calculates a numbers percantage
+//Calculates the percentage of number to total
 function calculatePercentage(number, total) {
     const percentage = (number / total) * 100;
     return percentage.toFixed(0);
 }
 
-//Shaking letters function
+//Function that makes letters shake in game
 function shakeLetters(){
   let shake = document.querySelectorAll(".shakeElement");
   shake.forEach(shakes => {
@@ -125,57 +125,12 @@ function animateElement(element, style, seconds, startValue, endValue) {
   }, 16.67);
 }
 
-//animates multiple elements
-function animateElements(elements, style, duration, startValue, endValue) {
-  var interval = (endendValue - startValue) / (duration * 60); // Calculate the increment value
-  var count = 0;
-
-  var animate = function() {
-    if (count < duration * 60) {
-      count++;
-      for (var i = 0; i < elements.length; i++) {
-        var currentVal = startValue + interval * count;
-        elements[i].style[style] = currentVal;
-      }
-      requestAnimationFrame(animate);
-    }
-  };
-  animate();
-}
-
-//Encrypter
-function encrypt(num) {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  let encryptedString = '';
-
-  while (num > 0) {
-    let remainder = (num - 1) % 26;
-    encryptedString = alphabet[remainder] + encryptedString;
-    num = Math.floor((num - remainder) / 26);
-  }
-
-  return encryptedString;
-}
-
-//Decrypter
-function decrypt(str) {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  let decryptedNumber = 0;
-
-  for (let i = 0; i < str.length; i++) {
-    let charIndex = alphabet.indexOf(str[i]) + 1;
-    decryptedNumber = decryptedNumber * 26 + charIndex;
-  }
-
-  return decryptedNumber;
-}
-
-//Save
+//Save a value to local storage
 function save(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-//Get
+//Get a value from local storage
 function get(key) {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : 0;

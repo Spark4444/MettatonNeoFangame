@@ -1,3 +1,4 @@
+//Varaibles initilization
 let HP_show;
 let intervalId2;
 let intervalId;
