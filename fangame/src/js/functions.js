@@ -61,10 +61,9 @@ function calculateAngle(hypotenuse, leg) {
     return angleDegrees;
 }
 
-//Calculates the percentage of number to total
+// Calculates the percentage of number to total
 function calculatePercentage(number, total) {
-    const percentage = (number / total) * 100;
-    return percentage.toFixed(0);
+    return ((number / total) * 100).toFixed(0);
 }
 
 //Function that makes letters shake in game
