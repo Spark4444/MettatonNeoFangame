@@ -832,24 +832,24 @@ document.addEventListener('keydown', e => {
           clearInterval(HP_show);
           attackLine.style.left = `${attackLine.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
           attackLine.classList.remove("move_attack");
-          let attack_amount = parseFloat(((attackLine.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
+          let attackPercantage = parseFloat(((attackLine.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
           let damage;
           audio.play(5);
           hits++;
 
-          if(attack_amount > 49){
-            damage = (0.35*calculatePercentage(51-(attack_amount-49),51)).toFixed(0)
+          if(attackPercantage > 49){
+            damage = (0.35*calculatePercentage(51-(attackPercantage-49),51)).toFixed(0)
             attackLine.classList.add("appear_hide");
           }
 
-          if(attack_amount > 48.49 && attack_amount < 49.01){
+          if(attackPercantage > 48.49 && attackPercantage < 49.01){
             damage = 36;
             criticalHitsGiven++;
             attackLine.classList.add("appear_hide_yellow");
           }
 
-          if(attack_amount < 48.49){
-            damage = (0.35*calculatePercentage(attack_amount,+49)).toFixed(0);
+          if(attackPercantage < 48.49){
+            damage = (0.35*calculatePercentage(attackPercantage,+49)).toFixed(0);
             attackLine.classList.add("appear_hide");
           }
           
