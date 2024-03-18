@@ -4,7 +4,7 @@ let HPDialogue = false;
 let foodDialogue = false;
 let pressedContinue = false;
 
-//Function that triggers dialogue for mettaton
+//Function that starts a dialogue with mettaton
 function dialogue(){
     if(attackNumber === false){
         attackNumber = 0;
@@ -36,7 +36,7 @@ function dialogue(){
             typeWriterBox("Ready to be blown away, darling? Enjoy the fireworks kid!");
             break;
         case 7:
-            typeWriterBox("Get ready for my stunning missile show, darling! Lights, camera, action!");
+            typeWriterBox("Get ready for my stunning missile show, darling!");
             break;        
         case 8:
             typeWriterBox("Did you really think that you were going to beat me, darling?");
@@ -64,7 +64,7 @@ function dialogue(){
     }
 }
 
-//Event listener for the user to continue into battle
+//Event listener for the user to continue into battle from a dialogue with mettaton
 document.addEventListener('keyup', e => {
 const key = e.keyCode || e.which;
 
@@ -78,28 +78,28 @@ if(busy == true){
 
     switch(attackNumber){
         case 7:
-            attack8_wings();
+            attack8();
             break;
         case 6:
-            attack7_bombs();
+            attack7();
             break;
         case 5:
-            attack6_dash();
+            attack6();
             break;
         case 4:
-            attack5_head();
+            attack5();
             break;
         case 3:
-            attack4_hand();
+            attack4();
             break;
         case 2:
-            attack3_lasers();
+            attack3();
             break;
         case 1:
-            attack2_smoke();
+            attack2();
             break;
         case 0:
-            attack1_legs();
+            attack1();
             break;
         case 8:
             audio.unmute(12);
@@ -109,7 +109,7 @@ if(busy == true){
             audio.pause(9);
             audio.play(10);
             audio.pause(2);
-            attack9_finale();
+            attack9();
             battleSection.style.opacity = "0";
             lv.style.opacity = "0";
             name.style.opacity = "0";

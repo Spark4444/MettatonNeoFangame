@@ -2,6 +2,8 @@
 let HP_show;
 let intervalId2;
 let intervalId;
+let leg1;
+let leg2;
 let ten_secs;
 let moveHeartI;
 let number_lightning;
@@ -60,13 +62,22 @@ let mettatonBottom = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * w
 let canvasBottom = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.795;
 
 //Attack 1(legs)
-function attack1_legs(){ 
+function attack1(){ 
     moveHeartI = setInterval(moveHeart, 10);
     let mov1 = mettatonBottom - window.innerWidth * 0.189;
     let mov2 = canvasBottom - window.innerWidth * 0.189;
     x = 47;
     y = 31;
     drawHeart(x, y);
+    //<div class="leg1 legs" style="top: 147px;">
+    //<img src="img/leg1.png" style="width: 100%;" alt="">
+    //<div class="hitbox" style="
+    //   position: absolute;
+    //   width: 54%;
+    //   height: 95%;
+    //   left: 24%;
+    //   top: 3%;
+    // "></div></div>
     projectile.innerHTML = `<img src="img/leg1.png" style="left:${randomRange(23,71)}%; top:${mov1}px;" class="leg1 legs" alt=""><img src="img/leg2.png" style="left:${randomRange(23,71)}%; top:${mov1}px;" class="leg2 legs" alt="">`
     mettatonGIF.style.opacity = "0";
     leg1 = document.querySelector(".leg1");
@@ -91,7 +102,7 @@ function attack1_legs(){
     }, 333);
 
     intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
     checkCollision(legs, player, 20, false, false);
     }
     }, 10);
@@ -111,7 +122,7 @@ function attack1_legs(){
   }
 
 //Attack 2(smoke and lighting)
-function attack2_smoke(){
+function attack2(){
   projectile.innerHTML = `<img src="img/smoke.png" class="smoke" style="opacity:0; top:${mettatonBottom}px" alt="">`;
   x = 47;
   y = 31;
@@ -177,7 +188,7 @@ function attack2_smoke(){
   
   setTimeout(()=>{
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       checkCollision(lightningElem, player, 15, false, false);
   }
   }, 10);
@@ -195,7 +206,7 @@ function attack2_smoke(){
 }
 
 //Attack 3(hand and lasers)
-function attack3_lasers(){
+function attack3(){
   if(randomPick(0,1) == 1){
     randomNum = randomRange(23,71);
     projectile.innerHTML = `<img src="img/hand.png" class="hand1" style="opacity:0; top:5%; left:${randomNum}%;">`;
@@ -235,7 +246,7 @@ function attack3_lasers(){
   drawHeart(x, y);
 
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       laser = document.querySelectorAll(".laser");
       checkCollision(laser, player, 30, false, true);
     }
@@ -349,7 +360,7 @@ function attack3_lasers(){
 } 
 
 //Attack 4 hand
-function attack4_hand(){
+function attack4(){
   projectile.innerHTML = `<img src="img/hand2.png" class="hand2" style="left: 47%; top:${mettatonBottom - window.innerWidth*0.045/77*277}px">`;
 
   setTimeout(() => {
@@ -365,7 +376,7 @@ function attack4_hand(){
   drawHeart(x, y);
 
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       hand2 = document.querySelectorAll(".hand2");
       checkCollision(hand2, player, 30, false, false);
     }
@@ -403,7 +414,7 @@ function attack4_hand(){
 }
 
 //Attack 5 head
-function attack5_head(){
+function attack5(){
   mettatonGIF.style.opacity = "1";
   x = 47;
   y = 31;
@@ -413,7 +424,7 @@ function attack5_head(){
   drawHeart(x, y);
 
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       laser_head = document.querySelectorAll(".laser_head");
       checkCollision(laser_head, player, 20, false, true);
     }
@@ -467,7 +478,7 @@ function attack5_head(){
 }
 
 //attack 6 legs dashing on you
-function attack6_dash(){
+function attack6(){
   random_leg = randomPick("Blue","Orange");
   projectile.innerHTML = `<img src="img/leg${random_leg}.png" id="${random_leg}" class="leg_dash">`;
   mettatonGIF.style.opacity = "0";
@@ -480,7 +491,7 @@ function attack6_dash(){
   leg_dash_transition = 500;
   leg_dash_count_top = 1;
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       leg_dash = document.querySelectorAll(".leg_dash");
       leg_dash[leg_dash.length - 1].style.transition = "0.5s";
       checkCollision(leg_dash, player, 20, false, true);
@@ -557,7 +568,7 @@ function attack6_dash(){
 }
 
 //attack 7 bombs
-function attack7_bombs(){
+function attack7(){
   projectile.innerHTML = ``;
   mettatonGIF.style.opacity = "1";
   x = 47;
@@ -567,7 +578,7 @@ function attack7_bombs(){
   drawHeart(x, y);
 
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       bomb = document.querySelectorAll(".bomb");
       explosion = document.querySelectorAll(".explosion");
       if (explosion !== null){
@@ -667,7 +678,7 @@ function attack7_bombs(){
 }
 
 //attack 8 wings,rockets
-function attack8_wings(){
+function attack8(){
   projectile.innerHTML = `<img src="img/wing2.png" class="wing1"><img src="img/wing1.png" class="wing2">`;
   mettatonGIF.style.opacity = "0";
   x = 47;
@@ -688,7 +699,7 @@ function attack8_wings(){
   intervalId2 = setInterval(() => {
     wing = document.querySelectorAll(".wing");
     rocket = document.querySelectorAll(".rocket");
-    if(t_f_wait === false && rocket.length > 1){
+    if(attackThrottle === false && rocket.length > 1){
       checkCollision(rocket, player, 20, true, false);
       checkCollision(wing, player, 20, false, false);
     }
@@ -739,7 +750,7 @@ function attack8_wings(){
 }
 
 //attack 9 HEART
-function attack9_finale(){
+function attack9(){
   projectile.innerHTML = `<div class="yellow_heart_anim" style="opacity: 0; top:${window.innerHeight/2 - window.innerWidth*0.25+window.innerWidth*0.109}px"><img src="img/yellowHeart.png" class="heart_yellow"></div><img src="img/yellowHeartBorder.png" class="heart_yellow_border" style="opacity: 1; top: ${window.innerHeight/2 - window.innerWidth*0.25+window.innerWidth*0.12}px">`;
   setTimeout(() => {
     mettatonGIF.style.opacity = "0";
@@ -771,7 +782,7 @@ function attack9_finale(){
 
   setTimeout(() => {
   intervalId2 = setInterval(() => {
-    if(t_f_wait === false){
+    if(attackThrottle === false){
       checkCollision(bullet, player, 20, true, false);
     }
   }, 10);
