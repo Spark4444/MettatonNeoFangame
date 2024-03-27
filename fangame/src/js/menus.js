@@ -71,7 +71,7 @@ let firstInventoryRow;
 let secondInventoryRow;
 let secondColumn;
 let thirdColumn;
-let timeoutID;
+let textWrite;
 
 //Enables fullscreen
 function enableFullScreen(){
@@ -259,9 +259,9 @@ function display(){
     case 2:
       position = 0;
       positionBefore = 0;
-      text = `<div class="invetory">${foodList[0] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
-      ${foodList[2] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
-      <div class="nothing"></div><div class="right-element-page" class="shakeElement">PAGE 1</div></div>`;
+      text = `<div class="invetory">${foodList[0] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
+      ${foodList[2] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
+      <div class="nothing"></div><div class="pageInfo" class="shakeElement">PAGE 1</div></div>`;
       typeWriterInstant();
       heartImg = document.querySelectorAll(".heartImg");
       heartImg[0].src = "img/heart.png";
@@ -279,9 +279,9 @@ function display2(){
     case 0:
       disableX = true;
       stage = false;
-      text = `<div class="line_attack" alt="" style=""></div>`;
+      text = `<div class="attackLine" alt="" style=""></div>`;
       setTimeout(() => {
-        attackLine = document.querySelector(".line_attack"); 
+        attackLine = document.querySelector(".attackLine"); 
         attack = 0;
       },10);
       typeWriterInstant();
@@ -386,9 +386,9 @@ function disappear(){
       dialogue();
     }
     else{
-      mettatonGIF.classList.add("mettaton_gif_left");
-      triangle.classList.add("triangle_left");
-      textBox.classList.add("chat_box_left");
+      mettatonGIF.classList.add("mettatonGifLeft");
+      triangle.classList.add("triangleLeft");
+      textBox.classList.add("chatBoxLeft");
       audio.mute(0);
       setTimeout(() => {
       deathMtt();
@@ -411,7 +411,13 @@ function disappear(){
 
 //Function that transitions from an attack into the menu
 function appear(text1){
-  projectile.innerHTML = ``;
+  clearInterval(attackInterval);
+  clearInterval(checkCollisionWithPlayer);
+  projectile = false;
+  if(player !== undefined){
+  player.style.animation = "";
+  }
+  projectiles.innerHTML = "";
   mettatonGIF.style.opacity = "1";
   playerFighting = false;
   disableButtonsMovement = false;
@@ -433,25 +439,24 @@ function appear(text1){
 //Function to calculate the damage done by player to mettaton
 function attackFunction(){
   setTimeout(() => {
-    attackLine.classList.add("move_attack");
-    playerMovementBox.classList.add("text_bc_im");
+    attackLine.classList.add("moveLine");
+    playerMovementBox.classList.add("attackBackground");
     attackLineTimeout = setTimeout(() => {
-      clearInterval(HP_show);
       attack = false;
       damageDealt.innerHTML = "MISS";
       misses++;
       audio.play(5);
       attackingSection.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
       attackingSection.classList.remove("hidden");
-      attackLine.classList.remove("move_attack");
+      attackLine.classList.remove("moveLine");
       attackLine.classList.add("hidden");
       attackingGIF.src = "img/attack.gif";
       setTimeout(() => {
-        attackLine.classList.remove("appear_hide");
+        attackLine.classList.remove("appearHide");
         attackLine.classList.add("hidden");
         attackingSection.classList.add("hidden");
         attackingGIF.src = "";
-        playerMovementBox.classList.remove("text_bc_im");
+        playerMovementBox.classList.remove("attackBackground");
         disappear();
       }, 980);
     }, 1201);
@@ -491,7 +496,7 @@ function showHP(){
     top2 = 19.3;
     left1 = 50;
     left2 = 50;
-    projectile.innerHTML == "";
+    projectiles.innerHTML == "";
     mettatonGIF.style.filter = "";
     battleSection.style.opacity = "1";
     name.style.opacity = "1";
@@ -510,19 +515,9 @@ function showHP(){
     restarts++;
     audio.reset(2);
     audio.mute(0);
-    clearInterval(intervalId);
-    clearInterval(intervalId2);
-    clearInterval(moveHeartI);
-    clearInterval(HP_show);
-    clearInterval(ten_secs);
-    clearInterval(lightning);
-    clearInterval(laser_time);
-    clearInterval(hand_time);
-    clearInterval(head_time);
-    clearInterval(dash_leg);
-    clearInterval(yellow_heartMove);
-    clearInterval(bomb_interval);
-    clearInterval(wings_rockets_inter);
+    clearInterval(attackInterval);
+    clearInterval(checkCollisionWithPlayer);
+    clearInterval(endOfTheAttack);
     clearInterval(timeToCompleteInterval);
     foodList = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
     health = ["72","72","60","40","40","40","40","40"];
@@ -577,16 +572,16 @@ function setButtonStyles(){
 function typeWriter() {
   audio.reset(7);
   audio.play(7);
-  clearTimeout(timeoutID);
+  clearTimeout(textWrite);
     playerMovementBox.innerHTML = `<div class="shakeElement"></div>`;
     setTimeout(() => {
       shakeElement = document.querySelector(".shakeElement");
       let i = 0;
-      timeoutID = setInterval(() => {
+      textWrite = setInterval(() => {
         if (i >= text.length) {
           shakeLetters();
           audio.pause(7);
-          clearInterval(timeoutID);
+          clearInterval(textWrite);
           return;
         }
         shakeElement.innerHTML += text[i];
@@ -599,10 +594,10 @@ function typeWriter() {
 function typeWriterInstant() {
   audio.reset(7);
   audio.pause(7);
-  clearTimeout(timeoutID);
+  clearTimeout(textWrite);
   playerMovementBox.innerHTML = "";
   playerMovementBox.innerHTML = text;
-  clearTimeout(timeoutID);
+  clearTimeout(textWrite);
   shakeLetters();
   return;
 }
@@ -611,22 +606,22 @@ function typeWriterInstant() {
 function typeWriterColumn() {
   audio.reset(7);
   audio.play(7);
-  clearTimeout(timeoutID);
+  clearTimeout(textWrite);
     playerMovementBox.innerHTML = `<div class="wrap"><div class="shakeElement"></div><div class="shakeElement"></div><div class="shakeElement"></div></div>`;
     setTimeout(() => {
       shakeElement = document.querySelectorAll(".shakeElement");
       let i = 0;
-      timeoutID = setInterval(() => {
+      textWrite = setInterval(() => {
         if (i >= text.length) {
-          clearInterval(timeoutID);
+          clearInterval(textWrite);
           let i = 0;
-          timeoutID = setInterval(() => {
+          textWrite = setInterval(() => {
             if (i >= secondColumn.length) {
-              clearInterval(timeoutID);
+              clearInterval(textWrite);
               let i = 0;
-              timeoutID = setInterval(() => {
+              textWrite = setInterval(() => {
                 if (i >= thirdColumn.length) {
-                  clearInterval(timeoutID);
+                  clearInterval(textWrite);
                   setTimeout(() => {
                     audio.pause(7);
                     shakeLetters();
@@ -658,14 +653,14 @@ function typeWriterBox(text) {
   audio.reset(6);
   audio.play(6);
   textBox.innerHTML = "";
-  clearTimeout(timeoutID);
+  clearTimeout(textWrite);
   let i = 0;
-  timeoutID = setInterval(() => {
+  textWrite = setInterval(() => {
     if (i >= text.length) {
       setTimeout(() => {
         audio.pause(6);
       },100);
-      clearInterval(timeoutID);
+      clearInterval(textWrite);
       return;
     }
     textBox.innerHTML += text[i];
@@ -676,7 +671,7 @@ function typeWriterBox(text) {
 //Mettaton death animation
 function deathMtt() {
   chatBox.style.opacity = "1";
-  mettatonGIF.style.animation = "shake_death 0.2s steps(1, end) infinite";
+  mettatonGIF.style.animation = "shakeDeath 0.2s steps(1, end) infinite";
   if(deathDialogue == 0){
   mettatonGIF.src="img/face7.png";
   typeWriterBox("YOU WON, BUT AT WHAT COST?");
@@ -747,12 +742,12 @@ function deathMtt() {
   audio.pause(6);
   audio.reset(6);
   audio.play(14);
-  projectile.classList.add("transition");
-  projectile.style.background = "white";
+  projectiles.classList.add("transition");
+  projectiles.style.background = "white";
   finished++;
   setTimeout(() => {
     html.classList.remove("cursorNone");
-    projectile.innerHTML = `<div class="statistics">
+    projectiles.innerHTML = `<div class="statistics">
     <div class="stat">Game was finished : ${finished}(times)</div>
     <div class="stat">Restarts : ${restarts}</div>
     <div class="stat">Damage taken : ${damageTaken}</div>
@@ -770,7 +765,7 @@ function deathMtt() {
     audio.unmute(2);
     audio.reset(2);
     audio.play(2);
-    projectile.style.background = "black";
+    projectiles.style.background = "black";
   }, 3000);
   //END
   }
@@ -818,9 +813,8 @@ document.addEventListener('keydown', e => {
         setTimeout(() => {
           attack = false;
           clearTimeout(attackLineTimeout);
-          clearInterval(HP_show);
           attackLine.style.left = `${attackLine.getBoundingClientRect().left-window.innerWidth*0.23795}px`;
-          attackLine.classList.remove("move_attack");
+          attackLine.classList.remove("moveLine");
           let attackPercantage = parseFloat(((attackLine.getBoundingClientRect().left - window.innerWidth*0.23795)/(window.innerWidth*0.005242)).toFixed(2));
           let damage;
           audio.play(5);
@@ -828,18 +822,18 @@ document.addEventListener('keydown', e => {
 
           if(attackPercantage > 49){
             damage = (0.35*calculatePercentage(51-(attackPercantage-49),51)).toFixed(0)
-            attackLine.classList.add("appear_hide");
+            attackLine.classList.add("appearHide");
           }
 
           if(attackPercantage > 48.49 && attackPercantage < 49.01){
             damage = 36;
             criticalHitsGiven++;
-            attackLine.classList.add("appear_hide_yellow");
+            attackLine.classList.add("appearHideYellow");
           }
 
           if(attackPercantage < 48.49){
             damage = (0.35*calculatePercentage(attackPercantage,+49)).toFixed(0);
-            attackLine.classList.add("appear_hide");
+            attackLine.classList.add("appearHide");
           }
           
           damageDealt.innerHTML = damage;
@@ -854,23 +848,23 @@ document.addEventListener('keydown', e => {
           hpWidth = `${MettatonHP/(360/100)}%`;
 
           setTimeout(() => {
-            mettatonGIF.classList.add("animation_shake");
+            mettatonGIF.classList.add("animationShake");
           }, 10);
           attackingSection.style.height = (window.innerHeight - 0.5 * window.innerWidth)/2 + (0.5 * window.innerWidth) * 0.556+"px"
           attackingSection.classList.remove("hidden");
-          attackLine.classList.remove("move_attack");
+          attackLine.classList.remove("moveLine");
           attackingGIF.src = "img/attack.gif";
           setTimeout(() => {
             setTimeout(() => {
-              mettatonGIF.classList.remove("animation_shake");
+              mettatonGIF.classList.remove("animationShake");
             }, 30);
-            attackLine.classList.remove("appear_hide");
-            attackLine.classList.remove("appear_hide_yellow");
+            attackLine.classList.remove("appearHide");
+            attackLine.classList.remove("appearHideYellow");
             attackLine.classList.add("hidden");
             attackingSection.classList.add("hidden");
             attackingGIF.src = "";
             attackLine.classList.add("hidden");
-            playerMovementBox.classList.remove("text_bc_im");
+            playerMovementBox.classList.remove("attackBackground");
             disappear();
           }, 980);
         },11);
@@ -891,7 +885,7 @@ document.addEventListener('keyup', e => {
       switch (stage) {
         case 0:
             audio.pause(7);
-            clearTimeout(timeoutID);
+            clearTimeout(textWrite);
             display();
             break;
         case 1:
@@ -935,12 +929,12 @@ document.addEventListener('keyup', e => {
 document.addEventListener('keyup', e => {
   if(position !== false){
   positionBefore = position;
-  firstInventoryRow = `<div class="invetory">${foodList[0] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
-  ${foodList[2] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
-  <div class="nothing"></div><div class="right-element-page" class="shakeElement">PAGE 1</div></div>`;
-  secondInventoryRow = `<div class="invetory">${foodList[4] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[4] + "</div></div>" : `<div class="nothing"></div>`}${foodList[5] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[5] + "</div></div>" : `<div class="nothing"></div>`}
-  ${foodList[6] !== undefined ? "<div class='left-element'><img class='heartImg smaller_img_heart' src='img/nothing.png'><div class='shakeElement'> * " + foodList[6] + "</div></div>" : `<div class="nothing"></div>`}${foodList[7] !== undefined ? "<div class='right-element'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[7] + "</div></div>" : `<div class="nothing"></div>`}
-  <div class="nothing"></div><div class="right-element-page" class="shakeElement">PAGE 2</div></div>`; 
+  firstInventoryRow = `<div class="invetory">${foodList[0] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
+  ${foodList[2] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[2] + "</div></div>" : `<div class="nothing"></div>`}${foodList[3] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[3] + "</div></div>" : `<div class="nothing"></div>`}
+  <div class="nothing"></div><div class="pageInfo" class="shakeElement">PAGE 1</div></div>`;
+  secondInventoryRow = `<div class="invetory">${foodList[4] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[4] + "</div></div>" : `<div class="nothing"></div>`}${foodList[5] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[5] + "</div></div>" : `<div class="nothing"></div>`}
+  ${foodList[6] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[6] + "</div></div>" : `<div class="nothing"></div>`}${foodList[7] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[7] + "</div></div>" : `<div class="nothing"></div>`}
+  <div class="nothing"></div><div class="pageInfo" class="shakeElement">PAGE 2</div></div>`; 
   const key = e.keyCode || e.which;
   switch (key) {
       case 38: // ArrowUp

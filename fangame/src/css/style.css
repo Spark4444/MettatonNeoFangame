@@ -64,6 +64,10 @@ audio{
     height: 100%;
     z-index: 2;
 }
+.hitbox {
+    /* background: #ff000082; */
+    /* for testing */
+}
 .leg1 {
     width: 8%;
     position: absolute;
@@ -118,7 +122,7 @@ audio{
     position: absolute;
     transition: 400ms;
 }
-.laser_head {
+.headLaser {
     transform-origin: top center;
     height: 4vw;
     position: absolute;
@@ -127,15 +131,16 @@ audio{
     border: 0.156vw black solid;
     transition: 700ms;
 }
-.leg_dash{
+.legDash{
     width: 8%;
     position: relative;
     top: 48%;
     left: 15%;
     background: none !important;
     z-index: 3;
+    transition: 0.5s;
 }
-.leg_dash_right{
+.legDashRight{
     left:77%;
 }
 .bomb {
@@ -144,9 +149,6 @@ audio{
     left: 45%;
     transition: 1s;
     z-index: 3;
-}
-.bomb_down{
-    top: 58% !important;
 }
 .explosion {
     width: 21%;
@@ -169,12 +171,7 @@ audio{
     z-index: 3;
     transition: 1s;
 }
-.wing2_down {
-    left: 57%;
-    top: 52%;
-}
-.wing1_down {
-    left: 22%;
+.wingsDown {
     top: 52%;
 }
 .rocket {
@@ -183,11 +180,11 @@ audio{
     transition: 2s linear;
     z-index: 3;
 }
-.heart_yellow {
+.yellowHeart {
     width: 38.8%;
     transition: 0.75s;
 }
-.yellow_heart_anim {
+.yellowHeartAnimation {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,14 +194,14 @@ audio{
     left: 47.2%;
     transition: 0.75s;
 }
-.yellow_heart_bc{
+.yellowHeartBackground{
     background-image: url(../img/yellowHeartBackground.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
     animation: backgroundAnimation 1s infinite;
 }
-.heart_yellow_border {
+.yellowHeartBorder {
     width: 2.8%;
     position: absolute;
     left: 48%;
@@ -274,16 +271,13 @@ audio{
     background: #00d800;
     height: 100%;
 }
-.line_attack {
+.attackLine {
     width: 2.5%;
     height: 100%;
     position: relative;
     left: 0%;
     border: 0.3vw solid black;
     background-color: white;
-}
-.heart_img {
-    width: 8%;
 }
 .heartImg {
     width: 7%;
@@ -439,7 +433,7 @@ audio{
     animation-iteration-count: 1;
     z-index: 0;
 }
-.mettaton_gif_left{
+.mettatonGifLeft{
     transition: 1s;
     left: -10%;
 }
@@ -464,7 +458,7 @@ audio{
     border-right: 3.2vw solid white;
     transition: 1s;
 }
-.triangle_left{
+.triangleLeft{
     left: -16%;
     transition: 0s;
 }
@@ -487,7 +481,7 @@ audio{
     letter-spacing: -0.15vw;
     transition: 1s;
 }
-.chat_box_left{
+.chatBoxLeft{
     left:-16%;
     transition: 0s;
 }
@@ -519,7 +513,7 @@ audio{
 .word {
     display: flex;
 }
-.text_bc_im{
+.attackBackground{
     background-image: url(../img/attack.png);
     background-size: 100% 100%;
     display: flex;
@@ -633,19 +627,19 @@ audio{
     font-size: 2vw;
 
 }
-.left-element {
+.leftItem {
     padding: 0 0 0 3%;
     display: flex;
     align-items: center;
 }
 
-.right-element {
+.rightItem {
     padding: 0 0 0 17%;
     display: flex;
     align-items: center;
 }
 
-.right-element-page {
+.pageInfo {
     padding: 0 0 0 39%;
     display: flex;
     align-items: center;
@@ -659,13 +653,6 @@ audio{
 .attack {
     width: 107%;
     height: 137%;
-}
-.attack_wrap {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .attackingText {
     display: flex;
@@ -689,8 +676,8 @@ audio{
 .transition{
     transition: 1s;
 }
-.animation_shake{
-    animation: shake_attack steps(1, end) 1s;
+.animationShake{
+    animation: shakeAttack steps(1, end) 1s;
     animation-timing-function: cubic-bezier(0.43, -0.02, 1, 2.29);
 }
 .wrap{
@@ -704,16 +691,16 @@ audio{
     position:absolute;
     display: none;
 }
-.appear_hide{
-    animation: black_white 0.2s infinite;
+.appearHide{
+    animation: BlackAndWhite 0.2s infinite;
 }
-.appear_hide_yellow{
-    animation: yellow_white 0.2s infinite;
+.appearHideYellow{
+    animation: yellowAndWhite 0.2s infinite;
 }
 .flash{
     animation: beam 0.5s infinite;
 }
-.move_attack{
+.moveLine{
     left: 100% !important;
     transition: 1.2s linear;
 } 
@@ -737,7 +724,7 @@ audio{
       opacity: 0;
     }
 }
-@keyframes black_white {
+@keyframes BlackAndWhite {
     0% {
         border: 0.3vw solid black;
         background-color: white;
@@ -751,7 +738,7 @@ audio{
         background-color: white;
     }
 }
-@keyframes yellow_white {
+@keyframes yellowAndWhite {
     0% {
         border: 0.3vw solid yellow;
         background-color:   black;
@@ -842,7 +829,7 @@ audio{
       transform: translateX(0);
     }
   }
-  @keyframes shake_attack {
+  @keyframes shakeAttack {
     0% {
       transform: translateX(0);
     }
@@ -889,7 +876,7 @@ audio{
       transform: translateX(-1px);
     }
   }  
-  @keyframes shake_death {
+  @keyframes shakeDeath {
     0%{
         transform: translateX(-2px);
     }

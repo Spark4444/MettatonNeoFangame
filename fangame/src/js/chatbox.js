@@ -6,10 +6,10 @@ let pressedContinue = false;
 
 //Function that starts a dialogue with mettaton
 function dialogue(){
-    if(attackNumber === false){
+    if(!attackNumber){
         attackNumber = 0;
     }
-    if(busy == false){
+    if(!busy){
 
     chatBox.style.opacity = 1;
 
@@ -42,11 +42,11 @@ function dialogue(){
             typeWriterBox("Did you really think that you were going to beat me, darling?");
             break;
     }
-    if(parseInt(playersHPString) < 37 && HPDialogue == false){
+    if(parseInt(playersHPString) < 37 && !HPDialogue){
         HPDialogue = true;
         typeWriterBox("Feeling the pressure, darling? Brace yourself for my ultimate power!");
     }
-    if(foodList.length < 5 && foodDialogue == false){
+    if(foodList.length < 5 && !foodDialogue){
         foodDialogue = true;
         typeWriterBox("You're running low on resources, but don't give up yet! The show must go on!");
     }
@@ -68,7 +68,7 @@ function dialogue(){
 document.addEventListener('keyup', e => {
 const key = e.keyCode || e.which;
 
-if(busy == true){
+if(busy){
   switch (key) {
     case 13: // Enter key
     case 90: // Z key
@@ -116,7 +116,7 @@ if(busy == true){
             break;
     }
     if(typeof attackNumber == "number"){
-        clearTimeout(timeoutID);
+        clearTimeout(textWrite);
         audio.pause(6);
         chatBox.style.opacity = 0;
         busy = false;
@@ -125,7 +125,7 @@ if(busy == true){
         if(attackNumber == 8){
             attackNumber = 0;
         }
-        if(attackNumber < 8){
+        else if(attackNumber < 8){
             attackNumber++;
         }
     }

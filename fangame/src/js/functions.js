@@ -48,17 +48,31 @@ function randomMultiRange(range1, range2, range3, range4) {
     return Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
 }
 
-//Calculates the hypotenuse from two legs
-function calculateHypotenuse(leg, leg2) {
-    const hypotenuse = Math.sqrt(leg * leg + leg2 * leg2);
-    return hypotenuse;
+function calculateAngle(startY, endY, startX, endX){
+  let isLeft, angle;
+
+  let firstLeg = startY - endY;
+  let secondLeg = startX - endX; 
+
+  if(secondLeg < 0){
+    secondLeg = secondLeg - secondLeg * 2;
+    isLeft = true;
+  }
+  else{
+    isLeft = false;
   }
 
-//Calculate the angle of a right angle triangle
-function calculateAngle(hypotenuse, leg) {
-    const angleRadians = Math.acos(leg / hypotenuse);
-    const angleDegrees = angleRadians * (180 / Math.PI);
-    return angleDegrees;
+  let hypotenuse = Math.sqrt(firstLeg * firstLeg + secondLeg * secondLeg);
+
+  if(!isLeft){
+    angle = Math.acos(firstLeg / hypotenuse) * (180 / Math.PI);
+    angle = -angle
+  }
+  if(isLeft){
+    angle = Math.acos(firstLeg / hypotenuse) * (180 / Math.PI);
+  }
+
+  return angle
 }
 
 // Calculates the percentage of number to total
@@ -88,8 +102,8 @@ setInterval(() => {
   let words = document.querySelectorAll(".word");
   if(words.length != 0){
     if(randomRange(1,2) == 1){
-      let random_letter = randomRange(0,words.length-1);
-      words[random_letter].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
+      let randomLetter = randomRange(0,words.length-1);
+      words[randomLetter].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
       setTimeout(() => {
         words.forEach(word => {
           word.style.animation = "";
@@ -97,10 +111,10 @@ setInterval(() => {
       }, 100);
     }
     else{
-      let random_letter = randomRange(0,words.length-1);
-      let random_letter2 = randomRange(0,words.length-1);
-      words[random_letter].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
-        words[random_letter2].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
+      let randomLetter = randomRange(0,words.length-1);
+      let randomLetter2 = randomRange(0,words.length-1);
+      words[randomLetter].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
+        words[randomLetter2].style.animation = `shake${randomRange(1,4)} 0.1s infinite`;
       setTimeout(() => {
         words.forEach(word => {
           word.style.animation = "";

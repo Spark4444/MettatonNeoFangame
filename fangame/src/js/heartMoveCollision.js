@@ -1,6 +1,5 @@
 //Initializing variables
 let player;
-let projectile = document.querySelector(".particles");
 let playerWasDamaged = false;
 let attackThrottle = false;
 let yMax;
@@ -37,17 +36,18 @@ function checkCollision(elements, target, damage, deletable, laser) {
       if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
         const id = element.id.toLowerCase();
         if (!attackThrottle) {
-          let hp_hold;
+          let amountOfHP;
           if (id === 'white' || !laser) {
             if(deletable){
               element.remove();
-              clearInterval(bomb_timeout);
+              clearInterval(bombTimeout);
             }
             attackThrottle = true;
-            hp_hold = parseInt(parseInt(playersHPString) - damage);
+            amountOfHP = parseInt(parseInt(playersHPString) - damage);
             damageTaken += damage;
             damageTakenTimes++;
-            playersHPString = hp_hold.toString();
+            playersHPString = amountOfHP.toString();
+            showHP();
             audio.reset(8);
             audio.play(8);
             player.classList.add("flash");
@@ -67,14 +67,15 @@ function checkCollision(elements, target, damage, deletable, laser) {
               if (!attackThrottle) {
                 if(deletable){
                   element.remove();
-                  clearInterval(bomb_timeout);
+                  clearInterval(bombTimeout);
                 }
                 attackThrottle = true;
                 orangeLaserTimer = setTimeout(function() {
-                  hp_hold = parseInt(parseInt(playersHPString) - damage);
+                  amountOfHP = parseInt(parseInt(playersHPString) - damage);
                   damageTaken += damage;
                   damageTakenTimes++;
-                  playersHPString = hp_hold.toString();
+                  playersHPString = amountOfHP.toString();
+                  showHP();
                   audio.reset(8);
                   audio.play(8);
                   player.classList.add("flash");
@@ -91,13 +92,14 @@ function checkCollision(elements, target, damage, deletable, laser) {
             if (playerIsMoving) {
               if(deletable){
                 element.remove();
-                clearInterval(bomb_timeout);
+                clearInterval(bombTimeout);
               }
               attackThrottle = true;
-              hp_hold = parseInt(parseInt(playersHPString) - damage);
+              amountOfHP = parseInt(parseInt(playersHPString) - damage);
               damageTaken += damage;
               damageTakenTimes++;
-              playersHPString = hp_hold.toString();
+              playersHPString = amountOfHP.toString();
+              showHP();
               audio.reset(8);
               audio.play(8);
               player.classList.add("flash");
