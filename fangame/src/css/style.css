@@ -65,7 +65,8 @@ audio{
     z-index: 2;
 }
 .hitbox {
-    /* background: #ff000082; */
+    background: none !important;
+    /* background: #ff000052 !important; */
     /* for testing */
 }
 .leg1 {

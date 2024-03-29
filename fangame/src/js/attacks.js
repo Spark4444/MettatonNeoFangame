@@ -16,64 +16,18 @@ function attack1(){
   let legsDown = canvasBottom - window.innerWidth * 0.189;
   projectiles.innerHTML = `
   <div class="leg1 legs" style="left:${randomRange(23,71)}%; top:${legsUp}px;">
-      <img src="img/leg1.png" style="width: 100%;" alt="">
-  <div class="hitbox" style="
-        position: absolute;
-        width: 44%;
-        height: 76%;
-        left: 30%;
-        top: 3%;
-    "></div>
-  <div class="hitbox" style="
-        position: absolute;
-        width: 26%;
-        height: 10%;
-        left: 34%;
-        top: 88%;
-      "></div><div class="hitbox" style="
-        position: absolute;
-        width: 33%;
-        height: 9%;
-        left: 41%;
-        top: 79%;
-      "></div>
-  <div class="hitbox" style="
-        position: absolute;
-        width: 16%;
-        height: 19%;
-        left: 74%;
-        top: 59%;
-  "></div>
+  <img src="img/leg1.png" style="width: 100%;" alt="">
+  <div class="hitbox" style="position: absolute; width: 44%; height: 76%; left: 30%; top: 3%;"></div>
+  <div class="hitbox" style="position: absolute; width: 26%; height: 10%; left: 34%; top: 88%;"></div>
+  <div class="hitbox" style="position: absolute; width: 33%; height: 9%; left: 41%; top: 79%;"></div>
+  <div class="hitbox" style="position: absolute; width: 16%; height: 19%; left: 74%; top: 59%;"></div>
   </div>
   <div class="leg2 legs" style="left:${randomRange(23,71)}%; top:${legsUp}px;">
   <img src="img/leg2.png" style="width: 100%;" alt="">
-  <div class="hitbox" style="
-  position: absolute;
-  width: 44%;
-  height: 76%;
-  left: 30%;
-  top: 3%;
-  "></div>
-  <div class="hitbox" style="
-      position: absolute;
-      width: 26%;
-      height: 10%;
-      left: 41%;
-      top: 88%;
-    "></div><div class="hitbox" style="
-      position: absolute;
-      width: 33%;
-      height: 9%;
-      left: 28%;
-      top: 79%;
-    "></div>
-  <div class="hitbox" style="
-      position: absolute;
-      width: 16%;
-      height: 19%;
-      left: 14%;
-      top: 59%;
-  "></div>
+  <div class="hitbox" style="position: absolute; width: 44%; height: 76%; left: 30%; top: 3%;"></div>
+  <div class="hitbox" style="position: absolute; width: 26%; height: 10%; left: 41%; top: 88%;"></div>
+  <div class="hitbox" style="position: absolute; width: 33%; height: 9%; left: 28%; top: 79%;"></div>
+  <div class="hitbox" style="position: absolute; width: 16%; height: 19%; left: 14%; top: 59%;"></div>
   </div>    
   `;
   x = 47;
@@ -230,12 +184,19 @@ function attack3(){
   endOfTheAttack = setTimeout(() => {
     appear("* Stage lights are blaring");
   }, 11999);
-} 
+}
 
 //Attack 4 (mettatons hand follows you around)
 function attack4(){
   projectiles.innerHTML = `
-  <img src="img/hand2.png" class="hand2" style="left: 47%; top:${mettatonBottom - window.innerWidth*0.045/77*277}px">
+  <div class="hand2" style="left: 47%; top:194.07301948051952px">
+  <img src="img/hand2.png" style="width: 100%;">
+  <div class="hitbox" style="position: absolute; top: 0%; left: 17%; width: 63%; height: 49%"></div>
+  <div class="hitbox" style="position: absolute; top: 9%; left: 80%; width: 15%; height: 16%;"></div>
+  <div class="hitbox" style="position: absolute; top: 49%; left: 26%; width: 39%; height: 24%;"></div>
+  <div class="hitbox" style="position: absolute; top: 57%; left: 5%; width: 21%; height: 22%;"></div>
+  <div class="hitbox" style="position: absolute; top: 73%; left: 26%; width: 31%; height: 24%;"></div>
+  </div>
   `;
   mettatonGIF.style.opacity = "0";
   x = 47;
@@ -268,7 +229,7 @@ function attack4(){
   checkCollisionWithPlayer = setInterval(() => {
     moveHeart();
     if(!attackThrottle){
-      checkCollision(hand2, player, 30, false, false);
+      checkCollision(hitbox, player, 30, false, false);
     }
   }, 10);
 
@@ -318,12 +279,19 @@ function attack5(){
   endOfTheAttack = setTimeout(() => {
     appear("* Stage lights are blaring");
   }, 10649);
-}
+} 
 
 //Attack 6 (mettaton dashes with his leg at you randomly)
 function attack6(){
   let laserColor = randomPick("Blue","Orange");
-  projectiles.innerHTML = `<img src="img/leg${laserColor}.png" id="${laserColor}" class="legDash">`;
+  projectiles.innerHTML = `
+  <div class="legDash">
+  <img src="img/leg${laserColor}.png" style="width:100%">
+  <div class="hitbox" id="${laserColor}" style="position: absolute; width: 44%; height: 76%; left: 30%; top: 3%;"></div>
+  <div class="hitbox" id="${laserColor}" style="position: absolute; width: 26%; height: 10%; left: 34%; top: 88%;"></div>
+  <div class="hitbox" id="${laserColor}" style="position: absolute; width: 33%; height: 9%; left: 41%; top: 79%;"></div>
+  <div class="hitbox" id="${laserColor}" style="position: absolute; width: 16%; height: 19%; left: 74%; top: 59%;"></div>
+  </div>`;
   mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
@@ -331,6 +299,7 @@ function attack6(){
   moveY = 0;
   iteration = 0;
   let legPosition = 1;
+  hitbox = document.querySelectorAll(".hitbox");
   projectile = document.querySelector(".legDash");
   drawHeart(x, y);
 
@@ -344,13 +313,13 @@ function attack6(){
     }
     if(iteration%3 == 0){
       if(legPosition == 0){
-        legPosition = randomRange(0,1);
+        legPosition = 1
       }
-      if(legPosition == 1){
+      else if(legPosition == 1){
         legPosition = randomRange(0,2);
       }
-      if(legPosition == 2){
-        legPosition = randomRange(1,2);
+      else if(legPosition == 2){
+        legPosition = 1
       }
       if(legPosition == 1){
         projectile.style.top = "";
@@ -359,8 +328,10 @@ function attack6(){
       if(legPosition == 0 || legPosition == 2){
         laserColor = "White";
       }
-      projectile.src = `img/leg${laserColor}.png`;
-      projectile.setAttribute('id', `${laserColor}`);
+      projectile.querySelector("img").src = `img/leg${laserColor}.png`;
+      hitbox.forEach(element => {
+        element.setAttribute('id', `${laserColor}`);
+      });
       if (legPosition == 0) {
         projectile.style.top = `${(canvasBottom - mettatonBottom)*0.6666+mettatonBottom - window.innerWidth*0.18919}px`;
       }
@@ -375,8 +346,7 @@ function attack6(){
   checkCollisionWithPlayer = setInterval(() => {
     moveHeart();
     if(!attackThrottle){
-      let legDash = document.querySelectorAll(".legDash");
-      checkCollision(legDash, player, 20, false, true);
+      checkCollision(hitbox, player, 20, false, true);
     }
   }, 10);
 
@@ -397,7 +367,14 @@ function attack7(){
 
   function spawnBombs(){
     let bombDistance = `${randomRange(23,69)}%`;
-    projectiles.innerHTML += `<img src="img/bomb.gif" style="top: ${(window.innerHeight - window.innerWidth*0.50)/2+window.innerWidth*0.07}px" class="bomb">`;
+    projectiles.innerHTML += `
+    <div style="top: ${(window.innerHeight - window.innerWidth*0.50)/2+window.innerWidth*0.07}px" class="bomb">
+    <img src="img/bomb.gif" style="width:100%">
+    <div class="hitbox" style="position: absolute; width: 70%; height: 60%; left: 0%; top: 38%; "></div>
+    <div class="hitbox" style="position: absolute; width: 23%; height: 11%; left: 23%; top: 27%; "></div>
+    <div class="hitbox" style="position: absolute; width: 53%; height: 17%; left: 30%; top: 10%; "></div>
+    <div class="hitbox" style="position: absolute; width: 16%; height: 19%; left: 83%; top: 2%; "></div>
+    </div>`;
     setTimeout(() => {
       projectile = document.querySelector(".bomb");
       projectile.style.left = bombDistance;
@@ -405,7 +382,7 @@ function attack7(){
       bombTimeout = setTimeout(() => {
         audio.reset(13);
         audio.play(13);
-        projectile.src = `img/explosion.gif`;
+        projectile.innerHTML = `<img src="img/explosion.gif" style="width:100%">`;
         projectile.classList.remove("bomb");
         projectile.style.top = ``;
         projectile.style.left = `${parseInt(bombDistance) - 5}%`;
@@ -417,7 +394,6 @@ function attack7(){
           projectile.style.top = `${canvasBottom-window.innerWidth*0.056}px`;
           projectile.style.left = `${parseInt(projectile.style.left) + 9}%`;
             setTimeout(() => {
-              projectile = document.querySelector(".explosion");
               projectile.remove();  
             }, 900);
           }, 10);
@@ -449,7 +425,25 @@ function attack7(){
 
 //attack 8 (mettaton shoots rockets at you)
 function attack8(){
-  projectiles.innerHTML = `<img src="img/wing2.png" class="wing1 wings"><img src="img/wing1.png" class="wing2 wings">`;
+  projectiles.innerHTML = `
+  <div class="wing1 wings">
+  <img src="img/wing1.png" style="width:100%">
+  <div class="hitbox" style="position: absolute; width: 67%; height: 41%; left: 22%; top: 10%;"></div>
+  <div class="hitbox" style="position: absolute; width: 6%; height: 29%; left: 89%; top: 20%;"></div>
+  <div class="hitbox" style="position: absolute; width: 5%; height: 13%; left: 95%; top: 29%;"></div>
+  <div class="hitbox" style="position: absolute; width: 65%; height: 9%; left: 22%; top: 51%;"></div>
+  <div class="hitbox" style="position: absolute;width: 58%;height: 9%; left: 22%; top: 60%;"></div>
+  <div class="hitbox" style="position: absolute; width: 50%; height: 9%; left: 22%; top: 69%;"></div>
+  </div>
+  <div class="wing2 wings">
+  <img src="img/wing2.png"  style="width:100%">
+  <div class="hitbox" style="position: absolute; width: 67%; height: 41%; left: 11%; top: 10%;"></div>
+  <div class="hitbox" style="position: absolute; width: 6%; height: 29%; left: 5%; top: 20%;"></div>
+  <div class="hitbox" style="position: absolute; width: 5%; height: 13%; left: 0%; top: 29%;"></div>
+  <div class="hitbox" style="position: absolute; width: 65%; height: 9%; left: 13%; top: 51%;"></div>
+  <div class="hitbox" style="position: absolute; width: 58%; height: 9%; left: 20%; top: 60%;"></div>
+  <div class="hitbox" style="position: absolute; width: 50%; height: 9%; left: 28%; top: 69%;"></div>
+  </div>`;
   mettatonGIF.style.opacity = "0";
   x = 47;
   y = 31;
@@ -457,6 +451,7 @@ function attack8(){
   moveY = 0;
   iteration = 0;
   let rocketLeft;
+  hitbox = document.querySelectorAll(".hitbox");
   let wings = document.querySelectorAll(".wings");
   setTimeout(() => {
     wings[0].classList.add("wingsDown");
@@ -493,11 +488,11 @@ function attack8(){
 
   checkCollisionWithPlayer = setInterval(() => {
     moveHeart();
-    wings = document.querySelectorAll(".wings");
+    hitbox = document.querySelectorAll(".hitbox");
     projectile = document.querySelectorAll(".rocket");
     if(!attackThrottle && projectile.length > 1){
       checkCollision(projectile, player, 20, true, false);
-      checkCollision(wings, player, 20, false, false);
+      checkCollision(hitbox, player, 20, false, false);
     }
   }, 10);
 
