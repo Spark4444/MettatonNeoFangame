@@ -113,9 +113,13 @@ playersHP.style.width = "100%";
 //Plays starting music
 startingMenu.addEventListener('mousedown', () =>{
   if(started !== true){
-  audio.play(2);
+    audio.play(2);
   }
 });
+
+setTimeout(() => {
+  audio.play(2);
+}, 110);
 
 //Mousedown listner to play sound when volume bar is changed
 volume.addEventListener("mousedown", () => {
