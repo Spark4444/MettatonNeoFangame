@@ -16,7 +16,7 @@ bash git clone https://github.com/Spark4444/MettatonNeoFangame
 
 ## Usage
 
-To play the game you can either open the `index.html` directly in your browser which is located in `fangame/src/`
+To play the game you can either open the `index.html` directly in your browser which is located in `MettatonNeoFangame/src/`
 
 ### &nbsp;&nbsp;&nbsp;Or
 
