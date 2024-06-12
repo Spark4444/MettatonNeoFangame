@@ -1,6 +1,6 @@
 # Mettaton Neo Fangame
 
-A fangame about [Mettaton Neo](https://undertale.fandom.com/wiki/Mettaton#Mettaton_NEO) which in authors opinion deserves its own battle in a game called [Undertale](https://en.wikipedia.org/wiki/Undertale). This fangame is based on [Undertale](https://undertale.fandom.com/wiki/Mettaton#Mettaton_NEO) and is written in javascript, this game was made in about a year. This game has 9 different attacks that go after each other, You will need to attack Mettaton Neo in order to progress through the game and then later kill him💔 that's where the game ends.
+A fangame about [Mettaton Neo](https://undertale.fandom.com/wiki/Mettaton#Mettaton_NEO) which in authors opinion deserves its own battle in a game called [Undertale](https://en.wikipedia.org/wiki/Undertale). This fangame is based on Undertale and is written in javascript, this game was made in about a year. This game has 9 different attacks that go after each other, You will need to attack Mettaton Neo in order to progress through the game and then later kill him💔 that's where the game ends.
 
 ## Instalation
 
