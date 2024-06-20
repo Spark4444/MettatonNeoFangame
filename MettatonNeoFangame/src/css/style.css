@@ -2,718 +2,825 @@
     font-family: "8bitOperator";
     src: url("../fonts/8bitOperator.ttf");
 }
+
 @font-face {
     font-family: "greaterDeterminationSpeechBubble";
     src: url("../fonts/greaterDeterminationSpeechBubble.ttf");
 }
+
 @font-face {
     font-family: "houseSansHeavy";
     src: url("../fonts/houseSansHeavy.ttf");
 }
+
 @font-face {
     font-family: "marsNeedsCunnilingus";
     src: url("../fonts/marsNeedsCunnilingus.ttf");
 }
+
 @font-face {
     font-family: "mercy";
-    src: url("../fonts/mercy.otf");
     font-weight: normal;
+    src: url("../fonts/mercy.otf");
 }
+
 @font-face {
     font-family: "UndertaleAttackFont(reversed)";
-    src: url("../fonts/UndertaleAttackFont(reversed).ttf");
     font-weight: normal;
+    src: url("../fonts/UndertaleAttackFont(reversed).ttf");
 }
-*{
+
+* {
     box-sizing: border-box;
     overflow: hidden;
 }
+
 html {
-    width: 100%;
-    height: 100%;
-    -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none; 
-    user-select: none; 
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    height: 100%;
+    user-select: none;
+    width: 100%;
 }
-.cursorNone{
+
+.cursorNone {
     cursor: none;
 }
+
 body {
+    align-items: center;
     background: black;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    height: 100%;
     justify-content: center;
+    margin: 0;
     overflow: visible;
+    padding: 0;
+    width: 100%;
 }
-img{
-    user-select: none;
+
+img {
     -webkit-user-drag: none;
+    user-select: none;
 }
-audio{
+
+audio {
     pointer-events: none;
 }
+
 .particles {
+    height: 100%;
     position: absolute;
     width: 100%;
-    height: 100%;
     z-index: 2;
 }
+
 .hitbox {
     background: none !important;
-    /* background: #ff000052 !important; */
-    /* for testing */
 }
+
 .leg1 {
-    width: 8%;
-    position: absolute;
     left: 50%;
+    position: absolute;
+    width: 8%;
 }
+
 .leg2 {
-    width: 8%;
-    position: absolute;
     left: 50%;
+    position: absolute;
+    width: 8%;
 }
-.legs{
+
+.legs {
     transition: 0.200s;
     z-index: 1;
 }
+
 .smoke {
-    width: 53%;
-    position: absolute;
     left: 24%;
-    z-index: 2;
+    position: absolute;
     transition: 1s;
+    width: 53%;
+    z-index: 2;
 }
+
 .lightning {
-    width: 3%;
     position: absolute;
     transition: 499ms;
+    width: 3%;
     z-index: 1;
 }
+
 .hand1 {
-    width: 4.5%;
     position: absolute;
-    transition: 0.5s;
     transform-origin: left top;
+    transition: 0.5s;
+    width: 4.5%;
 }
+
 .laser {
-    width: 0.5%;
     height: 0.5vw;
     position: absolute;
     transition: 1s;
+    width: 0.5%;
     z-index: 3;
 }
+
 #White {
     background: white;
 }
+
 #Blue {
     background: blue;
 }
+
 #Orange {
     background: orange;
 }
-.hand2{
-    width: 4.5%;
+
+.hand2 {
     position: absolute;
     transition: 400ms;
+    width: 4.5%;
 }
+
 .headLaser {
-    transform-origin: top center;
-    height: 4vw;
-    position: absolute;
-    left: 48%;
-    width: 0.7vw;
     border: 0.156vw black solid;
+    height: 4vw;
+    left: 48%;
+    position: absolute;
+    transform-origin: top center;
     transition: 700ms;
+    width: 0.7vw;
 }
-.legDash{
-    width: 8%;
+
+.legDash {
+    background: none !important;
+    left: 15%;
     position: relative;
     top: 48%;
-    left: 15%;
-    background: none !important;
-    z-index: 3;
     transition: 0.5s;
-}
-.legDashRight{
-    left:77%;
-}
-.bomb {
-    width: 12%;
-    position: absolute;
-    left: 45%;
-    transition: 1s;
+    width: 8%;
     z-index: 3;
 }
-.explosion {
-    width: 21%;
+
+.legDashRight {
+    left: 77%;
+}
+
+.bomb {
+    left: 45%;
     position: absolute;
+    transition: 1s;
+    width: 12%;
+    z-index: 3;
+}
+
+.explosion {
+    position: absolute;
+    width: 21%;
     z-index: 2;
 }
+
 .wing1 {
-    width: 21%;
-    position: absolute;
     left: 22%;
-    top: 19%;
-    z-index: 3;
-    transition: 1s;
-}
-.wing2 {
-    width: 21%;
     position: absolute;
-    left: 57%;
     top: 19%;
-    z-index: 3;
     transition: 1s;
+    width: 21%;
+    z-index: 3;
 }
+
+.wing2 {
+    left: 57%;
+    position: absolute;
+    top: 19%;
+    transition: 1s;
+    width: 21%;
+    z-index: 3;
+}
+
 .wingsDown {
     top: 52%;
 }
+
 .rocket {
-    width: 5%;
     position: absolute;
     transition: 2s linear;
+    width: 5%;
     z-index: 3;
 }
+
 .yellowHeart {
+    transition: 0.75s;
     width: 38.8%;
-    transition: 0.75s;
 }
+
 .yellowHeartAnimation {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 5%;
+    display: flex;
     height: 5vw;
-    position: absolute;
+    justify-content: center;
     left: 47.2%;
+    position: absolute;
     transition: 0.75s;
+    width: 5%;
 }
-.yellowHeartBackground{
+
+.yellowHeartBackground {
+    animation: backgroundAnimation 1s infinite;
     background-image: url(../img/yellowHeartBackground.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 40%;
-    animation: backgroundAnimation 1s infinite;
 }
+
 .yellowHeartBorder {
-    width: 2.8%;
-    position: absolute;
     left: 48%;
+    position: absolute;
     transition: 0.5s;
+    width: 2.8%;
 }
-.bullet{
+
+.bullet {
     position: absolute;
     transition: 1s;
     z-index: 3;
 }
+
 .statistics {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     align-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    display: flex;
     flex-direction: column;
-    width: 100%;
+    flex-wrap: wrap;
     height: 100%;
+    justify-content: center;
+    width: 100%;
 }
+
 .stat {
     color: white;
-    font-size: 2vw;
     font-family: "mercy";
+    font-size: 2vw;
     padding: 1% 0 1% 0;
     user-select: text;
 }
+
 .attackingSection {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    left: 25.5%;
     position: absolute;
     top: 0%;
     width: 48%;
-    left: 25.5%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-direction: column;
     z-index: 2;
 }
+
 .attackingGIF {
     width: 33%;
     z-index: 2;
 }
+
 .damageDealt {
-    color: red;
-    font-size: 2vw;
-    font-family: "UndertaleAttackFont(reversed)";
-    margin: 4% 0 1% 0;
     animation: bounce 750ms;
+    color: red;
+    font-family: "UndertaleAttackFont(reversed)";
+    font-size: 2vw;
+    margin: 4% 0 1% 0;
 }
+
 .mettatonsHPBackground {
-    width: 9vw;
+    background: #414041;
     height: 2.5vw;
     margin: 1% 0 0 0;
-    background: #414041;
+    width: 9vw;
 }
+
 .mettatonsHP2 {
-    width: 13%;
-    height: 90%;
     background: #414041;
+    height: 90%;
+    width: 13%;
 }
+
 .mettatonsHP {
+    background: #00d800;
+    height: 100%;
     width: 100%;
-    height: 100%;
-    background: #00d800;
 }
+
 .mettatonsHP {
     background: #00d800;
     height: 100%;
 }
+
 .attackLine {
-    width: 2.5%;
-    height: 100%;
-    position: relative;
-    left: 0%;
-    border: 0.3vw solid black;
     background-color: white;
+    border: 0.3vw solid black;
+    height: 100%;
+    left: 0%;
+    position: relative;
+    width: 2.5%;
 }
+
 .heartImg {
     width: 7%;
 }
+
 .smallerHeart {
     width: 3%;
 }
+
 .startingMenu {
-    width: 100%;
-    height: 100%;
+    align-items: center;
+    animation: moveBackground 2s linear infinite;
+    background-image: url(../img/background.png);
+    background-repeat: repeat;
+    background-size: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
     justify-content: center;
-    align-items: center;
     position: absolute;
-    background-image: url(../img/background.png);
-    animation: moveBackground 2s linear infinite;
-    background-size: 100%;
-    background-repeat: repeat;
     transition: 1s;
+    width: 100%;
     z-index: 3;
 }
+
 .play {
-    display: flex;
-    justify-content: center;
-    width: 23vw;
-    height: 11vw;
-    font-family: "mercy";
-    color: #f9812b;
+    align-items: center;
     background: black;
     border: 0.35vw solid #f9812b;
-    font-size: 5.7vw;
-    padding: 0 0 1% 1%;
-    align-items: center;
-    cursor: pointer;
-}
-.updatePageInfo {
     color: #f9812b;
+    cursor: pointer;
+    display: flex;
+    font-family: "mercy";
+    font-size: 5.7vw;
+    height: 11vw;
+    justify-content: center;
+    padding: 0 0 1% 1%;
+    width: 23vw;
+}
+
+.updatePageInfo {
+    align-items: center;
+    color: #f9812b;
+    display: flex;
     font-family: "mercy";
     font-size: 1vw;
-    display: flex;
     justify-content: center;
-    align-items: center;
 }
+
 .fullScreenButton {
-    width: 3%;
-    position: absolute;
-    padding: 0 0 1% 1%;
-    left: 0;
     bottom: 0;
     cursor: pointer;
-}
-.slider {
-    width: 23%;
-    height: 7%;
-    display: flex;
-    margin: 3% 0 0 0;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-.volume {
-    width: 20%;
-    height: 0.35%;
-    margin: 3%;
+    left: 0;
+    padding: 0 0 1% 1%;
     position: absolute;
-    left: 35%;
-    -webkit-appearance:none !important;
+    width: 3%;
+}
+
+.slider {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 7%;
+    justify-content: center;
+    margin: 3% 0 0 0;
+    width: 23%;
+}
+
+.volume {
+    -webkit-appearance: none !important;
     background: #f9812b;
     border: none;
-    outline: none;
     cursor: pointer;
+    height: 0.35%;
+    left: 35%;
+    margin: 3%;
+    outline: none;
     overflow: visible !important;
-}
-#rangeValue {
-    font-family: "UndertaleAttackFont(reversed)";
-    color: #f9812b;
     position: absolute;
-    left: 59%;
-    font-size: 1vw;
+    width: 20%;
 }
+
+#rangeValue {
+    color: #f9812b;
+    font-family: "UndertaleAttackFont(reversed)";
+    font-size: 1vw;
+    left: 59%;
+    position: absolute;
+}
+
 .slider input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none !important;
-    width: 1.25vw;
-    height: 1.25vw;
     background: #000000;
-    border: 0.15vw solid #e58947;
     border-radius: 0;
+    border: 0.15vw solid #e58947;
+    height: 1.25vw;
+    width: 1.25vw;
 }
+
 .slider input[type="range"]::-webkit-slider-thumb:hover {
     background: #000000;
     cursor: grab;
 }
+
 .slider input[type="range"]::-webkit-slider-thumb:active {
-  cursor: grabbing;
+    cursor: grabbing;
 }
+
 .exitButton {
-    width: 3%;
-    height: 3%;
+    align-items: center;
     color: #f9812b;
-    font-family: "mercy";
-    font-size: 1vw;
     cursor: pointer;
     display: flex;
+    font-family: "mercy";
+    font-size: 1vw;
+    height: 3%;
     justify-content: center;
-    align-items: center;
     margin: 1% 0 0 0;
+    width: 3%;
 }
+
 .heart {
-    width: 2vw;
-    position: absolute;
-    left: 49%;
-    animation: beam 0.5s infinite;
     -webkit-animation: beam 0.5s infinite;
+    animation: beam 0.5s infinite;
+    left: 49%;
     opacity: 1;
+    position: absolute;
+    width: 2vw;
     z-index: 2;
 }
+
 .startingAnimation {
-    display: flex;
     align-items: flex-end;
+    background: white;
+    display: flex;
+    height: 100%;
     justify-content: center;
     width: 100%;
-    height: 100%;
-    background: white;
 }
+
 .frisk {
-    width: 4%;
     position: absolute;
     top: 75%;
+    width: 4%;
 }
+
 .inGameScreen {
-    width: 100vw;
-    height: 50vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     align-items: center;
     background: black;
     color: white;
+    display: flex;
+    flex-direction: column;
+    height: 50vw;
+    justify-content: flex-end;
+    width: 100vw;
     z-index: 1;
 }
+
 .mettatonSection {
-    width: 82.5%;
-    height: 54.5%;
     display: flex;
+    height: 54.5%;
     justify-content: center;
+    width: 82.5%;
 }
+
 .mettatonGIF {
-    width: 59%;
-    transition: 0.5s;
+    animation-iteration-count: 1;
     left: 0;
     position: relative;
-    animation-iteration-count: 1;
+    transition: 0.5s;
+    width: 59%;
     z-index: 0;
 }
-.mettatonGifLeft{
-    transition: 1s;
+
+.mettatonGifLeft {
     left: -10%;
+    transition: 1s;
 }
+
 .chatBox {
-    width: 52vw;
-    height: 27vw;
-    position: absolute;
-    transition: 0.5s;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    height: 27vw;
     justify-content: flex-end;
+    position: absolute;
+    transition: 0.5s;
+    width: 52vw;
 }
+
 .triangle {
-    width: 0%;
-    height: 0%;
-    position: relative;
-    left: 1%;
-    top: 22%;
-    border-top: 1.5vw solid transparent;
     border-bottom: 1.5vw solid transparent;
     border-right: 3.2vw solid white;
+    border-top: 1.5vw solid transparent;
+    height: 0%;
+    left: 1%;
+    position: relative;
+    top: 22%;
     transition: 1s;
+    width: 0%;
 }
-.triangleLeft{
+
+.triangleLeft {
     left: -16%;
     transition: 0s;
 }
+
 .textBox {
-    width: 36%;
-    height: 34%;
+    align-items: flex-start;
     background-color: white;
-    position: relative;
-    top: 9%;
     border-radius: 1vw;
     color: black;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 1%;
     font-family: "greaterDeterminationSpeechBubble";
     font-size: 1.4vw;
+    height: 34%;
+    justify-content: flex-start;
     letter-spacing: -0.15vw;
+    padding: 1%;
+    position: relative;
+    top: 9%;
     transition: 1s;
+    width: 36%;
 }
-.chatBoxLeft{
-    left:-16%;
+
+.chatBoxLeft {
+    left: -16%;
     transition: 0s;
 }
+
 .playerMovingSection {
-    font-family: "8bitOperator";
+    align-items: center;
     display: flex;
     flex-direction: row;
-    width: 100%;
+    font-family: "8bitOperator";
     height: 25%;
     justify-content: center;
-    align-items: center;
+    width: 100%;
 }
+
 .playerMovementBox {
-    width: 51.5%;
-    height: 100%;
     border: 0.3vw solid white;
-    font-size: 2vw;
-    position: relative;
     color: white;
+    font-size: 2vw;
+    height: 100%;
     padding: 1%;
-    white-space: pre;
+    position: relative;
     transition: 1s;
+    white-space: pre;
+    width: 51.5%;
 }
+
 .shakeElement {
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
 }
+
 .word {
     display: flex;
 }
-.attackBackground{
+
+.attackBackground {
+    align-items: center;
     background-image: url(../img/attack.png);
     background-size: 100% 100%;
     display: flex;
-    align-items: center;
+    height: 91% !important;
     padding: 0% !important;
     width: 53% !important;
-    height: 91% !important;
 }
+
 .player {
-    width: 4%;
     position: absolute;
+    width: 4%;
     z-index: 0;
 }
+
 .statSection {
-    font-family: "marsNeedsCunnilingus";
+    align-items: center;
     display: flex;
+    font-family: "marsNeedsCunnilingus";
     height: 9%;
     justify-content: flex-start;
-    align-items: center;
+    transition: 1s;
     width: 54.5%;
-    transition: 1s;
 }
+
 .name {
-    padding-right: 5%;
+    align-items: center;
+    display: flex;
     font-size: 2vw;
     height: 100%;
-    display: flex;
-    align-items: center;
+    padding-right: 5%;
     transition: 1s;
 }
+
 .lv {
-    padding-right: 5%;
+    align-items: center;
+    display: flex;
     font-size: 2vw;
     height: 100%;
-    display: flex;
-    align-items: center;
+    padding-right: 5%;
     transition: 1s;
 }
+
 .hp2 {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    width: 30%;
-    justify-content: flex-start;
     font-size: 2.3vw;
     height: 100%;
-    align-items: center;
+    justify-content: flex-start;
+    width: 30%;
 }
+
 .hpText {
+    align-items: center;
+    display: flex;
     font-family: "houseSansHeavy";
     font-size: 1.25vw;
     padding: 0 1% 0 0;
-    display: flex;
-    align-items: center;
 }
+
 .playersHPBackground {
-    width: 10%;
-    margin: 0 1% 0 0;
-    height: 43%;
     background: #bf0000;
+    height: 43%;
+    margin: 0 1% 0 0;
+    width: 10%;
 }
+
 .playersHP {
     background: #ffff00;
     height: 100%;
 }
+
 .playersHPText {
     font-size: 2.5vw;
 }
+
 .battleSection {
-    width: 54.5%;
-    height: 11.5%;
+    align-items: flex-end;
     background-color: black;
     display: flex;
-    align-items: flex-end;
     font-family: "mercy";
+    height: 11.5%;
     justify-content: space-between;
-    transition: 1s;
     overflow: visible;
+    transition: 1s;
+    width: 54.5%;
 }
+
 .actionButton {
-    height: 96%;
-    width: 19%;
-    color: #fe8507;
-    border: 0.2vw solid #fe8507;
+    align-items: center;
     background: 0;
-    font-size: 1.5vw;
+    border: 0.2vw solid #fe8507;
+    color: #fe8507;
     display: flex;
     flex-direction: row;
+    font-size: 1.5vw;
+    height: 96%;
     justify-content: space-evenly;
-    align-items: center;
+    width: 19%;
 }
+
 .actionButton:focus {
-    outline:none;
+    outline: none;
 }
+
 .actionButton.yellow {
-    color: #d4d415;
     border: 0.2vw solid #d4d415;
+    color: #d4d415;
 }
+
 .buttonImg {
-    width: 2vw;
     height: 2vw;
-    vertical-align: middle;
     position: relative;
     top: 3%;
+    vertical-align: middle;
+    width: 2vw;
 }
+
 .invetory {
     display: grid;
+    font-size: 2vw;
     grid-template-columns: 0.5fr 0.5fr;
     grid-template-rows: 33% 33% 33%;
-    width: 100%;
     height: 100%;
-    font-size: 2vw;
-
+    width: 100%;
 }
+
 .leftItem {
-    padding: 0 0 0 3%;
-    display: flex;
     align-items: center;
+    display: flex;
+    padding: 0 0 0 3%;
 }
 
 .rightItem {
-    padding: 0 0 0 17%;
-    display: flex;
     align-items: center;
+    display: flex;
+    padding: 0 0 0 17%;
 }
 
 .pageInfo {
-    padding: 0 0 0 39%;
-    display: flex;
     align-items: center;
+    display: flex;
+    padding: 0 0 0 39%;
 }
 
 .nothing {
-    width: 10%;
-    height: 10%;
     background: black;
+    height: 10%;
+    width: 10%;
 }
+
 .attack {
-    width: 107%;
     height: 137%;
+    width: 107%;
 }
+
 .attackingText {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
     height: 29%;
+    justify-content: flex-start;
     padding: 1% 0 0 0;
+    width: 100%;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
-.black{
+
+.black {
     background-color: black;
 }
-.flex{
-    display: flex;
+
+.flex {
     align-items: center;
+    display: flex;
 }
-.transition{
+
+.transition {
     transition: 1s;
 }
-.animationShake{
-    animation: shakeAttack steps(1, end) 1s;
+
+.animationShake {
     animation-timing-function: cubic-bezier(0.43, -0.02, 1, 2.29);
+    animation: shakeAttack steps(1, end) 1s;
 }
-.wrap{
-    display: flex;
+
+.wrap {
     align-items: flex-start;
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
-.none{
-    position:absolute;
+
+.none {
     display: none;
+    position: absolute;
 }
-.appearHide{
+
+.appearHide {
     animation: BlackAndWhite 0.2s infinite;
 }
-.appearHideYellow{
+
+.appearHideYellow {
     animation: yellowAndWhite 0.2s infinite;
 }
-.flash{
+
+.flash {
     animation: beam 0.5s infinite;
 }
-.moveLine{
+
+.moveLine {
     left: 100% !important;
     transition: 1.2s linear;
-} 
+}
+
 .cube {
-    width: 49% !important;
     height: 97% !important;
     padding: 0;
+    width: 49% !important;
 }
+
 .move {
-    transition: all 0.4s ease-in-out !important;
     left: 23.7% !important;
+    transition: all 0.4s ease-in-out !important;
 }
+
 @keyframes beam {
     0% {
       opacity: 0;
@@ -725,6 +832,7 @@ audio{
       opacity: 0;
     }
 }
+
 @keyframes BlackAndWhite {
     0% {
         border: 0.3vw solid black;
@@ -739,6 +847,7 @@ audio{
         background-color: white;
     }
 }
+
 @keyframes yellowAndWhite {
     0% {
         border: 0.3vw solid yellow;
@@ -753,6 +862,7 @@ audio{
         background-color: black;
     }
 }
+
 @keyframes bounce {
     0% {
         position: relative;
@@ -767,6 +877,7 @@ audio{
         bottom: 0%;
     }
 }
+
 @keyframes moveBackground {
     0% {
       background-position: 0vw 0vw;
@@ -775,7 +886,8 @@ audio{
         background-position: 14.3vw -16.6vw;
     }
 }
-  @keyframes shake1 {
+
+@keyframes shake1 {
     0%{
       transform: translateY(0);
     }
@@ -785,8 +897,9 @@ audio{
     100%{
       transform: translateY(0);
     }
-  }
-  @keyframes shake2 {
+}
+
+@keyframes shake2 {
     0%{
       transform: translateY(0);
     }
@@ -796,8 +909,9 @@ audio{
     100%{
       transform: translateY(0);
     }
-  }
-  @keyframes shake3 {
+}
+
+@keyframes shake3 {
     0%{
       transform: translateX(0);
     }
@@ -807,8 +921,9 @@ audio{
     100%{
       transform: translateX(0);
     }
-  }
-  @keyframes shake4 {
+}
+
+@keyframes shake4 {
     0%{
       transform: translateX(0);
     }
@@ -818,8 +933,9 @@ audio{
     100%{
       transform: translateX(0);
     }
-  }
-  @keyframes shake4 {
+}
+
+@keyframes shake4 {
     0%{
       transform: translateX(0);
     }
@@ -829,8 +945,9 @@ audio{
     100%{
       transform: translateX(0);
     }
-  }
-  @keyframes shakeAttack {
+}
+
+@keyframes shakeAttack {
     0% {
       transform: translateX(0);
     }
@@ -876,8 +993,9 @@ audio{
     100% {
       transform: translateX(-1px);
     }
-  }  
-  @keyframes shakeDeath {
+}
+
+@keyframes shakeDeath {
     0%{
         transform: translateX(-2px);
     }
@@ -893,8 +1011,9 @@ audio{
     100%{
         transform: translateX(-2px);
     }
-  }
-  @keyframes backgroundAnimation {
+}
+
+@keyframes backgroundAnimation {
     0% {
         background-size: 40% 40%;
     }
@@ -905,3 +1024,4 @@ audio{
         background-size: 40% 40%;
     }
 }
+
