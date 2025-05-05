@@ -1,18 +1,29 @@
 {
-  "name": "Mettaton Neo Fight",
+  "name": "mettaton-neo-fangame",
   "version": "1.0.0",
-  "description": "A fangame that ive made in my free time based on a boss in undertale that doesnt actually have any in game attacks and is just skip, but this game makes it playable",
+  "description": "A fangame about Mettaton Neo which in authors opinion deserves its own battle in a game called Undertale. This fangame is based on Undertale and is written in javascript, this game was made in about a year.",
   "main": "src/main.js",
-  "author": "ME ONLY",
+  "author": "Spark",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^28.1.4"
+    "@electron-forge/cli": "^7.8.0",
+    "@electron-forge/maker-deb": "^7.8.0",
+    "@electron-forge/maker-rpm": "^7.8.0",
+    "@electron-forge/maker-squirrel": "^7.8.0",
+    "@electron-forge/maker-zip": "^7.8.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.0",
+    "@electron-forge/plugin-fuses": "^7.8.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^36.1.0"
   },
   "scripts": {
-    "start": "electron .",
-    "install": "npm install"
+    "start": "electron-forge start",
+    "install": "npm install",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "dependencies": {
-    "update-electron-app": "^3.0.0"
+    "electron-squirrel-startup": "^1.0.1",
+    "update-electron-app": "^3.1.1"
   }
 }

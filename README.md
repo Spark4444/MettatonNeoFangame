@@ -6,7 +6,7 @@ A fangame about [Mettaton Neo](https://undertale.fandom.com/wiki/Mettaton#Mettat
 
 1. Press the blue button `<> Code`
 2. Hover over the `Download Zip` button and click it to download the zip version of this repository
-
+\
 ### &nbsp;&nbsp;&nbsp;Or
 
 Use the git clone command to copy it onto your computer
@@ -20,18 +20,9 @@ To play the game you can either open the `index.html` directly in your browser w
 
 ### &nbsp;&nbsp;&nbsp;Or
 
- You can open the game as a window
- 1. Install [Node.js](https://nodejs.org/en)
- 1. Open the project in your code editor of choice (which in my case is Visual Studio Code)
- 2. Open the terminal and run
- ```
-npm install 
-```
-3. After downloading all dependencies run
-```
-npm run start
-```
-To  start the game
+Run the exe located in 
+<br> 
+`MettatonNeoFangame/out/mettaton-neo-fangame-win32-x64/mettaton-neo-fangame.exe`
 
 ## Current state of the game
-**This game is finished.**
+**Game is playable but i'm currently working on remaking the game to make it better.**

@@ -1,8 +1,8 @@
-const { app, BrowserWindow, Menu} = require('electron');
-const path = require('path');
+let { app, BrowserWindow, Menu} = require("electron");
+let path = require("path");
 
 
-const createWindow = () => {
+let createWindow = () => {
     let mainWindow = new BrowserWindow({
         width: 600,
         height: 800,
@@ -14,30 +14,30 @@ const createWindow = () => {
         fullscreenable: true,
     })
   
-    mainWindow.loadFile(path.join(__dirname, 'index.html'));
+    mainWindow.loadFile(path.join(__dirname, "index.html"));
     mainWindow.maximize()
 }
 
-app.on('ready', createWindow);
+app.on("ready", createWindow);
 
-const template = [
+let template = [
    
 ] 
 
-const menu = Menu.buildFromTemplate(template)
+let menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
       app.quit();
     }
 });
   
-app.on('will-quit', () => {
+app.on("will-quit", () => {
     globalShortcut.unregisterAll()
 })
   
-app.on('activate', () => {
+app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
