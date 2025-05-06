@@ -25,11 +25,11 @@ let battleSection = document.querySelector(".battleSection");
 let lv = document.querySelector(".lv");
 let name = document.querySelector(".name");
 let volume = document.querySelector(".volume");
-let playersHPString = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
+let playersHPString = getIfPresent("hp", document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1]);
 let playersHP = document.querySelector(".playersHP");
 let foodList = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
-let foodUsed = [];
+let foodUsed = getIfPresent("items", []);
 let text = "";
 let food = "";
 let hpWidth = "100%";
@@ -42,10 +42,10 @@ let position = false;
 let positionBefore = false;
 let started = false;
 let playerFighting = false;
-let attackNumber = false;
+let attackNumber = getIfPresent("level", false);
 let animation = true;
 let fullScreen = false;
-let MettatonHP = 360;
+let MettatonHP = getIfPresent("mettatonHP", 360);
 let secondPosition = 0;
 let HPRecovered = 0;
 let deathDialogue = 0;
@@ -59,9 +59,6 @@ let timeToComplete = 0;
 let turnsToComplete = 0;
 let attackLine;
 let finished;
-setTimeout(() => {
-  finished = get(1);
-}, 10);
 let attackLineTimeout;
 let timeToCompleteInterval;
 let shakeElement;
@@ -70,6 +67,15 @@ let secondInventoryRow;
 let secondColumn;
 let thirdColumn;
 let textWrite;
+
+setTimeout(() => {
+  finished = get(1);
+}, 10);
+
+if(attackNumber){
+  play.innerHTML = "CONTINUE";
+  play.style.width = "42%";
+}
 
 //Enables fullscreen
 function enableFullScreen(){
@@ -93,8 +99,9 @@ document.addEventListener('keyup', function(e) {
       e.preventDefault();
       enableFullScreen();
       break;
-    case 27:
-      this.location.reload()
+    case 81:
+      clearSave();
+      this.location.reload();
       break;
   }
 });
@@ -211,6 +218,7 @@ function startingAnimation(){
           heart.classList.add("hidden");
           audio.play(7);
           img[0].src = "img/heart.png";
+          recoverHP();
           disableButtonsMovement = false;
         },2600);
       }
@@ -413,6 +421,7 @@ function disappear(){
 
 //Function that transitions from an attack into the menu
 function appear(text1){
+  saveData();
   clearInterval(attackInterval);
   clearInterval(checkCollisionWithPlayer);
   projectile = false;
@@ -489,6 +498,7 @@ function showHP(){
   hp.innerHTML = `${playersHPString}/72`;
   playersHP.style.width = `${playersHPString/(72/100)}%`;
   if(playersHPString < 0){
+    clearSave();
     busy = false;
     HPDialogue = false;
     foodDialogue = false;
@@ -749,6 +759,7 @@ function deathMtt() {
   finished++;
   setTimeout(() => {
     html.classList.remove("cursorNone");
+    clearSave();
     projectiles.innerHTML = `<div class="statistics">
     <div class="stat">Game was finished : ${finished}(times)</div>
     <div class="stat">Restarts : ${restarts}</div>

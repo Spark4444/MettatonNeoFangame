@@ -148,3 +148,9 @@ function get(key) {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : 0;
 }
+
+//Get a value from local storage if it exists, otherwise return null
+function getIfPresent(key, defaultValue = null) {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : defaultValue;
+}

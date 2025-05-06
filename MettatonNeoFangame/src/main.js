@@ -1,4 +1,4 @@
-let { app, BrowserWindow, Menu} = require("electron");
+let { app, BrowserWindow, Menu, globalShortcut } = require("electron");
 let path = require("path");
 
 
@@ -22,7 +22,7 @@ app.on("ready", createWindow);
 
 let template = [
    
-] 
+];
 
 let menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
@@ -34,7 +34,7 @@ app.on("window-all-closed", () => {
 });
   
 app.on("will-quit", () => {
-    globalShortcut.unregisterAll()
+    globalShortcut.unregisterAll();
 })
   
 app.on("activate", () => {
