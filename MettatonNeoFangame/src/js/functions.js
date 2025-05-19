@@ -15,7 +15,7 @@ function randomPick(value, value2) {
 
 //Picks a random value from 3
 function randomPick3(value, value2, value3) {
-  const randomNumber = Math.floor(Math.random() * 3);
+  let randomNumber = Math.floor(Math.random() * 3);
 
   if (randomNumber === 0) {
       return value;
@@ -42,9 +42,9 @@ function randomPick4(num1, num2, num3, num4) {
 
 //Gets a random number from two ranges
 function randomMultiRange(range1, range2, range3, range4) {
-    const ranges = [[range1, range2], [range3, range4]];
-    const rangeIndex = Math.floor(Math.random() * ranges.length);
-    const range = ranges[rangeIndex];
+    let ranges = [[range1, range2], [range3, range4]];
+    let rangeIndex = Math.floor(Math.random() * ranges.length);
+    let range = ranges[rangeIndex];
     return Math.floor(Math.random() * (range[1] - range[0] + 1)) + range[0];
 }
 
@@ -89,7 +89,7 @@ function shakeLetters(){
     for(let i = 0;i < textInside.length;i++){
       let letter = textInside[i];
       if(letter == " "){
-        shakes.innerHTML += '&nbsp;';
+        shakes.innerHTML += "&nbsp;";
       }
       else{
             shakes.innerHTML += `<div class="word">${letter}</div>`;
@@ -127,8 +127,8 @@ setInterval(() => {
 //animate Element function 
 function animateElement(element, style, seconds, startValue, endValue) {
   let currentValue = startValue;
-  const increment = (endValue - startValue) / (seconds * 60);
-  const interval = setInterval(() => {
+  let increment = (endValue - startValue) / (seconds * 60);
+  let interval = setInterval(() => {
     if (currentValue >= endValue) {
       clearInterval(interval);
     } else {
@@ -145,12 +145,12 @@ function save(key, value) {
 
 //Get a value from local storage
 function get(key) {
-  const value = localStorage.getItem(key);
+  let value = localStorage.getItem(key);
   return value ? JSON.parse(value) : 0;
 }
 
 //Get a value from local storage if it exists, otherwise return null
 function getIfPresent(key, defaultValue = null) {
-  const value = localStorage.getItem(key);
+  let value = localStorage.getItem(key);
   return value ? JSON.parse(value) : defaultValue;
 }

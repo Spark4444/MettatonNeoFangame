@@ -17,7 +17,12 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        name: 'mettaton-neo-fangame',
+        setupIcon: './src/img/app.ico',
+        setupExe: 'mettaton-neo-fangame.exe',
+        noMsi: true,
+      },
     },
     {
       name: '@electron-forge/maker-zip',

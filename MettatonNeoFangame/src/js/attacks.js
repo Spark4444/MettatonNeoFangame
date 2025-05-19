@@ -330,7 +330,7 @@ function attack6(){
       }
       projectile.querySelector("img").src = `img/leg${laserColor}.png`;
       hitbox.forEach(element => {
-        element.setAttribute('id', `${laserColor}`);
+        element.setAttribute("id", `${laserColor}`);
       });
       if (legPosition == 0) {
         projectile.style.top = `${(canvasBottom - mettatonBottom)*0.6666+mettatonBottom - window.innerWidth*0.18919}px`;

@@ -30,14 +30,14 @@ function drawHeart(x, y) {
 function checkCollision(elements, target, damage, deletable, laser) {
   if (playerFighting) {
     for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-      const elemRect = element.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
+      let element = elements[i];
+      let elemRect = element.getBoundingClientRect();
+      let targetRect = target.getBoundingClientRect();
       if (elemRect.top <= targetRect.bottom && elemRect.bottom >= targetRect.top && elemRect.left <= targetRect.right && elemRect.right >= targetRect.left) {
-        const id = element.id.toLowerCase();
+        let id = element.id.toLowerCase();
         if (!attackThrottle) {
           let amountOfHP;
-          if (id === 'white' || !laser) {
+          if (id === "white" || !laser) {
             if(deletable){
               element.remove();
               clearInterval(bombTimeout);
@@ -58,7 +58,7 @@ function checkCollision(elements, target, damage, deletable, laser) {
               attackThrottle = false;
             }, 500);
           } 
-          else if (id === 'orange') {
+          else if (id === "orange") {
             if (playerIsMoving) {
               clearTimeout(orangeLaserTimer);
               continue;
@@ -88,7 +88,7 @@ function checkCollision(elements, target, damage, deletable, laser) {
                 }, 250);
               }
             }
-          } else if (id === 'blue') {
+          } else if (id === "blue") {
             if (playerIsMoving) {
               if(deletable){
                 element.remove();
@@ -180,7 +180,7 @@ setInterval(() => {
 },10);
 
 //AWSD key listeners for movement
-document.addEventListener('keydown', e => {
+document.addEventListener("keydown", e => {
   if (playerFighting){
     switch (e.keyCode) {
       case 65: // A
@@ -210,7 +210,7 @@ document.addEventListener('keydown', e => {
 });
 
 //AWSD keys listeners
-document.addEventListener('keyup', e => {
+document.addEventListener("keyup", e => {
   if (playerFighting){
     switch (e.keyCode) {
       case 65: // A

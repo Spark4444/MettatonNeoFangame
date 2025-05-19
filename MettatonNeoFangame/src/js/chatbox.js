@@ -65,8 +65,8 @@ function dialogue(){
 }
 
 //Event listener for the user to continue into battle from a dialogue with mettaton
-document.addEventListener('keyup', e => {
-const key = e.keyCode || e.which;
+document.addEventListener("keyup", e => {
+let key = e.keyCode || e.which;
 
 if(busy){
   switch (key) {

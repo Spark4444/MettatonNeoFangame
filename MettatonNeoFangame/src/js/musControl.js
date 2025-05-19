@@ -1,3 +1,5 @@
+let audioCanPlay = true;
+
 class Audio {
     //Tracks
     tracks = [
@@ -44,7 +46,9 @@ class Audio {
 
     //Plays a track
     play(index){
-        this.tracks[index].play();
+        if(audioCanPlay) {
+            this.tracks[index].play();
+        }
     }
 
     //Resets a track
@@ -75,4 +79,4 @@ class Audio {
     }
 }
 
-const audio = new Audio();
+let audio = new Audio();

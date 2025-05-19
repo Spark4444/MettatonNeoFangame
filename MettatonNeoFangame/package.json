@@ -19,8 +19,8 @@
   "scripts": {
     "start": "electron-forge start",
     "install:main": "npm install",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "package": "electron-forge package && node copy.js",
+    "make": "electron-forge make && node copy.js"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",

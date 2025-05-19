@@ -32,7 +32,7 @@ let health = ["72","72","60","40","40","40","40","40"];
 let foodUsed = getIfPresent("items", []);
 let text = "";
 let food = "";
-let hpWidth = "100%";
+let hpWidth = `${getIfPresent("MettatonHP", 360)/(360/100)}%`;
 let stage = false;
 let attack = false;
 let buttonId = 0;
@@ -45,7 +45,8 @@ let playerFighting = false;
 let attackNumber = getIfPresent("level", false);
 let animation = true;
 let fullScreen = false;
-let MettatonHP = getIfPresent("mettatonHP", 360);
+let gameIsFocused = true;
+let MettatonHP = getIfPresent("MettatonHP", 360);
 let secondPosition = 0;
 let HPRecovered = 0;
 let deathDialogue = 0;
@@ -92,8 +93,8 @@ function enableFullScreen(){
 }
 
 //f11 listener to enable fullscreen
-document.addEventListener('keyup', function(e) {
-  const key = e.keyCode || e.which;
+document.addEventListener("keyup", function(e) {
+  let key = e.keyCode || e.which;
   switch(key){
     case 122:
       e.preventDefault();
@@ -106,7 +107,7 @@ document.addEventListener('keyup', function(e) {
   }
 });
 
-//Pauses all the songs
+//Pauses all the songs to prevent errors
 setTimeout(() => {
   audio.pauseAll();
 }, 100);
@@ -118,7 +119,7 @@ document.querySelector("#rangeValue").innerHTML = `${volume.value}%`;
 playersHP.style.width = "100%";
 
 //Plays starting music
-startingMenu.addEventListener('mousedown', () =>{
+startingMenu.addEventListener("mousedown", () =>{
   if(started !== true){
     audio.play(2);
   }
@@ -139,31 +140,41 @@ volume.addEventListener("mouseup", () => {
   audio.volumeAll(volume.value);
 });
 
-//Event listener for the play button
-play.addEventListener('click', () => {
-
-  // Pause audio when user leaves the tab
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      audio.pause(0);
-      audio.pause(2);
-      audio.pause(9);
-      audio.pause(12);
-    } else {
+document.addEventListener("click", () => {
+    function playAudio(play = true) { 
+    if (play) {
+      audioCanPlay = true;
       audio.play(0);
       audio.play(2);
       audio.play(9);
       audio.play(12);
     }
+    else {
+      audioCanPlay = false;
+      audio.pause(0);
+      audio.pause(2);
+      audio.pause(9);
+      audio.pause(12);
+    }
+  }
+
+  // Pause audio when user leaves the tab
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      playAudio(false);
+    } else {
+      playAudio(true);
+    }
   });
 
   // Play audio when user returns to the tab or unblocks the browser
-  window.addEventListener('focus', () => {
-    audio.play(0);
-    audio.play(2);
-    audio.play(9);
-    audio.play(12);
+  window.addEventListener("focus", () => {
+    playAudio(true);
   });
+});
+
+//Event listener for the play button
+play.addEventListener("click", () => {
 
   if(started !== true){
     audio.mute(2);
@@ -214,7 +225,7 @@ function startingAnimation(){
         setTimeout(function(){
           play.innerHTML = "RESTART";
           play.style.width = "38%";
-          buttons[0].classList.add('yellow');
+          buttons[0].classList.add("yellow");
           heart.classList.add("hidden");
           audio.play(7);
           img[0].src = "img/heart.png";
@@ -231,7 +242,7 @@ function startingAnimation(){
         start.classList.add("hidden");
         inGameScreen.classList.remove("hidden");
         img[0].src = "img/heart.png";
-        buttons[0].classList.add('yellow');
+        buttons[0].classList.add("yellow");
         disableButtonsMovement = true;
         stage = false;
     
@@ -259,11 +270,11 @@ function display(){
   img[buttonId].src = "img/nothing.png";
   switch (buttonId) {
     case 0:
-      text = `<div class='attackingText'><img class='smallerHeart' src='img/heart.png'><div class="shakeElement" class="WidthN"> * Mettaton NEO </div> <div class='mettatonsHP2'><div class='mettatonsHP' style='width:${hpWidth};'></div></div></div>`;
+      text = `<div class="attackingText"><img class="smallerHeart" src="img/heart.png"><div class="shakeElement" class="WidthN"> * Mettaton NEO </div> <div class="mettatonsHP2"><div class="mettatonsHP" style="width:${hpWidth};"></div></div></div>`;
       typeWriterInstant();
       break;
     case 1:
-      text = `<div class="flex"><img class='smallerHeart' src='img/heart.png'><div class="shakeElement"> * Mettaton NEO</div></div>`;
+      text = `<div class="flex"><img class="smallerHeart" src="img/heart.png"><div class="shakeElement"> * Mettaton NEO</div></div>`;
       typeWriterInstant();
       break;
     case 2:
@@ -376,7 +387,7 @@ function disappear(){
   typeWriterInstant();
   playerMovementBox.classList.add("cube")
   setTimeout(function(){
-    buttons[buttonId].classList.remove('yellow');
+    buttons[buttonId].classList.remove("yellow");
     img[buttonId].src = "";
     if(buttonId == 0){
       img[0].src = "img/fight.png";
@@ -402,8 +413,8 @@ function disappear(){
       audio.mute(0);
       setTimeout(() => {
       deathMtt();
-      document.addEventListener('keyup', e => {
-        const key = e.keyCode || e.which;
+      document.addEventListener("keyup", e => {
+        let key = e.keyCode || e.which;
         switch (key) {
           case 13: // Enter key
           case 90: // Z key
@@ -788,8 +799,8 @@ function deathMtt() {
 
 //Event listener for the buttons movement
 setTimeout(() => {
-  document.addEventListener('keyup', e => {
-    const key = e.keyCode || e.which;
+  document.addEventListener("keyup", e => {
+    let key = e.keyCode || e.which;
     if (!disableButtonsMovement) {
     switch (key) {
       case 37: // Left arrow key
@@ -815,8 +826,8 @@ setTimeout(() => {
   });
 }, 3000);
 
-document.addEventListener('keydown', e => {
-  const key = e.keyCode || e.which;
+document.addEventListener("keydown", e => {
+  let key = e.keyCode || e.which;
   switch (key) {
     case 13: // Enter key
     case 90: // Z key
@@ -857,6 +868,7 @@ document.addEventListener('keydown', e => {
           else{
             MettatonHP -= damage;
           }
+          console.log(MettatonHP);
           mettatonsHP.style.width = `${MettatonHP/(360/100)}%`;
           hpWidth = `${MettatonHP/(360/100)}%`;
 
@@ -889,8 +901,8 @@ document.addEventListener('keydown', e => {
 
 //Z and enter, x key listeners
 setTimeout(() => {
-document.addEventListener('keyup', e => {
-  const key = e.keyCode || e.which;
+document.addEventListener("keyup", e => {
+  let key = e.keyCode || e.which;
   switch (key) {
     case 13: // Enter key
     case 90: // Z key
@@ -939,7 +951,7 @@ document.addEventListener('keyup', e => {
 },4000);
 
 //Movement in the inventory
-document.addEventListener('keyup', e => {
+document.addEventListener("keyup", e => {
   if(position !== false){
   positionBefore = position;
   firstInventoryRow = `<div class="invetory">${foodList[0] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[0] + "</div></div>" : `<div class="nothing"></div>`}${foodList[1] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[1] + "</div></div>" : `<div class="nothing"></div>`}
@@ -948,7 +960,7 @@ document.addEventListener('keyup', e => {
   secondInventoryRow = `<div class="invetory">${foodList[4] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[4] + "</div></div>" : `<div class="nothing"></div>`}${foodList[5] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[5] + "</div></div>" : `<div class="nothing"></div>`}
   ${foodList[6] !== undefined ? "<div class='leftItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[6] + "</div></div>" : `<div class="nothing"></div>`}${foodList[7] !== undefined ? "<div class='rightItem'><img class='heartImg' src='img/nothing.png'><div class='shakeElement'> * " + foodList[7] + "</div></div>" : `<div class="nothing"></div>`}
   <div class="nothing"></div><div class="pageInfo" class="shakeElement">PAGE 2</div></div>`; 
-  const key = e.keyCode || e.which;
+  let key = e.keyCode || e.which;
   switch (key) {
       case 38: // ArrowUp
       case 87: // W
