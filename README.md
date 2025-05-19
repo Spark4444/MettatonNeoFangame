@@ -6,7 +6,7 @@ A fangame about [Mettaton Neo](https://undertale.fandom.com/wiki/Mettaton#Mettat
 
 1. Press the blue button `<> Code`
 2. Hover over the `Download Zip` button and click it to download the zip version of this repository
-\
+
 ### &nbsp;&nbsp;&nbsp;Or
 
 Use the git clone command to copy it onto your computer
@@ -23,6 +23,12 @@ To play the game you can either open the `index.html` directly in your browser w
 Run the exe located in 
 <br> 
 `MettatonNeoFangame/out/mettaton-neo-fangame-win32-x64/mettaton-neo-fangame.exe`
+
+### &nbsp;&nbsp;&nbsp;Or
+
+Run the installer located in 
+<br>
+`MettatonNeoFangame/out/make/squirrel.windows/x64/mettaton-neo-fangame.exe`
 
 ## Current state of the game
 Finished
