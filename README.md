@@ -25,4 +25,4 @@ Run the exe located in
 `MettatonNeoFangame/out/mettaton-neo-fangame-win32-x64/mettaton-neo-fangame.exe`
 
 ## Current state of the game
-**Game is playable but i'm currently working on remaking the game to make it better.**
+Finished

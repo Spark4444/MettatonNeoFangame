@@ -770,7 +770,7 @@ function deathMtt() {
     <div class="stat">Food used : ${foodUsed.length === 0 ? 0 : foodUsed.join(" ")} , ${foodUsed.length}</div>
     <div class="stat">Time taken to complete the game : ${timeToComplete}s</div>
     <div class="stat">Turns taken to complete the game : ${turnsToComplete}</div>
-    <div class="stat">Press esc to restart</div>
+    <div class="stat">Press q to restart</div>
     </div>`;
   }, 1000);
   save(1,finished);

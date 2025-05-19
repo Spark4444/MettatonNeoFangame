@@ -1,2 +1,2 @@
 # lfs(large file storage) for the exe of the game since it is more than 100mb
-ettatonNeoFangame/out/** filter=lfs diff=lfs merge=lfs -text
+MettatonNeoFangame/out/** filter=lfs diff=lfs merge=lfs -text

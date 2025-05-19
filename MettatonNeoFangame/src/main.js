@@ -15,7 +15,9 @@ let createWindow = () => {
     })
   
     mainWindow.loadFile(path.join(__dirname, "index.html"));
-    mainWindow.maximize()
+    // Comment when packaging
+    // mainWindow.openDevTools();
+    mainWindow.maximize();
 }
 
 app.on("ready", createWindow);
