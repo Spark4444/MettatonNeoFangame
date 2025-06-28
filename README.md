@@ -11,7 +11,7 @@ A fangame about [Mettaton Neo](https://undertale.fandom.com/wiki/Mettaton#Mettat
 
 Use the git clone command to copy it onto your computer
 ```bash
-git clone https://github.com/Spark4444/FandomAdBlocker
+git clone https://github.com/Spark4444/MettatonNeoFangame
 ```
 
 ## Usage
