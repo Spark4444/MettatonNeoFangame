@@ -4,21 +4,14 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/img/app.ico',
-    osxSign: {},
-    osxNotarize: {
-      tool: 'notarytool',
-      appleId: process.env.APPLE_ID,
-      appleIdPassword: process.env.APPLE_PASSWORD,
-      teamId: process.env.APPLE_TEAM_ID
-    }
+    icon: './src/img/app.ico'
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        name: 'mettaton-neo-fangame',
+        name: 'Mettato Neo Fangame',
         setupIcon: './src/img/app.ico',
         setupExe: 'mettaton-neo-fangame.exe',
         noMsi: true,
@@ -27,6 +20,10 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      config: {
+        name: 'Mettato Neo Fangame',
+        icon: './src/img/app.icns',
+      }
     },
     {
       name: '@electron-forge/maker-deb',
