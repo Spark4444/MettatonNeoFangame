@@ -59,7 +59,7 @@ let misses = 0;
 let timeToComplete = 0;
 let turnsToComplete = 0;
 let attackLine;
-let finished;
+let finished = getIfExists("finished", 0);
 let attackLineTimeout;
 let timeToCompleteInterval;
 let shakeElement;
@@ -725,7 +725,7 @@ function deathMtt() {
   }
   else if(deathDialogue == 6){
   mettatonGIF.src="img/face6.png";
-  typeWriterBox("BUT YOU WON'T MURDER ALL HUMANS, WILL YOU?");
+  typeWriterBox("BUT YOU WON'T MURDER EVERYONE, WILL YOU?");
   deathDialogue++;
   }
   else if(deathDialogue == 7){
@@ -761,6 +761,7 @@ function deathMtt() {
   projectiles.classList.add("transition");
   projectiles.style.background = "white";
   finished++;
+  saveToLocalStorage("finished", finished);
   setTimeout(() => {
     html.classList.remove("cursorNone");
     projectiles.innerHTML = `<div class="statistics">

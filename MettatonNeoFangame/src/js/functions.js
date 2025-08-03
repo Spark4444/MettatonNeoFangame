@@ -137,3 +137,18 @@ function animateElement(element, style, seconds, startValue, endValue) {
     }
   }, 16.67);
 }
+
+// Function to get a value from localStorage
+function getFromLocalStorage(key) {
+  return localStorage.getItem(key);
+}
+
+// Function to save a value to localStorage
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, value);
+}
+
+function getIfExists(key, defaultValue) {
+  let value = getFromLocalStorage(key);
+  return value !== null ? value : defaultValue;
+}
