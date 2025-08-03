@@ -25,14 +25,15 @@ let battleSection = document.querySelector(".battleSection");
 let lv = document.querySelector(".lv");
 let name = document.querySelector(".name");
 let volume = document.querySelector(".volume");
-let playersHPString = getIfPresent("hp", document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1]);
+let playersHPString = document.querySelector(".playersHPText").innerHTML[0] + document.querySelector(".playersHPText").innerHTML[1];
 let playersHP = document.querySelector(".playersHP");
 let foodList = ["Pie","I. Noodles","Steak","L. Hero","L. Hero","L. Hero","L. Hero","L. Hero"];
 let health = ["72","72","60","40","40","40","40","40"];
-let foodUsed = getIfPresent("items", []);
+let foodUsed = [];
 let text = "";
 let food = "";
-let hpWidth = `${getIfPresent("MettatonHP", 360)/(360/100)}%`;
+let MettatonHP = 360;
+let hpWidth = `${MettatonHP / (360 / 100)}%`;
 let stage = false;
 let attack = false;
 let buttonId = 0;
@@ -42,11 +43,10 @@ let position = false;
 let positionBefore = false;
 let started = false;
 let playerFighting = false;
-let attackNumber = getIfPresent("level", false);
+let attackNumber = false;
 let animation = true;
 let fullScreen = false;
 let gameIsFocused = true;
-let MettatonHP = getIfPresent("MettatonHP", 360);
 let secondPosition = 0;
 let HPRecovered = 0;
 let deathDialogue = 0;
@@ -68,10 +68,6 @@ let secondInventoryRow;
 let secondColumn;
 let thirdColumn;
 let textWrite;
-
-setTimeout(() => {
-  finished = get(1);
-}, 10);
 
 if(attackNumber){
   play.innerHTML = "CONTINUE";
@@ -101,7 +97,6 @@ document.addEventListener("keyup", function(e) {
       enableFullScreen();
       break;
     case 81:
-      clearSave();
       this.location.reload();
       break;
   }
@@ -432,7 +427,6 @@ function disappear(){
 
 //Function that transitions from an attack into the menu
 function appear(text1){
-  saveData();
   clearInterval(attackInterval);
   clearInterval(checkCollisionWithPlayer);
   projectile = false;
@@ -509,7 +503,6 @@ function showHP(){
   hp.innerHTML = `${playersHPString}/72`;
   playersHP.style.width = `${playersHPString/(72/100)}%`;
   if(playersHPString < 0){
-    clearSave();
     busy = false;
     HPDialogue = false;
     foodDialogue = false;
@@ -770,7 +763,6 @@ function deathMtt() {
   finished++;
   setTimeout(() => {
     html.classList.remove("cursorNone");
-    clearSave();
     projectiles.innerHTML = `<div class="statistics">
     <div class="stat">Game was finished : ${finished}(times)</div>
     <div class="stat">Restarts : ${restarts}</div>
@@ -784,7 +776,6 @@ function deathMtt() {
     <div class="stat">Press q to restart</div>
     </div>`;
   }, 1000);
-  save(1,finished);
   setTimeout(() => {
     audio.unmute(2);
     audio.reset(2);

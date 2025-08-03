@@ -137,20 +137,3 @@ function animateElement(element, style, seconds, startValue, endValue) {
     }
   }, 16.67);
 }
-
-//Save a value to local storage
-function save(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-//Get a value from local storage
-function get(key) {
-  let value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : 0;
-}
-
-//Get a value from local storage if it exists, otherwise return null
-function getIfPresent(key, defaultValue = null) {
-  let value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : defaultValue;
-}
