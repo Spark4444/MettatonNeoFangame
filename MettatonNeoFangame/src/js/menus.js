@@ -859,7 +859,6 @@ document.addEventListener("keydown", e => {
           else{
             MettatonHP -= damage;
           }
-          console.log(MettatonHP);
           mettatonsHP.style.width = `${MettatonHP/(360/100)}%`;
           hpWidth = `${MettatonHP/(360/100)}%`;
 
