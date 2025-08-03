@@ -839,12 +839,13 @@ document.addEventListener("keydown", e => {
           audio.play(5);
           hits++;
 
-          if(attackPercantage > 49){
+          if(attackPercantage > 49.19){
             damage = (0.35*calculatePercentage(51-(attackPercantage-49),51)).toFixed(0)
             attackLine.classList.add("appearHide");
           }
 
-          if(attackPercantage > 48.49 && attackPercantage < 49.01){
+          console.log(attackPercantage);
+          if(attackPercantage > 48.48 && attackPercantage < 49.20){
             damage = 36;
             criticalHitsGiven++;
             attackLine.classList.add("appearHideYellow");
