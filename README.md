@@ -23,12 +23,7 @@ To play the game you can either open the `index.html` directly in your browser w
 Run the exe located in 
 <br> 
 `MettatonNeoFangame/out/mettaton-neo-fangame-win32-x64/mettaton-neo-fangame.exe`
-
-### &nbsp;&nbsp;&nbsp;Or
-
-Run the installer located in 
-<br>
-`MettatonNeoFangame/out/make/squirrel.windows/x64/mettaton-neo-fangame.exe`
+or `mettaton-neo-fangame-darwin-arm64` for macOS users.
 
 ## Current state of the game
 Finished

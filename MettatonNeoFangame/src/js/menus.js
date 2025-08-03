@@ -844,7 +844,6 @@ document.addEventListener("keydown", e => {
             attackLine.classList.add("appearHide");
           }
 
-          console.log(attackPercantage);
           if(attackPercantage > 48.48 && attackPercantage < 49.20){
             damage = 36;
             criticalHitsGiven++;
