@@ -497,7 +497,7 @@ function attack8(){
   }, 10);
 
   endOfTheAttack = setTimeout(() => {
-    appear("* Stage lights are blaring");
+    appear("* Air feels tense");
   }, 19000);
 }
 
