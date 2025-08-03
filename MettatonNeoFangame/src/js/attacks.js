@@ -79,7 +79,7 @@ function attack2(){
   moveY = 0;
   mettatonGIF.style.filter = "brightness(50%)";
   setTimeout(() => {
-    document.querySelector(".smoke").style.opacity = "1";
+    document.querySelector(".smoke").style.opacity = "0.95";
   }, 10);
   iteration = 0;
   drawHeart(x, y);

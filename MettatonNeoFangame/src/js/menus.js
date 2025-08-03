@@ -68,6 +68,7 @@ let secondInventoryRow;
 let secondColumn;
 let thirdColumn;
 let textWrite;
+let finishedGame = false;
 
 if(attackNumber){
   play.innerHTML = "CONTINUE";
@@ -686,6 +687,7 @@ function typeWriterBox(text) {
 
 //Mettaton death animation
 function deathMtt() {
+  playerFighting = false;
   chatBox.style.opacity = "1";
   mettatonGIF.style.animation = "shakeDeath 0.2s steps(1, end) infinite";
   if(deathDialogue == 0){
@@ -761,6 +763,7 @@ function deathMtt() {
   projectiles.classList.add("transition");
   projectiles.style.background = "white";
   finished++;
+  finishedGame = true;
   saveToLocalStorage("finished", finished);
   setTimeout(() => {
     html.classList.remove("cursorNone");
@@ -1130,4 +1133,12 @@ heartImg = document.querySelectorAll(".heartImg");
 heartImg[secondPosition].src = "img/heart.png";
 
 }
+});
+
+// Prompt user before leaving the page if the game is started
+window.addEventListener("beforeunload", function (e) {
+  if (started && !finishedGame) {
+    e.preventDefault();
+    e.returnValue = "Are you sure you want to leave? Your progress will be lost.";
+  }
 });

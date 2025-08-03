@@ -26,15 +26,15 @@ function dialogue(){
             foodDialogue = true;
             typeWriterBox("You're running low on items, but don't give up yet! The show must go on!");
         }
-        else if(attackNumber == 8){
+        else if(MettatonHP < 37){
             audio.mute(0);
             audio.pause(0);
             audio.unmute(9);
             audio.play(9);
+            attackNumber = 8;
             typeWriterBox("Did you really think that you were going to beat me, darling?");
         }
         else {
-
             nextAttack();
         } 
     }
@@ -71,7 +71,7 @@ function nextAttack() {
             case 0:
                 attack1();
                 break;
-            case 8:
+            case 8:            
                 audio.unmute(12);
                 audio.reset(12);
                 audio.play(12);
@@ -85,6 +85,7 @@ function nextAttack() {
                 name.style.opacity = "0";
                 break;
         }
+
         if(typeof attackNumber == "number"){
             clearTimeout(textWrite);
             audio.pause(6);
@@ -92,10 +93,10 @@ function nextAttack() {
             busy = false;
             pressedContinue = true;
             turnsToComplete++;
-            if(attackNumber == 8){
+            if(attackNumber > 6){
                 attackNumber = 0;
             }
-            else if(attackNumber < 8){
+            else if(attackNumber < 7){
                 attackNumber++;
             }
         }
