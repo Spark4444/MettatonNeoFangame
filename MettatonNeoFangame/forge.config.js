@@ -4,7 +4,10 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
-    icon: './src/img/app.ico'
+    icon: './src/img/app.ico',
+    extendInfo: {
+      LSApplicationCategoryType: 'public.app-category.games'
+    }
   },
   rebuildConfig: {},
   makers: [
@@ -27,11 +30,23 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          categories: ['Game'],
+          section: 'games',
+          priority: 'optional',
+          description: 'Mettaton Neo Fangame - a fangame about Mettaton Neo from Undertale',
+        }
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        options: {
+          categories: ['Game', 'Amusement'],
+          description: 'Mettaton Neo Fangame - a fangame about Mettaton Neo from Undertale'
+        }
+      },
     },
   ],
   plugins: [
